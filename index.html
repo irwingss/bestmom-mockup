@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>BestMom</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BestMom">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F5EFE6">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F5EFE6;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;font-family:'Figtree',sans-serif;color:#2A211C}*{box-sizing:border-box}button{font-family:inherit;color:inherit}a{color:#A9502B}a:hover{color:#7E3A1D}textarea,input{font-family:inherit}::-webkit-scrollbar{display:none}</style>
+</helmet>
+<div>
+<x-import component-from-global-scope="IOSDevice" from="./app-frame.jsx" dark="{{ isDark }}" hint-size="402px,874px">
+<div style="position:relative;height:100dvh;overflow:hidden;background:#F5EFE6;font-family:'Figtree',sans-serif;color:#2A211C">
+
+<sc-if value="{{ sWelcome }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="01 Welcome" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:76px 28px 52px;background:#F5EFE6">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div style="width:38px;height:38px;border-radius:12px;background:#A9502B;display:flex;align-items:center;justify-content:center;color:#FFF8F0;font-family:'Young Serif',serif;font-size:21px">B</div>
+    <div style="font-weight:700;font-size:18px">BestMom</div>
+  </div>
+  <div style="flex:1"></div>
+  <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A9502B">Your daily ally</div>
+  <h1 style="font-family:'Young Serif',serif;font-weight:400;font-size:42px;line-height:1.08;margin:14px 0 16px;text-wrap:pretty">Tell me about your life. I’ll plan your day in 5 minutes.</h1>
+  <p style="font-size:17px;line-height:1.45;color:#6E625A;margin:0 0 36px;text-wrap:pretty">When a nap moves or a meeting pops up, I rearrange the rest in one tap. Nothing gets lost.</p>
+  <button onClick="{{ toConsent }}" style="height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">Let’s start</button>
+  <div style="text-align:center;font-size:14px;color:#6E625A;margin-top:14px">No account needed to try your first day.</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sConsent }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="02 Consent" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:72px 24px 44px;background:#F5EFE6">
+  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:32px;line-height:1.1;margin:0 0 22px">Before you start talking</h2>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:17px;background:#DFE9DC;flex:none;display:flex;align-items:center;justify-content:center;color:#3D6142;font-weight:700">1</div><div style="font-size:16px;line-height:1.4">I keep a summary, never your voice. Audio is turned into text and thrown away.</div></div>
+    <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:17px;background:#DFE9DC;flex:none;display:flex;align-items:center;justify-content:center;color:#3D6142;font-weight:700">2</div><div style="font-size:16px;line-height:1.4">Your data is never sold or shared with advertisers.</div></div>
+    <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:17px;background:#DFE9DC;flex:none;display:flex;align-items:center;justify-content:center;color:#3D6142;font-weight:700">3</div><div style="font-size:16px;line-height:1.4">You can export or delete everything, anytime, from Settings.</div></div>
+  </div>
+  <div style="flex:1"></div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px">
+    <button onClick="{{ tC1 }}" style="display:flex;gap:14px;align-items:flex-start;text-align:left;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:14px;cursor:pointer">
+      <div style="width:26px;height:26px;border-radius:8px;flex:none;border:2px solid {{ c1.border }};background:{{ c1.bg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ c1.op }}"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div style="font-size:15px;line-height:1.4">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</div>
+    </button>
+    <button onClick="{{ tC2 }}" style="display:flex;gap:14px;align-items:flex-start;text-align:left;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:14px;cursor:pointer">
+      <div style="width:26px;height:26px;border-radius:8px;flex:none;border:2px solid {{ c2.border }};background:{{ c2.bg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ c2.op }}"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div style="font-size:15px;line-height:1.4">I consent to BestMom using what I share about my mood and wellbeing to plan my day. I can withdraw this anytime.</div>
+    </button>
+  </div>
+  <button onClick="{{ toDump }}" style="height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer;opacity:{{ consentOp }}">Continue</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sDump }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="03 Brain dump" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:66px 24px 40px;background:#F5EFE6">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><div style="width:28px;height:28px;border-radius:14px;background:#A9502B;color:#FFF8F0;font-family:'Young Serif',serif;font-size:15px;display:flex;align-items:center;justify-content:center">{{ anInitial }}</div><div style="font-size:14px;font-weight:600;color:#6E625A">{{ an }}</div></div>
+  <div style="font-family:'Young Serif',serif;font-size:25px;line-height:1.25;text-wrap:pretty">Tell me what your life looks like today: your kids, your work, what’s weighing on you. Talk or type, however it comes.</div>
+  <div style="flex:1;overflow:auto;margin:20px 0 12px">
+    <sc-if value="{{ dumpVoice }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ hasWords }}" hint-placeholder-val="{{ false }}"><div style="font-size:19px;line-height:1.5">{{ dumpWords }}</div></sc-if>
+      <sc-if value="{{ noWords }}" hint-placeholder-val="{{ true }}"><div style="font-size:16px;line-height:1.5;color:#6E625A">Like: “Mateo is 7 months, I work 9 to 5, and I never eat lunch.” Take as long as you need. Up to 10 minutes.</div></sc-if>
+    </sc-if>
+    <sc-if value="{{ dumpType }}" hint-placeholder-val="{{ false }}">
+      <textarea value="{{ dumpText }}" onChange="{{ onDumpText }}" placeholder="Start anywhere…" style="width:100%;height:100%;min-height:220px;border:1px solid #E6DCCF;border-radius:16px;background:#FFFBF5;padding:16px;font-size:17px;line-height:1.5;resize:none;outline:none;color:#2A211C"></textarea>
+    </sc-if>
+    <sc-if value="{{ followUp }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:20px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:18px;padding:16px">
+        <div style="font-size:16px;line-height:1.4;margin-bottom:12px">Got it. One thing I’m missing: what time does Mateo usually go to bed?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ fuChips }}" as="ch" hint-placeholder-count="4"><button onClick="{{ ch.pick }}" style="height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #D9CCBD;background:#F5EFE6;font-size:15px;font-weight:600;cursor:pointer">{{ ch.label }}</button></sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ listening }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;justify-content:center;gap:5px;height:36px;margin-bottom:10px"><sc-for list="{{ wave }}" as="w"><div style="width:5px;border-radius:3px;background:#A9502B;height:{{ w.h }}px"></div></sc-for><div style="font-size:14px;color:#6E625A;margin-left:10px">I’m listening…</div></div>
+  </sc-if>
+  <div style="display:grid;grid-template-columns:1fr 84px 1fr;align-items:center;gap:12px">
+    <button onClick="{{ toggleDumpMode }}" style="height:48px;border:none;background:transparent;font-size:15px;font-weight:600;color:#6E625A;cursor:pointer;text-align:left">{{ dumpModeLabel }}</button>
+    <button onClick="{{ micDump }}" style="width:84px;height:84px;border-radius:42px;border:none;background:{{ micBg }};display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 0 8px {{ micRing }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFF8F0" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+    <button onClick="{{ dumpDone }}" style="height:48px;border:none;background:transparent;font-size:15px;font-weight:700;color:#A9502B;cursor:pointer;text-align:right;opacity:{{ dumpDoneOp }}">Done</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sThinking }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 36px;background:#F5EFE6">
+  <div style="width:64px;height:64px;border-radius:32px;background:#EBDDCB;display:flex;align-items:center;justify-content:center;margin-bottom:28px"><div style="width:22px;height:22px;border-radius:11px;background:#A9502B"></div></div>
+  <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.15;margin-bottom:24px">{{ thinkTitle }}</div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <sc-for list="{{ thinkRows }}" as="r" hint-placeholder-count="3"><div style="display:flex;gap:12px;align-items:center;font-size:16px;opacity:{{ r.op }}"><div style="width:22px;height:22px;border-radius:11px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div>{{ r.text }}</div></sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sSummary }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="04 Summary" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:68px 24px 40px;background:#F5EFE6">
+  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:32px;line-height:1.1;margin:0 0 6px">Here’s what I understood</h2>
+  <div style="font-size:15px;color:#6E625A;margin-bottom:18px">Tap anything to fix it.</div>
+  <div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{ summaryRows }}" as="row" hint-placeholder-count="6">
+      <div style="display:flex;align-items:center;gap:6px;min-height:56px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:0 4px 0 16px">
+        <sc-if value="{{ row.editing }}"><input value="{{ row.text }}" onChange="{{ row.onEdit }}" onBlur="{{ row.stopEdit }}" style="flex:1;font-size:16px;border:none;outline:none;background:transparent;height:44px;color:#2A211C"></sc-if>
+        <sc-if value="{{ row.notEditing }}"><button onClick="{{ row.startEdit }}" style="flex:1;text-align:left;font-size:16px;border:none;background:transparent;cursor:pointer;min-height:48px">{{ row.text }}</button></sc-if>
+        <button onClick="{{ row.remove }}" aria-label="Remove" style="width:44px;height:44px;border:none;background:transparent;cursor:pointer;color:#6E625A;font-size:22px">×</button>
+      </div>
+    </sc-for>
+    <button onClick="{{ addSummary }}" style="min-height:52px;border:1.5px dashed #CDBFAF;border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:#6E625A;cursor:pointer">+ Add something</button>
+  </div>
+  <button onClick="{{ toPerm }}" style="margin-top:16px;height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">Looks right. Build my day</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sPerm }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="05 Permissions" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:72px 24px 44px;background:#F5EFE6">
+  <div style="display:flex;gap:6px;margin-bottom:40px"><div style="width:28px;height:5px;border-radius:3px;background:#A9502B"></div><div style="width:28px;height:5px;border-radius:3px;background:{{ perm2Bar }}"></div></div>
+  <div style="width:72px;height:72px;border-radius:22px;background:{{ perm.bg }};display:flex;align-items:center;justify-content:center;margin-bottom:24px"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="{{ perm.fg }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ perm.icon }}"></path></svg></div>
+  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:32px;line-height:1.1;margin:0 0 12px">{{ perm.title }}</h2>
+  <p style="font-size:17px;line-height:1.45;color:#6E625A;margin:0 0 18px;text-wrap:pretty">{{ perm.why }}</p>
+  <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:14px 16px;font-size:15px;line-height:1.45">{{ perm.detail }}</div>
+  <div style="flex:1"></div>
+  <button onClick="{{ permAllow }}" style="height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">{{ perm.cta }}</button>
+  <button onClick="{{ permDeny }}" style="height:52px;margin-top:6px;border:none;background:transparent;font-size:16px;font-weight:600;color:#6E625A;cursor:pointer">Not now</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sApp }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0">
+
+  <sc-if value="{{ tToday }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="06 Today" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 150px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+      <div><div style="font-size:14px;font-weight:600;color:#6E625A">Tuesday, Nov 3 · 1:40 PM</div><div style="font-family:'Young Serif',serif;font-size:30px;line-height:1.1;margin-top:4px">Good afternoon, Ana</div></div>
+      <button onClick="{{ toAllie }}" aria-label="Ask {{ an }}" style="width:48px;height:48px;border-radius:24px;border:none;background:#A9502B;color:#FFF8F0;font-family:'Young Serif',serif;font-size:20px;cursor:pointer;flex:none">{{ anInitial }}</button>
+    </div>
+    <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px;background:#EAE2D7;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.4"><b>You’re offline.</b> Logs and reminders still work. Replans use a simpler on-phone version until you’re back.</div></sc-if>
+    <sc-if value="{{ calDenied }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px;background:#E4E1F0;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.4;display:flex;gap:10px;align-items:center"><div style="flex:1"><b>I can’t see your meetings.</b> Turn on calendar access so I plan around them.</div><button onClick="{{ fixCal }}" style="height:40px;padding:0 14px;border-radius:20px;border:none;background:#4B4580;color:#FFF8F0;font-weight:600;cursor:pointer">Turn on</button></div></sc-if>
+
+    <div style="margin-top:16px;background:{{ hero.bg }};border-radius:24px;padding:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:{{ hero.fg }}"><span>Now</span><span>{{ hero.range }}</span></div>
+      <div style="font-family:'Young Serif',serif;font-size:25px;line-height:1.15;margin:8px 0 6px">{{ hero.title }}</div>
+      <div style="font-size:14px;line-height:1.4;color:#4A3F38">{{ hero.why }}</div>
+      <div style="height:1px;background:rgba(42,33,28,.12);margin:14px 0 12px"></div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:{{ hero.fg }}">Next</div>
+        <div style="flex:1;font-size:15px;font-weight:600;min-width:0">{{ hero.next }}</div>
+        <div style="font-size:13px;color:#4A3F38;white-space:nowrap">{{ hero.nextIn }}</div>
+      </div>
+    </div>
+
+    <sc-if value="{{ needCheckin }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top:12px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;padding:14px 14px 10px">
+      <div style="font-size:15px;font-weight:600;margin-bottom:6px">How’s your energy right now?</div>
+      <div style="display:flex;justify-content:space-between">
+        <sc-for list="{{ faces }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.pick }}" aria-label="{{ f.label }}" style="width:56px;height:62px;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;color:#6E625A;font-size:11px;font-weight:600"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7A5714" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9.5" fill="#F4E6C8"></circle><circle cx="9" cy="10" r=".6" fill="#7A5714"></circle><circle cx="15" cy="10" r=".6" fill="#7A5714"></circle><path d="{{ f.mouth }}"></path></svg>{{ f.label }}</button></sc-for>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ hasCheckin }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:14px;line-height:1.4;color:#6E625A;padding:0 4px">{{ checkinReply }}</div></sc-if>
+
+    <sc-if value="{{ notSaved }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top:12px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;padding:14px;display:flex;gap:12px;align-items:center">
+      <div style="flex:1;font-size:14px;line-height:1.4"><b>Save your day.</b> Your plan lives only on this phone until you do.</div>
+      <button onClick="{{ openSave }}" style="height:44px;padding:0 18px;border-radius:22px;border:1.5px solid #D9CCBD;background:transparent;font-weight:600;font-size:15px;cursor:pointer">Save</button>
+    </div>
+    </sc-if>
+
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin:24px 4px 12px"><div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A">Today</div><div style="font-size:13px;color:#6E625A">{{ doneLabel }}</div></div>
+    <sc-for list="{{ visBlocks }}" as="b" hint-placeholder-count="8">
+      <div onClick="{{ b.open }}" style="display:grid;grid-template-columns:56px 14px minmax(0,1fr);gap:8px;cursor:pointer">
+        <div style="font-size:12px;font-weight:600;color:#6E625A;padding-top:15px;text-align:right;white-space:nowrap">{{ b.time }}</div>
+        <div style="position:relative;display:flex;justify-content:center"><div style="position:absolute;top:0;bottom:0;width:2px;background:#E6DCCF"></div><div style="position:relative;margin-top:18px;width:10px;height:10px;border-radius:5px;background:{{ b.dot }};box-shadow:0 0 0 3px #F5EFE6"></div></div>
+        <div style="background:{{ b.cardBg }};border:1.5px solid {{ b.cardBorder }};border-radius:16px;padding:11px 8px 11px 14px;display:flex;gap:6px;align-items:flex-start;opacity:{{ b.op }};margin-bottom:10px">
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap">
+              <span style="font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:{{ b.dimFg }};background:{{ b.dimBg }};padding:3px 7px;border-radius:6px">{{ b.dimLabel }}</span>
+              <span style="font-size:12px;color:#6E625A">{{ b.meta }}</span>
+              <div style="display:flex"><sc-for list="{{ b.kids }}" as="k"><div style="width:20px;height:20px;border-radius:10px;background:{{ k.color }};color:#FFF8F0;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #FFFBF5;margin-right:-5px">{{ k.initial }}</div></sc-for></div>
+            </div>
+            <div style="font-size:16px;font-weight:600;line-height:1.25;text-decoration:{{ b.deco }}">{{ b.title }}</div>
+            <sc-if value="{{ b.hasWhy }}"><div style="font-size:13px;line-height:1.38;color:#6E625A;margin-top:3px;text-wrap:pretty">{{ b.why }}</div></sc-if>
+          </div>
+          <button onClick="{{ b.toggle }}" aria-label="Mark done" style="width:44px;height:44px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;margin-top:-4px"><div style="width:28px;height:28px;border-radius:14px;border:2px solid {{ b.chkBorder }};background:{{ b.chkBg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ b.chkOp }}"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3" fill="none" stroke-linecap="round"></path></svg></div></button>
+        </div>
+      </div>
+    </sc-for>
+    <sc-if value="{{ hasTomorrow }}" hint-placeholder-val="{{ false }}">
+      <div style="margin:18px 4px 0;background:#EAE2D7;border-radius:18px;padding:14px 16px">
+        <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A;margin-bottom:8px">Moved to tomorrow</div>
+        <sc-for list="{{ tomorrow }}" as="t"><div style="font-size:15px;padding:5px 0">{{ t.title }}</div></sc-for>
+        <div style="font-size:13px;color:#6E625A;margin-top:6px">Nothing deleted. It just fits better there.</div>
+      </div>
+    </sc-if>
+  </div>
+  <button onClick="{{ openLog }}" style="position:absolute;left:16px;bottom:100px;height:56px;padding:0 20px 0 16px;border-radius:28px;border:1.5px solid #D9CCBD;background:#FFFBF5;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 6px 18px rgba(42,33,28,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A211C" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log</button>
+  <button onClick="{{ openHappened }}" style="position:absolute;right:16px;bottom:100px;height:56px;padding:0 22px 0 18px;border-radius:28px;border:none;background:#2A211C;color:#FFF8F0;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 8px 22px rgba(42,33,28,.3)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z" fill="#E0A46A"></path></svg>Something happened</button>
+  </sc-if>
+
+  <sc-if value="{{ tKids }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="14 Kids" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 40px">
+    <div style="font-family:'Young Serif',serif;font-size:32px;margin-bottom:16px">Kids</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+    <sc-for list="{{ kidCards }}" as="k" hint-placeholder-count="2">
+      <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:22px;padding:16px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+          <div style="width:48px;height:48px;border-radius:24px;background:{{ k.color }};color:#FFF8F0;font-family:'Young Serif',serif;font-size:22px;display:flex;align-items:center;justify-content:center">{{ k.initial }}</div>
+          <div style="flex:1"><div style="font-family:'Young Serif',serif;font-size:22px">{{ k.name }}</div><div style="font-size:13px;color:#6E625A">{{ k.age }} · born {{ k.born }}</div></div>
+        </div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A;margin-bottom:4px">Today</div>
+        <sc-for list="{{ k.logs }}" as="l"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid #EFE7DC"><span>{{ l.label }}</span><span style="color:#6E625A">{{ l.time }}</span></div></sc-for>
+        <sc-if value="{{ k.hasLearn }}">
+          <div style="margin-top:12px;background:#DCE8F2;border-radius:16px;padding:12px 14px">
+            <div style="font-size:15px;font-weight:600;line-height:1.35">{{ k.learn }}</div>
+            <div style="font-size:13px;color:#2F5A7A;margin:3px 0 10px">Based on your last 10 days</div>
+            <div style="display:flex;gap:8px"><button onClick="{{ k.confirm }}" style="height:40px;padding:0 14px;border-radius:20px;border:none;background:#2F5A7A;color:#FFF8F0;font-weight:600;cursor:pointer">That’s right</button><button onClick="{{ k.correct }}" style="height:40px;padding:0 14px;border-radius:20px;border:1.5px solid #2F5A7A;background:transparent;color:#2F5A7A;font-weight:600;cursor:pointer">Correct it</button></div>
+          </div>
+        </sc-if>
+        <button onClick="{{ k.log }}" style="margin-top:12px;width:100%;height:48px;border-radius:24px;border:1.5px solid #D9CCBD;background:transparent;font-size:15px;font-weight:600;cursor:pointer">Log for {{ k.name }}</button>
+      </div>
+    </sc-for>
+    </div>
+    <div style="margin-top:14px;background:#F4E6C8;border-radius:18px;padding:14px 16px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A5714;margin-bottom:4px">I remember</div>
+      <div style="font-size:15px;line-height:1.4">You said Thursdays are chaotic, so I keep Thursday afternoons light.</div>
+    </div>
+    <button style="margin-top:14px;width:100%;min-height:52px;border:1.5px dashed #CDBFAF;border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:#6E625A;cursor:pointer">+ Add a child</button>
+    <div style="font-size:13px;color:#6E625A;text-align:center;margin-top:12px">I only keep nicknames and birth month.</div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ tAllie }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="13 Allie" style="position:absolute;top:0;left:0;right:0;bottom:84px;display:flex;flex-direction:column;padding-top:56px">
+    <div style="display:flex;align-items:center;gap:10px;padding:4px 18px 12px;border-bottom:1px solid #E6DCCF"><div style="width:38px;height:38px;border-radius:19px;background:#A9502B;color:#FFF8F0;font-family:'Young Serif',serif;font-size:18px;display:flex;align-items:center;justify-content:center">{{ anInitial }}</div><div><div style="font-family:'Young Serif',serif;font-size:22px;line-height:1">{{ an }}</div><div style="font-size:12px;color:#6E625A;margin-top:3px">Knows your plan and logs. Not medical advice.</div></div></div>
+    <div style="flex:1;overflow:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ chat }}" as="m" hint-placeholder-count="2">
+        <div style="display:flex;justify-content:{{ m.align }}"><div style="max-width:82%;background:{{ m.bg }};color:{{ m.fg }};border:1px solid {{ m.border }};border-radius:18px;padding:11px 14px;font-size:15px;line-height:1.42">{{ m.text }}<sc-if value="{{ m.hasSrc }}"><div style="font-size:12px;opacity:.7;margin-top:5px">{{ m.src }}</div></sc-if></div></div>
+      </sc-for>
+      <sc-if value="{{ chatTyping }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#6E625A;padding-left:6px">{{ an }} is checking…</div></sc-if>
+    </div>
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:6px 16px 10px">
+      <sc-for list="{{ chatChips }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.send }}" style="flex:none;height:40px;padding:0 14px;border-radius:20px;border:1.5px solid #D9CCBD;background:#FFFBF5;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap">{{ c.text }}</button></sc-for>
+    </div>
+    <div style="display:flex;gap:8px;padding:0 12px 12px;align-items:center">
+      <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Ask or tell {{ an }}…" style="flex:1;height:48px;border-radius:24px;border:1px solid #E6DCCF;background:#FFFBF5;padding:0 18px;font-size:16px;outline:none;color:#2A211C">
+      <button onClick="{{ sendChat }}" aria-label="Send or speak" style="width:48px;height:48px;border-radius:24px;border:none;background:#A9502B;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFF8F0" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ tMe }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="15 Settings" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 40px">
+    <div style="font-family:'Young Serif',serif;font-size:32px;margin-bottom:16px">You</div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;padding:14px 16px;margin-bottom:22px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A5714;margin-bottom:6px">Today’s note</div>
+      <div style="font-size:15px;line-height:1.45">{{ journal }}</div>
+      <div style="font-size:12px;color:#6E625A;margin-top:6px">Saved from what you told me. Edit or delete anytime.</div>
+    </div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A;margin:0 4px 8px">Reminders</div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;overflow:hidden;margin-bottom:22px">
+      <sc-for list="{{ settingRows }}" as="r" hint-placeholder-count="5">
+        <button onClick="{{ r.toggle }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border:none;border-bottom:1px solid #EFE7DC;background:transparent;text-align:left;cursor:pointer;min-height:60px">
+          <div style="width:10px;height:10px;border-radius:5px;background:{{ r.dot }};flex:none"></div>
+          <div style="flex:1"><div style="font-size:16px;font-weight:600">{{ r.label }}</div><div style="font-size:13px;color:#6E625A">{{ r.sub }}</div></div>
+          <div style="width:51px;height:31px;border-radius:16px;background:{{ r.track }};padding:2px;display:flex;justify-content:{{ r.justify }};flex:none"><div style="width:27px;height:27px;border-radius:14px;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2)"></div></div>
+        </button>
+      </sc-for>
+      <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #EFE7DC;min-height:60px"><div style="flex:1"><div style="font-size:16px;font-weight:600">Quiet hours</div><div style="font-size:13px;color:#6E625A">No nudges in this window</div></div><div style="font-size:15px;color:#6E625A">9:30 PM – 6:30 AM</div></div>
+      <div style="display:flex;align-items:center;padding:10px 12px 10px 16px;min-height:60px;gap:6px"><div style="flex:1"><div style="font-size:16px;font-weight:600">Daily nudge limit</div><div style="font-size:13px;color:#6E625A">Baby routines and meetings don’t count</div></div><button onClick="{{ budgetDown }}" style="width:44px;height:44px;border-radius:22px;border:1.5px solid #D9CCBD;background:transparent;font-size:20px;cursor:pointer">−</button><div style="width:30px;text-align:center;font-size:18px;font-weight:700">{{ budget }}</div><button onClick="{{ budgetUp }}" style="width:44px;height:44px;border-radius:22px;border:1.5px solid #D9CCBD;background:transparent;font-size:20px;cursor:pointer">+</button></div>
+    </div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A;margin:0 4px 8px">Family & calendars</div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;overflow:hidden;margin-bottom:22px">
+      <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid #EFE7DC;min-height:60px"><div style="flex:1"><div style="font-size:16px;font-weight:600">Support person</div><div style="font-size:13px;color:#6E625A">Diego · Partner</div></div><div style="font-size:15px;color:#A9502B;font-weight:600">Edit</div></div>
+      <div style="display:flex;align-items:center;padding:12px 16px;min-height:60px"><div style="flex:1"><div style="font-size:16px;font-weight:600">Work calendar</div><div style="font-size:13px;color:#6E625A">Outlook · read only. I write only to “BestMom”.</div></div></div>
+    </div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A;margin:0 4px 8px">Your data</div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;overflow:hidden">
+      <button onClick="{{ exportData }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;border-bottom:1px solid #EFE7DC;background:transparent;font-size:16px;font-weight:600;cursor:pointer">Export my data (JSON or CSV)</button>
+      <button onClick="{{ deleteData }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;background:transparent;font-size:16px;font-weight:600;color:#A33A2A;cursor:pointer">Delete my account and everything</button>
+    </div>
+    <div style="font-size:13px;color:#6E625A;text-align:center;margin-top:18px;line-height:1.4">BestMom plans your day. It isn’t medical advice.<br>In an emergency, call 911.</div>
+  </div>
+  </sc-if>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;height:84px;background:#FFFBF5;border-top:1px solid #E6DCCF;display:grid;grid-template-columns:repeat(4,1fr);padding:4px 8px 24px;z-index:5">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.go }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:{{ t.color }};font-size:11.5px;font-weight:700;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ t.color }}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg>{{ t.label }}</button></sc-for>
+  </div>
+
+  <sc-if value="{{ hasSheet }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(42,33,28,.38);z-index:20;display:flex;flex-direction:column;justify-content:flex-end">
+    <div onClick="{{ stop }}" style="background:#F8F2EA;border-radius:28px 28px 0 0;padding:10px 20px 38px;max-height:86%;overflow:auto">
+      <div style="width:40px;height:5px;border-radius:3px;background:#D9CCBD;margin:0 auto 16px"></div>
+
+      <sc-if value="{{ shHappened }}">
+        <div data-screen-label="07 Something happened">
+        <div style="font-family:'Young Serif',serif;font-size:27px;line-height:1.1">Something happened?</div>
+        <div style="font-size:15px;color:#6E625A;margin:6px 0 14px">Tap what changed. I’ll rearrange the rest.</div>
+        <sc-if value="{{ multiKid }}"><div style="display:flex;gap:8px;margin-bottom:12px"><sc-for list="{{ hKidPills }}" as="p"><button onClick="{{ p.pick }}" style="height:40px;padding:0 14px;border-radius:20px;border:1.5px solid {{ p.border }};background:{{ p.bg }};color:{{ p.fg }};font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:5px;background:{{ p.dot }}"></span>{{ p.label }}</button></sc-for></div></sc-if>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ presetBtns }}" as="p" hint-placeholder-count="6"><button onClick="{{ p.go }}" style="min-height:66px;padding:10px 14px;border-radius:16px;border:1px solid #E6DCCF;background:#FFFBF5;text-align:left;font-size:15px;font-weight:600;line-height:1.25;cursor:pointer">{{ p.label }}</button></sc-for>
+        </div>
+        <button onClick="{{ goSos }}" style="margin-top:8px;width:100%;min-height:56px;border-radius:16px;border:1.5px solid #A9502B;background:transparent;color:#A9502B;font-size:15px;font-weight:700;cursor:pointer">Emergency: clear my day</button>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:16px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:20px;padding:12px">
+          <button onClick="{{ micHappened }}" style="width:60px;height:60px;border-radius:30px;border:none;background:{{ micBg }};flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFF8F0" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div style="font-size:15px;line-height:1.4;color:{{ hVoiceColor }}">{{ hVoiceText }}</div>
+        </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shLog }}">
+        <div data-screen-label="09 Quick log">
+        <div style="font-family:'Young Serif',serif;font-size:27px;line-height:1.1;margin-bottom:14px">Quick log</div>
+        <sc-if value="{{ multiKid }}"><div style="display:flex;gap:8px;margin-bottom:12px"><sc-for list="{{ logKidPills }}" as="p"><button onClick="{{ p.pick }}" style="height:44px;padding:0 16px;border-radius:22px;border:1.5px solid {{ p.border }};background:{{ p.bg }};color:{{ p.fg }};font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:5px;background:{{ p.dot }}"></span>{{ p.label }}</button></sc-for></div></sc-if>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <sc-for list="{{ logTypes }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.pick }}" style="height:84px;border-radius:18px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};font-size:16px;font-weight:700;cursor:pointer">{{ t.label }}</button></sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:14px;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:18px;padding:10px 12px">
+          <div style="flex:1"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E625A">{{ logTimeLabel }}</div><div style="font-family:'Young Serif',serif;font-size:28px">{{ logTimeText }}</div></div>
+          <button onClick="{{ logMinus }}" style="width:48px;height:48px;border-radius:24px;border:1.5px solid #D9CCBD;background:transparent;font-size:22px;cursor:pointer">−</button>
+          <button onClick="{{ logPlus }}" style="width:48px;height:48px;border-radius:24px;border:1.5px solid #D9CCBD;background:transparent;font-size:22px;cursor:pointer">+</button>
+          <button onClick="{{ logNow }}" style="height:48px;padding:0 14px;border-radius:24px;border:1.5px solid #D9CCBD;background:transparent;font-size:15px;font-weight:600;cursor:pointer">Now</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:10px;padding:4px">
+          <button onClick="{{ micLog }}" aria-label="Say it" style="width:52px;height:52px;border-radius:26px;border:none;background:{{ micBg }};flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFF8F0" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div style="font-size:14px;line-height:1.4;color:#6E625A">{{ logVoiceText }}</div>
+        </div>
+        <button onClick="{{ saveLog }}" style="margin-top:14px;width:100%;height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">Save</button>
+        <div style="font-size:13px;color:#6E625A;text-align:center;margin-top:10px">Routines only. Works offline.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shBlock }}">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:{{ sel.dimFg }};background:{{ sel.dimBg }};padding:3px 8px;border-radius:6px">{{ sel.dimLabel }}</span><span style="font-size:13px;color:#6E625A">{{ sel.kind }}</span></div>
+        <div style="font-family:'Young Serif',serif;font-size:27px;line-height:1.12">{{ sel.title }}</div>
+        <div style="font-size:15px;color:#6E625A;margin:4px 0 10px">{{ sel.range }}</div>
+        <sc-if value="{{ sel.hasWhy }}"><div style="font-size:15px;line-height:1.45;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:12px 14px;margin-bottom:14px"><b>Why: </b>{{ sel.why }}</div></sc-if>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ sel.actions }}" as="a"><button onClick="{{ a.go }}" style="height:54px;border-radius:27px;border:{{ a.border }};background:{{ a.bg }};color:{{ a.fg }};font-size:16px;font-weight:600;cursor:pointer">{{ a.label }}</button></sc-for>
+        </div>
+        <sc-if value="{{ sel.fixed }}"><div style="font-size:13px;color:#6E625A;text-align:center;margin-top:10px">Fixed. I never move this without asking you.</div></sc-if>
+      </sc-if>
+
+      <sc-if value="{{ shSave }}">
+        <div style="font-family:'Young Serif',serif;font-size:27px;line-height:1.1">Save your day</div>
+        <div style="font-size:15px;color:#6E625A;margin:6px 0 18px;line-height:1.4">Today is on me, with reminders, replans and a close of day. Save it so nothing is lost.</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button onClick="{{ doSave }}" style="height:54px;border-radius:27px;border:none;background:#000;color:#FFF;font-size:16px;font-weight:600;cursor:pointer">Continue with Apple</button>
+          <button onClick="{{ doSave }}" style="height:54px;border-radius:27px;border:1.5px solid #D9CCBD;background:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Continue with Google</button>
+          <button onClick="{{ doSave }}" style="height:50px;border:none;background:transparent;font-size:16px;font-weight:600;color:#6E625A;cursor:pointer">Use email instead</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ sReplan }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="08 Replan" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F5EFE6;padding:58px 20px 36px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#A9502B">{{ replanTag }}</div><button onClick="{{ cancelReplan }}" aria-label="Close" style="width:44px;height:44px;border-radius:22px;border:none;background:#EAE2D7;font-size:22px;cursor:pointer">×</button></div>
+  <sc-if value="{{ replanLoading }}" hint-placeholder-val="{{ true }}">
+    <div style="font-family:'Young Serif',serif;font-size:27px;line-height:1.15;margin-bottom:22px">Rearranging your afternoon…</div>
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="height:74px;border-radius:16px;background:#EBE2D6"></div><div style="height:74px;border-radius:16px;background:#EFE7DC"></div><div style="height:74px;border-radius:16px;background:#F2EBE1"></div></div>
+  </sc-if>
+  <sc-if value="{{ replanReady }}" hint-placeholder-val="{{ false }}">
+    <div style="font-family:'Young Serif',serif;font-size:26px;line-height:1.18;margin-bottom:14px;text-wrap:pretty">{{ replanHead }}</div>
+    <sc-if value="{{ replanNotice }}"><div style="background:#F4E6C8;color:#5E430F;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.4;margin-bottom:12px">{{ replanNoticeText }}</div></sc-if>
+    <sc-if value="{{ offline }}"><div style="background:#EAE2D7;border-radius:14px;padding:10px 14px;font-size:14px;margin-bottom:12px">Offline: this is a simpler on-phone replan.</div></sc-if>
+    <div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ changes }}" as="c" hint-placeholder-count="4">
+        <div style="display:flex;gap:4px;align-items:flex-start;background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:10px 12px 12px 6px;opacity:{{ c.op }}">
+          <sc-if value="{{ c.canToggle }}"><button onClick="{{ c.toggle }}" aria-label="Include change" style="width:44px;height:44px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer"><div style="width:24px;height:24px;border-radius:7px;border:2px solid {{ c.boxBorder }};background:{{ c.boxBg }};display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 24 24" style="opacity:{{ c.chkOp }}"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3.2" fill="none" stroke-linecap="round"></path></svg></div></button></sc-if>
+          <sc-if value="{{ c.isKeep }}"><div style="width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6E625A" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></div></sc-if>
+          <div style="flex:1;min-width:0;padding-top:4px">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:{{ c.fg }};background:{{ c.bg }};padding:3px 7px;border-radius:6px">{{ c.label }}</span>
+            <div style="font-size:16px;font-weight:600;margin-top:6px">{{ c.title }}</div>
+            <sc-if value="{{ c.isMove }}"><div style="font-size:14px;margin-top:2px"><span style="text-decoration:line-through;color:#6E625A">{{ c.from }}</span> → <b>{{ c.to }}</b></div></sc-if>
+            <sc-if value="{{ c.notMove }}"><div style="font-size:14px;margin-top:2px;color:#4A3F38">{{ c.detail }}</div></sc-if>
+            <div style="font-size:13px;color:#6E625A;margin-top:3px;line-height:1.35">{{ c.note }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:12.5px;color:#6E625A;text-align:center;margin:12px 0 10px;line-height:1.4">Your reminders and BestMom calendar update when you accept.</div>
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px">
+      <button onClick="{{ cancelReplan }}" style="height:56px;border-radius:28px;border:1.5px solid #D9CCBD;background:transparent;font-size:16px;font-weight:600;cursor:pointer">Keep old plan</button>
+      <button onClick="{{ acceptReplan }}" style="height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:16px;font-weight:600;cursor:pointer">{{ acceptLabel }}</button>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ sBed }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="10 Bedtime" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#1A1411;color:#EBDDCF;padding:62px 24px 40px">
+  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:600;color:#A8968A">Bedtime · {{ bedKid }}</div><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:22px;border:none;background:#2A201B;color:#A8968A;font-size:22px;cursor:pointer">×</button></div>
+  <sc-if value="{{ bedActive }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;gap:6px;margin:18px 0 26px"><sc-for list="{{ bedDots }}" as="d"><div style="flex:1;height:4px;border-radius:2px;background:{{ d.bg }}"></div></sc-for></div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#E0A46A">{{ bedStepLabel }}</div>
+    <div style="font-family:'Young Serif',serif;font-size:36px;line-height:1.1;margin:8px 0 8px">{{ bedTitle }}</div>
+    <div style="font-size:16px;line-height:1.45;color:#A8968A">{{ bedHint }}</div>
+    <div style="flex:1;display:flex;align-items:center;justify-content:center">
+      <div style="position:relative;width:250px;height:250px">
+        <svg width="250" height="250" viewBox="0 0 250 250" style="transform:rotate(-90deg)"><circle cx="125" cy="125" r="112" stroke="#2E241E" stroke-width="8" fill="none"></circle><circle cx="125" cy="125" r="112" stroke="#E0A46A" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="703.7" stroke-dashoffset="{{ bedOffset }}" style="transition:stroke-dashoffset 1s linear"></circle></svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="font-family:'Young Serif',serif;font-size:50px">{{ bedClock }}</div><div style="font-size:14px;color:#A8968A">{{ bedRunLabel }}</div></div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:#A8968A;text-align:center;margin-bottom:14px">A steady routine helps your evenings feel calmer too.</div>
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px">
+      <button onClick="{{ bedPause }}" style="height:58px;border-radius:29px;border:1.5px solid #3A2E27;background:transparent;color:#EBDDCF;font-size:16px;font-weight:600;cursor:pointer">{{ bedPauseLabel }}</button>
+      <button onClick="{{ bedNext }}" style="height:58px;border-radius:29px;border:none;background:#E0A46A;color:#1A1411;font-size:16px;font-weight:700;cursor:pointer">{{ bedNextLabel }}</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ bedDone }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+      <div style="font-family:'Young Serif',serif;font-size:38px;line-height:1.1;margin-bottom:12px">{{ bedKid }} is down for the night.</div>
+      <div style="font-size:17px;color:#A8968A;line-height:1.45">Logged: asleep at 7:21 PM. All three steps, same as last night. That consistency is the part that works.</div>
+    </div>
+    <button onClick="{{ exitNight }}" style="height:58px;border-radius:29px;border:none;background:#E0A46A;color:#1A1411;font-size:16px;font-weight:700;cursor:pointer">Back to today</button>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ sBreathe }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="11 Breathing" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#1A1411;color:#EBDDCF;padding:62px 24px 40px">
+  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:600;color:#A8968A">5-minute breathing · {{ breathLeft }} left</div><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:22px;border:none;background:#2A201B;color:#A8968A;font-size:22px;cursor:pointer">×</button></div>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center">
+    <div style="width:300px;height:300px;border-radius:150px;border:1.5px solid #3A2E27;display:flex;align-items:center;justify-content:center">
+      <div style="width:280px;height:280px;border-radius:140px;background:#3A2B21;transform:scale({{ breathScale }});transition:transform {{ breathDur }} ease-in-out;display:flex;align-items:center;justify-content:center"></div>
+    </div>
+    <div style="position:absolute;display:flex;flex-direction:column;align-items:center"><div style="font-family:'Young Serif',serif;font-size:32px">{{ breathLabel }}</div><div style="font-size:44px;font-family:'Young Serif',serif;color:#E0A46A;margin-top:4px">{{ breathCount }}</div></div>
+  </div>
+  <div style="font-size:14px;color:#A8968A;text-align:center;margin-bottom:16px">In for 4, out for 6. About 6 breaths a minute.</div>
+  <button onClick="{{ breathPause }}" style="height:58px;border-radius:29px;border:1.5px solid #3A2E27;background:transparent;color:#EBDDCF;font-size:16px;font-weight:600;cursor:pointer">{{ breathPauseLabel }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sClose }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="12 Close of day" style="position:absolute;inset:0;overflow:auto;background:#F5EFE6;padding:66px 22px 40px">
+  <div style="font-size:14px;font-weight:600;color:#6E625A">Tuesday, 9:15 PM</div>
+  <div style="font-family:'Young Serif',serif;font-size:36px;line-height:1.08;margin:6px 0 16px">Today, wrapped.</div>
+  <div style="font-family:'Young Serif',serif;font-size:22px;line-height:1.32;color:#A9502B;margin-bottom:20px;text-wrap:pretty">{{ earned }}</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ doneCount }}</div><div style="font-size:13px;color:#6E625A">done</div></div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ replans }}</div><div style="font-size:13px;color:#6E625A">plan changes</div></div>
+    <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ tomorrowCount }}</div><div style="font-size:13px;color:#6E625A">to tomorrow</div></div>
+  </div>
+  <div style="background:#FFFBF5;border:1px solid #E6DCCF;border-radius:18px;padding:14px 16px;margin-bottom:16px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A5714;margin-bottom:6px">Today’s note</div>
+    <textarea value="{{ journal }}" onChange="{{ onJournal }}" style="width:100%;min-height:70px;border:none;background:transparent;font-size:16px;line-height:1.45;resize:none;outline:none;color:#2A211C;padding:0"></textarea>
+    <div style="font-size:12px;color:#6E625A">From what you told me today. Edit it or delete it.</div>
+  </div>
+  <div style="font-size:16px;font-weight:600;margin-bottom:10px">Did you feel supported today?</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:22px">
+    <sc-for list="{{ ratings }}" as="r" hint-placeholder-count="5"><button onClick="{{ r.pick }}" style="height:52px;border-radius:16px;border:1.5px solid {{ r.border }};background:{{ r.bg }};color:{{ r.fg }};font-size:18px;font-weight:700;cursor:pointer">{{ r.n }}</button></sc-for>
+  </div>
+  <button onClick="{{ toPaywall }}" style="width:100%;height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">Tomorrow’s plan is ready. Good night</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sPaywall }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="16 Paywall" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#F5EFE6;padding:64px 22px 30px">
+  <div style="font-size:14px;font-weight:600;color:#6E625A">Wednesday, 6:52 AM</div>
+  <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.1;margin:6px 0 14px">Good morning, Ana. Yesterday, together:</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
+    <sc-for list="{{ yesterday }}" as="y" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:center;font-size:16px"><div style="width:22px;height:22px;border-radius:11px;background:#3D6142;flex:none;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div>{{ y.text }}</div></sc-for>
+  </div>
+  <div style="font-size:17px;font-weight:600;margin-bottom:10px">Keep me planning your days</div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <sc-for list="{{ plans }}" as="p" hint-placeholder-count="2"><button onClick="{{ p.pick }}" style="display:flex;align-items:center;gap:12px;text-align:left;min-height:68px;border-radius:18px;border:2px solid {{ p.border }};background:#FFFBF5;padding:10px 16px;cursor:pointer"><div style="width:22px;height:22px;border-radius:11px;border:2px solid {{ p.border }};display:flex;align-items:center;justify-content:center;flex:none"><div style="width:10px;height:10px;border-radius:5px;background:{{ p.dot }}"></div></div><div style="flex:1"><div style="font-size:16px;font-weight:700">{{ p.name }}</div><div style="font-size:13px;color:#6E625A">{{ p.sub }}</div></div><div style="font-size:16px;font-weight:700">{{ p.price }}</div></button></sc-for>
+  </div>
+  <div style="flex:1"></div>
+  <button onClick="{{ subscribe }}" style="height:56px;border-radius:28px;border:none;background:#A9502B;color:#FFF8F0;font-size:17px;font-weight:600;cursor:pointer">Continue · {{ planPrice }}</button>
+  <div style="font-size:12px;color:#6E625A;text-align:center;line-height:1.45;margin:10px 4px">Renews automatically until you cancel. Cancel anytime in your App Store settings at least 24 hours before renewal.</div>
+  <div style="display:flex;justify-content:center;gap:18px;font-size:13px;font-weight:600"><a href="#">Restore purchases</a><a href="#">Export or delete my data</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sCrisis }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="17 Crisis" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#EFE7DD;padding:76px 24px 36px">
+  <div style="font-family:'Young Serif',serif;font-size:36px;line-height:1.1;margin-bottom:12px">You’re not alone.</div>
+  <div style="font-size:17px;line-height:1.45;color:#4A3F38;margin-bottom:24px">Talking to someone right now can help. These lines are free, confidential, and open 24/7.</div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="background:#FFFBF5;border-radius:20px;padding:16px">
+      <div style="font-size:17px;font-weight:700">988 Suicide & Crisis Lifeline</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button style="height:52px;border-radius:26px;border:none;background:#2A211C;color:#FFF8F0;font-size:16px;font-weight:600;cursor:pointer">Call 988</button><button style="height:52px;border-radius:26px;border:1.5px solid #2A211C;background:transparent;font-size:16px;font-weight:600;cursor:pointer">Text 988</button></div>
+    </div>
+    <div style="background:#FFFBF5;border-radius:20px;padding:16px">
+      <div style="font-size:17px;font-weight:700">National Maternal Mental Health Hotline</div>
+      <div style="font-size:14px;color:#6E625A;margin-top:2px">1-833-TLC-MAMA (1-833-852-6262)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button style="height:52px;border-radius:26px;border:none;background:#2A211C;color:#FFF8F0;font-size:16px;font-weight:600;cursor:pointer">Call</button><button style="height:52px;border-radius:26px;border:1.5px solid #2A211C;background:transparent;font-size:16px;font-weight:600;cursor:pointer">Text</button></div>
+    </div>
+    <button style="height:56px;border-radius:28px;border:none;background:#A33A2A;color:#FFF8F0;font-size:16px;font-weight:600;cursor:pointer">In immediate danger? Call 911</button>
+  </div>
+  <div style="flex:1"></div>
+  <div style="font-size:13px;color:#6E625A;text-align:center;margin-bottom:8px">What you just shared won’t be used to plan your day.</div>
+  <button onClick="{{ toTodayPlain }}" style="height:50px;border:none;background:transparent;font-size:16px;font-weight:600;color:#4A3F38;cursor:pointer">Back to BestMom</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:14px;right:14px;bottom:170px;z-index:30;background:#2A211C;color:#FFF8F0;border-radius:16px;padding:6px 6px 6px 16px;display:flex;align-items:center;gap:10px;min-height:52px;box-shadow:0 10px 30px rgba(42,33,28,.3)">
+    <div style="flex:1;font-size:15px;line-height:1.35">{{ toastText }}</div>
+    <sc-if value="{{ toastUndo }}"><button onClick="{{ undo }}" style="height:44px;padding:0 14px;border:none;background:transparent;color:#E0A46A;font-size:15px;font-weight:700;cursor:pointer">Undo</button></sc-if>
+  </div>
+</sc-if>
+
+</div>
+</x-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;family&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;two&quot;,&quot;one&quot;,&quot;twins&quot;],&quot;default&quot;:&quot;two&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Family (2 kids / 1 baby / twins)&quot;},&quot;assistantName&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Allie&quot;,&quot;Ally&quot;],&quot;default&quot;:&quot;Allie&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Assistant name&quot;},&quot;offline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;label&quot;:&quot;Offline state&quot;},&quot;showFlow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;label&quot;:&quot;Show screen map&quot;}}">
+const NOW = 13 * 60 + 40;
+const fmt = m => { let h = Math.floor(m / 60), mm = m % 60; const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(mm).padStart(2, '0') + ' ' + ap; };
+const DIMS = {
+  kids: { label: 'Kids', bg: '#DCE8F2', fg: '#2F5A7A' },
+  mom: { label: 'You', bg: '#DFE9DC', fg: '#3D6142' },
+  work: { label: 'Work', bg: '#E4E1F0', fg: '#4B4580' },
+  self: { label: 'Check-in', bg: '#F4E6C8', fg: '#7A5714' },
+  partner: { label: 'Partner', bg: '#F4DDDD', fg: '#8A3B44' },
+};
+const KINDS = { fixed: 'Fixed', flex: 'Flexible', routine: 'Routine', optional: 'Optional' };
+const FAMS = {
+  two: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: '#2F7F7A' }, { id: 'b', name: 'Lia', age: '3 years', born: 'Jun 2023', color: '#8A4C8F' }],
+  one: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: '#2F7F7A' }],
+  twins: [{ id: 'a', name: 'Mateo', age: '4 months', born: 'Jul 2026', color: '#2F7F7A' }, { id: 'b', name: 'Sofi', age: '4 months', born: 'Jul 2026', color: '#8A4C8F' }],
+};
+const B = (id, t, dur, title, dim, kind, child, why, status) => ({ id, t, dur, title, dim, kind, child, why, status: status || 'pending' });
+function buildBlocks(fam) {
+  const tw = fam === 'twins';
+  const b = [
+    B('feed1', 420, 20, tw ? 'Morning bottles' : 'Morning bottle', 'kids', 'routine', tw ? 'all' : 'a', '', 'done'),
+    B('focus', 540, 90, 'Focus block: Q4 deck', 'work', 'fixed', null, 'Protected. Replans try not to touch it.', 'done'),
+    B('nap1', 630, 75, tw ? 'Twins’ morning nap' : 'Mateo’s morning nap', 'kids', 'routine', tw ? 'all' : 'a', '', 'done'),
+    B('lunch', 735, 25, 'Lunch, sitting down', 'mom', 'flex', null, 'You said lunch gets skipped. This one is protected.', 'done'),
+    B('nap2', 810, 75, tw ? 'Twins’ afternoon nap' : 'Mateo’s afternoon nap', 'kids', 'routine', tw ? 'all' : 'a', 'Awake 2h 10m. Right on his rhythm.'),
+    B('walk', 840, 20, 'Stroller walk', 'mom', 'flex', null, '20 free minutes before your 3:00. A short walk recharges you.'),
+    B('prep', 885, 10, 'Prep for Sarah', 'work', 'flex', null, 'Meeting in 15 min. The bottle is already in the fridge.'),
+    B('meet', 900, 45, 'Meeting with Sarah', 'work', 'fixed', null, 'From your Outlook calendar.'),
+  ];
+  if (fam === 'two') b.push(B('pickup', 975, 30, 'Pick up Lia', 'kids', 'fixed', 'b', 'Daycare closes at 5:30.'));
+  if (tw) b.push(B('pickup', 960, 30, 'Twin feed', 'kids', 'routine', 'all', 'Feeding both together saves you about 25 minutes.'));
+  b.push(
+    B('dinner', 1050, 40, 'Family dinner', 'kids', 'flex', fam === 'one' ? 'a' : 'all', ''),
+    B('bath', 1125, 30, tw ? 'Twins’ bedtime routine' : 'Mateo’s bedtime routine', 'kids', 'routine', tw ? 'all' : 'a', 'Bath, lotion, song. The same 3 steps every night help him sleep longer.'),
+    B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good-energy day and a free gap. Thank him for the 6 AM bottle.'),
+    B('breathe', 1230, 5, '5-minute breathing', 'mom', 'optional', null, 'Slow breathing, about 6 breaths a minute, helps you wind down.'),
+    B('close', 1275, 5, 'Close your day', 'self', 'flex', null, '2 minutes. Tomorrow’s plan builds itself from tonight.'),
+  );
+  return b;
+}
+function seedLogs(fam) {
+  const l = [{ kid: 'a', type: 'sleep', t: 630, end: 705 }, { kid: 'a', type: 'feed', t: 730 }, { kid: 'a', type: 'diaper', t: 785 }];
+  if (fam === 'two') l.push({ kid: 'b', type: 'meal', t: 720 });
+  if (fam === 'twins') l.push({ kid: 'b', type: 'sleep', t: 635, end: 712 }, { kid: 'b', type: 'feed', t: 732 });
+  return l;
+}
+const TYPES = { sleep: 'Sleep', feed: 'Feed', diaper: 'Diaper', meal: 'Lunch at daycare' };
+const KEEP = (id, note) => ({ type: 'keep', id, note: note || 'Fixed. I didn’t touch it.' });
+const PRESETS = {
+  early: { head: 'He went down early, so your walk can start now.', changes: [
+    { type: 'move', id: 'nap2', to: 795, note: 'Logged: asleep at 1:15 PM.' },
+    { type: 'move', id: 'walk', to: 825, note: 'Go now while he sleeps.' }, KEEP('meet')] },
+  late: { head: 'The nap started late, so I nudged the evening by 15 minutes.', changes: [
+    { type: 'move', id: 'nap2', to: 835, note: 'Logged: asleep at 1:55 PM.' },
+    { type: 'move', id: 'walk', to: 855, note: 'Still fits before your prep.' },
+    { type: 'move', id: 'bath', to: 1140, note: 'Later nap, later bedtime.' }, KEEP('meet')] },
+  nonap: { head: 'No nap today. I moved 3 things and kept your 3:00 with Sarah.', changes: [
+    { type: 'skip', id: 'nap2', note: 'Logged: no afternoon nap.' },
+    { type: 'move', id: 'walk', to: 820, note: 'Stroller walk now. He may doze off on it.' },
+    { type: 'move', id: 'bath', to: 1095, note: 'Earlier bedtime after a skipped nap.' },
+    { type: 'drop', id: 'partner', note: 'Tonight will be busy.' }, KEEP('meet')] },
+  sick: { head: 'A slower afternoon at home. Your meeting stays unless you move it.', notice: 'I can’t give medical advice. Check with your pediatrician if you’re worried. I held time for a call.', changes: [
+    { type: 'add', block: B('call', 840, 15, 'Time to call the pediatrician', 'kids', 'flex', 'a', 'Held for you, if you want to call.'), note: 'Only if you want it.' },
+    { type: 'drop', id: 'walk', note: 'A home day. It fits better tomorrow.' },
+    { type: 'drop', id: 'partner', note: 'Not tonight.' }, KEEP('meet', 'Fixed. Want it on video? Only you can move it.')] },
+  meeting: { head: 'Sarah moved to 3:30. I shifted your prep to match.', changes: [
+    { type: 'move', id: 'meet', to: 930, note: 'Updated in your Outlook calendar. You confirmed it there.' },
+    { type: 'move', id: 'prep', to: 915, note: 'Still 15 minutes before.' }, KEEP('pickup', 'Fixed. Still fits after the meeting.')] },
+  tired: { head: 'You’ve carried a lot today. I cleared what can wait.', changes: [
+    { type: 'add', block: B('rest', 820, 20, 'Rest while Mateo sleeps', 'mom', 'flex', null, 'Lie down. The dishes can wait.'), note: '20 minutes, just for you.' },
+    { type: 'drop', id: 'walk', note: 'Tomorrow, when you have more in the tank.' },
+    { type: 'drop', id: 'partner', note: 'Optional. Let it go tonight.' },
+    { type: 'drop', id: 'breathe', note: 'Optional. Sleep counts more tonight.' }, KEEP('meet')] },
+  sos: { head: 'Day cleared. Only fixed things and the kids’ routines are left.', changes: [
+    { type: 'drop', id: 'walk' }, { type: 'drop', id: 'prep' }, { type: 'drop', id: 'partner' }, { type: 'drop', id: 'breathe' },
+    KEEP('meet', 'Fixed. Want to ask Sarah to reschedule?'), KEEP('pickup', 'Fixed.')] },
+};
+PRESETS.voice = { ...PRESETS.nonap, head: 'Heard you: no nap, and Sarah at 3:00. Here’s the new afternoon.' };
+const BED = [
+  { t: 'Bath', d: 10, hint: 'Warm water, low lights. Same time every night.' },
+  { t: 'Lotion & massage', d: 5, hint: 'Slow strokes, in the same order each night.' },
+  { t: 'Song or quiet story', d: 8, hint: 'The same song becomes his cue to sleep.' },
+];
+const TX = {
+  dump: fam => ((fam === 'twins' ? 'Okay so… I have twins, Mateo and Sofi, they’re four months, and my leave ends in two weeks.' : fam === 'one' ? 'Okay so… I have Mateo, he’s seven months.' : 'Okay so… I have Mateo, he’s seven months, and Lia, who’s three.') + ' I’m back at work, hybrid, mostly nine to five. Tuesdays and Thursdays are packed with meetings. His naps are all over the place, and when he skips one the whole day falls apart. I keep forgetting to eat lunch. Diego helps a lot in the mornings.'),
+  happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
+  log: () => 'He fell asleep at one thirty-five.',
+};
+const ICONS = {
+  today: 'M12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 1 0 0-9M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8',
+  kids: 'M8 11a3.5 3.5 0 1 0 0-7a3.5 3.5 0 1 0 0 7M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M17 11a2.8 2.8 0 1 0 0-5.6a2.8 2.8 0 1 0 0 5.6M16 14.2c3.2-.4 6 1.9 6 5.8',
+  allie: 'M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z',
+  me: 'M12 12a4 4 0 1 0 0-8a4 4 0 1 0 0 8M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8',
+};
+const MOUTHS = ['M8 16.5c1.2-1.6 2.5-2.3 4-2.3s2.8.7 4 2.3', 'M8.5 16c1-.8 2.2-1.2 3.5-1.2s2.5.4 3.5 1.2', 'M8.5 15.5h7', 'M8.5 14.5c1 .9 2.2 1.3 3.5 1.3s2.5-.4 3.5-1.3', 'M8 14c1.1 1.8 2.4 2.7 4 2.7s2.9-.9 4-2.7'];
+const FACE_LABELS = ['Drained', 'Low', 'Okay', 'Good', 'Great'];
+const CHIPS = ['What time did Mateo fall asleep yesterday?', 'How many diapers this week?', 'Move my walk to Thursday', 'Is his cough something to worry about?'];
+const REPLY = q => {
+  if (/fever|cough|tylenol|medic|rash|vaccin|dose|sick|worry/i.test(q)) return { text: 'That’s best checked with your pediatrician or doctor. If it’s urgent, call 911. What I can do is clear time in your day so you can call or go.', src: '' };
+  if (/asleep|sleep/i.test(q)) return { text: '7:22 PM, after bath, lotion and his song. That’s 8 minutes later than his usual.', src: 'From your logs, Monday' };
+  if (/diaper/i.test(q)) return { text: '38 so far, about 6 a day. Same pace as last week.', src: 'From your logs, last 7 days' };
+  if (/move|walk/i.test(q)) return { text: 'Done. Your walk is now Thursday at 12:30, during Mateo’s nap.', src: 'Updated in your BestMom calendar' };
+  return { text: 'Got it. I’ll keep that in mind when I plan tomorrow.', src: '' };
+};
+const FLOW = [
+  { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
+  { title: 'Core loop', items: [[6, 'Today', 'today'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log']] },
+  { title: 'Care', items: [[10, 'Bedtime (night mode)', 'bed'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
+  { title: 'Tabs', items: [[13, 'Assistant chat', 'allie'], [14, 'Kids & family', 'kids'], [15, 'Settings & data', 'me']] },
+  { title: 'Business & safety', items: [[16, 'Paywall (day 2)', 'paywall'], [17, 'Crisis screen', 'crisis']] },
+];
+
+class Component extends DCLogic {
+  state = this.initState(this.props.family || 'two');
+  initState(fam) {
+    return {
+      fam, screen: 'welcome', tab: 'today', sheet: null, blocks: buildBlocks(fam), consent1: false, consent2: false,
+      dumpMode: 'voice', listening: false, ctx: null, words: 0, wave: [8, 14, 10, 18, 9, 12, 7], dumpText: '', followUp: false,
+      summary: [], editIdx: -1, permStep: 0, calDenied: false, thinkLines: [], thinkStep: 0, thinkTitle: '', thinkNext: 'today',
+      replanKey: 'nonap', replanLoading: false, replanAt: 0, on: {}, prevBlocks: null, replans: 0,
+      toast: null, toastUndo: false, toastUntil: 0, checkin: null, selBlock: null, saved: false, hKid: 'a',
+      logKid: 'a', logType: 'sleep', logTime: NOW, logHeard: null, logs: seedLogs(fam),
+      bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false, bSec: 0, bRun: true,
+      rating: null, journal: 'Mateo laughed at the dog for the first time. Real belly laughs.', plan: 'year',
+      chat: [{ me: false, text: 'Hi Ana. Ask me about your day or the kids’ routines, or tell me what to move.' }], chatInput: '', chatTyping: false,
+      settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
+    };
+  }
+  componentDidMount() { this.iv = setInterval(() => this.tick(), 200); }
+  componentWillUnmount() { clearInterval(this.iv); }
+  componentDidUpdate(prev) {
+    if ((prev.family || 'two') !== (this.props.family || 'two')) { const f = this.props.family || 'two'; this.setState({ fam: f, blocks: buildBlocks(f), logs: seedLogs(f), summary: this.buildSummary(f) }); }
+  }
+  kids() { return FAMS[this.state.fam] || FAMS.two; }
+  buildSummary(fam) {
+    fam = fam || this.state.fam;
+    const k = fam === 'twins' ? ['Mateo & Sofi, twins, 4 months', 'Your leave ends in 2 weeks'] : fam === 'one' ? ['Mateo, 7 months'] : ['Mateo, 7 months', 'Lia, 3 years, in daycare'];
+    return [...k, 'Mateo’s bedtime is around 7:15 PM', 'You work 9–5, hybrid', 'Meetings pile up Tue & Thu', 'Lunch often gets skipped', 'Diego helps in the mornings'];
+  }
+  toastMsg(text, undo) { this.setState({ toast: text, toastUndo: !!undo, toastUntil: Date.now() + 4500 }); }
+  startListen(ctx) {
+    if (this.state.listening) { this.setState({ listening: false }); return; }
+    this.tx = TX[ctx](this.state.fam).split(' ');
+    this.setState({ listening: true, ctx, words: 0, followUp: false, logHeard: null });
+  }
+  thinking(title, lines, next) { this.setState({ screen: 'thinking', thinkTitle: title, thinkLines: lines, thinkStep: 0, thinkNext: next, sheet: null }); }
+  tick() {
+    const s = this.state, up = {}; this.n = (this.n || 0) + 1;
+    if (s.listening && this.tx) {
+      const tot = this.tx.length, w = Math.min(tot, s.words + (s.ctx === 'dump' ? 2 : 1));
+      up.words = w; up.wave = s.wave.map(() => 6 + Math.round(Math.random() * 26));
+      if (w >= tot) {
+        up.listening = false;
+        if (s.ctx === 'dump') up.followUp = true;
+        if (s.ctx === 'log') { up.logHeard = '“' + this.tx.join(' ') + '”'; up.logTime = 815; up.logType = 'sleep'; up.logKid = 'a'; }
+        if (s.ctx === 'happened') setTimeout(() => this.openReplan('voice'), 500);
+      }
+    }
+    if (s.screen === 'thinking' && this.n % 4 === 0) {
+      if (s.thinkStep < s.thinkLines.length) up.thinkStep = s.thinkStep + 1;
+      else { setTimeout(() => this.go(s.thinkNext), 0); }
+    }
+    if (s.replanLoading && Date.now() > s.replanAt) up.replanLoading = false;
+    if (this.n % 5 === 0) {
+      if (s.screen === 'bed' && s.bedRun && !s.bedDone && s.bedLeft > 0) up.bedLeft = s.bedLeft - 1;
+      if (s.screen === 'breathe' && s.bRun && s.bSec < 300) up.bSec = s.bSec + 1;
+    }
+    if (s.toast && Date.now() > s.toastUntil) up.toast = null;
+    if (Object.keys(up).length) this.setState(up);
+  }
+  go(k) {
+    const base = { sheet: null, listening: false, selBlock: null };
+    switch (k) {
+      case 'welcome': case 'consent': return this.setState({ ...base, screen: k });
+      case 'dump': return this.setState({ ...base, screen: 'dump', words: 0, followUp: false });
+      case 'summary': return this.setState({ ...base, screen: 'summary', summary: this.buildSummary(), editIdx: -1 });
+      case 'perm': return this.setState({ ...base, screen: 'perm', permStep: 0 });
+      case 'today': case 'kids': case 'allie': case 'me': return this.setState({ ...base, screen: 'app', tab: k });
+      case 'happened': case 'log': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW });
+      case 'replan': return this.openReplan('nonap');
+      case 'bed': return this.setState({ ...base, screen: 'bed', bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false });
+      case 'breathe': return this.setState({ ...base, screen: 'breathe', bSec: 0, bRun: true });
+      default: return this.setState({ ...base, screen: k });
+    }
+  }
+  openReplan(key) {
+    const on = {}; PRESETS[key].changes.forEach((c, i) => { on[i] = true; });
+    this.setState({ screen: 'replan', replanKey: key, replanLoading: true, replanAt: Date.now() + 1500, on, sheet: null, listening: false });
+  }
+  mut(fn, text, extra) {
+    const prev = this.state.blocks; const bl = fn(prev.map(b => ({ ...b }))); bl.sort((a, b) => a.t - b.t);
+    this.setState({ prevBlocks: prev, blocks: bl, sheet: null, selBlock: null, ...(extra || {}) });
+    if (text) this.toastMsg(text, true);
+  }
+  visibleChanges() {
+    const s = this.state, P = PRESETS[s.replanKey];
+    return P.changes.map((c, i) => ({ c, i })).filter(({ c }) => c.type === 'add' || s.blocks.some(b => b.id === c.id && b.status !== 'tomorrow'));
+  }
+  acceptReplan() {
+    const s = this.state, vis = this.visibleChanges();
+    this.mut(bl => {
+      vis.forEach(({ c, i }) => {
+        if (!s.on[i] || c.type === 'keep') return;
+        const b = bl.find(x => x.id === c.id);
+        if (c.type === 'move' && b) b.t = c.to;
+        if (c.type === 'drop' && b) b.status = 'tomorrow';
+        if (c.type === 'skip' && b) b.status = 'skipped';
+        if (c.type === 'add' && !bl.some(x => x.id === c.block.id)) bl.push({ ...c.block });
+      });
+      return bl;
+    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1 });
+  }
+  toggleDone(id) {
+    const b = this.state.blocks.find(x => x.id === id); const done = b.status !== 'done';
+    this.mut(bl => { bl.find(x => x.id === id).status = done ? 'done' : 'pending'; return bl; }, done ? 'Nice. ' + b.title + ' is done.' : null);
+  }
+  sendChat(text) {
+    const t = (text || '').trim(); if (!t) return;
+    this.setState(s => ({ chat: [...s.chat, { me: true, text: t }], chatInput: '', chatTyping: true }));
+    setTimeout(() => { const r = REPLY(t); this.setState(s => ({ chat: [...s.chat, { me: false, text: r.text, src: r.src }], chatTyping: false })); }, 900);
+  }
+
+  renderVals() {
+    const s = this.state, kids = this.kids(), an = this.props.assistantName || 'Allie';
+    const offline = !!this.props.offline, showFlow = this.props.showFlow !== false;
+    const multi = kids.length > 1, allLabel = 'Both';
+    const kidsOf = ch => ch === 'all' ? kids : ch ? kids.filter(k => k.id === ch) : [];
+    const kidName = id => id === 'all' ? kids.map(k => k.name).join(' & ') : (kids.find(k => k.id === id) || kids[0]).name;
+    const pills = (cur, pick) => [...kids.map(k => ({ id: k.id, label: k.name, dot: k.color })), ...(multi ? [{ id: 'all', label: allLabel, dot: '#6E625A' }] : [])]
+      .map(p => ({ ...p, bg: cur === p.id ? '#2A211C' : '#FFFBF5', fg: cur === p.id ? '#FFF8F0' : '#2A211C', border: cur === p.id ? '#2A211C' : '#D9CCBD', pick: () => pick(p.id) }));
+    const scr = s.screen;
+    const hideBlock = b => b.dim === 'partner' && (!s.settings.partner || (s.checkin && s.checkin <= 2) || s.replanKey === 'tired' && s.replans > 0);
+    const live = s.blocks.filter(b => b.status !== 'tomorrow' && !hideBlock(b));
+    const nowB = live.find(b => b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur);
+    const nextB = live.find(b => b.status === 'pending' && b.t > NOW && b !== nowB);
+    const mins = nextB ? nextB.t - NOW : 0;
+    const hero = nowB ? { bg: DIMS[nowB.dim].bg, fg: DIMS[nowB.dim].fg, range: fmt(nowB.t) + ' – ' + fmt(nowB.t + nowB.dur), title: nowB.title, why: nowB.why || '' }
+      : { bg: '#EAE2D7', fg: '#6E625A', range: fmt(NOW), title: 'Open time', why: 'Nothing scheduled right now. Sit for a minute.' };
+    hero.next = nextB ? fmt(nextB.t) + ' · ' + nextB.title : 'Nothing else today';
+    hero.nextIn = nextB ? (mins >= 60 ? 'in ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm' : 'in ' + mins + ' min') : '';
+    const visBlocks = live.map(b => {
+      const d = DIMS[b.dim], done = b.status === 'done', sk = b.status === 'skipped', isNow = nowB && nowB.id === b.id;
+      return {
+        time: fmt(b.t), title: b.title, why: b.why, hasWhy: !!b.why && !done && !sk, dimLabel: d.label, dimFg: d.fg, dimBg: d.bg,
+        dot: done || sk ? '#C9BBAB' : d.fg, meta: (sk ? 'Skipped' : KINDS[b.kind]) + ' · ' + b.dur + ' min',
+        kids: kidsOf(b.child).map(k => ({ initial: k.name[0], color: k.color })),
+        cardBg: isNow ? '#FFFFFF' : '#FFFBF5', cardBorder: isNow ? d.fg : '#E6DCCF', op: done || sk ? 0.6 : 1, deco: done || sk ? 'line-through' : 'none',
+        chkBorder: done ? '#3D6142' : '#BFB1A2', chkBg: done ? '#3D6142' : 'transparent', chkOp: done ? 1 : 0,
+        open: () => this.setState({ sheet: 'block', selBlock: b.id }),
+        toggle: e => { e.stopPropagation(); this.toggleDone(b.id); },
+      };
+    });
+    const tomorrow = s.blocks.filter(b => b.status === 'tomorrow').map(b => ({ title: b.title }));
+    const doneCount = s.blocks.filter(b => b.status === 'done').length;
+
+    // sheet: block
+    const sb = s.blocks.find(b => b.id === s.selBlock);
+    let sel = { actions: [] };
+    if (sb) {
+      const d = DIMS[sb.dim], fixed = sb.kind === 'fixed', isDone = sb.status === 'done';
+      const P = (label, go) => ({ label, go, bg: '#A9502B', fg: '#FFF8F0', border: 'none' });
+      const S = (label, go) => ({ label, go, bg: 'transparent', fg: '#2A211C', border: '1.5px solid #D9CCBD' });
+      const acts = [];
+      if (sb.id === 'bath') acts.push(P('Start bedtime routine', () => this.go('bed')));
+      if (sb.id === 'breathe') acts.push(P('Start breathing', () => this.go('breathe')));
+      if (sb.id === 'close') acts.push(P('Close my day', () => this.go('close')));
+      if (sb.id === 'nap2') acts.push(P('Log: he woke up', () => { this.setState({ sheet: null }); this.toastMsg('Logged: ' + kidName('a') + ' woke at ' + fmt(NOW), true); }));
+      acts.push((acts.length ? S : P)(isDone ? 'Mark not done' : 'Mark done', () => this.toggleDone(sb.id)));
+      if (!fixed && !isDone) {
+        acts.push(S('Snooze 15 min', () => this.mut(bl => { bl.find(x => x.id === sb.id).t += 15; return bl; }, sb.title + ' moved to ' + fmt(sb.t + 15))));
+        acts.push(S('Let it go for today', () => this.mut(bl => { bl.find(x => x.id === sb.id).status = 'tomorrow'; return bl; }, 'On tomorrow’s list. Nothing lost.')));
+      }
+      sel = { dimLabel: d.label, dimFg: d.fg, dimBg: d.bg, kind: KINDS[sb.kind], title: sb.title, range: fmt(sb.t) + ' – ' + fmt(sb.t + sb.dur), why: sb.why, hasWhy: !!sb.why, actions: acts, fixed };
+    }
+
+    // replan
+    const RP = PRESETS[s.replanKey];
+    const TT = { move: ['Moved', '#2F5A7A', '#DCE8F2'], drop: ['To tomorrow', '#7A5714', '#F4E6C8'], add: ['Added', '#3D6142', '#DFE9DC'], skip: ['Skipped', '#6E625A', '#EAE2D7'], keep: ['Unchanged', '#6E625A', '#EAE2D7'] };
+    const changes = this.visibleChanges().map(({ c, i }) => {
+      const b = c.type === 'add' ? c.block : s.blocks.find(x => x.id === c.id); const on = !!s.on[i]; const T = TT[c.type];
+      return {
+        title: b.title, label: T[0], fg: T[1], bg: T[2], note: c.note || 'Nothing deleted. It’s on tomorrow’s list.', isMove: c.type === 'move', notMove: c.type !== 'move',
+        from: fmt(b.t), to: c.type === 'move' ? fmt(c.to) : '',
+        detail: c.type === 'add' ? fmt(b.t) + ' · ' + b.dur + ' min' : c.type === 'drop' ? 'Moved to tomorrow’s list' : c.type === 'skip' ? fmt(b.t) : 'Fixed · ' + fmt(b.t),
+        canToggle: c.type !== 'keep', isKeep: c.type === 'keep', boxBg: on ? '#A9502B' : 'transparent', boxBorder: on ? '#A9502B' : '#BFB1A2', chkOp: on ? 1 : 0,
+        op: c.type === 'keep' || on ? 1 : 0.5, toggle: () => this.setState(st => ({ on: { ...st.on, [i]: !st.on[i] } })),
+        _on: on && c.type !== 'keep',
+      };
+    });
+    const nAcc = changes.filter(c => c._on).length;
+
+    // bedtime / breathe
+    const bedTot = BED[s.bedStep].d * 60, bm = Math.floor(s.bedLeft / 60), bsec = s.bedLeft % 60;
+    const bm2 = s.bSec % 10, inP = bm2 < 4, bl = 300 - s.bSec;
+
+    // close
+    const earned = s.replans > 0
+      ? (s.replans === 1 ? 'One plan change' : s.replans + ' plan changes') + ' today, and you still made your 3:00 with Sarah and got ' + kidName('a') + ' to bed. That’s huge.'
+      : 'A steady day. You protected your lunch and made your 3:00 with Sarah. That counts.';
+
+    const perms = [
+      { title: 'See your meetings', why: 'So I can plan naps, meals and walks around them, not on top of them.', detail: 'I only read your calendars. I write only to a calendar of my own called “BestMom”.', cta: 'Allow calendar', icon: 'M4 6.5h16v13H4zM4 10.5h16M8.5 3.5v5M15.5 3.5v5', bg: '#E4E1F0', fg: '#4B4580' },
+      { title: 'Remind you before each thing', why: 'A short heads-up with the why: “Mateo sleeps in 15 min. Start the bath now.”', detail: 'At most 8 nudges a day, plus baby routines and meetings. You set quiet hours.', cta: 'Allow notifications', icon: 'M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 21h4', bg: '#F4E6C8', fg: '#7A5714' },
+    ];
+    const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
+    const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else toApp(); };
+
+    const curKey = scr === 'app' ? (s.sheet === 'happened' || s.sheet === 'log' ? s.sheet : s.tab) : scr === 'bed' ? 'bed' : scr;
+    const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
+    const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
+    const micActive = s.listening;
+    const planPrice = s.plan === 'year' ? '$59.99/year' : '$9.99/month';
+
+    return {
+      an, anInitial: an[0], offline, showFlow, isDark: scr === 'bed' || scr === 'breathe',
+      sWelcome: scr === 'welcome', sConsent: scr === 'consent', sDump: scr === 'dump', sThinking: scr === 'thinking', sSummary: scr === 'summary', sPerm: scr === 'perm',
+      sApp: scr === 'app', sReplan: scr === 'replan', sBed: scr === 'bed', sBreathe: scr === 'breathe', sClose: scr === 'close', sPaywall: scr === 'paywall', sCrisis: scr === 'crisis',
+      tToday: s.tab === 'today', tKids: s.tab === 'kids', tAllie: s.tab === 'allie', tMe: s.tab === 'me',
+      hasSheet: !!s.sheet && scr === 'app', shHappened: s.sheet === 'happened', shLog: s.sheet === 'log', shBlock: s.sheet === 'block' && !!sb, shSave: s.sheet === 'save',
+      closeSheet: () => this.setState({ sheet: null, listening: false }), stop: e => e.stopPropagation(),
+      // onboarding
+      toConsent: () => this.go('consent'),
+      c1: { bg: s.consent1 ? '#A9502B' : 'transparent', border: s.consent1 ? '#A9502B' : '#BFB1A2', op: s.consent1 ? 1 : 0 },
+      c2: { bg: s.consent2 ? '#A9502B' : 'transparent', border: s.consent2 ? '#A9502B' : '#BFB1A2', op: s.consent2 ? 1 : 0 },
+      tC1: () => this.setState({ consent1: !s.consent1 }), tC2: () => this.setState({ consent2: !s.consent2 }),
+      consentOp: s.consent1 && s.consent2 ? 1 : 0.4,
+      toDump: () => { if (s.consent1 && s.consent2) this.go('dump'); },
+      dumpVoice: s.dumpMode === 'voice', dumpType: s.dumpMode === 'type', hasWords: s.words > 0 && s.ctx === 'dump', noWords: !(s.words > 0 && s.ctx === 'dump'),
+      dumpWords, dumpText: s.dumpText, onDumpText: e => this.setState({ dumpText: e.target.value }),
+      dumpModeLabel: s.dumpMode === 'voice' ? 'Type instead' : 'Talk instead',
+      toggleDumpMode: () => this.setState({ dumpMode: s.dumpMode === 'voice' ? 'type' : 'voice', listening: false }),
+      micDump: () => { if (s.dumpMode === 'type') this.setState({ dumpMode: 'voice' }); this.startListen('dump'); },
+      listening: s.listening && scr === 'dump', wave: s.wave.map(h => ({ h })),
+      micBg: micActive ? '#7E3A1D' : '#A9502B', micRing: micActive ? 'rgba(169,80,43,.22)' : 'rgba(169,80,43,.08)',
+      followUp: s.followUp && scr === 'dump',
+      fuChips: ['7:00 PM', '7:15 PM', '7:30 PM', 'It varies'].map(label => ({ label, pick: () => this.thinking('Reading what you told me…', ['Your kids and their routines', 'Your work week', 'What weighs on you'], 'summary') })),
+      dumpDoneOp: (s.words > 0 || s.dumpText) ? 1 : 0.35,
+      dumpDone: () => { if (s.words > 0 || s.dumpText) this.setState({ listening: false, followUp: true, dumpMode: 'voice', ctx: 'dump', words: s.words || 0 }); },
+      thinkTitle: s.thinkTitle,
+      thinkRows: s.thinkLines.map((text, i) => ({ text, op: i < s.thinkStep ? 1 : 0.35, bg: i < s.thinkStep ? '#3D6142' : '#D9CCBD' })),
+      summaryRows: s.summary.map((text, i) => ({
+        text, editing: s.editIdx === i, notEditing: s.editIdx !== i,
+        startEdit: () => this.setState({ editIdx: i }), stopEdit: () => this.setState({ editIdx: -1 }),
+        onEdit: e => { const v = e.target.value; this.setState(st => { const a = [...st.summary]; a[i] = v; return { summary: a }; }); },
+        remove: () => this.setState(st => ({ summary: st.summary.filter((_, j) => j !== i), editIdx: -1 })),
+      })),
+      addSummary: () => this.setState(st => ({ summary: [...st.summary, ''], editIdx: st.summary.length })),
+      toPerm: () => this.go('perm'),
+      perm: perms[s.permStep], perm2Bar: s.permStep === 1 ? '#A9502B' : '#D9CCBD',
+      permAllow: () => permNext(false), permDeny: () => permNext(s.permStep === 0 ? true : s.calDenied),
+      // today
+      toAllie: () => this.go('allie'), calDenied: s.calDenied, fixCal: () => { this.setState({ calDenied: false }); this.toastMsg('Calendar on. I can see your meetings now.'); },
+      hero, needCheckin: !s.checkin, hasCheckin: !!s.checkin,
+      faces: MOUTHS.map((mouth, i) => ({ mouth, label: FACE_LABELS[i], pick: () => this.setState({ checkin: i + 1 }) })),
+      checkinReply: s.checkin ? (s.checkin <= 2 ? 'Energy ' + s.checkin + '/5. Thanks for telling me. I’ll keep tonight light and skip the extras.' : 'Energy ' + s.checkin + '/5. Good to hear. I’ll keep the afternoon as planned.') : '',
+      notSaved: !s.saved, openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
+      doneLabel: doneCount + ' of ' + live.length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
+      openLog: () => this.go('log'), openHappened: () => this.go('happened'),
+      tabs: [['today', 'Today'], ['kids', 'Kids'], ['allie', an], ['me', 'You']].map(([k, label]) => ({ label, icon: ICONS[k], color: s.tab === k ? '#A9502B' : '#6E625A', go: () => this.go(k) })),
+      // happened
+      multiKid: multi, hKidPills: pills(s.hKid, id => this.setState({ hKid: id })),
+      presetBtns: (() => { const n = kidName(s.hKid); return [['early', n + ' fell asleep early'], ['late', n + ' fell asleep late'], ['nonap', n + ' skipped the nap'], ['sick', n + ' is sick or home'], ['meeting', 'A meeting moved or was added'], ['tired', 'I’m exhausted']].map(([k, label]) => ({ label, go: () => this.openReplan(k) })); })(),
+      goSos: () => this.openReplan('sos'),
+      micHappened: () => this.startListen('happened'),
+      hVoiceText: hTx || (s.listening && s.ctx === 'happened' ? 'I’m listening…' : 'Or just tell me what happened'),
+      hVoiceColor: hTx ? '#2A211C' : '#6E625A',
+      // log
+      logKidPills: pills(s.logKid, id => this.setState({ logKid: id })),
+      logTypes: ['sleep', 'feed', 'diaper'].map(t => ({ label: TYPES[t], bg: s.logType === t ? '#DCE8F2' : '#FFFBF5', border: s.logType === t ? '#2F5A7A' : '#E6DCCF', fg: s.logType === t ? '#2F5A7A' : '#2A211C', pick: () => this.setState({ logType: t }) })),
+      logTimeLabel: s.logType === 'sleep' ? 'Fell asleep at' : s.logType === 'feed' ? 'Fed at' : 'Changed at',
+      logTimeText: fmt(s.logTime), logMinus: () => this.setState({ logTime: s.logTime - 5 }), logPlus: () => this.setState({ logTime: Math.min(s.logTime + 5, NOW) }), logNow: () => this.setState({ logTime: NOW }),
+      micLog: () => this.startListen('log'),
+      logVoiceText: s.logHeard || (s.listening && s.ctx === 'log' ? 'Listening… ' + (this.tx ? this.tx.slice(0, s.words).join(' ') : '') : 'Or say it: “He fell asleep at 1:35”'),
+      saveLog: () => {
+        const ids = s.logKid === 'all' ? kids.map(k => k.id) : [s.logKid];
+        this.setState(st => ({ logs: [...st.logs, ...ids.map(kid => ({ kid, type: st.logType, t: st.logTime }))], sheet: null, logHeard: null }));
+        this.toastMsg('Logged: ' + kidName(s.logKid) + ' · ' + TYPES[s.logType] + ' · ' + fmt(s.logTime), false);
+      },
+      sel,
+      // replan
+      replanLoading: s.replanLoading, replanReady: !s.replanLoading, replanTag: s.replanLoading ? 'Something happened' : 'New plan',
+      replanHead: RP.head, replanNotice: !!RP.notice, replanNoticeText: RP.notice || '', changes,
+      acceptLabel: nAcc ? 'Accept ' + nAcc + (nAcc === 1 ? ' change' : ' changes') : 'Done',
+      acceptReplan: () => this.acceptReplan(), cancelReplan: () => this.setState({ screen: 'app', tab: 'today' }),
+      // undo / toast
+      hasToast: !!s.toast, toastText: s.toast, toastUndo: s.toastUndo && !!s.prevBlocks,
+      undo: () => this.setState(st => ({ blocks: st.prevBlocks, prevBlocks: null, toast: null, replans: st.screen === 'app' && st.toast && st.toast.startsWith('Plan updated') ? Math.max(0, st.replans - 1) : st.replans })),
+      // bed
+      bedKid: kidName(s.fam === 'twins' ? 'all' : 'a'), bedActive: !s.bedDone, bedDone: s.bedDone,
+      bedDots: BED.map((_, i) => ({ bg: i <= s.bedStep ? '#E0A46A' : '#2E241E' })),
+      bedStepLabel: 'Step ' + (s.bedStep + 1) + ' of 3', bedTitle: BED[s.bedStep].t, bedHint: BED[s.bedStep].hint,
+      bedOffset: 703.7 * (1 - s.bedLeft / bedTot), bedClock: bm + ':' + String(bsec).padStart(2, '0'), bedRunLabel: s.bedRun ? 'left' : 'paused',
+      bedPause: () => this.setState({ bedRun: !s.bedRun }), bedPauseLabel: s.bedRun ? 'Pause' : 'Resume',
+      bedNextLabel: s.bedStep < 2 ? 'Next: ' + BED[s.bedStep + 1].t : 'Finish',
+      bedNext: () => {
+        if (s.bedStep < 2) this.setState({ bedStep: s.bedStep + 1, bedLeft: BED[s.bedStep + 1].d * 60, bedRun: true });
+        else { this.setState(st => ({ bedDone: true, blocks: st.blocks.map(b => b.id === 'bath' ? { ...b, status: 'done' } : b), logs: [...st.logs, { kid: 'a', type: 'sleep', t: 1161 }] })); }
+      },
+      exitNight: () => this.setState({ screen: 'app', tab: 'today' }),
+      breathLeft: Math.floor(bl / 60) + ':' + String(bl % 60).padStart(2, '0'),
+      breathScale: inP ? 1 : 0.6, breathDur: inP ? '4s' : '6s', breathLabel: inP ? 'Breathe in' : 'Breathe out', breathCount: inP ? 4 - bm2 : 10 - bm2,
+      breathPause: () => this.setState({ bRun: !s.bRun }), breathPauseLabel: s.bRun ? 'Pause' : 'Resume',
+      // close
+      earned, doneCount, replans: s.replans, tomorrowCount: tomorrow.length, journal: s.journal, onJournal: e => this.setState({ journal: e.target.value }),
+      ratings: [1, 2, 3, 4, 5].map(n => ({ n, bg: s.rating === n ? '#2A211C' : '#FFFBF5', fg: s.rating === n ? '#FFF8F0' : '#2A211C', border: s.rating === n ? '#2A211C' : '#E6DCCF', pick: () => this.setState({ rating: n }) })),
+      toPaywall: () => this.go('paywall'),
+      yesterday: [{ text: doneCount + ' things done, on your terms' }, { text: s.replans ? s.replans + ' replans, nothing lost' : 'Your 3:00 with Sarah, on time' }, { text: kidName('a') + ' asleep by 7:21 PM' }],
+      plans: [['year', 'Yearly', '$5.00 a month, billed yearly. Save 50%', '$59.99'], ['month', 'Monthly', 'Cancel anytime', '$9.99']].map(([k, name, sub, price]) => ({ name, sub, price, border: s.plan === k ? '#A9502B' : '#E6DCCF', dot: s.plan === k ? '#A9502B' : 'transparent', pick: () => this.setState({ plan: k }) })),
+      planPrice, subscribe: () => { this.go('today'); this.toastMsg('Welcome back. Today’s plan is ready.'); },
+      toTodayPlain: () => this.go('today'),
+      // kids tab
+      kidCards: kids.map(k => ({
+        ...k, initial: k.name[0],
+        logs: s.logs.filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type], time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : '') })),
+        hasLearn: k.id === 'a', learn: k.name + '’s wake window is about 2h 15m. I plan his naps around it.',
+        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.go('allie'),
+        log: () => this.setState({ sheet: 'log', tab: 'today', logKid: k.id, logTime: NOW, logHeard: null }),
+      })),
+      // chat
+      chat: s.chat.map(m => ({ text: m.text, src: m.src || '', hasSrc: !!m.src, align: m.me ? 'flex-end' : 'flex-start', bg: m.me ? '#2A211C' : '#FFFBF5', fg: m.me ? '#FFF8F0' : '#2A211C', border: m.me ? '#2A211C' : '#E6DCCF' })),
+      chatTyping: s.chatTyping, chatInput: s.chatInput,
+      chatChips: CHIPS.map(text => ({ text, send: () => this.sendChat(text) })),
+      onChatInput: e => this.setState({ chatInput: e.target.value }), onChatKey: e => { if (e.key === 'Enter') this.sendChat(s.chatInput); },
+      sendChat: () => this.sendChat(s.chatInput),
+      // settings
+      settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing'], ['work', 'Work', 'Meeting prep, focus blocks'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Support person', 'Up to 3 a week, never on hard days']].map(([k, label, sub]) => ({
+        label, sub, dot: DIMS[k].fg, track: s.settings[k] ? '#3D6142' : '#D9CCBD', justify: s.settings[k] ? 'flex-end' : 'flex-start',
+        toggle: () => this.setState(st => ({ settings: { ...st.settings, [k]: !st.settings[k] } })),
+      })),
+      budget: s.budget, budgetDown: () => this.setState({ budget: Math.max(0, s.budget - 1) }), budgetUp: () => this.setState({ budget: Math.min(20, s.budget + 1) }),
+      exportData: () => this.toastMsg('Preparing your export. I’ll let you know when it’s ready.'),
+      deleteData: () => this.toastMsg('I’ll ask you to confirm first. Everything is erased within 30 days, backups included.'),
+      // flow panel
+      flowGroups: FLOW.map(g => ({ title: g.title, items: g.items.map(([n, label, key]) => ({ n, label: key === 'allie' ? an + ' chat' : label, bg: curKey === key ? '#2A211C' : 'transparent', fg: curKey === key ? '#FFF8F0' : '#2A211C', go: () => this.go(key) })) })),
+      legend: Object.values(DIMS).map(d => ({ label: d.label, fg: d.fg, bg: d.bg })),
+    };
+  }
+}
+</script>
+</body>
+</html>
