@@ -18,7 +18,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
-<style>body{margin:0;background:#F5EFE6;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;font-family:'Figtree',sans-serif;color:#2A211C}*{box-sizing:border-box}button{font-family:inherit;color:inherit}a{color:#A9502B}a:hover{color:#7E3A1D}textarea,input{font-family:inherit}::-webkit-scrollbar{display:none}</style>
+<style>@keyframes bmUp{from{transform:translateY(100%)}to{transform:none}}@keyframes bmJig{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}@keyframes bmFade{from{opacity:0}to{opacity:1}}.bm-scrim{animation:bmFade .25s ease-out}.bm-sheet{animation:bmUp .38s cubic-bezier(.2,.9,.25,1)}.bm-plus,.bm-tile,.bm-row{transition:transform .15s ease}.bm-plus:active,.bm-tile:active,.bm-row:active{transform:scale(.94)}body{margin:0;background:#F5EFE6;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;font-family:'Figtree',sans-serif;color:#2A211C}*{box-sizing:border-box}button{font-family:inherit;color:inherit}a{color:#A9502B}a:hover{color:#7E3A1D}textarea,input{font-family:inherit}::-webkit-scrollbar{display:none}</style>
 </helmet>
 <div>
 <x-import component-from-global-scope="IOSDevice" from="./app-frame.jsx" dark="{{ isDark }}" hint-size="402px,874px">
@@ -139,7 +139,7 @@
 <div style="position:absolute;inset:0">
 
   <sc-if value="{{ tToday }}" hint-placeholder-val="{{ true }}">
-  <div data-screen-label="06 Today" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 230px">
+  <div data-screen-label="06 Today" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 40px">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:36px">
       <div style="font-size:14px;font-weight:600;color:var(--mute)">Tuesday, Nov 17 · 1:40 PM</div>
       <sc-if value="{{ canMode }}" hint-placeholder-val="{{ true }}">
@@ -152,7 +152,7 @@
     </div>
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:8px">
       <div style="font-family:'Young Serif',serif;font-size:30px;line-height:1.1;text-wrap:pretty">{{ greeting }}</div>
-      <sc-if value="{{ canMode }}" hint-placeholder-val="{{ true }}"><button onClick="{{ toAllie }}" aria-label="Ask {{ an }}" style="width:48px;height:48px;border-radius:24px;border:none;background:var(--acc);color:var(--on);font-family:'Young Serif',serif;font-size:20px;cursor:pointer;flex:none;transition:background .5s">{{ anInitial }}</button></sc-if>
+      <sc-if value="{{ canMode }}" hint-placeholder-val="{{ true }}"><button onClick="{{ toMe }}" aria-label="You and settings" style="width:44px;height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:'Young Serif',serif;font-size:19px;cursor:pointer;flex:none;box-shadow:0 1px 3px rgba(42,33,28,.08)">R</button></sc-if>
     </div>
     <sc-if value="{{ previewing }}" hint-placeholder-val="{{ false }}">
       <div style="margin-top:14px;background:var(--ink);color:var(--on);border-radius:16px;padding:12px 10px 12px 14px;display:flex;gap:10px;align-items:center">
@@ -298,10 +298,6 @@
     </sc-if>
     </sc-if>
   </div>
-  <sc-if value="{{ momBody }}" hint-placeholder-val="{{ true }}">
-  <button onClick="{{ openLog }}" style="position:absolute;left:16px;bottom:100px;height:56px;padding:0 20px 0 16px;border-radius:28px;border:1.5px solid var(--line2);background:var(--card);font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 6px 18px rgba(42,33,28,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A211C" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log</button>
-  <button onClick="{{ openHappened }}" style="position:absolute;right:16px;bottom:100px;height:56px;padding:0 22px 0 18px;border-radius:28px;border:none;background:var(--ink);color:var(--on);font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 8px 22px rgba(42,33,28,.3)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z" fill="#E0A46A"></path></svg>{{ happenedLabel }}</button>
-  </sc-if>
   </sc-if>
 
   <sc-if value="{{ tCal }}" hint-placeholder-val="{{ false }}">
@@ -367,12 +363,6 @@
   </div>
   </sc-if>
 
-  <sc-if value="{{ momBar }}" hint-placeholder-val="{{ true }}">
-  <div data-screen-label="06b For you bar" style="position:absolute;left:16px;right:16px;bottom:{{ momBarBottom }};height:56px;border-radius:28px;background:rgba(250,253,248,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #CFE0CC;box-shadow:0 6px 18px rgba(42,33,28,.10);display:grid;grid-template-columns:auto repeat(4,1fr);align-items:center;padding:0 6px 0 14px;gap:2px;z-index:4">
-    <span style="font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#3D6142;line-height:1.1;padding-right:4px">For<br>you</span>
-    <sc-for list="{{ momBtns }}" as="m" hint-placeholder-count="4"><button onClick="{{ m.go }}" aria-label="{{ m.aria }}" style="height:48px;border:none;border-radius:16px;background:{{ m.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:#3D6142;font-size:11.5px;font-weight:700;transition:background .3s"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3D6142" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg>{{ m.label }}</button></sc-for>
-  </div>
-  </sc-if>
 
   <sc-if value="{{ tKids }}" hint-placeholder-val="{{ false }}">
   <div data-screen-label="14 Kids" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 40px">
@@ -450,6 +440,7 @@
 
   <sc-if value="{{ tMe }}" hint-placeholder-val="{{ false }}">
   <div data-screen-label="15 Settings" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 18px 40px">
+    <button onClick="{{ toTodayTab }}" style="height:36px;margin:-8px 0 4px -6px;padding:0 6px;border:none;background:transparent;color:var(--acc);font-size:16px;font-weight:600;display:flex;align-items:center;gap:2px;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Today</button>
     <div style="font-family:'Young Serif',serif;font-size:32px;margin-bottom:16px">You</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:22px">
       <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A5714;margin-bottom:6px">Today’s note</div>
@@ -494,13 +485,44 @@
   </sc-if>
 
   <div style="position:absolute;left:0;right:0;bottom:0;height:84px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:4px 4px 24px;z-index:5;transition:background .5s">
-    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><button onClick="{{ t.go }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:{{ t.color }};font-size:11.5px;font-weight:700;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg>{{ t.label }}</button></sc-for>
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><sc-if value="{{ t.plus }}"><div style="display:flex;align-items:center;justify-content:center"><button onClick="{{ openAdd }}" aria-label="Add: something happened, log, for you" class="bm-plus" style="width:52px;height:52px;border-radius:26px;border:none;background:var(--ink);color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px rgba(42,33,28,.22)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="transform:rotate({{ plusRot }}deg);transition:transform .3s cubic-bezier(.2,.8,.2,1)"><path d="M12 5v14M5 12h14"></path></svg></button></div></sc-if><sc-if value="{{ t.tab }}"><button onClick="{{ t.go }}" style="border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:{{ t.color }};font-size:11.5px;font-weight:700;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ t.icon }}"></path></svg>{{ t.label }}</button></sc-if></sc-for>
   </div>
 
   <sc-if value="{{ hasSheet }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ closeSheet }}" style="position:absolute;inset:0;background:rgba(42,33,28,.38);z-index:20;display:flex;flex-direction:column;justify-content:flex-end">
-    <div onClick="{{ stop }}" style="background:var(--sheet);border-radius:28px 28px 0 0;padding:10px 20px 38px;max-height:86%;overflow:auto">
+  <div onClick="{{ closeSheet }}" class="bm-scrim" style="position:absolute;inset:0;background:rgba(42,33,28,.38);z-index:20;display:flex;flex-direction:column;justify-content:flex-end">
+    <div onClick="{{ stop }}" class="bm-sheet" style="background:var(--sheet);border-radius:28px 28px 0 0;padding:10px 20px 38px;max-height:86%;overflow:auto">
       <div style="width:40px;height:5px;border-radius:3px;background:var(--line2);margin:0 auto 16px"></div>
+
+      <sc-if value="{{ shAdd }}">
+        <div data-screen-label="25 The + sheet">
+        <button onClick="{{ openHappened }}" class="bm-row" style="width:100%;display:flex;align-items:center;gap:14px;padding:16px;border:none;border-radius:20px;background:var(--ink);color:var(--on);text-align:left;cursor:pointer">
+          <div style="width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.12);flex:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22l8.5-11.5H12z" fill="#E0A46A"></path></svg></div>
+          <div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:700">{{ happenedLabel }}</div><div style="font-size:13.5px;opacity:.75;margin-top:2px">{{ happenedSub }}</div></div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:.6;flex:none"><path d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin:20px 4px 8px"><div style="font-size:13px;font-weight:600;color:var(--mute)">Log for {{ logWhoAdd }}</div><button onClick="{{ toggleAddEdit }}" style="border:none;background:transparent;padding:4px 2px;font-size:15px;font-weight:{{ editWeight }};color:var(--acc);cursor:pointer">{{ editLabel }}</button></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <sc-for list="{{ kidTiles }}" as="a"><button onClick="{{ a.go }}" aria-label="{{ a.aria }}" class="bm-tile" style="position:relative;height:78px;border-radius:18px;border:{{ a.border }};background:{{ a.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);box-shadow:{{ a.sh }};animation:{{ a.jig }}"><sc-if value="{{ a.edit }}"><span style="position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:11px;background:{{ a.badgeBg }};color:#FFFFFF;font-size:16px;font-weight:700;line-height:22px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.2)">{{ a.badge }}</span></sc-if><div style="width:34px;height:34px;border-radius:11px;background:#DCE8F2;display:flex;align-items:center;justify-content:center;opacity:{{ a.op }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2F5A7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></div>{{ a.label }}</button></sc-for>
+        </div>
+        <sc-if value="{{ kidHasMore }}"><div style="font-size:12px;font-weight:600;color:var(--mute);margin:12px 4px 8px">Tap to add</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <sc-for list="{{ kidMore }}" as="a"><button onClick="{{ a.go }}" aria-label="{{ a.aria }}" class="bm-tile" style="position:relative;height:78px;border-radius:18px;border:{{ a.border }};background:{{ a.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);box-shadow:{{ a.sh }};animation:{{ a.jig }}"><sc-if value="{{ a.edit }}"><span style="position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:11px;background:{{ a.badgeBg }};color:#FFFFFF;font-size:16px;font-weight:700;line-height:22px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.2)">{{ a.badge }}</span></sc-if><div style="width:34px;height:34px;border-radius:11px;background:#DCE8F2;display:flex;align-items:center;justify-content:center;opacity:{{ a.op }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#2F5A7A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg></div>{{ a.label }}</button></sc-for>
+        </div>
+        </sc-if>
+        <sc-if value="{{ addForYou }}">
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin:20px 4px 8px">For you</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <sc-for list="{{ momTiles }}" as="m"><button onClick="{{ m.go }}" aria-label="{{ m.aria }}" class="bm-tile" style="position:relative;height:78px;border-radius:18px;border:{{ m.border }};background:{{ m.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);box-shadow:{{ m.sh }};animation:{{ m.jig }}"><sc-if value="{{ m.edit }}"><span style="position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:11px;background:{{ m.badgeBg }};color:#FFFFFF;font-size:16px;font-weight:700;line-height:22px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.2)">{{ m.badge }}</span></sc-if><div style="width:34px;height:34px;border-radius:11px;background:#DFE9DC;display:flex;align-items:center;justify-content:center;opacity:{{ m.op }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3D6142" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg></div>{{ m.label }}</button></sc-for>
+        </div>
+        <sc-if value="{{ momHasMore }}"><div style="font-size:12px;font-weight:600;color:var(--mute);margin:12px 4px 8px">Tap to add</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <sc-for list="{{ momMore }}" as="m"><button onClick="{{ m.go }}" aria-label="{{ m.aria }}" class="bm-tile" style="position:relative;height:78px;border-radius:18px;border:{{ m.border }};background:{{ m.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);box-shadow:{{ m.sh }};animation:{{ m.jig }}"><sc-if value="{{ m.edit }}"><span style="position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:11px;background:{{ m.badgeBg }};color:#FFFFFF;font-size:16px;font-weight:700;line-height:22px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.2)">{{ m.badge }}</span></sc-if><div style="width:34px;height:34px;border-radius:11px;background:#DFE9DC;display:flex;align-items:center;justify-content:center;opacity:{{ m.op }}"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3D6142" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg></div>{{ m.label }}</button></sc-for>
+        </div>
+        </sc-if>
+        </sc-if>
+        <sc-if value="{{ addEdit }}"><div style="font-size:13px;color:var(--mute);text-align:center;margin-top:16px;line-height:1.4">Up to 8 in each row. Only you see your + menu.</div></sc-if>
+        </div>
+      </sc-if>
 
       <sc-if value="{{ shHappened }}">
         <div data-screen-label="07 Something happened">
@@ -758,7 +780,7 @@
 </sc-if>
 
 <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
-  <div style="position:absolute;left:14px;right:14px;bottom:170px;z-index:30;background:var(--ink);color:var(--on);border-radius:16px;padding:6px 6px 6px 16px;display:flex;align-items:center;gap:10px;min-height:52px;box-shadow:0 10px 30px rgba(42,33,28,.3)">
+  <div style="position:absolute;left:14px;right:14px;bottom:100px;z-index:30;background:var(--ink);color:var(--on);border-radius:16px;padding:6px 6px 6px 16px;display:flex;align-items:center;gap:10px;min-height:52px;box-shadow:0 10px 30px rgba(42,33,28,.3)">
     <div style="flex:1;font-size:15px;line-height:1.35">{{ toastText }}</div>
     <sc-if value="{{ toastUndo }}"><button onClick="{{ undo }}" style="height:44px;padding:0 14px;border:none;background:transparent;color:#E0A46A;font-size:15px;font-weight:700;cursor:pointer">Undo</button></sc-if>
   </div>
@@ -916,6 +938,27 @@ const TX = {
   happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
   log: () => 'He fell asleep at one thirty-five.',
 };
+const LOG_ICONS = {
+  feed: 'M9 2h6M10 2v3M14 2v3M8.5 5h7l1 4v10a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V9zM7.5 12h9',
+  sleep: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z',
+  diaper: 'M3 7h18v3a9 9 0 0 1-18 0zM8 7v3M16 7v3',
+  activity: 'M12 21a9 9 0 1 0 0-18a9 9 0 1 0 0 18M3.5 9.5c4 1 13 1 17 0M3.5 14.5c4-1 13-1 17 0',
+};
+const KID_EXTRA_ICONS = {
+  night: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5zM17 3v4M15 5h4',
+  bath: 'M3 12h18v2a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6zM6 12V5a2 2 0 0 1 4 0M7 20l-1 2M17 20l1 2',
+  tummy: 'M3 18h18M7 15a2.5 2.5 0 1 0 0-5a2.5 2.5 0 1 0 0 5M10 15h7a3 3 0 0 1 3 3',
+  skill: 'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z',
+};
+const MOM_EXTRA_ICONS = {
+  meal: 'M7 3v8a2 2 0 0 0 2 2v8M5 3v6M9 3v6M17 21V3c-2 1.5-3 4-3 7v4h3',
+  stretch: 'M12 5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 1 0 0 3M4 8l8 1 8-1M12 9v6l-4 6M12 15l4 6',
+  air: 'M5 19c0-8 6-14 15-14 0 9-6 15-14 15M5 19l7-7',
+  call: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',
+};
+// ponytail: + menu choices live in mockup state; the real app saves them per user on the server.
+const KID_OPTS = { feed: 'Feed', sleep: 'Sleep', diaper: 'Diaper', activity: 'Activity', night: 'Night wake', bath: 'Bath', tummy: 'Tummy time', skill: 'New skill' };
+const MOM_OPTS = { water: 'Water', move: 'Move', focus: 'Focus', pause: 'Pause 5s', meal: 'Ate a meal', stretch: 'Stretch', air: 'Fresh air', call: 'Called a friend' };
 const ICONS = {
   cal: 'M4 6.5h16v13H4zM4 10.5h16M8.5 3.5v5M15.5 3.5v5M8 14h2M14 14h2M8 17h2',
   today: 'M12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 1 0 0-9M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8',
@@ -948,7 +991,7 @@ const REPLY = q => {
 };
 const FLOW = [
   { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
-  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth']] },
+  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [25, 'The + sheet', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth']] },
   { title: 'Self-Love', items: [[20, 'Self-Love mode', 'self'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
   { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'night'], [14, 'Kids: nights & rough patch', 'kids']] },
   { title: 'Family', items: [[22, 'Invite a caregiver', 'invite'], [23, 'See as Diego (partner)', 'asDiego'], [24, 'See as Carmen (nanny)', 'asCarmen'], [15, 'Settings & data', 'me']] },
@@ -965,7 +1008,7 @@ class Component extends DCLogic {
       summary: [], editIdx: -1, permStep: 0, calDenied: false, thinkLines: [], thinkStep: 0, thinkTitle: '', thinkNext: 'today',
       replanKey: 'nonap', replanLoading: false, replanAt: 0, on: {}, prevBlocks: null, replans: 0,
       toast: null, toastUndo: false, toastUntil: 0, checkin: null, selBlock: null, saved: false, hKid: 'a',
-      logSub: 'bottle', logOz: 4, logFood: '', logAct: 'Outdoor play', logDur: 30, momLog: { water: 2, move: 0, focus: 1, pause: 0 }, pauseLeft: 0,
+      logSub: 'bottle', logOz: 4, logFood: '', logAct: 'Outdoor play', logDur: 30, momLog: { water: 2, move: 0, focus: 1, pause: 0 }, pauseLeft: 0, addKid: ['feed', 'sleep', 'diaper', 'activity'], addMom: ['water', 'move', 'focus', 'pause'], addEdit: false,
       logKid: 'a', logType: 'sleep', logTime: NOW, logHeard: null, logs: seedLogs(fam),
       bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false, bSec: 0, bRun: true,
       rating: null, journal: 'Mateo laughed at the dog for the first time. Real belly laughs.', plan: 'year',
@@ -1036,7 +1079,7 @@ class Component extends DCLogic {
       case 'invite': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: 'invite', viewer: 'ana' });
       case 'asDiego': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'diego' });
       case 'asCarmen': return this.setState(st => ({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'carmen', members: st.members.some(m => m.id === 'carmen') ? st.members : [...st.members, { id: 'carmen', name: 'Carmen', role: 'caregiver' }] }));
-      case 'happened': case 'log': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW });
+      case 'add': case 'happened': case 'log': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW });
       case 'replan': return this.openReplan('nonap');
       case 'bed': return this.setState({ ...base, screen: 'bed', bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false });
       case 'breathe': return this.setState({ ...base, screen: 'breathe', bSec: 0, bRun: true });
@@ -1174,7 +1217,7 @@ class Component extends DCLogic {
     const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
     const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else toApp(); };
 
-    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : ['happened', 'log', 'invite'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr;
+    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : ['add', 'happened', 'log', 'invite'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr;
     const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
     const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
     const micActive = s.listening;
@@ -1279,10 +1322,36 @@ class Component extends DCLogic {
     const invWho = (s.invName || '').trim() || 'they';
 
     return {
-      th, greeting, momBar: scr === 'app' && s.tab === 'today' && V === 'ana' && !s.sheet, momBarBottom: selfMode ? '100px' : '166px',
-      momBtns: [['water', 'Water · ' + s.momLog.water, 'Log a glass of water'], ['move', 'Move', 'Log a move break'], ['focus', 'Focus', 'Start 25 minutes of focus'], ['pause', 'Pause 5s', 'Take a 5-second breathing pause']].map(([k, label, aria]) => ({ label, aria, icon: MOM_ICONS[k], bg: 'transparent',
-        go: () => { if (k === 'pause') return this.setState({ pauseLeft: 5 }); this.setState(st => ({ momLog: { ...st.momLog, [k]: st.momLog[k] + 1 } }));
-          this.toastMsg(k === 'water' ? 'Water: ' + (s.momLog.water + 1) + ' glasses today.' : k === 'move' ? 'Move break logged. Your body thanks you.' : 'Focus on for 25 min. Only the kids’ routines can reach you.'); } })),
+      th, greeting, shAdd: s.sheet === 'add', addForYou: V === 'ana', plusRot: s.sheet === 'add' ? 45 : 0, openAdd: () => this.setState({ sheet: s.sheet === 'add' ? null : 'add' }),
+      logWhoAdd: s.fam === 'two' ? kidName('all') : kidName('a'), happenedSub: V === 'carmen' ? 'Rossi sees it and decides the plan.' : 'I’ll rearrange the rest of your day.',
+      toMe: () => this.go('me'), toTodayTab: () => this.go('today'),
+      ...(() => {
+        const ed = s.addEdit, jig = i => ed ? 'bmJig .' + (26 + (i % 3) * 4) + 's ease-in-out infinite alternate' : 'none';
+        const tile = (i, label, icon, go, badge) => ({ label, icon, aria: label, go, edit: ed, badge: badge === 'add' ? '+' : '−', badgeBg: badge === 'add' ? '#3D8B4F' : '#8E8E93',
+          bg: badge === 'add' ? 'transparent' : 'var(--card)', border: badge === 'add' ? '1.5px dashed var(--line2)' : 'none', sh: badge === 'add' ? 'none' : '0 1px 2px rgba(42,33,28,.06)', op: badge === 'add' ? .7 : 1, jig: badge === 'add' ? 'none' : jig(i) });
+        const edit = (key, k) => this.setState(st => { const cur = st[key]; if (cur.includes(k)) return cur.length > 1 ? { [key]: cur.filter(x => x !== k) } : null; return cur.length < 8 ? { [key]: [...cur, k] } : null; });
+        const kidIcon = k => LOG_ICONS[k] || KID_EXTRA_ICONS[k], momIcon = k => MOM_ICONS[k] || MOM_EXTRA_ICONS[k];
+        const kidGo = k => () => {
+          if (k === 'night') return this.go('night');
+          if (LOG_ICONS[k]) return this.setState({ sheet: 'log', logType: k, logHeard: null, logTime: NOW });
+          this.setState({ sheet: null });
+          this.toastMsg(k === 'skill' ? 'New skill noted. I’ll watch how sleep responds.' : 'Logged: ' + kidName('a') + ' · ' + KID_OPTS[k] + ' · ' + fmt(NOW));
+        };
+        const momGo = k => () => {
+          if (k === 'pause') return this.setState({ pauseLeft: 5, sheet: null });
+          this.setState(st => ({ sheet: null, momLog: { ...st.momLog, [k]: (st.momLog[k] || 0) + 1 } }));
+          this.toastMsg(k === 'water' ? 'Water: ' + (s.momLog.water + 1) + ' glasses today.' : k === 'move' ? 'Move break logged. Your body thanks you.' : k === 'focus' ? 'Focus on for 25 min. Only the kids’ routines can reach you.'
+            : k === 'meal' ? 'Meal logged. Good. You need fuel too.' : k === 'stretch' ? 'Stretch logged. Shoulders down, breathe.' : k === 'air' ? 'Fresh air logged. That counts.' : 'Logged. Staying connected matters.');
+        };
+        const kidMore = Object.keys(KID_OPTS).filter(k => !s.addKid.includes(k)), momMore = Object.keys(MOM_OPTS).filter(k => !s.addMom.includes(k));
+        return {
+          addEdit: ed, editLabel: ed ? 'Done' : 'Edit', editWeight: ed ? 700 : 500, toggleAddEdit: () => this.setState({ addEdit: !ed }),
+          kidTiles: s.addKid.map((k, i) => tile(i, KID_OPTS[k], kidIcon(k), ed ? () => edit('addKid', k) : kidGo(k), 'remove')),
+          momTiles: s.addMom.map((k, i) => tile(i, k === 'water' ? 'Water · ' + s.momLog.water : MOM_OPTS[k], momIcon(k), ed ? () => edit('addMom', k) : momGo(k), 'remove')),
+          kidMore: kidMore.map((k, i) => tile(i, KID_OPTS[k], kidIcon(k), () => edit('addKid', k), 'add')), kidHasMore: ed && kidMore.length > 0 && s.addKid.length < 8,
+          momMore: momMore.map((k, i) => tile(i, MOM_OPTS[k], momIcon(k), () => edit('addMom', k), 'add')), momHasMore: ed && momMore.length > 0 && s.addMom.length < 8,
+        };
+      })(),
       pausing: s.pauseLeft > 0, pauseLeft: s.pauseLeft, endPause: () => this.setState({ pauseLeft: 0 }),
       pauseLabel: s.pauseLeft >= 4 ? 'Breathe in' : s.pauseLeft === 3 ? 'Hold' : 'Breathe out', pauseScale: s.pauseLeft === 5 ? .55 : s.pauseLeft >= 3 ? 1 : .55, previewing: V !== 'ana', pv, exitPreview: () => this.setState({ viewer: 'ana' }), canMode: V === 'ana',
       modeKnob: selfMode ? '92px' : '3px', modeA: selfMode ? 'var(--mute)' : 'var(--ink)', modeB: selfMode ? 'var(--acc)' : 'var(--mute)',
@@ -1309,7 +1378,7 @@ class Component extends DCLogic {
       sApp: scr === 'app', sReplan: scr === 'replan', sBed: scr === 'bed', sBreathe: scr === 'breathe', sClose: scr === 'close', sPaywall: scr === 'paywall', sCrisis: scr === 'crisis',
       tToday: s.tab === 'today', tKids: s.tab === 'kids', tAllie: s.tab === 'allie', tMe: s.tab === 'me',
       hasSheet: !!s.sheet && scr === 'app', shHappened: s.sheet === 'happened', shLog: s.sheet === 'log', shBlock: s.sheet === 'block' && !!sb, shSave: s.sheet === 'save', shInvite: s.sheet === 'invite',
-      closeSheet: () => this.setState({ sheet: null, listening: false }), stop: e => e.stopPropagation(),
+      closeSheet: () => this.setState({ sheet: null, listening: false, addEdit: false }), stop: e => e.stopPropagation(),
       // onboarding
       toConsent: () => this.go('consent'),
       c1: { bg: s.consent1 ? 'var(--acc)' : 'transparent', border: s.consent1 ? 'var(--acc)' : 'var(--line2)', op: s.consent1 ? 1 : 0 },
@@ -1348,7 +1417,7 @@ class Component extends DCLogic {
       notSaved: !s.saved && V === 'ana', openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
       doneLabel: doneCount + ' of ' + live.length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
       openLog: () => this.go('log'), openHappened: () => this.go('happened'),
-      tabs: [['today', 'Today'], ['cal', 'Calendar'], ['kids', 'Kids'], ['allie', an], ['me', 'You']].map(([k, label]) => ({ label, icon: ICONS[k], color: s.tab === k ? 'var(--acc)' : 'var(--mute)', go: () => this.go(k) })),
+      tabs: [['today', 'Today'], ['cal', 'Calendar'], ['plus', ''], ['kids', 'Kids'], ['allie', an]].map(([k, label]) => ({ label, plus: k === 'plus', tab: k !== 'plus', icon: ICONS[k] || '', color: s.tab === k || (k === 'today' && s.tab === 'me') ? 'var(--acc)' : 'var(--mute)', go: () => this.go(k) })),
       // happened
       multiKid: multi, hKidPills: pills(s.hKid, id => this.setState({ hKid: id })),
       presetBtns: (() => { const n = kidName(s.hKid); return [['early', n + ' fell asleep early'], ['late', n + ' fell asleep late'], ['nonap', n + ' skipped the nap'], ['noeat', n + ' didn’t eat well'], ['skipmeal', n + ' skipped a meal'], ['sick', n + ' is sick or home'], ['meeting', 'A meeting moved or was added'], ['momskip', 'I skipped my lunch'], ['tired', 'I’m exhausted']].map(([k, label]) => ({ label, go: () => this.openReplan(k) })); })(),
