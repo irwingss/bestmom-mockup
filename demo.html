@@ -704,7 +704,7 @@
 <sc-if value="{{ sPaywall }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="16 Paywall" style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding:64px 22px 30px">
   <div style="font-size:14px;font-weight:600;color:var(--mute)">Wednesday, 6:52 AM</div>
-  <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.1;margin:6px 0 14px">Good morning, Rosa. Yesterday, together:</div>
+  <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.1;margin:6px 0 14px">Good morning, Rossi. Yesterday, together:</div>
   <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
     <sc-for list="{{ yesterday }}" as="y" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:center;font-size:16px"><div style="width:22px;height:22px;border-radius:11px;background:#3D6142;flex:none;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#FFF8F0" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div>{{ y.text }}</div></sc-for>
   </div>
@@ -817,7 +817,7 @@ const ACCESS = [
   ['Kids’ routines and their plan for today', true, true, true],
   ['Log naps, feeds, diapers and night wakes', true, true, false],
   ['Tell you “something happened”. You approve the replan', true, true, false],
-  ['Your meetings', 'Titles and times', 'Only “Rosa busy”', false],
+  ['Your meetings', 'Titles and times', 'Only “Rossi busy”', false],
   ['Moments you choose to share', true, false, true],
   ['Your check-ins, notes and Self-Love', false, false, false],
 ];
@@ -984,7 +984,7 @@ class Component extends DCLogic {
       rating: null, journal: 'Mateo laughed at the dog for the first time. Real belly laughs.', plan: 'year',
       chats: { kids: [{ me: false, text: TOPICS.kids.hello }], work: [{ me: false, text: TOPICS.work.hello }], me: [{ me: false, text: TOPICS.me.hello }] }, chatTopic: 'kids', chatInput: '', chatTyping: false,
       mode: 'mom', viewer: 'ana', calView: 'week', calSel: TODAY_D, us: {}, invName: 'Carmen', invRole: 'caregiver',
-      members: [{ id: 'ana', name: 'Rosa', role: 'owner' }, { id: 'diego', name: 'Diego', role: 'partner' }],
+      members: [{ id: 'ana', name: 'Rossi', role: 'owner' }, { id: 'diego', name: 'Diego', role: 'partner' }],
       moments: [{ t: '10:12 AM', text: 'Mateo laughed at the dog. Real belly laughs.', tone: MOMENT_TONES[0] }, { t: '8:05 AM', text: 'Lia at drop-off: “Love you to the moon, mama.”', tone: MOMENT_TONES[1] }],
       nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed' }],
       settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
@@ -1109,7 +1109,7 @@ class Component extends DCLogic {
     const hideBlock = b => b.dim === 'partner' && (!s.settings.partner || (s.checkin && s.checkin <= 2) || s.replanKey === 'tired' && s.replans > 0);
     const V = s.viewer, selfMode = s.mode === 'self' && V === 'ana';
     // ponytail: preview filters on the client; the real app syncs to each phone only what the role allows
-    const viewBlock = b => V === 'carmen' ? (b.dim === 'kids' || b.dim === 'home' ? b : b.dim === 'work' ? { ...b, title: 'Rosa busy', why: '' } : null)
+    const viewBlock = b => V === 'carmen' ? (b.dim === 'kids' || b.dim === 'home' ? b : b.dim === 'work' ? { ...b, title: 'Rossi busy', why: '' } : null)
       : V === 'diego' ? (b.dim === 'partner' || b.dim === 'self' || b.id === 'breathe' ? null : b) : b;
     const live = s.blocks.filter(b => b.status !== 'tomorrow' && !hideBlock(b)).map(viewBlock).filter(Boolean);
     const nowB = live.find(b => b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur);
@@ -1195,16 +1195,16 @@ class Component extends DCLogic {
 
     // ---- mode, viewer, day brief
     const th = THEMES[selfMode ? 'self' : 'mom'];
-    const vName = V === 'ana' ? 'Rosa' : V === 'diego' ? 'Diego' : 'Carmen';
-    const greeting = selfMode ? 'This time is yours, Rosa' : 'Good afternoon, ' + vName;
+    const vName = V === 'ana' ? 'Rossi' : V === 'diego' ? 'Diego' : 'Carmen';
+    const greeting = selfMode ? 'This time is yours, Rossi' : 'Good afternoon, ' + vName;
     const pv = V === 'diego' ? { title: 'Preview: Diego’s phone · Partner', sub: 'Whole family plan. Your check-ins and Self-Love stay hidden.' }
-      : { title: 'Preview: Carmen’s phone · Caregiver', sub: 'Only the kids’ day. Your work shows as “Rosa busy”.' };
+      : { title: 'Preview: Carmen’s phone · Caregiver', sub: 'Only the kids’ day. Your work shows as “Rossi busy”.' };
     const span = (a, b) => { const m = b - a; return m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'; };
     const fixedLeft = live.filter(b => b.kind === 'fixed' && b.status === 'pending').length;
     const low = s.checkin && s.checkin <= 2;
     const briefLine = V === 'carmen' ? kidName('all') + ': afternoon nap at 1:30' + (s.fam === 'two' ? ', Lia’s pickup at 4:15' : '') + ', bedtime routine at 6:45. Rough night, so expect a sleepy afternoon.'
       : low ? 'You’re running low, so tonight is just the essentials. Everything else can wait.'
-      : V === 'diego' ? 'Rosa has ' + fixedLeft + ' fixed things left. Rough night again, so the evening stays light.'
+      : V === 'diego' ? 'Rossi has ' + fixedLeft + ' fixed things left. Rough night again, so the evening stays light.'
       : 'A full Tuesday with ' + fixedLeft + ' fixed things left. Last night was rough, so I kept tonight light.';
     const priIds = (V === 'carmen' ? ['nap2', 'pickup', 'bath'] : ['meet', 'pickup', 'bath']).concat(['cook', 'dinner']);
     const brief = {
@@ -1300,7 +1300,7 @@ class Component extends DCLogic {
       pauseLabel: s.pauseLeft >= 4 ? 'Breathe in' : s.pauseLeft === 3 ? 'Hold' : 'Breathe out', pauseScale: s.pauseLeft === 5 ? .55 : s.pauseLeft >= 3 ? 1 : .55, previewing: V !== 'ana', pv, exitPreview: () => this.setState({ viewer: 'ana' }), canMode: V === 'ana',
       modeKnob: selfMode ? '92px' : '3px', modeA: selfMode ? 'var(--mute)' : 'var(--ink)', modeB: selfMode ? 'var(--acc)' : 'var(--mute)',
       toggleMode: () => this.setState({ mode: s.mode === 'self' ? 'mom' : 'self' }), selfBody: selfMode && s.tab === 'today', momBody: !selfMode,
-      brief, mealIn, kid1: kidName('a'), toKids: () => this.go('kids'), happenedLabel: V === 'carmen' ? 'Tell Rosa' : 'Something happened',
+      brief, mealIn, kid1: kidName('a'), toKids: () => this.go('kids'), happenedLabel: V === 'carmen' ? 'Tell Rossi' : 'Something happened',
       goodMom, selfItems, usOpts, winChat: () => this.setState({ tab: 'allie', chatTopic: 'work', chatInput: 'My win today: ' }),
       moments: s.moments, addMoment: () => { this.setState(st => ({ moments: [{ t: fmt(NOW), text: kidName('a') + ' grabbed my finger and wouldn’t let go.', tone: MOMENT_TONES[2] }, ...st.moments] })); this.toastMsg('Saved to today’s moments. Only you see it unless you share.'); },
       tCal: s.tab === 'cal', calWeek: s.calView === 'week', calMonth: s.calView === 'month', calTitle: s.calView === 'week' ? 'This week' : 'November',
