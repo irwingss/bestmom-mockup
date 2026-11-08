@@ -149,6 +149,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div data-screen-label="06 Today" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 16px 40px">
     <div data-screen-label="06 Header" style="position:sticky;top:-60px;z-index:6;margin:-60px -16px 0;padding:56px 16px 8px;background:color-mix(in srgb,var(--bg) 74%,transparent);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:.5px solid rgba(42,33,28,.08);display:flex;align-items:center;gap:8px">
       <div style="flex:1;min-width:0;line-height:1.3"><div style="font-size:14px;font-weight:600;color:var(--mute)">Tuesday, Nov 17</div><div style="font-size:14px;font-weight:700;color:var(--ink)">1:40 PM</div></div>
+      <button onClick="{{ toggleDark }}" aria-label="{{ darkAria }}" title="{{ darkAria }}" style="width:44px;height:44px;padding:0;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;color:var(--ink)"><span style="width:36px;height:36px;border-radius:18px;background:var(--soft);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ darkIcon }}"></path></svg></span></button>
       <sc-if value="{{ canMode }}" hint-placeholder-val="{{ true }}">
       <div style="position:relative;flex:none">
         <button onClick="{{ toggleMode }}" aria-label="{{ modeAria }}" style="position:relative;display:grid;grid-template-columns:1fr 1fr;width:84px;height:36px;padding:4px;border-radius:18px;border:none;background:var(--soft);cursor:pointer">
@@ -719,21 +720,21 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 </sc-if>
 
 <sc-if value="{{ sNight }}" hint-placeholder-val="{{ false }}">
-<div data-screen-label="19 Night log" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#0B0606;color:#C77A68;padding:64px 24px 36px">
-  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:600;color:#B26A5A">2:14 AM · Night log · {{ kid1 }}<div role="status" style="display:flex;align-items:center;gap:4px;margin-top:4px;font-size:12px;font-weight:600;color:#B26A5A"><svg style="stroke:#B26A5A" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg>{{ nightSaved }}</div></div><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:22px;border:none;background:#1C0E0C;color:#B26A5A;font-size:22px;cursor:pointer">×</button></div>
-  <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.12;margin:16px 0 8px;color:#D88C78">{{ nightHead }}</div>
-  <div style="font-size:15px;line-height:1.4;color:#B26A5A">{{ nightSub }}</div>
+<div data-screen-label="19 Night log" style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--w-bg);color:var(--w-tx);{{ wakeVars }};padding:64px 24px 36px">
+  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:600;color:var(--w-mu)">{{ wakeTitle }} · {{ kid1 }}<div role="status" style="display:flex;align-items:center;gap:4px;margin-top:4px;font-size:12px;font-weight:600;color:var(--w-mu)"><svg style="stroke:var(--w-mu)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg>{{ nightSaved }}</div></div><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:22px;border:none;background:var(--w-btn);color:var(--w-mu);font-size:22px;cursor:pointer">×</button></div>
+  <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.12;margin:16px 0 8px;color:var(--w-hd)">{{ nightHead }}</div>
+  <div style="font-size:15px;line-height:1.4;color:var(--w-mu)">{{ nightSub }}</div>
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-    <button onClick="{{ nightTap }}" style="width:210px;height:210px;border-radius:105px;border:2px solid {{ nightRing }};background:#160B09;color:#D88C78;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 0 14px rgba(120,40,30,.10)">
-      <sc-if value="{{ nightIdle }}"><svg style="stroke:var(--d-C77A68)" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg><span style="font-size:20px;font-weight:700">{{ kid1 }} is awake</span><span style="font-size:13px;color:#B26A5A">Tap to start</span></sc-if>
-      <sc-if value="{{ nightAwake }}"><span style="font-family:'Young Serif',serif;font-size:52px;line-height:1">{{ nightClock }}</span><span style="font-size:14px;color:#B26A5A">awake</span></sc-if>
+    <button onClick="{{ nightTap }}" style="width:210px;height:210px;border-radius:105px;border:2px solid {{ nightRing }};background:var(--w-card);color:var(--w-hd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 0 14px var(--w-halo)">
+      <sc-if value="{{ nightIdle }}"><svg style="stroke:var(--w-acc)" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg><span style="font-size:20px;font-weight:700">{{ kid1 }} is awake</span><span style="font-size:13px;color:var(--w-mu)">Tap to start</span></sc-if>
+      <sc-if value="{{ nightAwake }}"><span style="font-family:'Young Serif',serif;font-size:52px;line-height:1">{{ nightClock }}</span><span style="font-size:14px;color:var(--w-mu)">awake</span></sc-if>
     </button>
-    <sc-if value="{{ nightAwake }}"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px"><sc-for list="{{ nightTags }}" as="t"><button onClick="{{ t.pick }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:#D88C78;font-size:14px;font-weight:600;cursor:pointer">{{ t.label }}</button></sc-for></div></sc-if>
+    <sc-if value="{{ nightAwake }}"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px"><sc-for list="{{ nightTags }}" as="t"><button onClick="{{ t.pick }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:var(--w-hd);font-size:14px;font-weight:600;cursor:pointer">{{ t.label }}</button></sc-for></div></sc-if>
   </div>
-  <sc-if value="{{ nightAwake }}"><button onClick="{{ nightTap }}" style="height:58px;border-radius:29px;border:none;background:#5E2219;color:#F2B7A6;font-size:17px;font-weight:700;cursor:pointer;margin-bottom:16px">Back asleep</button></sc-if>
-  <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#B26A5A;margin-bottom:4px">Tonight</div>
-  <sc-for list="{{ nightList }}" as="w"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid #22110E"><span>{{ w.t }} · {{ w.dur }}</span><span style="color:#B26A5A">{{ w.tags }}</span></div></sc-for>
-  <div style="font-size:13px;color:#B26A5A;text-align:center;margin-top:16px;line-height:1.4">Red, dim screen so your eyes stay sleepy. Log it, then rest.<br>In the morning I’ll fold tonight into your plan.</div>
+  <sc-if value="{{ nightAwake }}"><button onClick="{{ nightTap }}" style="height:58px;border-radius:29px;border:none;background:var(--w-cta);color:var(--w-ctaTx);font-size:17px;font-weight:700;cursor:pointer;margin-bottom:16px">Back asleep</button></sc-if>
+  <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--w-mu);margin-bottom:4px">{{ wakeListTitle }}</div>
+  <sc-for list="{{ nightList }}" as="w"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid var(--w-line)"><span>{{ w.t }} · {{ w.dur }}</span><span style="color:var(--w-mu)">{{ w.tags }}</span></div></sc-for>
+  <div style="font-size:13px;color:var(--w-mu);text-align:center;margin-top:16px;line-height:1.4">{{ wakeFoot }}</div>
 </div>
 </sc-if>
 
@@ -837,6 +838,8 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;family&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;two&quot;,&quot;one&quot;,&quot;twins&quot;],&quot;default&quot;:&quot;two&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Family (2 kids / 1 baby / twins)&quot;},&quot;assistantName&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Allie&quot;,&quot;Ally&quot;],&quot;default&quot;:&quot;Allie&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;label&quot;:&quot;Assistant name&quot;},&quot;offline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;label&quot;:&quot;Offline state&quot;},&quot;showFlow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;label&quot;:&quot;Show screen map&quot;}}">
 const NOW = 13 * 60 + 40;
+// ponytail: fixed night window; the real app can learn it from her bedtime and wake time.
+const isNightAt = m => m >= 21 * 60 || m < 6 * 60;
 const fmt = m => { let h = Math.floor(m / 60), mm = m % 60; const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(mm).padStart(2, '0') + ' ' + ap; };
 // One color per life area, used everywhere: timeline, calendar, chat, settings.
 const DIMS = {
@@ -1040,7 +1043,7 @@ const FLOW = [
   { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
   { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth']] },
   { title: 'Self-Love', items: [[20, 'Self-Love mode', 'self'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
-  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'night'], [31, 'Night log: offline', 'nightoff'], [14, 'Kids: nights & rough patch', 'kids'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
+  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [14, 'Kids: nights & rough patch', 'kids'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
   { title: 'Family', items: [[22, 'Invite a caregiver', 'invite'], [23, 'See as Diego (partner)', 'asDiego'], [24, 'See as Carmen (nanny)', 'asCarmen'], [15, 'Settings & data', 'me']] },
   { title: 'Assistant', items: [[13, 'Chat: Kids · Work · Me', 'allie']] },
   { title: 'Business & safety', items: [[16, 'Paywall (day 2)', 'paywall'], [17, 'Crisis screen', 'crisis']] },
@@ -1055,7 +1058,7 @@ class Component extends DCLogic {
       summary: [], editIdx: -1, permStep: 0, calDenied: false, thinkLines: [], thinkStep: 0, thinkTitle: '', thinkNext: 'today',
       replanKey: 'nonap', replanLoading: false, replanAt: 0, on: {}, prevBlocks: null, replans: 0,
       toast: null, toastUndo: false, toastUntil: 0, checkin: null, selBlock: null, saved: false, hKid: 'a',
-      logSub: 'bottle', logOz: 4, logFood: '', logAct: 'Outdoor play', logDur: 30, momLog: { water: 2, move: 0, focus: 1, pause: 0 }, pauseLeft: 0, addKid: ['feed', 'sleep', 'diaper', 'activity'], addMom: ['water', 'move', 'focus', 'pause'], addEdit: false, radial: false, dayOne: false, dark: typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches, addPart: 'log', chatMic: false, modeTipUntil: 0,
+      logSub: 'bottle', logOz: 4, logFood: '', logAct: 'Outdoor play', logDur: 30, momLog: { water: 2, move: 0, focus: 1, pause: 0 }, pauseLeft: 0, addKid: ['night', 'feed', 'sleep', 'diaper', 'activity'], addMom: ['water', 'move', 'focus', 'pause'], addEdit: false, radial: false, dayOne: false, dark: isNightAt(NOW) || (typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches), addPart: 'log', chatMic: false, modeTipUntil: 0,
       logKid: 'a', logType: 'sleep', logTime: NOW, logHeard: null, logs: seedLogs(fam),
       bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false, bSec: 0, bRun: true,
       rating: null, journal: 'Mateo laughed at the dog for the first time. Real belly laughs.', plan: 'year',
@@ -1063,7 +1066,7 @@ class Component extends DCLogic {
       mode: 'mom', viewer: 'ana', calView: '3day', calSel: TODAY_D, us: {}, invName: 'Carmen', invRole: 'caregiver',
       members: [{ id: 'ana', name: 'Rossi', role: 'owner' }, { id: 'diego', name: 'Diego', role: 'partner' }],
       moments: [{ t: '10:12 AM', text: 'Mateo laughed at the dog. Real belly laughs.', tone: MOMENT_TONES[0] }, { t: '8:05 AM', text: 'Lia at drop-off: “Love you to the moon, mama.”', tone: MOMENT_TONES[1] }],
-      nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed' }],
+      nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed' }], napWakes: [{ t: '10:05 AM', dur: '6 min', tags: 'Rocked' }], wakeKind: 'night',
       settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
     };
   }
@@ -1129,9 +1132,12 @@ class Component extends DCLogic {
       case 'dayone': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'ana', dayOne: true });
       case 'dark': return this.setState(st => ({ dark: !st.dark }));
       case 'kidsempty': return this.setState({ ...base, screen: 'app', tab: 'kids', mode: 'mom', viewer: 'ana', dayOne: true });
-      case 'nightoff': return this.setState({ ...base, screen: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {}, nightOff: true });
+      case 'nightoff': return this.setState({ ...base, screen: 'night', wakeKind: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {}, nightOff: true });
       case 'self': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'self', viewer: 'ana' });
-      case 'night': return this.setState({ ...base, screen: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {} });
+      case 'night': return this.setState({ ...base, screen: 'night', wakeKind: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {} });
+      case 'wake': return this.setState({ ...base, screen: 'night', wakeKind: isNightAt(NOW) ? 'night' : 'nap', nightAwake: true, nightSec: 0, nightTagsOn: {} });
+      case 'nightnow': return this.setState({ ...base, screen: 'night', wakeKind: 'night', nightAwake: true, nightSec: 0, nightTagsOn: {} });
+      case 'nap': return this.setState({ ...base, screen: 'night', wakeKind: 'nap', nightAwake: true, nightSec: 0, nightTagsOn: {} });
       case 'invite': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: 'invite', viewer: 'ana' });
       case 'asDiego': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'diego' });
       case 'asCarmen': return this.setState(st => ({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'carmen', members: st.members.some(m => m.id === 'carmen') ? st.members : [...st.members, { id: 'carmen', name: 'Carmen', role: 'caregiver' }] }));
@@ -1186,6 +1192,7 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state, kids = this.kids(), an = this.props.assistantName || 'Allie';
     const offline = !!this.props.offline, showFlow = this.props.showFlow !== false;
+    const wakeName = isNightAt(NOW) ? 'Night wake' : 'Nap wake';
     const multi = kids.length > 1, allLabel = 'Both';
     const kidsOf = ch => ch === 'all' ? kids : ch ? kids.filter(k => k.id === ch) : [];
     const kidName = id => id === 'all' ? kids.map(k => k.name).join(' & ') : (kids.find(k => k.id === id) || kids[0]).name;
@@ -1393,7 +1400,9 @@ class Component extends DCLogic {
           [V === 'ana' && ['Clear My Day', 'M4 7h16M10 11v6M14 11v6M5 7l1 13h12l1-13M9 7V4h6v3', () => this.openReplan('sos')],
            [V === 'carmen' ? 'Tell Rossi' : 'Something Happened?', 'M13 2L4.5 13.5H11L10 22l8.5-11.5H12z', () => this.go('happened')]],
           [V === 'ana' && ['For You', MOM_ICONS.water, sheet('you')],
-           ['Logs', LOG_ICONS.feed, sheet('log')]],
+           // wake sits closest to + at night (2 taps, timer starts at once); by day Logs keeps that spot
+           ...(isNightAt(NOW) ? [['Logs', LOG_ICONS.feed, sheet('log')], [wakeName, KID_EXTRA_ICONS.night, () => this.go('wake')]]
+             : [[wakeName, KID_EXTRA_ICONS.night, () => this.go('wake')], ['Logs', LOG_ICONS.feed, sheet('log')]])],
         ].map(g => g.filter(Boolean));
         return groups.map((g, gi) => ({ gap: gi ? '8px solid var(--menuGap)' : 'none',
           items: g.map(([label, icon, go], i) => ({ label, icon, go, sep: i ? '.5px solid var(--menuSep)' : 'none' })) }));
@@ -1407,7 +1416,7 @@ class Component extends DCLogic {
         const edit = (key, k) => this.setState(st => { const cur = st[key]; if (cur.includes(k)) return cur.length > 1 ? { [key]: cur.filter(x => x !== k) } : null; return cur.length < 8 ? { [key]: [...cur, k] } : null; });
         const kidIcon = k => LOG_ICONS[k] || KID_EXTRA_ICONS[k], momIcon = k => MOM_ICONS[k] || MOM_EXTRA_ICONS[k];
         const kidGo = k => () => {
-          if (k === 'night') return this.go('night');
+          if (k === 'night') return this.go('wake');
           if (LOG_ICONS[k]) return this.setState({ sheet: 'log', logType: k, logHeard: null, logTime: NOW });
           this.setState({ sheet: null });
           this.toastMsg(k === 'skill' ? 'New skill noted. I’ll watch how sleep responds.' : 'Logged: ' + kidName('a') + ' · ' + KID_OPTS[k] + ' · ' + fmt(NOW));
@@ -1421,7 +1430,7 @@ class Component extends DCLogic {
         const kidMore = Object.keys(KID_OPTS).filter(k => !s.addKid.includes(k)), momMore = Object.keys(MOM_OPTS).filter(k => !s.addMom.includes(k));
         return {
           addEdit: ed, editLabel: ed ? 'Done' : 'Edit', editWeight: ed ? 700 : 500, toggleAddEdit: () => this.setState({ addEdit: !ed }),
-          kidTiles: s.addKid.map((k, i) => tile(i, KID_OPTS[k], kidIcon(k), ed ? () => edit('addKid', k) : kidGo(k), 'remove')),
+          kidTiles: s.addKid.map((k, i) => tile(i, k === 'night' ? wakeName : KID_OPTS[k], kidIcon(k), ed ? () => edit('addKid', k) : kidGo(k), 'remove')),
           momTiles: s.addMom.map((k, i) => tile(i, k === 'water' ? 'Water · ' + s.momLog.water : MOM_OPTS[k], momIcon(k), ed ? () => edit('addMom', k) : momGo(k), 'remove')),
           kidMore: kidMore.map((k, i) => tile(i, KID_OPTS[k], kidIcon(k), () => edit('addKid', k), 'add')), kidHasMore: ed && kidMore.length > 0 && s.addKid.length < 8,
           momMore: momMore.map((k, i) => tile(i, MOM_OPTS[k], momIcon(k), () => edit('addMom', k), 'add')), momHasMore: ed && momMore.length > 0 && s.addMom.length < 8,
@@ -1446,18 +1455,33 @@ class Component extends DCLogic {
       calSub: s.calView !== 'month' ? doneWeek + ' things done this week · ' + (allWeek - doneWeek) + ' to go · nothing lost' : monthCells.filter(c => c.d < TODAY_D && dayRatio(c.d) === 1).length + ' full rings so far this month. The rest were mostly done, and nothing got lost.',
       weekOff: 87.96 * (1 - doneWeek / allWeek), week, hours, gridH: (H1 - H0) / 60 * HR, nowTop: (NOW - H0) / 60 * HR,
       dayLetters: DAYN.map(d => ({ t: d[0] })), monthCells, selDay,
-      sNight: scr === 'night', nightIdle: !s.nightAwake, nightAwake: s.nightAwake, nightClock, nightRing: s.nightAwake ? 'var(--l-9A3E2E)' : 'var(--l-4A211B)',
-      nightHead: s.nightAwake ? 'You’ve got this.' : 'Rough patch, night 4.', nightSub: s.nightAwake ? 'Tap what helped. One tap, eyes half closed is fine.' : 'Since bedtime: 1 wake, a 4h 12m stretch. Tap when he wakes.',
-      nightTap: () => { if (!s.nightAwake) return this.setState({ nightAwake: true, nightSec: 0, nightTagsOn: {} }); const tags = Object.keys(s.nightTagsOn).filter(k => s.nightTagsOn[k]); this.setState(st => ({ nightAwake: false, nightWakes: [...st.nightWakes, { t: '2:14 AM', dur: Math.max(1, Math.round(st.nightSec / 60)) + ' min', tags: tags.join(', ') || 'Soothed' }] })); },
-      nightTags: ['Fed', 'Changed', 'Rocked', 'Just checked'].map(label => ({ label, bg: s.nightTagsOn[label] ? 'var(--l-3A1712)' : 'transparent', border: s.nightTagsOn[label] ? 'var(--l-9A3E2E)' : 'var(--l-3A1C17)', pick: () => this.setState(st => ({ nightTagsOn: { ...st.nightTagsOn, [label]: !st.nightTagsOn[label] } })) })),
-      nightList: s.nightWakes,
+      ...(() => {
+        // One wake screen, two looks: red and dim at night, Kids blue on the normal theme for naps.
+        const nap = s.wakeKind === 'nap', W = nap
+          ? { bg: 'var(--bg)', tx: 'var(--ink)', hd: 'var(--ink)', mu: 'var(--mute)', btn: 'var(--soft)', card: 'var(--card)', halo: 'rgba(47,90,122,.10)', cta: 'var(--l-2F5A7A)', ctaTx: 'var(--bg)', line: 'var(--hair)', acc: 'var(--l-2F5A7A)' }
+          : { bg: '#0B0606', tx: '#C77A68', hd: '#D88C78', mu: '#B26A5A', btn: '#1C0E0C', card: '#160B09', halo: 'rgba(120,40,30,.10)', cta: '#5E2219', ctaTx: '#F2B7A6', line: '#22110E', acc: 'var(--d-C77A68)' };
+        const on = nap ? ['var(--d-DCE8F2)', 'var(--l-2F5A7A)'] : ['var(--l-3A1712)', 'var(--l-9A3E2E)'], off = nap ? 'var(--line)' : 'var(--l-3A1C17)';
+        const listKey = nap ? 'napWakes' : 'nightWakes';
+        return {
+          sNight: scr === 'night', nightIdle: !s.nightAwake, nightAwake: s.nightAwake, nightClock,
+          wakeVars: Object.entries(W).map(([k, v]) => '--w-' + k + ':' + v).join(';'),
+          nightRing: s.nightAwake ? on[1] : (nap ? 'var(--line)' : 'var(--l-4A211B)'),
+          wakeTitle: nap ? '1:40 PM · Nap log' : '2:14 AM · Night log', wakeListTitle: nap ? 'Today’s naps' : 'Tonight',
+          wakeFoot: nap ? 'Short naps are common. I’ll shift this afternoon’s plan around it.' : 'Red, dim screen so your eyes stay sleepy. Log it, then rest. In the morning I’ll fold tonight into your plan.',
+          nightHead: nap ? (s.nightAwake ? 'Nap cut short.' : 'Nap log.') : (s.nightAwake ? 'You’ve got this.' : 'Rough patch, night 4.'),
+          nightSub: nap ? (s.nightAwake ? 'Timer’s running. Tap what helped, then Back asleep if he settles.' : 'Tap when he wakes. Close this if the nap is over.') : (s.nightAwake ? 'Tap what helped. One tap, eyes half closed is fine.' : 'Since bedtime: 1 wake, a 4h 12m stretch. Tap when he wakes.'),
+          nightTap: () => { if (!s.nightAwake) return this.setState({ nightAwake: true, nightSec: 0, nightTagsOn: {} }); const tags = Object.keys(s.nightTagsOn).filter(k => s.nightTagsOn[k]); this.setState(st => ({ nightAwake: false, [listKey]: [...st[listKey], { t: nap ? '1:40 PM' : '2:14 AM', dur: Math.max(1, Math.round(st.nightSec / 60)) + ' min', tags: tags.join(', ') || 'Soothed' }] })); },
+          nightTags: ['Fed', 'Changed', 'Rocked', 'Just checked'].map(label => ({ label, bg: s.nightTagsOn[label] ? on[0] : 'transparent', border: s.nightTagsOn[label] ? on[1] : off, pick: () => this.setState(st => ({ nightTagsOn: { ...st.nightTagsOn, [label]: !st.nightTagsOn[label] } })) })),
+          nightList: s[listKey],
+        };
+      })(),
       members, openInvite: () => this.setState({ sheet: 'invite' }), shInvite: s.sheet === 'invite', invName: s.invName, onInvName: e => this.setState({ invName: e.target.value }), invWho,
       roleCards: ['partner', 'caregiver', 'family'].map(k => ({ label: ROLES[k].label, sub: ROLES[k].sub, border: s.invRole === k ? 'var(--acc)' : 'var(--line)', pick: () => this.setState({ invRole: k }) })),
       access: ACCESS.map(a => { const v = a[ri]; return { label: a[0], note: typeof v === 'string' ? v : a[0].startsWith('Your check-ins') ? 'Always private' : '', hasNote: typeof v === 'string' || a[0].startsWith('Your check-ins'), icon: typeof v === 'string' ? '~' : v ? '✓' : '–', bg: typeof v === 'string' ? '#BC8C36' : v ? '#5E8A62' : 'var(--d-C9BDB0)', op: v ? 1 : .6 }; }),
       sendInvite: () => { const name = invWho === 'they' ? 'Carmen' : invWho; this.setState(st => ({ sheet: null, members: [...st.members.filter(m => m.id !== 'carmen'), { id: 'carmen', name, role: st.invRole }] })); this.toastMsg(name + ' joined as ' + ROLES[s.invRole].label + '. Tap “See as ' + name + '” to check her view.'); },
       an, anInitial: an[0], offline, ghostBars: [10, 16, 12, 20, 14, 18, 12, 24, 16, 12, 20, 14, 18, 16].map(h => ({ h })),
-      nightSaved: offline || s.nightOff ? 'Offline · saved on this phone. Syncs when you’re back online.' : 'Saved on this phone · synced', showFlow, toggleDark: () => this.go('dark'), darkLabel: s.dark ? 'Phone in Dark mode · switch to Light' : 'Phone in Light mode · switch to Dark',
-      isDark: s.dark || scr === 'bed' || scr === 'breathe' || scr === 'night', scheme: s.dark ? 'dark' : 'light',
+      nightSaved: offline || s.nightOff ? 'Offline · saved on this phone. Syncs when you’re back online.' : 'Saved on this phone · synced', showFlow, toggleDark: () => this.go('dark'), darkAria: s.dark ? 'Dark mode on. Switch to light' : 'Light mode on. Switch to dark', darkIcon: s.dark ? 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z' : 'M12 16a4 4 0 1 0 0-8a4 4 0 1 0 0 8M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4', darkLabel: s.dark ? 'Phone in Dark mode · switch to Light' : 'Phone in Light mode · switch to Dark',
+      isDark: s.dark || scr === 'bed' || scr === 'breathe' || (scr === 'night' && s.wakeKind !== 'nap'), scheme: s.dark ? 'dark' : 'light',
       darkVars: s.dark ? Object.entries(PALETTE_DARK).map(([k, v]) => k + ':' + v).join(';') : '',
       sWelcome: scr === 'welcome', sConsent: scr === 'consent', sDump: scr === 'dump', sThinking: scr === 'thinking', sSummary: scr === 'summary', sPerm: scr === 'perm',
       sApp: scr === 'app', sReplan: scr === 'replan', sBed: scr === 'bed', sBreathe: scr === 'breathe', sClose: scr === 'close', sPaywall: scr === 'paywall', sCrisis: scr === 'crisis',
@@ -1512,7 +1536,7 @@ class Component extends DCLogic {
       hVoiceColor: hTx ? 'var(--ink)' : 'var(--mute)',
       // log
       logKidPills: pills(s.logKid, id => this.setState({ logKid: id })),
-      logTypes: ['sleep', 'feed', 'diaper', 'activity', 'night'].map(t => ({ label: TYPES[t], bg: s.logType === t ? 'var(--d-DCE8F2)' : 'var(--card)', border: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--line)', fg: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--ink)', pick: () => t === 'night' ? this.go('night') : this.setState({ logType: t }) })),
+      logTypes: ['sleep', 'feed', 'diaper', 'activity', 'night'].map(t => ({ label: t === 'night' ? wakeName : TYPES[t], bg: s.logType === t ? 'var(--d-DCE8F2)' : 'var(--card)', border: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--line)', fg: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--ink)', pick: () => t === 'night' ? this.go('wake') : this.setState({ logType: t }) })),
       logTimeLabel: s.logType === 'sleep' ? 'Fell asleep at' : s.logType === 'feed' ? 'Ate at' : s.logType === 'activity' ? 'Started at' : 'Changed at',
       logIsFeed: s.logType === 'feed', logIsAct: s.logType === 'activity', feedBottle: s.logSub === 'bottle', feedSolids: s.logSub === 'solids',
       logWho: kidName(s.logKid), logPron: s.logKid === 'b' ? 'she' : s.logKid === 'all' ? 'they' : 'he', logFood: s.logFood, onLogFood: e => this.setState({ logFood: e.target.value }),
