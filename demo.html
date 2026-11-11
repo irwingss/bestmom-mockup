@@ -233,11 +233,6 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div data-screen-label="06 Day brief" style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:16px 16px 8px">
       <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)">{{ brief.title }}</div>
       <div style="font-family:'Young Serif',serif;font-size:20px;line-height:1.3;margin:8px 0 16px;text-wrap:pretty">{{ brief.line }}</div>
-      <div style="position:relative;height:12px;border-radius:6px;background:var(--hair);overflow:hidden">
-        <sc-for list="{{ brief.shape }}" as="g"><div style="position:absolute;top:0;bottom:0;left:{{ g.l }}%;width:{{ g.w }}%;background:{{ g.c }};opacity:{{ g.op }};border-right:1.5px solid var(--card)"></div></sc-for>
-        <div style="position:absolute;top:0;bottom:0;left:{{ brief.now }}%;width:2.5px;background:var(--ink)"></div>
-      </div>
-      <div style="position:relative;height:16px;font-size:11px;color:var(--mute);margin:4px 0 8px"><span style="position:absolute;left:0">6 AM</span><span style="position:absolute;left:37.5%;transform:translateX(-50%)">Noon</span><span style="position:absolute;left:75%;transform:translateX(-50%)">6 PM</span><span style="position:absolute;right:0">10 PM</span></div>
       <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:4px 0 2px">3 things that matter</div>
       <sc-for list="{{ brief.pri }}" as="p" hint-placeholder-count="3"><button onClick="{{ p.toggle }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:48px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0">
         <div style="width:24px;height:24px;border-radius:12px;border:2px solid {{ p.ring }};background:{{ p.fill }};flex:none;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24" style="opacity:{{ p.chk }}"><path style="stroke:var(--d-FFFFFF)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div>
@@ -249,11 +244,19 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Last night: 3 wakes</div><div style="font-size:13px;color:var(--mute)">Longest stretch 3h 10m · {{ kid1 }}’s usual is 1 wake</div></div>
         <span style="font-size:11px;font-weight:700;color:var(--l-3E3F78);background:var(--d-E6E5F3);padding:4px 8px;border-radius:8px;white-space:nowrap">Rough patch · night 4</span>
       </button>
-      <div style="display:flex;align-items:center;gap:12px;min-height:56px">
-        <div style="width:32px;height:32px;border-radius:10px;background:var(--d-F4E6C8);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-7A5714)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM2 10h20M9.5 7c0-1.2 1-1.3 1-2.5M13.5 7c0-1.2 1-1.3 1-2.5"></path></svg></div>
-        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: chicken tacos</div><div style="font-size:13px;color:var(--mute)">Start prep at 5:10 PM · from your meals</div></div>
-        <div style="text-align:right;flex:none"><div style="font-family:'Young Serif',serif;font-size:17px;color:var(--l-7A5714)">{{ mealIn }}</div><div style="font-size:11px;color:var(--mute)">to prep</div></div>
+      <sc-if value="{{ sickOn }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="37 Sick day" style="display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--hair)">
+        <div style="width:32px;height:32px;border-radius:10px;background:var(--d-DCE8F2);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-2F5A7A)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18M5 18V9l7-5 7 5v9M10 18v-5h4v5"></path></svg></div>
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">{{ sickName }} is home sick</div><div style="font-size:13px;color:var(--mute)">{{ sickSub }}</div></div>
+        <button onClick="{{ openReminder }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none">Reminder</button>
+        <button onClick="{{ openSickNote }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none">Note</button>
       </div>
+      </sc-if>
+      <button onClick="{{ toHome }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
+        <div style="width:32px;height:32px;border-radius:10px;background:var(--d-F4E6C8);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-7A5714)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM2 10h20M9.5 7c0-1.2 1-1.3 1-2.5M13.5 7c0-1.2 1-1.3 1-2.5"></path></svg></div>
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: {{ dinnerName }}</div><div style="font-size:13px;color:var(--mute)">Start prep at 5:10 PM · this week’s meals ›</div></div>
+        <div style="text-align:right;flex:none"><div style="font-family:'Young Serif',serif;font-size:17px;color:var(--l-7A5714)">{{ mealIn }}</div><div style="font-size:11px;color:var(--mute)">to prep</div></div>
+      </button>
     </div>
 
     <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--soft);border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.4"><b>You’re offline.</b> Logs and reminders still work. Replans use a simpler on-phone version until you’re back.</div></sc-if>
@@ -399,7 +402,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <sc-if value="{{ k.hasLearn }}">
           <div style="margin-top:12px;background:var(--d-DCE8F2);border-radius:16px;padding:12px 16px">
             <div style="font-size:15px;font-weight:600;line-height:1.35">{{ k.learn }}</div>
-            <div style="font-size:13px;color:var(--l-2F5A7A);margin:4px 0 8px">Based on your last 10 days</div>
+            <div style="font-size:13px;color:var(--l-2F5A7A);margin:4px 0 8px">{{ k.learnSrc }}</div>
             <div style="display:flex;gap:8px"><button onClick="{{ k.confirm }}" style="height:40px;padding:0 16px;border-radius:20px;border:none;background:#2F5A7A;color:var(--on);font-weight:600;cursor:pointer">That’s right</button><button onClick="{{ k.correct }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #2F5A7A;background:transparent;color:var(--l-2F5A7A);font-weight:600;cursor:pointer">Correct it</button></div>
           </div>
         </sc-if>
@@ -415,6 +418,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
               </div></sc-for>
             </div>
             <div style="display:flex;justify-content:space-between;font-size:11px;color:#5B5C8F"><span>Nov 3</span><span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:4px;background:#B88A35"></span>Started crawling</span><span>Last night</span></div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><sc-for list="{{ k.skills }}" as="sk"><span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:var(--card);padding:4px 10px;border-radius:12px"><span style="width:7px;height:7px;border-radius:4px;background:#B88A35"></span>{{ sk.label }} · {{ sk.date }}</span></sc-for></div>
             <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--l-3E3F78)">Rough patch · night 4</div>
             <div style="font-size:15px;line-height:1.4;margin-top:4px">Nights got choppier the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.</div>
             <div style="font-size:12px;color:#5B5C8F;margin-top:8px;line-height:1.4">Pattern from your own logs, not a chart of what babies “should” do. Worried about something? Your pediatrician is the right call.</div>
@@ -466,6 +470,99 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   </div>
   </sc-if>
 
+  <sc-if value="{{ tHome }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="33 Home" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 16px 40px">
+    <button onClick="{{ toTodayTab }}" style="height:36px;margin:-8px 0 4px -8px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:16px;font-weight:600;display:flex;align-items:center;gap:2px;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Today</button>
+    <div style="font-family:'Young Serif',serif;font-size:32px;margin-bottom:4px">Home</div>
+    <div style="font-size:14px;color:var(--mute);margin-bottom:12px;line-height:1.4">Dinners, what’s in the house, and cleaning. Diego sees it too.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:18px;background:var(--soft);margin-bottom:16px">
+      <sc-for list="{{ homeSegs }}" as="c"><button onClick="{{ c.go }}" style="height:36px;border:none;border-radius:15px;background:{{ c.bg }};box-shadow:{{ c.sh }};font-size:14px;font-weight:700;cursor:pointer;color:var(--ink)">{{ c.label }}</button></sc-for>
+    </div>
+
+    <sc-if value="{{ hMeals }}">
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 16px 8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-7A5714)">This week’s dinners</span><span style="font-size:12px;color:var(--mute)">{{ mealsReady }}</span></div>
+      <sc-for list="{{ mealDays }}" as="d" hint-placeholder-count="7"><div style="border-bottom:1px solid var(--hair)">
+        <button onClick="{{ d.open }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:60px;border:none;background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink);opacity:{{ d.op }}">
+          <div style="width:42px;height:42px;border-radius:12px;background:{{ d.bg }};color:{{ d.fg }};flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1"><span style="font-size:11px;font-weight:700;text-transform:uppercase">{{ d.name }}</span><span style="font-size:15px;font-weight:700;margin-top:2px">{{ d.date }}</span></div>
+          <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">{{ d.meal }}</div><div style="font-size:12px;color:var(--mute);margin-top:2px">{{ d.sub }}</div></div>
+          <div style="display:flex;gap:3px;flex:none"><sc-for list="{{ d.dots }}" as="o"><span style="width:9px;height:9px;border-radius:5px;background:{{ o.bg }};border:1.5px solid #BC8C36"></span></sc-for></div>
+        </button>
+        <sc-if value="{{ d.picking }}"><div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 0 12px"><sc-for list="{{ d.opts }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div></sc-if>
+      </div></sc-for>
+      <div style="font-size:12px;color:var(--mute);padding:8px 0 4px;line-height:1.4">Each dot is an ingredient. Filled means it’s in the house. Tap a day to change the dish.</div>
+    </div>
+    <div style="margin-top:16px;background:var(--d-F4E6C8);border-radius:22px;padding:16px 16px 12px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-7A5714)">You can make with what you have</div>
+      <sc-for list="{{ canMake }}" as="m" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(122,87,20,.16)">
+        <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">{{ m.name }}</div>
+          <div style="height:6px;border-radius:3px;background:rgba(122,87,20,.18);margin:6px 0 4px;overflow:hidden"><div style="height:100%;width:{{ m.pct }}%;background:{{ m.bar }};border-radius:3px;transition:width .4s"></div></div>
+          <div style="font-size:12px;color:var(--l-5E430F)">{{ m.sub }}</div></div>
+        <sc-if value="{{ m.missing }}"><button onClick="{{ m.add }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--l-7A5714);background:transparent;color:var(--l-7A5714);font-size:13px;font-weight:700;cursor:pointer;flex:none">+ List</button></sc-if>
+        <sc-if value="{{ m.ready }}"><span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#FFFFFF;background:#5E8A62;padding:4px 8px;border-radius:6px;flex:none">Ready</span></sc-if>
+      </div></sc-for>
+      <div style="font-size:12px;color:var(--l-5E430F);margin-top:8px;line-height:1.4">Only dishes from your own list, matched to your pantry. I don’t suggest recipes.</div>
+    </div>
+    <button onClick="{{ addDish }}" style="margin-top:16px;width:100%;min-height:52px;border:1.5px dashed var(--line2);border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer">+ Add a dish to my list</button>
+    </sc-if>
+
+    <sc-if value="{{ hPantry }}">
+    <div data-screen-label="33b Pantry" style="display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px">
+      <button onClick="{{ micPantry }}" aria-label="Say what you have" style="width:56px;height:56px;border-radius:28px;border:none;background:{{ micBg }};flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg style="stroke:var(--d-FFF8F0)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+      <div style="flex:1;font-size:15px;line-height:1.4;color:{{ pantryVoiceColor }}">{{ pantryVoiceText }}</div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <input value="{{ pantryText }}" onChange="{{ onPantryText }}" onKeyDown="{{ onPantryKey }}" placeholder="Or type: we have rice, out of dish soap…" style="flex:1;min-width:0;height:48px;border-radius:24px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:16px;outline:none;color:var(--ink)">
+      <button onClick="{{ addPantry }}" style="height:48px;padding:0 20px;border-radius:24px;border:none;background:var(--acc);color:var(--on);font-size:15px;font-weight:600;cursor:pointer">Add</button>
+    </div>
+    <div style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)">In the house</span><span style="font-size:12px;color:var(--mute)">{{ stockLine }}</span></div>
+      <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;gap:2px;margin:12px 0 4px"><sc-for list="{{ stockBar }}" as="b"><div style="flex:{{ b.n }};background:{{ b.c }};transition:flex .4s"></div></sc-for></div>
+      <sc-for list="{{ pantryGroups }}" as="g" hint-placeholder-count="3"><div style="font-size:12px;font-weight:700;color:var(--mute);margin:12px 0 8px">{{ g.title }}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ g.items }}" as="p"><button onClick="{{ p.cycle }}" aria-label="{{ p.aria }}" style="height:36px;padding:0 12px 0 10px;border-radius:18px;border:1.5px {{ p.bs }} {{ p.bd }};background:{{ p.bg }};color:{{ p.fg }};font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;text-decoration:{{ p.deco }}"><span style="width:8px;height:8px;border-radius:4px;background:{{ p.dot }};border:1.5px solid {{ p.dotBd }};box-sizing:border-box"></span>{{ p.n }}</button></sc-for></div>
+      </sc-for>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--mute);margin-top:16px"><span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:4px;background:#5E8A62"></span>Have</span><span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:4px;background:#BC8C36"></span>Running low</span><span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:4px;border:1.5px solid var(--mute);box-sizing:border-box"></span>Out</span><span>Tap an item to change it.</span></div>
+    </div>
+    <div style="margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 16px 8px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-7A5714)">To buy · {{ shopCount }}</div>
+      <sc-for list="{{ shopList }}" as="i" hint-placeholder-count="5"><button onClick="{{ i.buy }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
+        <div style="width:24px;height:24px;border-radius:12px;border:2px solid var(--line2);flex:none"></div>
+        <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">{{ i.t }}</div><div style="font-size:12px;color:var(--mute)">{{ i.sub }}</div></div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:{{ i.fg }};background:{{ i.bg }};padding:4px 8px;border-radius:6px;flex:none">{{ i.cat }}</span>
+      </button></sc-for>
+      <sc-if value="{{ shopEmpty }}"><div style="font-size:15px;padding:12px 0">Nothing to buy. You’re stocked for the week.</div></sc-if>
+      <div style="font-size:12px;color:var(--mute);padding:8px 0 4px;line-height:1.4">Built from what ran out and this week’s dinners. Tap when it’s bought and it goes back to your pantry.</div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ hClean }}">
+    <div data-screen-label="33c Cleaning" style="background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 16px 8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-7A5714)">This week</span><span style="font-size:12px;color:var(--mute)">{{ cleanLine }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:12px 0 8px"><sc-for list="{{ cleanWeek }}" as="d" hint-placeholder-count="7"><div style="border-radius:12px;background:{{ d.bg }};padding:8px 0;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:68px"><span style="font-size:11px;font-weight:700;color:{{ d.fg }}">{{ d.name }}</span><sc-for list="{{ d.dots }}" as="o"><span style="width:11px;height:11px;border-radius:6px;background:{{ o.bg }};border:1.5px solid {{ o.bd }};box-sizing:border-box"></span></sc-for></div></sc-for></div>
+      <div style="display:flex;gap:12px;font-size:12px;color:var(--mute);margin-bottom:4px"><sc-for list="{{ whoLegend }}" as="w"><span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:4px;background:{{ w.c }}"></span>{{ w.label }}</span></sc-for></div>
+      <sc-for list="{{ chores }}" as="c" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:8px;min-height:60px;border-top:1px solid var(--hair)">
+        <button onClick="{{ c.toggle }}" aria-label="Mark done" style="width:44px;height:44px;margin-left:-10px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none"><div style="width:24px;height:24px;border-radius:12px;border:2px solid {{ c.ring }};background:{{ c.fill }};display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24" style="opacity:{{ c.chk }}"><path style="stroke:var(--d-FFFFFF)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div></button>
+        <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600;text-decoration:{{ c.deco }}">{{ c.t }}</div><div style="font-size:12px;color:var(--mute)">{{ c.sub }}</div></div>
+        <button onClick="{{ c.next }}" aria-label="Change who does it" style="height:36px;padding:0 12px 0 10px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;color:var(--ink);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;flex:none"><span style="width:8px;height:8px;border-radius:4px;background:{{ c.whoC }}"></span>{{ c.whoLabel }}</button>
+      </div></sc-for>
+    </div>
+    <div style="margin-top:16px;background:var(--d-F4E6C8);border-radius:22px;padding:16px;opacity:{{ deepOp }}">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="position:relative;width:52px;height:52px;flex:none"><svg width="52" height="52" viewBox="0 0 52 52" style="transform:rotate(-90deg)"><circle cx="26" cy="26" r="21" stroke="rgba(122,87,20,.2)" stroke-width="5" fill="none"></circle><circle cx="26" cy="26" r="21" stroke="#BC8C36" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="131.9" stroke-dashoffset="48.4"></circle></svg><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1"><span style="font-size:15px;font-weight:700">11</span><span style="font-size:9px;font-weight:700;color:var(--l-5E430F)">DAYS</span></div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-7A5714)">Monthly deep clean</div><div style="font-size:16px;font-weight:600;margin-top:2px">Saturday, Nov 28</div></div>
+        <button onClick="{{ deepToggle }}" aria-label="Monthly deep clean on or off" style="width:51px;height:31px;border-radius:16px;border:none;background:{{ deepTrack }};padding:2px;display:flex;justify-content:{{ deepJustify }};flex:none;cursor:pointer"><div style="width:27px;height:27px;border-radius:14px;background:var(--d-FFFFFF);box-shadow:0 1px 3px rgba(0,0,0,.2)"></div></button>
+      </div>
+      <sc-if value="{{ deepOn }}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:rgba(122,87,20,.12);margin-top:12px"><sc-for list="{{ deepWho }}" as="c"><button onClick="{{ c.go }}" style="height:36px;border:none;border-radius:13px;background:{{ c.bg }};box-shadow:{{ c.sh }};font-size:14px;font-weight:700;cursor:pointer;color:var(--ink)">{{ c.label }}</button></sc-for></div>
+      </sc-if>
+      <div style="font-size:13px;color:var(--l-5E430F);margin-top:12px;line-height:1.4">{{ deepSub }}</div>
+    </div>
+    <button onClick="{{ addChore }}" style="margin-top:16px;width:100%;min-height:52px;border:1.5px dashed var(--line2);border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer">+ Add a chore</button>
+    <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:12px;line-height:1.4">All optional. Chores land in your day as Home blocks, and replans can move them.</div>
+    </sc-if>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ tMe }}" hint-placeholder-val="{{ false }}">
   <div data-screen-label="15 Settings" style="position:absolute;top:0;left:0;right:0;bottom:84px;overflow:auto;padding:60px 16px 40px">
     <button onClick="{{ toTodayTab }}" style="height:36px;margin:-8px 0 4px -8px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:16px;font-weight:600;display:flex;align-items:center;gap:2px;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Today</button>
@@ -475,7 +572,12 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <div style="font-size:15px;line-height:1.45">{{ journal }}</div>
       <div style="font-size:12px;color:var(--mute);margin-top:8px">Saved from what you told me. Edit or delete anytime.</div>
     </div>
-    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 4px 8px">Reminders</div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 4px 8px">Your reminders</div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:24px">
+      <sc-for list="{{ reminderRows }}" as="r"><div style="display:flex;align-items:center;gap:8px;padding:8px 4px 8px 16px;border-bottom:1px solid var(--hair);min-height:60px"><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">{{ r.text }}</div><div style="font-size:13px;color:var(--mute)">{{ r.sub }}</div></div><button onClick="{{ r.remove }}" aria-label="Delete reminder" style="width:44px;height:44px;border:none;background:transparent;color:var(--mute);font-size:22px;cursor:pointer">×</button></div></sc-for>
+      <button onClick="{{ openReminder }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;background:transparent;font-size:16px;font-weight:600;color:var(--acc);cursor:pointer">+ New reminder</button>
+    </div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 4px 8px">What I remind you about</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:24px">
       <sc-for list="{{ settingRows }}" as="r" hint-placeholder-count="5">
         <button onClick="{{ r.toggle }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;min-height:60px">
@@ -587,6 +689,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           <sc-for list="{{ logTypes }}" as="t" hint-placeholder-count="5"><button onClick="{{ t.pick }}" style="height:56px;border-radius:18px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.fg }};font-size:16px;font-weight:700;cursor:pointer">{{ t.label }}</button></sc-for>
         </div>
 <sc-if value="{{ logIsFeed }}"><div style="margin-top:12px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:16px;background:var(--soft)"><sc-for list="{{ feedSubs }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;border:none;border-radius:13px;background:{{ c.seg }};box-shadow:{{ c.sh }};font-size:14px;font-weight:700;cursor:pointer;color:var(--ink)">{{ c.label }}</button></sc-for></div><sc-if value="{{ feedBottle }}"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:12px">How much</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ ozChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div></sc-if><sc-if value="{{ feedSolids }}"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:12px">What did {{ logPron }} eat?</div><input value="{{ logFood }}" onChange="{{ onLogFood }}" placeholder="Avocado, banana, a bit of rice…" style="width:100%;height:46px;margin-top:8px;border-radius:14px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:16px;outline:none;color:var(--ink)"><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ foodChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div><div style="font-size:12px;color:var(--mute);margin-top:8px">Just a note for you. No nutrition advice, ever.</div></sc-if></div></sc-if>
+        <sc-if value="{{ logIsDiaper }}"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:12px">What was in it?</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ diaperChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div><div style="font-size:12px;color:var(--mute);margin-top:8px">Pediatricians often ask for wet and dirty counts. I keep them for you.</div></sc-if>
         <sc-if value="{{ logIsAct }}"><div style="margin-top:4px"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:12px">What did {{ logWho }} do?</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ actChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:12px">For how long</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ durChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div></div></sc-if>
         <div style="display:flex;align-items:center;gap:8px;margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px 12px">
           <div style="flex:1"><div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)">{{ logTimeLabel }}</div><div style="font-family:'Young Serif',serif;font-size:28px">{{ logTimeText }}</div></div>
@@ -631,6 +734,65 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         </div>
         <button onClick="{{ sendInvite }}" style="margin-top:16px;width:100%;height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Send invite by message</button>
         <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px">The link expires in 7 days. Change or remove access anytime.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shWakeWin }}">
+        <div data-screen-label="36 Wake window">
+        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ wwName }}’s wake window</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">How long {{ wwName }} is usually awake between naps. I plan naps around it.</div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><button onClick="{{ wwMinus }}" aria-label="5 minutes less" style="width:52px;height:52px;border-radius:26px;border:1.5px solid var(--line2);background:transparent;color:var(--ink);font-size:24px;cursor:pointer;flex:none">−</button><div style="font-family:'Young Serif',serif;font-size:44px;line-height:1">{{ wwText }}</div><button onClick="{{ wwPlus }}" aria-label="5 minutes more" style="width:52px;height:52px;border-radius:26px;border:1.5px solid var(--line2);background:transparent;color:var(--ink);font-size:24px;cursor:pointer;flex:none">+</button></div>
+          <div style="position:relative;height:28px;margin:16px 4px 0"><div style="position:absolute;left:0;right:0;top:10px;height:8px;border-radius:4px;background:var(--d-DCE8F2)"></div><div style="position:absolute;left:0;top:10px;height:8px;border-radius:4px;width:{{ wwPct }}%;background:#4E7FA8;transition:width .25s"></div><div style="position:absolute;left:{{ wwEstPct }}%;top:3px;width:2px;height:22px;background:var(--ink)"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin:0 4px"><span>1h</span><span>2h</span><span>3h</span><span>4h</span></div>
+          <div style="font-size:12px;color:var(--mute);margin-top:8px"><span style="display:inline-block;width:2px;height:10px;background:var(--ink);margin-right:6px;vertical-align:-1px"></span>My estimate from your last 10 days: 2h 15m</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><sc-for list="{{ wwChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
+        <button onClick="{{ wwSave }}" style="margin-top:16px;width:100%;height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Use {{ wwText }}</button>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px">Starts with tomorrow’s naps. Change it back anytime.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shSkill }}">
+        <div data-screen-label="34 New skill">
+        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">New skill</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">What did {{ skillWho }} start doing?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><sc-for list="{{ skillChips }}" as="c"><button onClick="{{ c.pick }}" style="min-height:52px;padding:0 16px;border-radius:16px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;text-align:left;cursor:pointer">{{ c.label }}</button></sc-for></div>
+        <input value="{{ skillText }}" onChange="{{ onSkillText }}" placeholder="Or in your words: waved bye-bye…" style="width:100%;height:50px;border-radius:14px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box;margin-top:8px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:16px">When</div>
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center"><sc-for list="{{ skillDays }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for><input type="date" value="{{ skillDate }}" max="2026-11-17" onChange="{{ onSkillDate }}" aria-label="Pick a date" style="flex:1;min-width:0;height:38px;border-radius:19px;border:1.5px solid var(--line2);background:var(--card);color:var(--ink);padding:0 12px;font-size:14px;font-weight:600;outline:none;font-family:inherit"></div>
+        <button onClick="{{ saveSkill }}" style="margin-top:16px;width:100%;height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Save</button>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">A note from you, not a checklist. I only use it to read sleep patterns. Questions about development go to your pediatrician.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shReminder }}">
+        <div data-screen-label="37b Reminder">
+        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">New reminder</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">Your words, your times. I’ll ping you on this phone.</div>
+        <input value="{{ remText }}" onChange="{{ onRemText }}" placeholder="What should I remind you of?" style="width:100%;height:50px;border-radius:14px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box">
+        <div style="display:flex;align-items:center;gap:12px;margin-top:12px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);flex:none">Starts at</span><input type="time" value="{{ remTime }}" onChange="{{ onRemTime }}" aria-label="Start time" style="flex:1;min-width:0;height:50px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 16px;font-size:20px;font-family:'Young Serif',serif;outline:none;box-sizing:border-box"></div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:16px">Repeat</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ remEveryChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:16px">For</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ remDaysChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 16px 16px;margin-top:16px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)">Your next 24 hours</div>
+          <div style="position:relative;height:20px;margin:12px 6px 4px"><div style="position:absolute;left:0;right:0;top:9px;height:2px;background:var(--line2)"></div><sc-for list="{{ remDots }}" as="d"><div style="position:absolute;left:{{ d.l }}%;top:3px;width:14px;height:14px;margin-left:-7px;border-radius:7px;background:var(--acc);box-shadow:0 0 0 3px var(--card)"></div></sc-for></div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><sc-for list="{{ remDots }}" as="d"><span style="font-size:13px;font-weight:600;background:var(--soft);padding:4px 8px;border-radius:10px">{{ d.t }}</span></sc-for></div>
+        </div>
+        <button onClick="{{ saveReminder }}" style="margin-top:16px;width:100%;height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ remOp }}">Set reminder</button>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">I only remind you. I don’t know what it’s for and I never suggest what to give or when. For anything about health, ask your pediatrician.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shSickNote }}">
+        <div data-screen-label="37c Private note">
+        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Private note</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ sickName }}’s day at home, in your words. For you, or to read to your pediatrician.</div>
+        <textarea value="{{ sickNote }}" onChange="{{ onSickNote }}" placeholder="Write anything you want to remember…" style="width:100%;min-height:130px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px 16px;font-size:16px;line-height:1.45;resize:none;outline:none;color:var(--ink);box-sizing:border-box;font-family:inherit"></textarea>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:12px 16px;margin-top:12px"><svg style="stroke:var(--mute);flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="font-size:13px;line-height:1.45;color:var(--ink2)"><b>Stays on this phone.</b> It isn’t uploaded or backed up by BestMom, {{ an }} doesn’t read it, and nobody else in your family sees it.</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:16px"><button onClick="{{ deleteSickNote }}" style="height:56px;border-radius:28px;border:1.5px solid var(--line2);background:transparent;color:var(--l-A33A2A);font-size:16px;font-weight:600;cursor:pointer">Delete</button><button onClick="{{ closeSheet }}" style="height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:16px;font-weight:600;cursor:pointer">Done</button></div>
         </div>
       </sc-if>
 
@@ -720,14 +882,29 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div style="font-family:'Young Serif',serif;font-size:32px;line-height:1.12;margin:16px 0 8px;color:var(--w-hd)">{{ nightHead }}</div>
   <div style="font-size:15px;line-height:1.4;color:var(--w-mu)">{{ nightSub }}</div>
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-    <button onClick="{{ nightTap }}" style="width:210px;height:210px;border-radius:105px;border:2px solid {{ nightRing }};background:var(--w-card);color:var(--w-hd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 0 14px var(--w-halo)">
+    <sc-if value="{{ pastClosed }}"><button onClick="{{ nightTap }}" style="width:210px;height:210px;border-radius:105px;border:2px solid {{ nightRing }};background:var(--w-card);color:var(--w-hd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-shadow:0 0 0 14px var(--w-halo)">
       <sc-if value="{{ nightIdle }}"><svg style="stroke:var(--w-acc)" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg><span style="font-size:20px;font-weight:700">{{ kid1 }} is awake</span><span style="font-size:13px;color:var(--w-mu)">Tap to start</span></sc-if>
       <sc-if value="{{ nightAwake }}"><span style="font-family:'Young Serif',serif;font-size:52px;line-height:1">{{ nightClock }}</span><span style="font-size:14px;color:var(--w-mu)">awake</span></sc-if>
-    </button>
+    </button></sc-if>
+    <sc-if value="{{ pastOpen }}"><div data-screen-label="35 Add a past wake" style="width:100%;background:var(--w-card);border:1.5px solid var(--w-line);border-radius:20px;padding:16px;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--w-mu)">Add a wake from earlier</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:12px"><span style="font-size:15px;color:var(--w-mu);flex:none">Woke at</span><input type="time" value="{{ pastTime }}" onChange="{{ onPastTime }}" aria-label="Time he woke" style="flex:1;min-width:0;height:52px;border-radius:14px;border:1.5px solid var(--w-line);background:var(--w-bg);color:var(--w-hd);font-size:22px;font-family:'Young Serif',serif;padding:0 12px;outline:none;box-sizing:border-box;color-scheme:{{ wakeScheme }}"></div>
+      <div style="font-size:15px;color:var(--w-mu);margin-top:16px">Awake for</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ pastDurChips }}" as="t"><button onClick="{{ t.pick }}" style="height:40px;padding:0 14px;border-radius:20px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:var(--w-hd);font-size:14px;font-weight:600;cursor:pointer">{{ t.label }}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:16px"><button onClick="{{ cancelPast }}" style="height:52px;border-radius:26px;border:1.5px solid var(--w-line);background:transparent;color:var(--w-mu);font-size:16px;font-weight:600;cursor:pointer">Cancel</button><button onClick="{{ savePast }}" style="height:52px;border-radius:26px;border:none;background:var(--w-cta);color:var(--w-ctaTx);font-size:16px;font-weight:700;cursor:pointer">Add wake</button></div>
+    </div></sc-if>
     <sc-if value="{{ nightAwake }}"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px"><sc-for list="{{ nightTags }}" as="t"><button onClick="{{ t.pick }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:var(--w-hd);font-size:14px;font-weight:600;cursor:pointer">{{ t.label }}</button></sc-for></div></sc-if>
   </div>
   <sc-if value="{{ nightAwake }}"><button onClick="{{ nightTap }}" style="height:58px;border-radius:29px;border:none;background:var(--w-cta);color:var(--w-ctaTx);font-size:17px;font-weight:700;cursor:pointer;margin-bottom:16px">Back asleep</button></sc-if>
-  <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--w-mu);margin-bottom:4px">{{ wakeListTitle }}</div>
+  <div style="margin-bottom:12px">
+    <div style="position:relative;height:20px;border-radius:10px;background:var(--w-card);border:1px solid var(--w-line);overflow:hidden">
+      <sc-for list="{{ nightBar }}" as="b"><div style="position:absolute;top:0;bottom:0;left:{{ b.l }}%;width:{{ b.w }}%;background:var(--w-acc);border-radius:3px"></div></sc-for>
+      <sc-if value="{{ pastOpen }}"><div style="position:absolute;top:0;bottom:0;left:{{ pastL }}%;width:{{ pastW }}%;border:1.5px dashed var(--w-hd);border-radius:3px;box-sizing:border-box"></div></sc-if>
+      <div style="position:absolute;top:0;bottom:0;left:{{ nightNowL }}%;width:2px;background:var(--w-hd)"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--w-mu);margin-top:4px"><sc-for list="{{ nightTicks }}" as="t"><span>{{ t.t }}</span></sc-for></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--w-mu)">{{ wakeListTitle }}</span><sc-if value="{{ canPast }}"><button onClick="{{ openPast }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--w-line);background:transparent;color:var(--w-hd);font-size:13px;font-weight:600;cursor:pointer">+ Earlier wake</button></sc-if></div>
   <sc-for list="{{ nightList }}" as="w"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid var(--w-line)"><span>{{ w.t }} · {{ w.dur }}</span><span style="color:var(--w-mu)">{{ w.tags }}</span></div></sc-for>
   <div style="font-size:13px;color:var(--w-mu);text-align:center;margin-top:16px;line-height:1.4">{{ wakeFoot }}</div>
 </div>
@@ -848,7 +1025,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ legend }}" as="d"><span style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:{{ d.fg }};background:{{ d.bg }};padding:4px 8px;border-radius:6px">{{ d.label }}</span></sc-for></div>
   </div>
   <div style="font-size:13px;line-height:1.5;color:var(--l-6E625A)">Try: flip <b>Full Mom → Self-Love</b> in Today’s header. Open <b>Calendar</b> (week and month). In Kids, open <b>Night log</b>. In You, <b>Invite someone</b> as Caregiver, then “See as Carmen”.</div>
-  <div style="font-size:12px;line-height:1.5;color:#8A7D73">Assumptions: English copy for the US launch. Demo clock is Tuesday Nov 17, 1:40 PM. Sharing: one household, each member has a role (partner, caregiver, family) that scopes what syncs to their phone. Recipes stay out of v1; meals are her own list with a prep countdown. The attached design system was empty, so type is Young Serif + Figtree on warm paper tones, with a warm dark mode for night screens.</div>
+  <div style="font-size:12px;line-height:1.5;color:#8A7D73">Assumptions: English copy for the US launch. Demo clock is Tuesday Nov 17, 1:40 PM. Sharing: one household, each member has a role (partner, caregiver, family) that scopes what syncs to their phone. Recipes stay out of v1: meals are her own dishes, planned by week and matched to her pantry. Nothing medical is stored: reminders are free text and the sick-day note stays on the phone. The attached design system was empty, so type is Young Serif + Figtree on warm paper tones, with a warm dark mode for night screens.</div>
 </div>
 </sc-if>
 </div>
@@ -943,7 +1120,7 @@ function buildBlocks(fam) {
   return b;
 }
 function seedLogs(fam) {
-  const l = [{ kid: 'a', type: 'sleep', t: 630, end: 705 }, { kid: 'a', type: 'feed', t: 730, detail: 'Solids: avocado' }, { kid: 'a', type: 'diaper', t: 785 }];
+  const l = [{ kid: 'a', type: 'sleep', t: 630, end: 705 }, { kid: 'a', type: 'feed', t: 730, detail: 'Solids: avocado' }, { kid: 'a', type: 'diaper', t: 785, detail: 'Wet' }];
   if (fam === 'two') l.push({ kid: 'b', type: 'meal', t: 720 });
   if (fam === 'twins') l.push({ kid: 'b', type: 'sleep', t: 635, end: 712 }, { kid: 'b', type: 'feed', t: 732 });
   return l;
@@ -1004,6 +1181,7 @@ const TX = {
   dump: fam => ((fam === 'twins' ? 'Okay so… I have twins, Mateo and Sofi, they’re four months, and my leave ends in two weeks.' : fam === 'one' ? 'Okay so… I have Mateo, he’s seven months.' : 'Okay so… I have Mateo, he’s seven months, and Lia, who’s three.') + ' I’m back at work, hybrid, mostly nine to five. Tuesdays and Thursdays are packed with meetings. His naps are all over the place, and when he skips one the whole day falls apart. I keep forgetting to eat lunch. Diego helps a lot in the mornings.'),
   happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
   log: () => 'He fell asleep at one thirty-five.',
+  pantry: () => 'We have rice, potatoes, chicken, eggs and onions. Dish soap is almost out and we need snacks for the kids.',
 };
 const LOG_ICONS = {
   feed: 'M9 2h6M10 2v3M14 2v3M8.5 5h7l1 4v10a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V9zM7.5 12h9',
@@ -1045,7 +1223,7 @@ const REPLY = q => {
   if (/fever|cough|tylenol|medic|rash|vaccin|dose|sick|worry/i.test(q)) return { text: 'That’s best checked with your pediatrician or doctor. If it’s urgent, call 911. What I can do is clear time in your day so you can call or go.', src: '' };
   if (/choppier|nights|wake/i.test(q)) return { text: 'Last night he woke 3 times; his usual is 1. It started the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.', src: 'From your logs, last 14 nights' };
   if (/asleep|sleep/i.test(q)) return { text: '7:22 PM, after bath, lotion and his song. That’s 8 minutes later than his usual.', src: 'From your logs, Monday' };
-  if (/diaper/i.test(q)) return { text: '38 so far, about 6 a day. Same pace as last week.', src: 'From your logs, last 7 days' };
+  if (/diaper/i.test(q)) return { text: '38 so far, about 6 a day: 32 wet and 14 dirty (some were both). Same pace as last week.', src: 'From your logs, last 7 days' };
   if (/hardest/i.test(q)) return { text: 'Thursday: 4 meetings plus Lia’s pickup. I already kept that afternoon light and moved your walk to lunch.', src: 'From your Outlook calendar' };
   if (/focus/i.test(q)) return { text: 'Done. Tomorrow 9:00 to 11:00 is a focus block. Replans won’t touch it.', src: 'Added to your BestMom calendar' };
   if (/4:15|leave/i.test(q)) return { text: 'Try: “I’m stepping out at 4:15 for pickup and back online at 8 if anything is urgent.” Short and clear. No apology needed.', src: '' };
@@ -1056,11 +1234,47 @@ const REPLY = q => {
   if (/move|walk/i.test(q)) return { text: 'Done. Your walk is now Thursday at 12:30, during Mateo’s nap.', src: 'Updated in your BestMom calendar' };
   return { text: 'Got it. I’ll keep that in mind when I plan tomorrow.', src: '' };
 };
+// Her own dishes with their ingredients (names only: no recipes, no steps).
+const MEALS = [
+  ['Chicken tacos', ['chicken', 'tortillas', 'avocado', 'tomato']],
+  ['Arroz con pollo', ['rice', 'chicken', 'peas', 'onion']],
+  ['Potato and chicken bake', ['potatoes', 'chicken', 'onion']],
+  ['Pasta with tomato sauce', ['pasta', 'tomato', 'cheese']],
+  ['Veggie omelet', ['eggs', 'spinach', 'cheese']],
+  ['Lentil soup', ['lentils', 'carrots', 'onion']],
+  ['Salmon and rice', ['salmon', 'rice', 'broccoli']],
+];
+const SKILLS = ['Rolling over', 'Sitting up', 'Crawling', 'Pulling to stand', 'First steps', 'First words'];
+const HOME_ICON = 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6';
+const WHO = { me: ['Me', '#A9502B'], diego: ['Diego', '#B35C67'], cleaner: ['Cleaner', '#BC8C36'] };
+const fmtDur = m => Math.floor(m / 60) + 'h' + (m % 60 ? ' ' + (m % 60) + 'm' : '');
+const cap = x => x[0].toUpperCase() + x.slice(1);
+const stem = x => x.toLowerCase().replace(/e?s$/, '');
+const sameItem = (a, b) => a.toLowerCase().includes(stem(b)) || b.toLowerCase().includes(stem(a));
+const catOf = n => /soap|detergent|bleach|sponge|towel|trash|cleaner/i.test(n) ? 'Cleaning' : /diaper|wipes|formula|snack|pouch/i.test(n) ? 'Kids' : 'Food';
+// ponytail: regex stand-in. The real app sends the sentence to the small model (one cheap extraction call, text in, list out)
+// and gets this same shape back: [{ n: item, lvl: 'ok' | 'low' | 'out' }].
+function parsePantry(text) {
+  const out = [];
+  text.split(/[.;]|\bbut\b|\band we\b/i).forEach(sent => {
+    const lvl = /\bout of\b|\bneed\b|ran out|no more/i.test(sent) ? 'out' : /\blow\b|almost|running/i.test(sent) ? 'low' : 'ok';
+    sent.replace(/\b(we|i|we’re|we're|have|has|got|there is|there’s|are|is|need|ran out of|out of|almost out|almost|running low on|running low|low on|low|out|some|a few|a bit of|for the kids|only|just|still|also|the|of|to buy|more)\b/gi, ',')
+      .split(/,|\band\b/i).map(x => x.replace(/^[^a-z]+|[^a-z]+$/gi, '')).filter(x => x.length > 2).forEach(n => out.push({ n: cap(n.toLowerCase()), lvl }));
+  });
+  return out;
+}
+console.assert(parsePantry('We have rice and eggs. Dish soap is almost out and we need snacks for the kids').map(x => x.n + ':' + x.lvl).join() === 'Rice:ok,Eggs:ok,Dish soap:low,Snacks:out', 'parsePantry');
+const mergePantry = (cur, items) => items.reduce((list, it) => list.some(p => sameItem(p.n, it.n))
+  ? list.map(p => sameItem(p.n, it.n) ? { ...p, lvl: it.lvl, note: it.lvl === 'ok' ? '' : p.note } : p)
+  : [...list, { n: it.n, lvl: it.lvl, cat: catOf(it.n) }], cur);
+const PANTRY0 = [['Chicken'], ['Tortillas'], ['Avocado'], ['Tomato', 'low'], ['Rice'], ['Onion'], ['Pasta'], ['Cheese'], ['Eggs'], ['Spinach'],
+  ['Diapers, size 3', 'low', 'At this month’s pace they run out Thursday'], ['Wipes'], ['Kids’ snacks'], ['Dish soap'], ['Laundry detergent']]
+  .map(([n, lvl, note]) => ({ n, lvl: lvl || 'ok', note: note || '', cat: catOf(n) }));
 const FLOW = [
   { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
-  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth']] },
+  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth'], [33, 'Home: meals, pantry, cleaning', 'home'], [37, 'Sick day: reminder & note', 'reminder']] },
   { title: 'Self-Love', items: [[20, 'Self-Love mode', 'self'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
-  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [14, 'Kids: nights & rough patch', 'kids'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
+  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [35, 'Night log: add an earlier wake', 'nightpast'], [14, 'Kids: nights & rough patch', 'kids'], [36, 'Kids: correct wake window', 'wakewin'], [34, 'Kids: new skill', 'skill'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
   { title: 'Family', items: [[22, 'Invite a caregiver', 'invite'], [23, 'See as Diego (partner)', 'asDiego'], [24, 'See as Carmen (nanny)', 'asCarmen'], [15, 'Settings & data', 'me']] },
   { title: 'Assistant', items: [[13, 'Chat: Kids · Work · Me', 'allie']] },
   { title: 'Business & safety', items: [[16, 'Paywall (day 2)', 'paywall'], [17, 'Crisis screen', 'crisis']] },
@@ -1083,7 +1297,13 @@ class Component extends DCLogic {
       mode: 'mom', viewer: 'ana', calView: '3day', calSel: TODAY_D, us: {}, invName: 'Carmen', invRole: 'caregiver',
       members: [{ id: 'ana', name: 'Rossi', role: 'owner' }, { id: 'diego', name: 'Diego', role: 'partner' }],
       moments: [{ t: '10:12 AM', text: 'Mateo laughed at the dog. Real belly laughs.', tone: MOMENT_TONES[0] }, { t: '8:05 AM', text: 'Lia at drop-off: “Love you to the moon, mama.”', tone: MOMENT_TONES[1] }],
-      nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed' }], napWakes: [{ t: '10:05 AM', dur: '6 min', tags: 'Rocked' }], wakeKind: 'night',
+      nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed', m: 1432, d: 12 }], napWakes: [{ t: '10:05 AM', dur: '6 min', tags: 'Rocked', m: 605, d: 6 }], wakeKind: 'night',
+      pastOpen: false, pastTime: '00:40', pastDur: 10, wakeWin: 135, wwDraft: 135, wwSet: false,
+      skills: [{ kid: 'a', label: 'Started crawling', date: 'Nov 12' }], skillKid: 'a', skillPick: 'Pulling to stand', skillText: '', skillDate: '2026-11-17', logDiaper: 'wet',
+      homeSeg: 'meals', mealPlan: ['Veggie omelet', 'Pasta with tomato sauce', 'Chicken tacos', 'Arroz con pollo', 'Lentil soup', 'Salmon and rice', null], mealPick: null,
+      pantry: PANTRY0, pantryText: '', pantryHeard: 0, shopExtra: [],
+      chores: [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'me', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }],
+      deep: { on: true, who: 'cleaner' }, sickKid: null, sickNote: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3,
       settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
     };
   }
@@ -1120,6 +1340,7 @@ class Component extends DCLogic {
         if (s.ctx === 'dump') up.followUp = true;
         if (s.ctx === 'log') { up.logHeard = '“' + this.tx.join(' ') + '”'; up.logTime = 815; up.logType = 'sleep'; up.logKid = 'a'; }
         if (s.ctx === 'happened') setTimeout(() => this.openReplan('voice'), 500);
+        if (s.ctx === 'pantry') { const got = parsePantry(this.tx.join(' ')); up.pantry = mergePantry(s.pantry, got); up.pantryHeard = got.length; setTimeout(() => this.toastMsg('Pantry updated: ' + got.length + ' items from what you said.'), 0); }
       }
     }
     if (s.screen === 'thinking' && this.n % 4 === 0) {
@@ -1137,13 +1358,17 @@ class Component extends DCLogic {
     if (Object.keys(up).length) this.setState(up);
   }
   go(k) {
-    const base = { sheet: null, listening: false, selBlock: null, radial: false, nightOff: false };
+    const base = { sheet: null, listening: false, selBlock: null, radial: false, nightOff: false, pastOpen: false };
     switch (k) {
       case 'welcome': case 'consent': return this.setState({ ...base, screen: k });
       case 'dump': return this.setState({ ...base, screen: 'dump', words: 0, followUp: false });
       case 'summary': return this.setState({ ...base, screen: 'summary', summary: this.buildSummary(), editIdx: -1 });
       case 'perm': return this.setState({ ...base, screen: 'perm', permStep: 0 });
-      case 'today': case 'kids': case 'me': case 'cal': return this.setState({ ...base, screen: 'app', tab: k });
+      case 'today': case 'kids': case 'me': case 'cal': case 'home': return this.setState({ ...base, screen: 'app', tab: k });
+      case 'skill': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'skill', skillKid: 'a', skillText: '' });
+      case 'wakewin': return this.setState(st => ({ ...base, screen: 'app', tab: 'kids', sheet: 'wakewin', wwDraft: st.wakeWin }));
+      case 'reminder': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sheet: 'reminder' });
+      case 'nightpast': return this.setState({ ...base, screen: 'night', wakeKind: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {}, pastOpen: true, pastTime: '00:40' });
       case 'allie': return this.setState({ ...base, screen: 'app', tab: 'allie', chatTopic: this.state.mode === 'self' ? 'me' : this.state.chatTopic });
       case 'cal3day': case 'calweek': case 'calmonth': return this.setState({ ...base, screen: 'app', tab: 'cal', calView: k.slice(3) });
       case 'dayone': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'ana', dayOne: true });
@@ -1191,7 +1416,7 @@ class Component extends DCLogic {
         if (c.type === 'add' && !bl.some(x => x.id === c.block.id)) bl.push({ ...c.block });
       });
       return bl;
-    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1 });
+    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1, ...(s.replanKey === 'sick' ? { sickKid: s.hKid === 'all' ? 'a' : s.hKid } : {}) });
   }
   toggleDone(id) {
     const b = this.state.blocks.find(x => x.id === id); const done = b.status !== 'done';
@@ -1298,7 +1523,7 @@ class Component extends DCLogic {
     const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
     const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else toApp(); };
 
-    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add' : s.dayOne && s.tab === 'today' ? 'dayone' : ['add', 'happened', 'log', 'invite'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr;
+    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add' : s.dayOne && s.tab === 'today' ? 'dayone' : ['add', 'happened', 'log', 'invite', 'skill', 'wakewin', 'reminder'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr === 'night' && s.pastOpen ? 'nightpast' : scr;
     const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
     const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
     const micActive = s.listening;
@@ -1414,13 +1639,14 @@ class Component extends DCLogic {
         const groups = [
           [['Type to ' + an, 'M4 6h16M4 12h10M4 18h7', () => { this.go('allie'); setTimeout(() => { const el = document.querySelector('input[placeholder^="Ask or tell"]'); if (el) el.focus(); }, 60); }],
            ['Talk to ' + an, 'M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3', () => { this.go('allie'); this.setState({ chatMic: true }); setTimeout(() => { this.setState({ chatMic: false }); this.sendChat('Can you move my walk? Today got busy.'); }, 1800); }]],
+          [V !== 'carmen' && ['Home & Meals', HOME_ICON, () => this.go('home'), 'home']],
           [V === 'ana' && ['Clear My Day', 'M4 7h16M10 11v6M14 11v6M5 7l1 13h12l1-13M9 7V4h6v3', () => this.openReplan('sos')],
            [V === 'carmen' ? 'Tell Rossi' : 'Something Happened?', 'M13 2L4.5 13.5H11L10 22l8.5-11.5H12z', () => this.go('happened')]],
           [V === 'ana' && ['For You', MOM_ICONS.water, sheet('you'), 'mom'],
            // listed least to most used, then reversed: wake comes first at night (2 taps, timer starts at once), Logs by day
            ...(isNightAt(NOW) ? [['Logs', LOG_ICONS.feed, sheet('log'), 'kids'], [wakeName, KID_EXTRA_ICONS.night, () => this.go('wake'), 'kids']]
              : [[wakeName, KID_EXTRA_ICONS.night, () => this.go('wake'), 'kids'], ['Logs', LOG_ICONS.feed, sheet('log'), 'kids']])],
-        ].map(g => g.filter(Boolean).reverse()).reverse();
+        ].map(g => g.filter(Boolean).reverse()).filter(g => g.length).reverse();
         return groups.map((g, gi) => ({ gap: gi ? '12px' : '0',
           items: g.map(([label, icon, go, dim], i) => ({ label, icon, go, sep: i ? '.5px solid var(--hair)' : 'none',
             // area color where the item belongs to one (Kids, You); Allie and plan actions use the accent
@@ -1437,8 +1663,9 @@ class Component extends DCLogic {
         const kidGo = k => () => {
           if (k === 'night') return this.go('wake');
           if (LOG_ICONS[k]) return this.setState({ sheet: 'log', logType: k, logHeard: null, logTime: NOW });
+          if (k === 'skill') return this.setState({ sheet: 'skill', skillKid: s.logKid === 'all' ? 'a' : s.logKid, skillText: '' });
           this.setState({ sheet: null });
-          this.toastMsg(k === 'skill' ? 'New skill noted. I’ll watch how sleep responds.' : 'Logged: ' + kidName('a') + ' · ' + KID_OPTS[k] + ' · ' + fmt(NOW));
+          this.toastMsg('Logged: ' + kidName('a') + ' · ' + KID_OPTS[k] + ' · ' + fmt(NOW));
         };
         const momGo = k => () => {
           if (k === 'pause') return this.setState({ pauseLeft: 5, sheet: null });
@@ -1465,7 +1692,104 @@ class Component extends DCLogic {
         ['Connect your calendar', 'Read only. I’ll plan around your meetings.', 'M4 6h16v14H4zM4 10h16M8 3v5M16 3v5', () => { this.setState({ dayOne: false }); this.toastMsg('Calendar on. Here’s today with your meetings.'); }],
         ['Log one thing for ' + kidName('a'), 'A feed, a nap, a diaper. One tap is enough.', LOG_ICONS.feed, () => this.setState({ sheet: 'add', addPart: 'log', addEdit: false })],
       ].map(([title, sub, icon, go], i) => ({ n: i + 1, title, sub, icon, go })),
-      brief, mealIn, kid1: kidName('a'), toKids: () => this.go('kids'), happenedLabel: V === 'carmen' ? 'Tell Rossi' : 'Something happened',
+      brief, mealIn, kid1: kidName('a'), toHome: () => V === 'carmen' ? null : this.go('home'),
+      ...(() => {
+        // ---- home: meals, pantry, shopping, cleaning. All plain data; the only AI call is turning her sentence into pantry items.
+        const has = ing => s.pantry.some(p => p.lvl !== 'out' && sameItem(p.n, ing));
+        const ingsOf = name => (MEALS.find(m => m[0] === name) || [null, []])[1];
+        const seg = (cur, opts, set) => opts.map(([k, label]) => ({ label, bg: cur === k ? 'var(--card)' : 'transparent', sh: cur === k ? '0 1px 4px rgba(42,33,28,.14)' : 'none', go: () => set(k) }));
+        const mealDays = DAYN.map((name, i) => {
+          const meal = s.mealPlan[i], ings = ingsOf(meal), miss = ings.filter(x => !has(x)), past = i < TODAY_I, today = i === TODAY_I;
+          return { name, date: WEEK0 + i, meal: meal || 'Open', op: past ? .5 : 1, bg: today ? '#BC8C36' : 'var(--d-F4E6C8)', fg: today ? '#FFFFFF' : 'var(--l-7A5714)',
+            sub: !meal ? 'Tap to pick a dish' : past ? 'Done' : (miss.length ? 'Need: ' + miss.join(', ') : 'You have everything') + (today ? ' · prep at 5:10 PM' : ''),
+            dots: past ? [] : ings.map(x => ({ bg: has(x) ? '#BC8C36' : 'transparent' })),
+            picking: s.mealPick === i, open: () => this.setState({ mealPick: s.mealPick === i ? null : i }),
+            opts: chips(meal, MEALS.map(m => [m[0], m[0]]).concat([[null, 'Leave open']]), v => {
+              this.setState(st => ({ mealPick: null, mealPlan: st.mealPlan.map((m, j) => j === i ? v : m), blocks: today && v ? st.blocks.map(b => b.id === 'cook' ? { ...b, title: 'Start dinner: ' + v.toLowerCase() } : b) : st.blocks }));
+              this.toastMsg(v ? name + ': ' + v + '. Your list is updated.' : name + ' is open.');
+            }) };
+        });
+        const upcoming = mealDays.slice(TODAY_I).filter(d => d.meal !== 'Open');
+        const canMake = MEALS.map(([name, ings]) => ({ name, ings, miss: ings.filter(x => !has(x)) })).filter(m => m.miss.length < m.ings.length)
+          .sort((a, b) => a.miss.length - b.miss.length).slice(0, 5).map(m => ({ name: m.name, pct: (m.ings.length - m.miss.length) / m.ings.length * 100, bar: m.miss.length ? '#BC8C36' : '#5E8A62',
+            sub: m.miss.length ? 'Have ' + (m.ings.length - m.miss.length) + ' of ' + m.ings.length + ' · need ' + m.miss.join(', ') : 'Everything’s in the house',
+            missing: m.miss.length > 0, ready: !m.miss.length,
+            add: () => { this.setState(st => ({ shopExtra: [...st.shopExtra, ...m.miss.filter(x => !st.shopExtra.includes(x))] })); this.toastMsg('Added to your list: ' + m.miss.join(', ') + '.'); } }));
+        const raw = [
+          ...s.pantry.filter(p => p.lvl !== 'ok').map(p => ({ t: p.n, sub: p.note || (p.lvl === 'out' ? 'Out' : 'Running low'), cat: p.cat })),
+          ...s.mealPlan.flatMap((meal, i) => i < TODAY_I ? [] : ingsOf(meal).filter(x => !has(x)).map(x => ({ t: cap(x), sub: 'For ' + DAYN[i] + ': ' + meal.toLowerCase(), cat: 'Food' }))),
+          ...s.shopExtra.filter(x => !has(x)).map(x => ({ t: cap(x), sub: 'You added it', cat: catOf(x) })),
+        ];
+        const catDim = { Food: DIMS.home, Kids: DIMS.kids, Cleaning: DIMS.mom };
+        const shopList = raw.filter((x, i) => raw.findIndex(y => sameItem(y.t, x.t)) === i).map(x => ({ ...x, fg: catDim[x.cat].fg, bg: catDim[x.cat].bg,
+          buy: () => { this.setState(st => ({ pantry: mergePantry(st.pantry, [{ n: x.t, lvl: 'ok' }]), shopExtra: st.shopExtra.filter(e => !sameItem(e, x.t)) })); this.toastMsg('Bought: ' + x.t + '. Back in your pantry.'); } }));
+        const cnt = l => s.pantry.filter(p => p.lvl === l).length;
+        const look = { ok: ['var(--card)', 'var(--line2)', 'solid', '#5E8A62', '#5E8A62', 'var(--ink)', 'none'], low: ['var(--d-F4E6C8)', '#BC8C36', 'solid', '#BC8C36', '#BC8C36', 'var(--ink)', 'none'], out: ['transparent', 'var(--line2)', 'dashed', 'transparent', 'var(--mute)', 'var(--mute)', 'line-through'] };
+        const nextLvl = { ok: 'low', low: 'out', out: 'ok' };
+        const addPantry = () => { const got = parsePantry(s.pantryText); if (!got.length) return; this.setState(st => ({ pantry: mergePantry(st.pantry, got), pantryText: '' })); this.toastMsg('Pantry updated: ' + got.map(x => x.n).join(', ') + '.'); };
+        const hearing = s.listening && s.ctx === 'pantry';
+        // cleaning
+        const next = c => c.days.find(d => d >= TODAY_I);
+        const occ = s.chores.flatMap(c => c.days.map(d => ({ c, d, done: d < TODAY_I || (c.done && d === next(c)) })));
+        const chores = s.chores.map(c => ({ t: c.t, deco: c.done ? 'line-through' : 'none', ring: c.done ? '#5E8A62' : 'var(--line2)', fill: c.done ? '#5E8A62' : 'transparent', chk: c.done ? 1 : 0,
+          sub: c.days.map(d => DAYN[d]).join(' & ') + ' · ' + c.min + ' min' + (c.days.includes(TODAY_I) ? ' · today' : ''), whoLabel: WHO[c.who][0], whoC: WHO[c.who][1],
+          toggle: () => this.setState(st => ({ chores: st.chores.map(x => x.id === c.id ? { ...x, done: !x.done } : x) })),
+          next: () => this.setState(st => ({ chores: st.chores.map(x => x.id === c.id ? { ...x, who: { me: 'diego', diego: 'cleaner', cleaner: 'me' }[x.who] } : x) })) }));
+        const dp = s.deep;
+        return {
+          tHome: s.tab === 'home', hMeals: s.homeSeg === 'meals', hPantry: s.homeSeg === 'pantry', hClean: s.homeSeg === 'clean',
+          homeSegs: seg(s.homeSeg, [['meals', 'Meals'], ['pantry', 'Pantry & list'], ['clean', 'Cleaning']], k => this.setState({ homeSeg: k, mealPick: null })),
+          dinnerName: (s.mealPlan[TODAY_I] || 'open').toLowerCase(), mealDays, canMake,
+          mealsReady: upcoming.filter(d => d.sub.startsWith('You have')).length + ' of ' + upcoming.length + ' ready to cook',
+          addDish: () => this.setState({ tab: 'allie', chatTopic: 'me', chatInput: 'Add a dish to my list: ' }),
+          micPantry: () => this.startListen('pantry'), pantryText: s.pantryText, onPantryText: e => this.setState({ pantryText: e.target.value }), onPantryKey: e => { if (e.key === 'Enter') addPantry(); }, addPantry,
+          pantryVoiceText: hearing ? (this.tx.slice(0, s.words).join(' ') || 'I’m listening…') : s.pantryHeard ? 'Got it: ' + s.pantryHeard + ' items updated. Tell me again whenever something changes.' : 'Tell me what you have, or what ran out. I’ll keep the list.',
+          pantryVoiceColor: hearing ? 'var(--ink)' : 'var(--mute)',
+          stockLine: cnt('ok') + ' have · ' + cnt('low') + ' low · ' + cnt('out') + ' out', stockBar: [['ok', '#5E8A62'], ['low', '#BC8C36'], ['out', 'var(--d-C9BDB0)']].map(([l, c]) => ({ n: cnt(l), c })),
+          pantryGroups: ['Food', 'Kids', 'Cleaning'].map(cat => ({ cat, items: s.pantry.filter(p => p.cat === cat) })).filter(g => g.items.length).map(g => ({ title: g.cat + ' · ' + g.items.length,
+            items: g.items.map(p => { const L = look[p.lvl]; return { n: p.n, aria: p.n + ', ' + (p.lvl === 'ok' ? 'have' : p.lvl === 'low' ? 'running low' : 'out') + '. Tap to change', bg: L[0], bd: L[1], bs: L[2], dot: L[3], dotBd: L[4], fg: L[5], deco: L[6],
+              cycle: () => this.setState(st => ({ pantry: st.pantry.map(x => x.n === p.n ? { ...x, lvl: nextLvl[x.lvl] } : x) })) }; }) })),
+          shopList, shopCount: shopList.length, shopEmpty: !shopList.length,
+          chores, cleanLine: occ.filter(o => o.done).length + ' of ' + occ.length + ' done',
+          cleanWeek: DAYN.map((d, i) => ({ name: d[0], bg: i === TODAY_I ? 'var(--d-F4E6C8)' : 'var(--soft)', fg: i === TODAY_I ? 'var(--l-7A5714)' : 'var(--mute)', dots: occ.filter(o => o.d === i).map(o => ({ bg: o.done ? WHO[o.c.who][1] : 'transparent', bd: WHO[o.c.who][1] })) })),
+          whoLegend: Object.values(WHO).map(([label, c]) => ({ label, c })).concat([{ label: 'Filled = done', c: 'transparent' }]),
+          deepOn: dp.on, deepOp: dp.on ? 1 : .6, deepTrack: dp.on ? 'var(--l-3D6142)' : 'var(--line2)', deepJustify: dp.on ? 'flex-end' : 'flex-start', deepToggle: () => this.setState({ deep: { ...dp, on: !dp.on } }),
+          deepWho: seg(dp.who, [['me', 'I’ll do it'], ['cleaner', 'A cleaner comes']], k => this.setState({ deep: { ...dp, who: k } })),
+          deepSub: !dp.on ? 'Off. Turn it on if you want a monthly reset.' : dp.who === 'cleaner' ? 'Marta comes at 9 AM. I’ll remind you Thursday to confirm with her. It’s just a name and a date: no booking or payments here.' : 'I’ll split it into three 40-minute blocks across the weekend so it fits around the kids.',
+          addChore: () => this.setState({ tab: 'allie', chatTopic: 'me', chatInput: 'Add a chore: ' }),
+        };
+      })(),
+      ...(() => {
+        // ---- sick day (reminders + private note), wake window, new skill
+        const sickName = kidName(s.sickKid || 'a');
+        const start = (() => { const [h, mi] = (s.remTime || '0:0').split(':').map(Number); return (h || 0) * 60 + (mi || 0); })();
+        const times = s.remEvery ? Array.from({ length: Math.min(6, Math.floor(24 / s.remEvery)) }, (_, k) => start + k * s.remEvery * 60) : [start];
+        const remLabel = r => r.time + (r.every === 24 ? ' · every day' : r.every ? ' · every ' + r.every + ' h' : ' · once') + (r.every ? (r.days ? ' · for ' + r.days + (r.days === 1 ? ' day' : ' days') : ' · until you stop it') : '');
+        const ww = s.wwDraft, skillWho = kidName(s.skillKid);
+        return {
+          sickOn: !!s.sickKid && V === 'ana', sickName, sickSub: s.reminders.length ? 'Next reminder ' + s.reminders[s.reminders.length - 1].time + (s.sickNote ? ' · note saved' : '') : s.sickNote ? 'Private note saved on this phone' : 'Set a reminder or keep a private note',
+          openReminder: () => this.setState({ sheet: 'reminder', remText: '' }), openSickNote: () => this.setState({ sheet: 'sicknote' }),
+          shReminder: s.sheet === 'reminder', remText: s.remText, onRemText: e => this.setState({ remText: e.target.value }), remTime: s.remTime, onRemTime: e => this.setState({ remTime: e.target.value }),
+          remEveryChips: chips(s.remEvery, [[0, 'Once'], [4, 'Every 4 h'], [6, 'Every 6 h'], [8, 'Every 8 h'], [12, 'Every 12 h'], [24, 'Daily']], v => this.setState({ remEvery: v })),
+          remDaysChips: chips(s.remDays, [[1, 'Today'], [3, '3 days'], [7, '7 days'], [0, 'Until I stop it']], v => this.setState({ remDays: v })),
+          remDots: times.map(t => ({ l: (t - start) / 1440 * 100, t: fmt(t % 1440) })), remOp: s.remText.trim() ? 1 : .4,
+          saveReminder: () => { const text = s.remText.trim(); if (!text) return; const r = { text, time: fmt(start % 1440), every: s.remEvery, days: s.remDays }; this.setState(st => ({ reminders: [...st.reminders, r], sheet: null, remText: '' })); this.toastMsg('Reminder set: ' + remLabel(r) + '.'); },
+          reminderRows: s.reminders.map((r, i) => ({ text: r.text, sub: remLabel(r), remove: () => this.setState(st => ({ reminders: st.reminders.filter((_, j) => j !== i) })) })),
+          shSickNote: s.sheet === 'sicknote', sickNote: s.sickNote, onSickNote: e => this.setState({ sickNote: e.target.value }), deleteSickNote: () => { this.setState({ sickNote: '', sheet: null }); this.toastMsg('Note deleted from this phone.'); },
+          shWakeWin: s.sheet === 'wakewin', wwName: kidName('a'), wwText: fmtDur(ww), wwPct: (ww - 60) / 180 * 100, wwEstPct: (135 - 60) / 180 * 100,
+          wwMinus: () => this.setState({ wwDraft: Math.max(60, ww - 5) }), wwPlus: () => this.setState({ wwDraft: Math.min(240, ww + 5) }),
+          wwChips: chips(ww, [105, 120, 135, 150, 180].map(v => [v, fmtDur(v)]), v => this.setState({ wwDraft: v })),
+          wwSave: () => { this.setState({ wakeWin: ww, wwSet: ww !== 135, sheet: null }); this.toastMsg('Got it. From tomorrow I plan ' + kidName('a') + '’s naps around ' + fmtDur(ww) + '.'); },
+          shSkill: s.sheet === 'skill', skillWho, skillText: s.skillText, onSkillText: e => this.setState({ skillText: e.target.value }), skillDate: s.skillDate, onSkillDate: e => this.setState({ skillDate: e.target.value || '2026-11-17' }),
+          skillChips: chips(s.skillText.trim() ? null : s.skillPick, SKILLS.map(x => [x, x]), v => this.setState({ skillPick: v, skillText: '' })),
+          skillDays: chips(s.skillDate, [['2026-11-17', 'Today'], ['2026-11-16', 'Yesterday']], v => this.setState({ skillDate: v })),
+          saveSkill: () => {
+            const label = s.skillText.trim() || s.skillPick, date = new Date(s.skillDate + 'T12:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            this.setState(st => ({ skills: [...st.skills, { kid: st.skillKid, label, date }], sheet: null, skillText: '' }));
+            this.toastMsg('Noted: ' + skillWho + ' · ' + label + ' · ' + date + '. I’ll watch how sleep responds.');
+          },
+        };
+      })(), toKids: () => this.go('kids'), happenedLabel: V === 'carmen' ? 'Tell Rossi' : 'Something happened',
       goodMom, selfItems, usOpts, winChat: () => this.setState({ tab: 'allie', chatTopic: 'work', chatInput: 'My win today: ' }),
       moments: s.moments, addMoment: () => { this.setState(st => ({ moments: [{ t: fmt(NOW), text: kidName('a') + ' grabbed my finger and wouldn’t let go.', tone: MOMENT_TONES[2] }, ...st.moments] })); this.toastMsg('Saved to today’s moments. Only you see it unless you share.'); },
       tCal: s.tab === 'cal', calWeek: s.calView !== 'month', calMonth: s.calView === 'month', calTitle: s.calView === '3day' ? 'Nov 16–18' : s.calView === 'week' ? 'This week' : 'November',
@@ -1480,7 +1804,9 @@ class Component extends DCLogic {
           ? { bg: 'var(--bg)', tx: 'var(--ink)', hd: 'var(--ink)', mu: 'var(--mute)', btn: 'var(--soft)', card: 'var(--card)', halo: 'rgba(47,90,122,.10)', cta: 'var(--l-2F5A7A)', ctaTx: 'var(--bg)', line: 'var(--hair)', acc: 'var(--l-2F5A7A)' }
           : { bg: '#0B0606', tx: '#C77A68', hd: '#D88C78', mu: '#B26A5A', btn: '#1C0E0C', card: '#160B09', halo: 'rgba(120,40,30,.10)', cta: '#5E2219', ctaTx: '#F2B7A6', line: '#22110E', acc: 'var(--d-C77A68)' };
         const on = nap ? ['var(--d-DCE8F2)', 'var(--l-2F5A7A)'] : ['var(--l-3A1712)', 'var(--l-9A3E2E)'], off = nap ? 'var(--line)' : 'var(--l-3A1C17)';
-        const listKey = nap ? 'napWakes' : 'nightWakes';
+        const listKey = nap ? 'napWakes' : 'nightWakes', nowM = nap ? 820 : 134;
+        const win = nap ? [360, 840] : [1140, 720], pos = m => ((m - win[0] + 1440) % 1440) / win[1] * 100; // nap: 6 AM to 8 PM, night: 7 PM to 7 AM
+        const pm = (() => { const [h, mi] = (s.pastTime || '0:0').split(':').map(Number); return (h || 0) * 60 + (mi || 0); })();
         return {
           sNight: scr === 'night', nightIdle: !s.nightAwake, nightAwake: s.nightAwake, nightClock,
           wakeVars: Object.entries(W).map(([k, v]) => '--w-' + k + ':' + v).join(';'),
@@ -1489,9 +1815,15 @@ class Component extends DCLogic {
           wakeFoot: nap ? 'Short naps are common. I’ll shift this afternoon’s plan around it.' : 'Red, dim screen so your eyes stay sleepy. Log it, then rest. In the morning I’ll fold tonight into your plan.',
           nightHead: nap ? (s.nightAwake ? 'Nap cut short.' : 'Nap log.') : (s.nightAwake ? 'You’ve got this.' : 'Rough patch, night 4.'),
           nightSub: nap ? (s.nightAwake ? 'Timer’s running. Tap what helped, then Back asleep if he settles.' : 'Tap when he wakes. Close this if the nap is over.') : (s.nightAwake ? 'Tap what helped. One tap, eyes half closed is fine.' : 'Since bedtime: 1 wake, a 4h 12m stretch. Tap when he wakes.'),
-          nightTap: () => { if (!s.nightAwake) return this.setState({ nightAwake: true, nightSec: 0, nightTagsOn: {} }); const tags = Object.keys(s.nightTagsOn).filter(k => s.nightTagsOn[k]); this.setState(st => ({ nightAwake: false, [listKey]: [...st[listKey], { t: nap ? '1:40 PM' : '2:14 AM', dur: Math.max(1, Math.round(st.nightSec / 60)) + ' min', tags: tags.join(', ') || 'Soothed' }] })); },
+          nightTap: () => { if (!s.nightAwake) return this.setState({ nightAwake: true, nightSec: 0, nightTagsOn: {} }); const tags = Object.keys(s.nightTagsOn).filter(k => s.nightTagsOn[k]); this.setState(st => ({ nightAwake: false, [listKey]: [...st[listKey], { t: nap ? '1:40 PM' : '2:14 AM', dur: Math.max(1, Math.round(st.nightSec / 60)) + ' min', tags: tags.join(', ') || 'Soothed', m: nowM, d: Math.max(1, Math.round(st.nightSec / 60)) }] })); },
+          nightBar: s[listKey].map(w => ({ l: pos(w.m), w: Math.max(1.6, w.d / win[1] * 100) })), nightNowL: pos(nowM), nightTicks: (nap ? ['6 AM', '1 PM', '8 PM'] : ['7 PM', '11 PM', '3 AM', '7 AM']).map(t => ({ t })),
+          pastOpen: s.pastOpen, pastClosed: !s.pastOpen, canPast: !s.nightAwake && !s.pastOpen, pastL: pos(pm), pastW: Math.max(1.6, s.pastDur / win[1] * 100), pastTime: s.pastTime, onPastTime: e => this.setState({ pastTime: e.target.value }),
+          wakeScheme: nap ? (s.dark ? 'dark' : 'light') : 'dark',
+          pastDurChips: [5, 10, 20, 30, 45].map(v => ({ label: v + ' min', bg: s.pastDur === v ? on[0] : 'transparent', border: s.pastDur === v ? on[1] : off, pick: () => this.setState({ pastDur: v }) })),
+          openPast: () => this.setState({ pastOpen: true, pastTime: nap ? '11:20' : '00:40' }), cancelPast: () => this.setState({ pastOpen: false }),
+          savePast: () => { this.setState(st => ({ pastOpen: false, [listKey]: [...st[listKey], { t: fmt(pm), dur: st.pastDur + ' min', tags: 'Added later', m: pm, d: st.pastDur }] })); this.toastMsg('Added: awake at ' + fmt(pm) + ' for ' + s.pastDur + ' min.'); },
           nightTags: ['Fed', 'Changed', 'Rocked', 'Just checked'].map(label => ({ label, bg: s.nightTagsOn[label] ? on[0] : 'transparent', border: s.nightTagsOn[label] ? on[1] : off, pick: () => this.setState(st => ({ nightTagsOn: { ...st.nightTagsOn, [label]: !st.nightTagsOn[label] } })) })),
-          nightList: s[listKey],
+          nightList: [...s[listKey]].sort((a, b) => pos(a.m) - pos(b.m)),
         };
       })(),
       members, openInvite: () => this.setState({ sheet: 'invite' }), shInvite: s.sheet === 'invite', invName: s.invName, onInvName: e => this.setState({ invName: e.target.value }), invWho,
@@ -1545,7 +1877,7 @@ class Component extends DCLogic {
       notSaved: !s.saved && V === 'ana', openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
       doneLabel: doneCount + ' of ' + live.length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
       openLog: () => this.go('log'), openHappened: () => this.go('happened'),
-      tabs: [['today', 'Today'], ['cal', 'Calendar'], ['plus', ''], ['kids', 'Kids'], ['allie', an]].map(([k, label]) => ({ label, plus: k === 'plus', tab: k !== 'plus', icon: ICONS[k] || '', color: s.tab === k || (k === 'today' && s.tab === 'me') ? 'var(--acc)' : 'var(--mute)', go: () => this.go(k) })),
+      tabs: [['today', 'Today'], ['cal', 'Calendar'], ['plus', ''], ['kids', 'Kids'], ['allie', an]].map(([k, label]) => ({ label, plus: k === 'plus', tab: k !== 'plus', icon: ICONS[k] || '', color: s.tab === k || (k === 'today' && (s.tab === 'me' || s.tab === 'home')) ? 'var(--acc)' : 'var(--mute)', go: () => this.go(k) })),
       // happened
       multiKid: multi, hKidPills: pills(s.hKid, id => this.setState({ hKid: id })),
       presetBtns: (() => { const n = kidName(s.hKid); return [['early', n + ' fell asleep early'], ['late', n + ' fell asleep late'], ['nonap', n + ' skipped the nap'], ['noeat', n + ' didn’t eat well'], ['skipmeal', n + ' skipped a meal'], ['sick', n + ' is sick or home'], ['meeting', 'A meeting moved or was added'], ['momskip', 'I skipped my lunch'], ['tired', 'I’m exhausted']].map(([k, label]) => ({ label, go: () => this.openReplan(k) })); })(),
@@ -1557,6 +1889,7 @@ class Component extends DCLogic {
       logKidPills: pills(s.logKid, id => this.setState({ logKid: id })),
       logTypes: ['sleep', 'feed', 'diaper', 'activity', 'night'].map(t => ({ label: t === 'night' ? wakeName : TYPES[t], bg: s.logType === t ? 'var(--d-DCE8F2)' : 'var(--card)', border: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--line)', fg: s.logType === t ? 'var(--l-2F5A7A)' : 'var(--ink)', pick: () => t === 'night' ? this.go('wake') : this.setState({ logType: t }) })),
       logTimeLabel: s.logType === 'sleep' ? 'Fell asleep at' : s.logType === 'feed' ? 'Ate at' : s.logType === 'activity' ? 'Started at' : 'Changed at',
+      logIsDiaper: s.logType === 'diaper', diaperChips: chips(s.logDiaper || 'wet', [['wet', 'Wet (pee)'], ['dirty', 'Dirty (poop)'], ['both', 'Both']], v => this.setState({ logDiaper: v })),
       logIsFeed: s.logType === 'feed', logIsAct: s.logType === 'activity', feedBottle: s.logSub === 'bottle', feedSolids: s.logSub === 'solids',
       logWho: kidName(s.logKid), logPron: s.logKid === 'b' ? 'she' : s.logKid === 'all' ? 'they' : 'he', logFood: s.logFood, onLogFood: e => this.setState({ logFood: e.target.value }),
       feedSubs: [['bottle', 'Bottle'], ['solids', 'Solids'], ['nursing', 'Nursing']].map(([k, label]) => ({ label, seg: s.logSub === k ? 'var(--card)' : 'transparent', sh: s.logSub === k ? '0 1px 4px rgba(42,33,28,.14)' : 'none', pick: () => this.setState({ logSub: k }) })),
@@ -1570,7 +1903,8 @@ class Component extends DCLogic {
       saveLog: () => {
         const ids = s.logKid === 'all' ? kids.map(k => k.id) : [s.logKid];
         const detail = s.logType === 'feed' ? (s.logSub === 'bottle' ? 'Bottle, ' + s.logOz + ' oz' : s.logSub === 'solids' ? 'Solids' + (s.logFood ? ': ' + s.logFood.toLowerCase() : '') : 'Nursing')
-          : s.logType === 'activity' ? s.logAct + ', ' + (s.logDur >= 60 ? s.logDur / 60 + ' h' : s.logDur + ' min') : '';
+          : s.logType === 'activity' ? s.logAct + ', ' + (s.logDur >= 60 ? s.logDur / 60 + ' h' : s.logDur + ' min')
+          : s.logType === 'diaper' ? { wet: 'Wet', dirty: 'Dirty', both: 'Wet + dirty' }[s.logDiaper || 'wet'] : '';
         this.setState(st => ({ logs: [...st.logs, ...ids.map(kid => ({ kid, type: st.logType, t: st.logTime, detail, act: st.logType === 'activity' ? st.logAct : null }))], sheet: null, logHeard: null, logFood: '' }));
         this.toastMsg('Logged: ' + kidName(s.logKid) + ' · ' + (detail || TYPES[s.logType]) + ' · ' + fmt(s.logTime), false);
       },
@@ -1612,9 +1946,10 @@ class Component extends DCLogic {
         play: (PLAY[k.id] || PLAY.a).map(([label, n]) => ({ label, n: n + s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === label).length }))
           .concat(ACTS.map(a => ACT_KEY[a] || a).filter(a => !(PLAY[k.id] || PLAY.a).some(([x]) => x === a)).map(a => ({ label: a, n: s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === a).length })).filter(x => x.n > 0)),
         logs: s.logs.filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : '') })),
-        hasLearn: k.id === 'a', hasNights: k.id === 'a' && !s.dayOne, name: k.name, nightsEmpty: k.id === 'a' && s.dayOne, night: () => this.go('night'), skill: () => this.toastMsg('New skill noted. I’ll watch how sleep responds.'),
-        nights: NIGHTS.map((w, i) => ({ h: w ? w * 16 : 4, c: i > SKILL_AT ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === SKILL_AT })), learn: k.name + '’s wake window is about 2h 15m. I plan his naps around it.',
-        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.go('allie'),
+        hasLearn: k.id === 'a', hasNights: k.id === 'a' && !s.dayOne, name: k.name, nightsEmpty: k.id === 'a' && s.dayOne, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
+        skills: s.skills.filter(x => x.kid === k.id), learnSrc: s.wwSet ? 'Set by you. My estimate was 2h 15m' : 'Based on your last 10 days',
+        nights: NIGHTS.map((w, i) => ({ h: w ? w * 16 : 4, c: i > SKILL_AT ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === SKILL_AT })), learn: k.name + '’s wake window is about ' + fmtDur(s.wakeWin) + '. I plan his naps around it.',
+        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.setState({ sheet: 'wakewin', wwDraft: s.wakeWin }),
         log: () => this.setState({ sheet: 'log', tab: 'today', logKid: k.id, logTime: NOW, logHeard: null }),
       })),
       // chat
