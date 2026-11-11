@@ -247,10 +247,10 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="flex:1;min-width:0;font-size:16px;font-weight:600;text-decoration:{{ p.deco }};opacity:{{ p.op }}">{{ p.title }}</div>
         <div style="font-size:13px;color:var(--mute);white-space:nowrap">{{ p.time }}</div>
       </button></sc-for>
-      <button onClick="{{ toKids }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0">
+      <button onClick="{{ toNights }}" aria-label="Open the night log" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0">
         <div style="width:32px;height:32px;border-radius:10px;background:var(--d-E6E5F3);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-3E3F78)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></div>
         <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Last night: 3 wakes</div><div style="font-size:13px;color:var(--mute)">Longest stretch 3h 10m · {{ kid1 }}’s usual is 1 wake</div></div>
-        <span style="font-size:11px;font-weight:700;color:var(--l-3E3F78);background:var(--d-E6E5F3);padding:4px 8px;border-radius:8px;white-space:nowrap">Rough patch · night 4</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none"><div style="display:flex;align-items:flex-end;gap:3px;height:22px"><sc-for list="{{ nightMini }}" as="n"><div style="width:6px;height:{{ n.h }}px;border-radius:2px;background:{{ n.c }}"></div></sc-for></div><span style="font-size:11px;font-weight:700;color:var(--l-3E3F78)">Rough patch ›</span></div>
       </button>
       <sc-if value="{{ sickOn }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="37 Sick day" style="display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--hair)">
@@ -265,6 +265,12 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: {{ dinnerName }}</div><div style="font-size:13px;color:var(--mute)">Start prep at 5:10 PM · this week’s meals ›</div></div>
         <div style="text-align:right;flex:none"><div style="font-family:'Young Serif',serif;font-size:17px;color:var(--l-7A5714)">{{ mealIn }}</div><div style="font-size:11px;color:var(--mute)">to prep</div></div>
       </button>
+      <sc-if value="{{ showHomeStrip }}"><div data-screen-label="06d Home strip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 8px">
+        <sc-for list="{{ homeTiles }}" as="h" hint-placeholder-count="3"><button onClick="{{ h.go }}" style="min-height:64px;border:none;border-radius:14px;background:var(--d-F4E6C8);padding:8px 10px;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:4px;color:var(--ink)">
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%"><svg style="stroke:var(--l-7A5714)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ h.icon }}"></path></svg><span style="font-family:'Young Serif',serif;font-size:17px;line-height:1;color:var(--l-7A5714)">{{ h.n }}</span></div>
+          <div style="font-size:12px;font-weight:600;line-height:1.2">{{ h.label }}</div>
+        </button></sc-for>
+      </div></sc-if>
     </div>
 
     <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--soft);border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.4"><b>You’re offline.</b> Logs and reminders still work. Replans use a simpler on-phone version until you’re back.</div></sc-if>
@@ -403,19 +409,8 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           <div style="width:48px;height:48px;border-radius:24px;background:{{ k.color }};color:var(--on);font-family:'Young Serif',serif;font-size:22px;display:flex;align-items:center;justify-content:center">{{ k.initial }}</div>
           <div style="flex:1"><div style="font-family:'Young Serif',serif;font-size:22px">{{ k.name }}</div><div style="font-size:13px;color:var(--mute)">{{ k.age }} · born {{ k.born }}</div></div>
         </div>
-        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px">Today</div>
-        <sc-for list="{{ k.logs }}" as="l"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid var(--hair)"><span>{{ l.label }}</span><span style="color:var(--mute)">{{ l.time }}</span></div></sc-for>
-        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:16px 0 8px">Play this week</div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ k.play }}" as="p"><span style="font-size:13px;font-weight:600;background:var(--soft);padding:4px 8px;border-radius:12px">{{ p.label }} <b style="color:var(--acc)">{{ p.n }}</b></span></sc-for></div>
-        <sc-if value="{{ k.hasLearn }}">
-          <div style="margin-top:12px;background:var(--d-DCE8F2);border-radius:16px;padding:12px 16px">
-            <div style="font-size:15px;font-weight:600;line-height:1.35">{{ k.learn }}</div>
-            <div style="font-size:13px;color:var(--l-2F5A7A);margin:4px 0 8px">{{ k.learnSrc }}</div>
-            <div style="display:flex;gap:8px"><button onClick="{{ k.confirm }}" style="height:40px;padding:0 16px;border-radius:20px;border:none;background:#2F5A7A;color:var(--on);font-weight:600;cursor:pointer">That’s right</button><button onClick="{{ k.correct }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #2F5A7A;background:transparent;color:var(--l-2F5A7A);font-weight:600;cursor:pointer">Correct it</button></div>
-          </div>
-        </sc-if>
         <sc-if value="{{ k.hasNights }}">
-          <div data-screen-label="14b Nights" style="margin-top:12px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
+          <div data-screen-label="14b Nights" style="margin-bottom:16px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
             <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-3E3F78)">Nights · last 14</span><span style="font-size:12px;color:#5B5C8F">wakes per night</span></div>
             <div style="position:relative;display:flex;align-items:flex-end;gap:4px;height:64px;margin:12px 0 4px">
               <div style="position:absolute;left:0;right:0;bottom:16px;border-top:1.5px dashed var(--d-9C9CC8)"></div>
@@ -434,12 +429,23 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           </div>
         </sc-if>
         <sc-if value="{{ k.nightsEmpty }}">
-          <div data-screen-label="30 Nights: empty" style="margin-top:12px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
+          <div data-screen-label="30 Nights: empty" style="margin-bottom:16px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
             <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-3E3F78)">Nights · last 14</div>
             <div style="display:flex;align-items:flex-end;gap:4px;height:48px;margin:12px 0 8px"><sc-for list="{{ ghostBars }}" as="g"><div style="flex:1;height:{{ g.h }}px;border-radius:4px;border:1.5px dashed var(--d-9C9CC8)"></div></sc-for></div>
             <div style="font-size:15px;line-height:1.4">No nights logged yet. After about a week I’ll show {{ k.name }}’s usual and tell you when a night is off pattern.</div>
             <div style="font-size:12px;color:#5B5C8F;margin-top:8px;line-height:1.4">One tap when he wakes is enough. The screen stays red and dim.</div>
             <button onClick="{{ k.night }}" style="margin-top:12px;height:44px;padding:0 16px;border-radius:22px;border:none;background:#3E3F78;color:#FFFFFF;font-weight:600;font-size:15px;cursor:pointer">Log tonight</button>
+          </div>
+        </sc-if>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:4px">Today</div>
+        <sc-for list="{{ k.logs }}" as="l"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid var(--hair)"><span>{{ l.label }}</span><span style="color:var(--mute)">{{ l.time }}</span></div></sc-for>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:16px 0 8px">Play this week</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ k.play }}" as="p"><span style="font-size:13px;font-weight:600;background:var(--soft);padding:4px 8px;border-radius:12px">{{ p.label }} <b style="color:var(--acc)">{{ p.n }}</b></span></sc-for></div>
+        <sc-if value="{{ k.hasLearn }}">
+          <div style="margin-top:12px;background:var(--d-DCE8F2);border-radius:16px;padding:12px 16px">
+            <div style="font-size:15px;font-weight:600;line-height:1.35">{{ k.learn }}</div>
+            <div style="font-size:13px;color:var(--l-2F5A7A);margin:4px 0 8px">{{ k.learnSrc }}</div>
+            <div style="display:flex;gap:8px"><button onClick="{{ k.confirm }}" style="height:40px;padding:0 16px;border-radius:20px;border:none;background:#2F5A7A;color:var(--on);font-weight:600;cursor:pointer">That’s right</button><button onClick="{{ k.correct }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #2F5A7A;background:transparent;color:var(--l-2F5A7A);font-weight:600;cursor:pointer">Correct it</button></div>
           </div>
         </sc-if>
         <button onClick="{{ k.log }}" style="margin-top:12px;width:100%;height:48px;border-radius:24px;border:1.5px solid var(--line2);background:transparent;font-size:15px;font-weight:600;cursor:pointer">Log for {{ k.name }}</button>
@@ -1064,7 +1070,7 @@ function weekDays(fam, today, extra) {
   return DAYN.map((name, i) => {
     if (i === TODAY_I) return { name, date: WEEK0 + i, blocks: today };
     const wk = i === 0 || i === 6;
-    let bl = buildBlocks(fam).filter(b => !['partner', 'breathe', 'close', 'prep'].includes(b.id) && !(wk && (b.dim === 'work' || b.id === 'pickup' || b.id === 'walk')));
+    let bl = buildBlocks(fam).filter(b => !['partner', 'breathe', 'close', 'prep', 'chore'].includes(b.id) && !(wk && (b.dim === 'work' || b.id === 'pickup' || b.id === 'walk')));
     if (wk) bl.push(B('park', 570, 90, 'Park, all four of us', 'partner', 'flex', 'all', ''));
     if (i === 3) bl.push(B('gym', 375, 30, 'Workout', 'mom', 'flex', null, ''));
     if (i === 4) bl.push(B('tea', 1215, 25, 'Tea with Diego', 'partner', 'optional', null, ''));
@@ -1100,6 +1106,7 @@ function buildBlocks(fam) {
     B('dinner', 1050, 40, 'Family dinner', 'home', 'flex', fam === 'one' ? 'a' : 'all', ''),
     B('bath', 1125, 30, tw ? 'Twins’ bedtime routine' : 'Mateo’s bedtime routine', 'kids', 'routine', tw ? 'all' : 'a', 'Bath, lotion, song. The same 3 steps every night help him sleep longer.'),
     B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good-energy day and a free gap. Thank him for the 6 AM bottle.'),
+    B('chore', 1205, 20, 'Vacuum', 'home', 'flex', null, 'From your cleaning plan. Skip it if tonight is rough.'),
     B('breathe', 1230, 5, '5-minute breathing', 'mom', 'optional', null, 'Slow breathing, about 6 breaths a minute, helps you wind down.'),
     B('close', 1275, 5, 'Close your day', 'self', 'flex', null, '2 minutes. Tomorrow’s plan builds itself from tonight.'),
   );
@@ -1468,6 +1475,8 @@ class Component extends DCLogic {
       if (sb.id === 'bath') acts.push(S('Open tonight’s night log', () => this.go('night')));
       if (sb.id === 'breathe') acts.push(P('Start breathing', () => this.go('breathe')));
       if (sb.id === 'close') acts.push(P('Close my day', () => this.go('close')));
+      if (sb.id === 'cook' || sb.id === 'dinner') acts.push(S('This week’s dinners', () => this.setState({ sheet: null, tab: 'home', homeSeg: 'meals' })));
+      if (sb.id === 'chore') acts.push(S('Open cleaning', () => this.setState({ sheet: null, tab: 'home', homeSeg: 'clean' })));
       if (sb.id === 'nap2') acts.push(P('Log: he woke up', () => { this.setState({ sheet: null }); this.toastMsg('Logged: ' + kidName('a') + ' woke at ' + fmt(NOW), true); }));
       acts.push((acts.length ? S : P)(isDone ? 'Mark not done' : 'Mark done', () => this.toggleDone(sb.id)));
       if (!fixed && !isDone) {
@@ -1723,6 +1732,12 @@ class Component extends DCLogic {
           next: () => this.setState(st => ({ chores: st.chores.map(x => x.id === c.id ? { ...x, who: { me: 'diego', diego: 'cleaner', cleaner: 'me' }[x.who] } : x) })) }));
         const dp = s.deep;
         return {
+          showHomeStrip: V !== 'carmen',
+          homeTiles: [
+            ['M4 6h16M4 12h16M4 18h10', upcoming.filter(d => d.sub.startsWith('You have')).length + '/' + upcoming.length, 'Dinners ready', 'meals'],
+            ['M3 4h2l2.4 11h11L21 7H6.5M9 20a1 1 0 1 0 0-2a1 1 0 1 0 0 2M18 20a1 1 0 1 0 0-2a1 1 0 1 0 0 2', shopList.length, 'To buy', 'pantry'],
+            ['M5 21l3-9M14 4l-6 8 5 3 6-8zM12 21h8', occ.filter(o => o.d === TODAY_I && !o.done).length, 'Chore today', 'clean'],
+          ].map(([icon, n, label, seg]) => ({ icon, n, label, go: () => this.setState({ screen: 'app', tab: 'home', homeSeg: seg, sheet: null, mealPick: null }) })),
           tHome: s.tab === 'home', hMeals: s.homeSeg === 'meals', hPantry: s.homeSeg === 'pantry', hClean: s.homeSeg === 'clean',
           homeSegs: seg(s.homeSeg, [['meals', 'Meals'], ['pantry', 'Pantry & list'], ['clean', 'Cleaning']], k => this.setState({ homeSeg: k, mealPick: null })),
           dinnerName: (s.mealPlan[TODAY_I] || 'open').toLowerCase(), mealDays, canMake,
@@ -1775,7 +1790,8 @@ class Component extends DCLogic {
             this.toastMsg('Noted: ' + skillWho + ' · ' + label + ' · ' + date + '. I’ll watch how sleep responds.');
           },
         };
-      })(), toKids: () => this.go('kids'), happenedLabel: V === 'carmen' ? 'Tell Rossi' : 'Something happened',
+      })(), toKids: () => this.go('kids'), toNights: () => this.go('night'),
+      nightMini: NIGHTS.slice(-7).map((w, i) => ({ h: Math.max(3, w * 7), c: i >= 7 - (NIGHTS.length - 1 - SKILL_AT) ? '#5B5CA8' : 'var(--d-B9B9DA)' })), happenedLabel: V === 'carmen' ? 'Tell Rossi' : 'Something happened',
       goodMom, selfItems, usOpts, winChat: () => this.setState({ tab: 'allie', chatTopic: 'work', chatInput: 'My win today: ' }),
       moments: s.moments, addMoment: () => { this.setState(st => ({ moments: [{ t: fmt(NOW), text: kidName('a') + ' grabbed my finger and wouldn’t let go.', tone: MOMENT_TONES[2] }, ...st.moments] })); this.toastMsg('Saved to today’s moments. Only you see it unless you share.'); },
       tCal: s.tab === 'cal', calWeek: s.calView !== 'month', calMonth: s.calView === 'month', calTitle: s.calView === '3day' ? 'Nov 16–18' : s.calView === 'week' ? 'This week' : 'November',
