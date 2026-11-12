@@ -39,6 +39,35 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <p style="font-size:17px;line-height:1.45;color:var(--mute);margin:0 0 36px;text-wrap:pretty">When a nap moves or a meeting pops up, I rearrange the rest in one tap. Nothing gets lost.</p>
   <button onClick="{{ toConsent }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Let’s start</button>
   <div style="text-align:center;font-size:15px;color:var(--mute);margin-top:16px">No account needed to try your first day.</div>
+  <button onClick="{{ toSignin }}" style="height:44px;margin-top:4px;border:none;background:transparent;font-size:15px;font-weight:600;color:var(--acc);cursor:pointer">I already have an account</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sSignin }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="41 Sign in" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:60px 24px 40px;background:var(--bg)">
+  <button onClick="{{ signinBack }}" style="align-self:flex-start;height:44px;margin:0 0 8px -8px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:17px;font-weight:600;display:flex;align-items:center;gap:2px;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Back</button>
+  <sc-if value="{{ signinForm }}">
+    <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1">{{ signinTitle }}</div>
+    <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:8px 0 24px">{{ signinSub }}</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button onClick="{{ signinDone }}" style="height:54px;border-radius:999px;border:none;background:#000;color:#FFF;font-size:17px;font-weight:600;cursor:pointer">Continue with Apple</button>
+      <button onClick="{{ signinGoogle }}" style="height:54px;border-radius:999px;border:1.5px solid var(--line2);background:var(--card);font-size:17px;font-weight:600;cursor:pointer">Continue with Google</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin:24px 0 16px;font-size:13px;font-weight:600;color:var(--mute)"><div style="flex:1;height:1px;background:var(--line)"></div>or with email<div style="flex:1;height:1px;background:var(--line)"></div></div>
+    <input type="email" value="{{ email }}" onChange="{{ onEmail }}" autocomplete="email" placeholder="you@email.com" aria-label="Email" style="width:100%;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink)">
+    <button onClick="{{ sendLink }}" style="margin-top:8px;height:54px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ linkOp }}">Email me a sign-in link</button>
+    <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">No password to remember. The link works once, for 15 minutes.</div>
+  </sc-if>
+  <sc-if value="{{ signinSent }}">
+    <div style="width:56px;height:56px;border-radius:16px;background:var(--d-DFE9DC);display:flex;align-items:center;justify-content:center;margin:24px 0 16px"><svg style="stroke:var(--l-3D6142)" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 7l9 6 9-6"></path></svg></div>
+    <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1">Check your email</div>
+    <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:8px 0 24px">I sent a link to <b style="color:var(--ink)">{{ email }}</b>. Open it on this phone to {{ signinVerb }}.</div>
+    <button onClick="{{ signinLink }}" style="height:54px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Open the link (demo)</button>
+    <button onClick="{{ signinRetry }}" style="height:50px;margin-top:4px;border:none;background:transparent;font-size:17px;font-weight:600;color:var(--mute);cursor:pointer">Use a different email</button>
+    <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">Nothing there? Check spam. You can ask for a new link in 30 seconds.</div>
+  </sc-if>
+  <div style="flex:1"></div>
+  <div style="font-size:13px;color:var(--mute);text-align:center;line-height:1.4">I only use your email to sign you in and to confirm big changes, like deleting your account. Never for ads.</div>
 </div>
 </sc-if>
 
@@ -98,7 +127,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 </sc-if>
 
 <sc-if value="{{ sThinking }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 36px;background:var(--bg)">
+<div data-screen-label="03b Building your day" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 36px;background:var(--bg)">
   <div style="width:64px;height:64px;border-radius:50%;background:var(--d-EBDDCB);display:flex;align-items:center;justify-content:center;margin-bottom:28px"><div style="width:22px;height:22px;border-radius:50%;background:var(--acc)"></div></div>
   <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.15;margin-bottom:24px">{{ thinkTitle }}</div>
   <div style="display:flex;flex-direction:column;gap:16px">
@@ -164,6 +193,15 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <div style="margin-top:16px;background:var(--ink);color:var(--on);border-radius:16px;padding:12px 8px 12px 16px;display:flex;gap:8px;align-items:center">
         <div style="flex:1;font-size:13px;line-height:1.4"><b>{{ pv.title }}</b><br><span style="opacity:.8">{{ pv.sub }}</span></div>
         <button onClick="{{ exitPreview }}" style="height:40px;padding:0 16px;border-radius:999px;border:none;background:var(--on);color:var(--ink);font-weight:600;font-size:15px;cursor:pointer;flex:none">Exit</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ lockedOn }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="43 Free day ended" style="margin-top:16px;background:var(--ink);color:var(--on);border-radius:16px;padding:16px">
+        <div style="font-size:13px;font-weight:600;opacity:.8">Your free day ended</div>
+        <div style="font-family:'Young Serif',serif;font-size:20px;line-height:1.3;margin:4px 0 8px">Yesterday’s plan and your logs are still here.</div>
+        <div style="font-size:15px;line-height:1.4;opacity:.85">You can look, log, export or delete anything. New plans and replans need a subscription.</div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button onClick="{{ toPaywall }}" style="height:44px;padding:0 16px;border-radius:999px;border:none;background:var(--on);color:var(--ink);font-size:15px;font-weight:600;cursor:pointer">See plans</button><button onClick="{{ toMe }}" style="height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--on);background:transparent;color:var(--on);font-size:15px;font-weight:600;cursor:pointer">Export or delete</button></div>
       </div>
     </sc-if>
 
@@ -281,6 +319,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 
     <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--soft);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4"><b>You’re offline.</b> Logs and reminders still work. Replans use a simpler on-phone version until you’re back.</div></sc-if>
     <sc-if value="{{ calDenied }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--d-E4E1F0);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4;display:flex;gap:8px;align-items:center"><div style="flex:1"><b>I can’t see your meetings.</b> Turn on calendar access so I plan around them.</div><button onClick="{{ fixCal }}" style="height:40px;padding:0 16px;border-radius:999px;border:none;background:#4B4580;color:#FFFFFF;font-weight:600;cursor:pointer">Turn on</button></div></sc-if>
+    <sc-if value="{{ notifDenied }}" hint-placeholder-val="{{ false }}"><div data-screen-label="48 Notifications off" style="margin-top:16px;background:var(--d-F4E6C8);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4"><b>Notifications are off.</b> I can’t give you a heads-up before naps or meetings. Your plan still updates here.<div style="font-size:13px;color:var(--l-5E430F);margin-top:4px">To turn them back on: Settings › BestMom › Notifications › Allow.</div><button onClick="{{ fixNotif }}" style="margin-top:8px;height:40px;padding:0 16px;border-radius:999px;border:none;background:#7A5714;color:#FFFFFF;font-weight:600;cursor:pointer">Open Settings</button></div></sc-if>
 
     <div style="margin-top:16px;background:{{ hero.bg }};border-radius:24px;padding:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:{{ hero.fg }}"><span>Now</span><span>{{ hero.range }}</span></div>
@@ -293,6 +332,15 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="font-size:13px;color:var(--ink2);white-space:nowrap">{{ hero.nextIn }}</div>
       </div>
     </div>
+
+    <sc-if value="{{ jarvisOn }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="53 I learned something" style="margin-top:12px;background:var(--d-F4E6C8);border-radius:16px;padding:16px">
+      <div style="font-size:13px;font-weight:600;color:var(--l-7A5714)">New · I know {{ kid1 }}’s rhythm now</div>
+      <div style="font-size:15px;line-height:1.4;margin-top:4px">After 7 days of your logs, I plan {{ kid1 }}’s naps from when he really sleeps, not the clock. Today’s afternoon nap moved 15 minutes later because of it.</div>
+      <div style="font-size:13px;color:var(--l-5E430F);margin-top:4px">From your logs, Nov 10 to 16</div>
+      <div style="display:flex;gap:8px;margin-top:12px"><button onClick="{{ openMemory }}" style="height:40px;padding:0 16px;border-radius:999px;border:none;background:#7A5714;color:#FFFFFF;font-size:15px;font-weight:600;cursor:pointer">See what I know</button><button onClick="{{ jarvisOk }}" style="height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #7A5714;background:transparent;color:var(--l-7A5714);font-size:15px;font-weight:600;cursor:pointer">Got it</button></div>
+    </div>
+    </sc-if>
 
     <sc-if value="{{ needCheckin }}" hint-placeholder-val="{{ true }}">
     <div style="margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 8px">
@@ -414,6 +462,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
           <div style="width:48px;height:48px;border-radius:50%;background:{{ k.color }};color:var(--on);font-family:'Young Serif',serif;font-size:22px;display:flex;align-items:center;justify-content:center">{{ k.initial }}</div>
           <div style="flex:1"><div style="font-family:'Young Serif',serif;font-size:22px">{{ k.name }}</div><div style="font-size:13px;color:var(--mute)">{{ k.age }} · born {{ k.born }}</div></div>
+          <sc-if value="{{ k.canEdit }}"><button onClick="{{ k.edit }}" aria-label="Edit {{ k.name }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">Edit</button></sc-if>
         </div>
         <sc-if value="{{ k.hasNights }}">
           <div data-screen-label="14b Nights" style="margin-bottom:16px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
@@ -442,8 +491,8 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
             <button onClick="{{ k.night }}" style="margin-top:12px;height:44px;padding:0 16px;border-radius:999px;border:none;background:#3E3F78;color:#FFFFFF;font-weight:600;font-size:15px;cursor:pointer">Log tonight</button>
           </div>
         </sc-if>
-        <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:4px">Today</div>
-        <sc-for list="{{ k.logs }}" as="l"><div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;border-bottom:1px solid var(--hair)"><span>{{ l.label }}</span><span style="color:var(--mute)">{{ l.time }}</span></div></sc-for>
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:4px">Today · tap to fix</div>
+        <sc-for list="{{ k.logs }}" as="l"><button onClick="{{ l.open }}" aria-label="Edit {{ l.label }} at {{ l.time }}" style="width:100%;display:flex;justify-content:space-between;gap:8px;font-size:15px;padding:8px 0;min-height:44px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;color:var(--ink)"><span>{{ l.label }}</span><span style="color:var(--mute);white-space:nowrap">{{ l.time }}</span></button></sc-for>
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 0 8px">Play this week</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ k.play }}" as="p"><span style="font-size:13px;font-weight:600;background:var(--soft);padding:4px 8px;border-radius:12px">{{ p.label }} <b style="color:var(--acc)">{{ p.n }}</b></span></sc-for></div>
         <sc-if value="{{ k.hasLearn }}">
@@ -466,8 +515,10 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div style="margin-top:16px;background:var(--d-F4E6C8);border-radius:16px;padding:16px 16px">
       <div style="font-size:13px;font-weight:600;color:var(--l-7A5714);margin-bottom:4px">I remember</div>
       <div style="font-size:15px;line-height:1.4">You said Thursdays are chaotic, so I keep Thursday afternoons light.</div>
+      <button onClick="{{ openMemory }}" style="margin-top:8px;height:36px;padding:0;border:none;background:transparent;color:var(--l-7A5714);font-size:15px;font-weight:600;cursor:pointer">See everything I know ›</button>
     </div>
-    <button style="margin-top:16px;width:100%;min-height:52px;border:1.5px dashed var(--line2);border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer">+ Add a child</button>
+    <sc-if value="{{ canAddKid }}"><button onClick="{{ addKidOpen }}" style="margin-top:16px;width:100%;min-height:52px;border:1.5px dashed var(--line2);border-radius:16px;background:transparent;font-size:15px;font-weight:600;color:var(--mute);cursor:pointer">+ Add a child</button></sc-if>
+    <sc-for list="{{ archivedKids }}" as="a"><div style="display:flex;align-items:center;gap:12px;margin-top:8px;padding:8px 8px 8px 16px;border-radius:16px;background:var(--soft);min-height:52px"><div style="flex:1;font-size:15px"><b>{{ a.name }}</b> · archived</div><button onClick="{{ a.restore }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)">Restore</button></div></sc-for>
     <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:12px">I only keep nicknames and birth month.</div>
   </div>
   </sc-if>
@@ -597,6 +648,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <div style="font-size:15px;line-height:1.45">{{ journal }}</div>
       <div style="font-size:12px;color:var(--mute);margin-top:8px">Saved from what you told me. Edit or delete anytime.</div>
     </div>
+    <button onClick="{{ openMemory }}" style="width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;min-height:64px;margin:-12px 0 24px;text-align:left;cursor:pointer;color:var(--ink)"><div style="flex:1"><div style="font-size:17px;font-weight:600">What I know about you</div><div style="font-size:13px;color:var(--mute)">{{ memCount }} things I plan with. Fix or forget any of them.</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;flex:none"><path d="M9 5l7 7-7 7"></path></svg></button>
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Your reminders</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:24px">
       <sc-for list="{{ reminderRows }}" as="r"><div style="display:flex;align-items:center;gap:8px;padding:8px 4px 8px 16px;border-bottom:1px solid var(--hair);min-height:60px"><div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:600">{{ r.text }}</div><div style="font-size:13px;color:var(--mute)">{{ r.sub }}</div></div><button onClick="{{ r.remove }}" aria-label="Delete reminder" style="width:44px;height:44px;border:none;background:transparent;color:var(--mute);font-size:22px;cursor:pointer">×</button></div></sc-for>
@@ -611,7 +663,9 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           <div style="width:51px;height:31px;border-radius:999px;background:{{ r.track }};padding:2px;display:flex;justify-content:{{ r.justify }};flex:none"><div style="width:27px;height:27px;border-radius:50%;background:var(--d-FFFFFF);box-shadow:var(--sh4)"></div></div>
         </button>
       </sc-for>
-      <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--hair);min-height:60px"><div style="flex:1"><div style="font-size:17px;font-weight:600">Quiet hours</div><div style="font-size:13px;color:var(--mute)">No nudges in this window</div></div><div style="font-size:15px;color:var(--mute)">9:30 PM – 6:30 AM</div></div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--hair)"><div style="font-size:17px;font-weight:600">Quiet hours</div><div style="font-size:13px;color:var(--mute)">No nudges or tips from {{ quietText }}.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><input type="time" value="{{ quietFrom }}" onChange="{{ onQuietFrom }}" aria-label="Quiet hours start" style="flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;font-size:17px;outline:none"><span style="color:var(--mute)">to</span><input type="time" value="{{ quietTo }}" onChange="{{ onQuietTo }}" aria-label="Quiet hours end" style="flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;font-size:17px;outline:none"></div>
+      </div>
       <div style="display:flex;align-items:center;padding:8px 12px 8px 16px;min-height:60px;gap:8px"><div style="flex:1"><div style="font-size:17px;font-weight:600">Daily nudge limit</div><div style="font-size:13px;color:var(--mute)">Baby routines and meetings don’t count</div></div><button onClick="{{ budgetDown }}" style="width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:20px;cursor:pointer">−</button><div style="width:30px;text-align:center;font-size:17px;font-weight:600">{{ budget }}</div><button onClick="{{ budgetUp }}" style="width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:20px;cursor:pointer">+</button></div>
     </div>
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Family</div>
@@ -628,7 +682,14 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div style="font-size:13px;color:var(--mute);margin:0 8px 24px;line-height:1.4">Each person uses BestMom on their own phone and sees only what their role allows. Your check-ins, notes and Self-Love always stay private.</div>
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Calendars</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:24px">
-      <div style="display:flex;align-items:center;padding:12px 16px;min-height:60px"><div style="flex:1"><div style="font-size:17px;font-weight:600">Work calendar</div><div style="font-size:13px;color:var(--mute)">Outlook · read only. I write only to “BestMom”.</div></div></div>
+      <button onClick="{{ openCals }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:60px;border:none;background:transparent;text-align:left;cursor:pointer;color:var(--ink)"><div style="flex:1"><div style="font-size:17px;font-weight:600">Which calendars are work</div><div style="font-size:13px;color:var(--mute)">{{ calSummary }}</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;flex:none"><path d="M9 5l7 7-7 7"></path></svg></button>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Account</div>
+    <div data-screen-label="15c Account" style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-bottom:1px solid var(--hair);min-height:60px"><div style="flex:1"><div style="font-size:17px;font-weight:600">{{ acctTitle }}</div><div style="font-size:13px;color:var(--mute)">{{ acctSub }}</div></div><sc-if value="{{ notSaved }}"><button onClick="{{ openSave }}" style="height:36px;padding:0 12px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:13px;font-weight:600;cursor:pointer;flex:none">Save</button></sc-if></div>
+      <button onClick="{{ subRowGo }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;min-height:60px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;color:var(--ink)"><div style="flex:1"><div style="font-size:17px;font-weight:600">Subscription</div><div style="font-size:13px;color:var(--mute)">{{ subRowSub }}</div></div><span style="font-size:15px;font-weight:600;color:var(--acc)">{{ subRowCta }}</span></button>
+      <button onClick="{{ restore }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;font-size:17px;font-weight:600;cursor:pointer">Restore purchases</button>
+      <sc-if value="{{ isSaved }}"><button onClick="{{ signOut }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;background:transparent;font-size:17px;font-weight:600;cursor:pointer">Sign out</button></sc-if>
     </div>
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Your data</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden">
@@ -732,7 +793,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       </sc-if>
 
       <sc-if value="{{ shBlock }}">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:13px;font-weight:600;color:{{ sel.dimFg }};background:{{ sel.dimBg }};padding:4px 8px;border-radius:4px">{{ sel.dimLabel }}</span><span style="font-size:13px;color:var(--mute)">{{ sel.kind }}</span></div>
+        <div data-screen-label="06b Block detail" style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:13px;font-weight:600;color:{{ sel.dimFg }};background:{{ sel.dimBg }};padding:4px 8px;border-radius:4px">{{ sel.dimLabel }}</span><span style="font-size:13px;color:var(--mute)">{{ sel.kind }}</span></div>
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.12">{{ sel.title }}</div>
         <div style="font-size:15px;color:var(--mute);margin:4px 0 8px">{{ sel.range }}</div>
         <sc-if value="{{ sel.hasWhy }}"><div style="font-size:15px;line-height:1.45;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:16px"><b>Why: </b>{{ sel.why }}</div></sc-if>
@@ -825,12 +886,101 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       </sc-if>
 
       <sc-if value="{{ shSave }}">
-        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Save your day</div>
+        <div data-screen-label="42 Save your day" role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Save your day</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">Today is on me, with reminders, replans and a close of day. Save it so nothing is lost.</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <button onClick="{{ doSave }}" style="height:54px;border-radius:999px;border:none;background:#000;color:#FFF;font-size:17px;font-weight:600;cursor:pointer">Continue with Apple</button>
-          <button onClick="{{ doSave }}" style="height:54px;border-radius:999px;border:1.5px solid var(--line2);background:var(--d-FFFFFF);font-size:17px;font-weight:600;cursor:pointer">Continue with Google</button>
-          <button onClick="{{ doSave }}" style="height:50px;border:none;background:transparent;font-size:17px;font-weight:600;color:var(--mute);cursor:pointer">Use email instead</button>
+          <button onClick="{{ doSaveGoogle }}" style="height:54px;border-radius:999px;border:1.5px solid var(--line2);background:var(--d-FFFFFF);font-size:17px;font-weight:600;cursor:pointer">Continue with Google</button>
+          <button onClick="{{ saveEmail }}" style="height:50px;border:none;background:transparent;font-size:17px;font-weight:600;color:var(--mute);cursor:pointer">Use email instead</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shKid }}">
+        <div data-screen-label="40 Child profile">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ kidSheetTitle }}</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">I only keep a nickname and the birth month. No full name, no exact birthday, no photos.</div>
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:8px">What you call them</div>
+        <input value="{{ kidDraftName }}" onChange="{{ onKidName }}" placeholder="Nickname" aria-label="Nickname" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink)">
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 0 8px">Born</div>
+        <input type="month" value="{{ kidDraftBorn }}" max="2026-11" onChange="{{ onKidBorn }}" aria-label="Birth month" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink)">
+        <div style="font-size:12px;color:var(--mute);margin-top:4px">{{ kidDraftAge }}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 0 8px">Their color</div>
+        <div style="display:flex;gap:12px"><sc-for list="{{ kidColors }}" as="c"><button onClick="{{ c.pick }}" aria-label="{{ c.label }}" aria-pressed="{{ c.on }}" style="width:44px;height:44px;border-radius:50%;background:{{ c.color }};border:3px solid {{ c.ring }};box-shadow:inset 0 0 0 2px var(--sheet);cursor:pointer;flex:none"></button></sc-for></div>
+        <div style="font-size:12px;color:var(--mute);margin-top:8px;line-height:1.4">It marks their blocks, logs and avatar everywhere.</div>
+        <button onClick="{{ kidSave }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ kidSaveOp }}">{{ kidSaveLabel }}</button>
+        <sc-if value="{{ kidCanArchive }}">
+          <button onClick="{{ kidArchive }}" style="margin-top:4px;width:100%;height:50px;border:none;background:transparent;font-size:17px;font-weight:600;color:var(--l-A33A2A);cursor:pointer">Archive {{ kidDraftName }}</button>
+          <div style="font-size:13px;color:var(--mute);text-align:center;line-height:1.4">Archiving takes {{ kidDraftName }} out of your plan and menus. Logs stay in your export, and you can restore anytime from Kids.</div>
+        </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shLogEdit }}">
+        <div data-screen-label="51 Edit a log">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ leTitle }}</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ leSub }}</div>
+        <sc-for list="{{ leTimes }}" as="t"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 12px">
+          <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--mute)">{{ t.label }}</div><div style="font-family:'Young Serif',serif;font-size:28px">{{ t.text }}</div></div>
+          <button onClick="{{ t.minus }}" aria-label="5 minutes earlier" style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:22px;cursor:pointer;color:var(--ink)">−</button>
+          <button onClick="{{ t.plus }}" aria-label="5 minutes later" style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:22px;cursor:pointer;color:var(--ink)">+</button>
+        </div></sc-for>
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:8px"><button onClick="{{ leDelete }}" style="height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;color:var(--l-A33A2A);font-size:17px;font-weight:600;cursor:pointer">Delete</button><button onClick="{{ leSave }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Save</button></div>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">Fixing a time updates {{ leName }}’s patterns and the rest of today’s plan.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shMemory }}">
+        <div data-screen-label="52 What I know">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">What I know about you</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">I plan with these. Forget anything that’s wrong or no longer true.</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px"><sc-for list="{{ stages }}" as="g"><div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px"><div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:#5E8A62"></span>{{ g.name }}</div><div style="font-size:12px;color:var(--mute);margin-top:2px;line-height:1.3">{{ g.since }}</div></div></sc-for></div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden">
+          <sc-for list="{{ memRows }}" as="m"><div style="display:flex;align-items:flex-start;gap:4px;padding:12px 4px 12px 16px;border-bottom:1px solid var(--hair)"><div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600;line-height:1.35">{{ m.text }}</div><div style="font-size:13px;color:var(--mute);margin-top:2px">{{ m.src }}</div></div><button onClick="{{ m.forget }}" style="height:44px;padding:0 12px;border:none;background:transparent;color:var(--acc);font-size:15px;font-weight:600;cursor:pointer;flex:none">Forget</button></div></sc-for>
+          <sc-if value="{{ memEmpty }}"><div style="padding:16px;font-size:15px;color:var(--mute);line-height:1.4">Nothing yet. Tell me about your days and log a few things, and I’ll start remembering.</div></sc-if>
+        </div>
+        <button onClick="{{ memCorrect }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:17px;font-weight:600;cursor:pointer;color:var(--ink)">Something changed? Tell {{ an }}</button>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px;line-height:1.4">Like “he doesn’t nap in the morning anymore.” Nothing here is shared with your family.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shCals }}">
+        <div data-screen-label="47 Calendars">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Your calendars</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">These come from your phone. Mark which ones are work, so I protect your meetings and focus blocks.</div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden">
+          <sc-for list="{{ calRows }}" as="c"><div style="padding:12px 16px;border-bottom:1px solid var(--hair)">
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:{{ c.dot }};flex:none"></span><div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:600">{{ c.name }}</div><div style="font-size:13px;color:var(--mute)">{{ c.src }}</div></div></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px;padding:4px;border-radius:12px;background:var(--soft)"><sc-for list="{{ c.opts }}" as="o"><button onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="height:34px;border:none;border-radius:8px;background:{{ o.bg }};box-shadow:{{ o.sh }};font-size:15px;font-weight:600;cursor:pointer;color:var(--ink)">{{ o.label }}</button></sc-for></div>
+          </div></sc-for>
+          <div style="display:flex;align-items:center;gap:8px;padding:12px 16px"><svg style="stroke:var(--mute);flex:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="flex:1"><div style="font-size:17px;font-weight:600">BestMom</div><div style="font-size:13px;color:var(--mute)">Mine. Your plan and alarms live here. I never write anywhere else.</div></div></div>
+        </div>
+        <div style="font-size:13px;color:var(--mute);margin-top:8px;line-height:1.4">Work: I plan around it and never move it. Personal: I plan around it. Ignore: I don’t look at it. Missing one? Add the account in your phone’s Settings, then come back.</div>
+        <button onClick="{{ closeSheet }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Done</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shExport }}">
+        <div data-screen-label="45 Export my data">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Export my data</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">A copy of everything BestMom keeps about you. You choose where it goes.</div>
+        <div style="display:flex;flex-direction:column;gap:8px"><sc-for list="{{ expOpts }}" as="o"><button onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="display:flex;align-items:center;gap:12px;text-align:left;min-height:64px;border-radius:16px;border:2px solid {{ o.border }};background:var(--card);padding:8px 16px;cursor:pointer;color:var(--ink)"><div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ o.border }};display:flex;align-items:center;justify-content:center;flex:none"><div style="width:10px;height:10px;border-radius:50%;background:{{ o.dot }}"></div></div><div style="flex:1"><div style="font-size:17px;font-weight:600">{{ o.name }}</div><div style="font-size:13px;color:var(--mute)">{{ o.sub }}</div></div></button></sc-for></div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-top:12px">
+          <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:4px">What’s inside</div>
+          <div style="font-size:15px;line-height:1.6">Plans and every replan<br>Kids’ logs: sleep, feeds, diapers, activity, night wakes<br>Check-ins and today’s notes<br>Reminders, meals, pantry and chores</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:12px 16px;margin-top:8px"><svg style="stroke:var(--mute);flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="font-size:13px;line-height:1.45;color:var(--ink2)"><b>Not included: your kids’ private notes.</b> They live only on this phone. Export them from each child’s card in Kids.</div></div>
+        <button onClick="{{ doExport }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Export {{ expFmtLabel }}</button>
+        <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px">Opens your share sheet. BestMom keeps no extra copy.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ shDelete }}">
+        <div data-screen-label="46 Delete account">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Delete everything?</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">Your account, plans, logs, check-ins, notes and reminders. Gone from this phone now, and from our servers and backups within 30 days. This can’t be undone.</div>
+        <div style="background:var(--d-F4DDDD);color:var(--l-8A3B44);border-radius:16px;padding:12px 16px;font-size:15px;line-height:1.45"><b>Your subscription is separate.</b> Deleting doesn’t cancel it. Cancel it first in your App Store settings.<sc-if value="{{ delFamily }}"><br><b>{{ delFamilyText }}</b> lose access to the family plan.</sc-if></div>
+        <button onClick="{{ toggleDelOk }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px;cursor:pointer;color:var(--ink)"><div style="width:26px;height:26px;border-radius:8px;flex:none;border:2px solid {{ delBox.border }};background:{{ delBox.bg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ delBox.op }}"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div style="font-size:15px;line-height:1.4">I understand everything will be erased</div></button>
+        <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:16px"><button onClick="{{ exportData }}" style="height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:17px;font-weight:600;cursor:pointer;color:var(--ink)">Export first</button><button onClick="{{ doDelete }}" style="height:56px;border-radius:999px;border:none;background:#A33A2A;color:#FFFFFF;font-size:17px;font-weight:600;cursor:pointer;opacity:{{ delOp }}">Delete everything</button></div>
         </div>
       </sc-if>
     </div>
@@ -849,7 +999,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <sc-if value="{{ replanReady }}" hint-placeholder-val="{{ false }}">
     <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.18;margin-bottom:16px;text-wrap:pretty">{{ replanHead }}</div>
     <sc-if value="{{ replanNotice }}"><div style="background:var(--d-F4E6C8);color:var(--l-5E430F);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4;margin-bottom:12px">{{ replanNoticeText }}</div></sc-if>
-    <sc-if value="{{ offline }}"><div style="background:var(--soft);border-radius:12px;padding:8px 16px;font-size:15px;margin-bottom:12px">Offline: this is a simpler on-phone replan.</div></sc-if>
+    <sc-if value="{{ replanSimpleNote }}"><div style="background:var(--soft);border-radius:12px;padding:8px 16px;font-size:15px;margin-bottom:12px">{{ replanSimpleText }}</div></sc-if>
     <div style="flex:1;overflow:auto;display:flex;flex-direction:column;gap:8px">
       <sc-for list="{{ changes }}" as="c" hint-placeholder-count="4">
         <div style="display:flex;gap:4px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 12px 12px 8px;opacity:{{ c.op }}">
@@ -871,12 +1021,42 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <button onClick="{{ acceptReplan }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">{{ acceptLabel }}</button>
     </div>
   </sc-if>
+  <sc-if value="{{ replanError }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="50 Replan failed" style="flex:1;display:flex;flex-direction:column">
+      <div style="width:56px;height:56px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin:8px 0 16px"><svg style="stroke:var(--mute)" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5M12 16.5v.5M10.3 3.9L2.5 17.5A2 2 0 0 0 4.2 20.5h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></div>
+      <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.18;margin-bottom:8px">I couldn’t build a new plan this time.</div>
+      <div style="font-size:17px;line-height:1.45;color:var(--ink2)">Nothing changed. Your current plan is still on, and every reminder still works.</div>
+      <div style="background:var(--soft);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4;margin-top:16px">This happens when the connection drops or I take too long. Try again, or I can make a simpler plan right here on your phone.</div>
+      <div style="flex:1"></div>
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px">
+        <button onClick="{{ retryReplan }}" style="height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:17px;font-weight:600;cursor:pointer;color:var(--ink)">Try again</button>
+        <button onClick="{{ simpleReplan }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Simpler plan</button>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </sc-if>
 
 <sc-if value="{{ sBed }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="10 Bedtime" style="position:absolute;inset:0;display:flex;flex-direction:column;background:#1A1411;color:#EBDDCF;padding:64px 24px 40px">
-  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:15px;font-weight:600;color:#A8968A">Bedtime · {{ bedKid }}</div><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:50%;border:none;background:#2A201B;color:#A8968A;font-size:22px;cursor:pointer">×</button></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div style="flex:1;font-size:15px;font-weight:600;color:#A8968A">Bedtime · {{ bedKid }}</div><sc-if value="{{ bedActive }}"><button onClick="{{ bedOpenPick }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid #3A2E27;background:transparent;color:#A8968A;font-size:13px;font-weight:600;cursor:pointer">Steps</button></sc-if><button onClick="{{ exitNight }}" aria-label="Close" style="width:44px;height:44px;border-radius:50%;border:none;background:#2A201B;color:#A8968A;font-size:22px;cursor:pointer">×</button></div>
+  <sc-if value="{{ bedPicking }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="54 Bedtime: who and steps" style="flex:1;display:flex;flex-direction:column;overflow:auto">
+      <div style="font-size:13px;font-weight:600;color:#E0A46A;margin-top:16px">Tonight’s routine</div>
+      <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1;margin:8px 0 12px">{{ bedPickHead }}</div>
+      <sc-if value="{{ bedMulti }}"><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ bedWhoChips }}" as="c"><button onClick="{{ c.pick }}" aria-pressed="{{ c.on }}" style="height:44px;padding:0 16px;border-radius:999px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
+      <div style="font-size:15px;line-height:1.4;color:#A8968A;margin-top:8px">{{ bedWhoNote }}</div></sc-if>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:20px 0 4px"><div style="font-size:13px;font-weight:600;color:#A8968A">Steps</div><button onClick="{{ bedToggleEdit }}" style="height:36px;padding:0 4px;border:none;background:transparent;color:#E0A46A;font-size:15px;font-weight:600;cursor:pointer">{{ bedEditLabel }}</button></div>
+      <sc-for list="{{ bedStepRows }}" as="r"><div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #2E241E;min-height:56px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2A201B;color:#E0A46A;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none">{{ r.n }}</div>
+        <sc-if value="{{ r.view }}"><div style="flex:1;font-size:17px;font-weight:600">{{ r.t }}</div><div style="font-size:15px;color:#A8968A">{{ r.d }} min</div></sc-if>
+        <sc-if value="{{ r.editing }}"><input value="{{ r.t }}" onChange="{{ r.onT }}" aria-label="Step {{ r.n }} name" style="flex:1;min-width:0;height:44px;border-radius:12px;border:1.5px solid #3A2E27;background:#221A16;color:#EBDDCF;padding:0 12px;font-size:17px;outline:none"><button onClick="{{ r.minus }}" aria-label="One minute less" style="width:40px;height:40px;border-radius:50%;border:1.5px solid #3A2E27;background:transparent;color:#EBDDCF;font-size:20px;cursor:pointer;flex:none">−</button><div style="width:34px;text-align:center;font-size:15px;color:#A8968A;flex:none">{{ r.d }}m</div><button onClick="{{ r.plus }}" aria-label="One minute more" style="width:40px;height:40px;border-radius:50%;border:1.5px solid #3A2E27;background:transparent;color:#EBDDCF;font-size:20px;cursor:pointer;flex:none">+</button></sc-if>
+      </div></sc-for>
+      <div style="font-size:13px;color:#A8968A;margin-top:12px;line-height:1.4">Three calm steps, the same order every night. That sameness is what helps, more than which steps you pick.</div>
+      <div style="flex:1;min-height:16px"></div>
+      <button onClick="{{ bedStart }}" style="height:58px;border-radius:999px;border:none;background:var(--d-E0A46A);color:#1A1411;font-size:17px;font-weight:600;cursor:pointer">{{ bedStartLabel }}</button>
+    </div>
+  </sc-if>
   <sc-if value="{{ bedActive }}" hint-placeholder-val="{{ true }}">
     <div style="display:flex;gap:8px;margin:16px 0 24px"><sc-for list="{{ bedDots }}" as="d"><div style="flex:1;height:4px;border-radius:999px;background:{{ d.bg }}"></div></sc-for></div>
     <div style="font-size:13px;font-weight:600;color:#E0A46A">{{ bedStepLabel }}</div>
@@ -990,7 +1170,46 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div style="flex:1"></div>
   <button onClick="{{ subscribe }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Continue · {{ planPrice }}</button>
   <div style="font-size:12px;color:var(--mute);text-align:center;line-height:1.45;margin:8px 4px">Renews automatically until you cancel. Cancel anytime in your App Store settings at least 24 hours before renewal.</div>
-  <div style="display:flex;justify-content:center;gap:16px;font-size:13px;font-weight:600"><a href="#">Restore purchases</a><a href="#">Export or delete my data</a></div>
+  <div style="display:flex;justify-content:center;gap:8px;font-size:13px;font-weight:600"><button onClick="{{ restore }}" style="height:44px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:13px;font-weight:600;cursor:pointer">Restore purchases</button><button onClick="{{ notNow }}" style="height:44px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:13px;font-weight:600;cursor:pointer">Not now</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ sSubok }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="44 Subscribed" style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding:76px 24px 40px">
+  <div style="width:56px;height:56px;border-radius:50%;background:#3D6142;display:flex;align-items:center;justify-content:center;margin-bottom:24px"><svg width="26" height="26" viewBox="0 0 24 24"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3" fill="none" stroke-linecap="round"></path></svg></div>
+  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1">{{ subHead }}</div>
+  <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:8px 0 24px">{{ subLine }}</div>
+  <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px">
+    <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:8px">What happens now</div>
+    <div style="font-size:15px;line-height:1.5">Today’s plan is ready, built from last night’s close.</div>
+    <div style="font-size:15px;line-height:1.5;margin-top:8px">Replans, reminders and {{ an }} are on again.</div>
+    <div style="font-size:15px;line-height:1.5;margin-top:8px">Manage or cancel anytime in your App Store settings.</div>
+  </div>
+  <div style="flex:1"></div>
+  <button onClick="{{ subContinue }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">See today’s plan</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sDeleted }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="46b Account deleted" style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding:96px 24px 40px">
+  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1">Done. Your data is being erased.</div>
+  <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:12px 0 0">It’s gone from this phone now. Our servers and backups follow within 30 days, and you’ll get an email when it’s finished.</div>
+  <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:12px 0 0">Thank you for letting me help with your days.</div>
+  <div style="flex:1"></div>
+  <button onClick="{{ startOver }}" style="height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:17px;font-weight:600;cursor:pointer;color:var(--ink)">Start over</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sLock }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="49 Notifications" style="position:absolute;inset:0;display:flex;flex-direction:column;background:linear-gradient(180deg,#3B4A5E 0%,#6B5B6E 55%,#B0866A 100%);color:#FFFFFF;padding:64px 12px 40px">
+  <div style="text-align:center;font-size:17px;font-weight:600;opacity:.9">Tuesday, November 17</div>
+  <div style="text-align:center;font-size:84px;font-weight:600;line-height:1;letter-spacing:-2px">2:50</div>
+  <div style="flex:1"></div>
+  <sc-for list="{{ lockNotes }}" as="n"><button onClick="{{ n.go }}" style="width:100%;display:flex;gap:12px;text-align:left;background:rgba(245,239,230,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:#2A211C;border:none;border-radius:20px;padding:12px 14px;margin-bottom:8px;cursor:pointer">
+    <div style="width:38px;height:38px;border-radius:9px;background:#A9502B;color:#FFF8F0;font-family:'Young Serif',serif;font-size:20px;display:flex;align-items:center;justify-content:center;flex:none">B</div>
+    <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;font-size:13px"><b>BestMom</b><span style="color:#6E625A">{{ n.when }}</span></div><div style="font-size:15px;font-weight:600;margin-top:2px">{{ n.title }}</div><div style="font-size:15px;line-height:1.35">{{ n.body }}</div></div>
+  </button></sc-for>
+  <div style="text-align:center;font-size:13px;line-height:1.4;opacity:.85;margin:8px 16px 0">Each heads-up says what, when and why. At most 8 a day, none in quiet hours. Tap one to open it in today’s plan.</div>
 </div>
 </sc-if>
 
@@ -1045,7 +1264,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div>
       <div style="font-size:13px;font-weight:600;color:var(--l-6E625A);margin:0 0 8px 8px">{{ g.title }}</div>
       <div style="display:flex;flex-direction:column;gap:2px">
-        <sc-for list="{{ g.items }}" as="it"><button onClick="{{ it.go }}" style="display:flex;align-items:center;gap:8px;height:38px;padding:0 8px;border-radius:8px;border:none;background:{{ it.bg }};color:{{ it.fg }};font-size:15px;font-weight:600;text-align:left;cursor:pointer"><span style="font:600 11px ui-monospace,Menlo,monospace;opacity:.7;width:18px">{{ it.n }}</span>{{ it.label }}</button></sc-for>
+        <sc-for list="{{ g.items }}" as="it"><button onClick="{{ it.go }}" style="display:flex;align-items:center;gap:8px;height:38px;padding:0 8px;border-radius:8px;border:none;background:{{ it.bg }};color:{{ it.fg }};font-size:15px;font-weight:600;text-align:left;cursor:pointer"><span style="font:600 11px ui-monospace,Menlo,monospace;opacity:.7;width:26px;flex:none">{{ it.n }}</span>{{ it.label }}</button></sc-for>
       </div>
     </div>
   </sc-for>
@@ -1206,8 +1425,25 @@ PRESETS.voice = { ...PRESETS.nonap, head: 'Heard you: no nap, and Sarah at 3:00.
 const BED = [
   { t: 'Bath', d: 10, hint: 'Warm water, low lights. Same time every night.' },
   { t: 'Lotion & massage', d: 5, hint: 'Slow strokes, in the same order each night.' },
-  { t: 'Song or quiet story', d: 8, hint: 'The same song becomes his cue to sleep.' },
+  { t: 'Song or quiet story', d: 8, hint: 'The same song becomes the cue to sleep.' },
 ];
+// Kids: we keep only a nickname and the birth month (PRD 8.2). Demo clock is Nov 2026.
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const toYm = label => { const [m, y] = label.split(' '); return y + '-' + String(MON.indexOf(m) + 1).padStart(2, '0'); };
+const ymLabel = ym => MON[+ym.slice(5) - 1] + ' ' + ym.slice(0, 4);
+const ageOf = ym => { const m = (2026 - +ym.slice(0, 4)) * 12 + 11 - +ym.slice(5); return m < 1 ? 'Newborn' : m < 24 ? m + (m === 1 ? ' month' : ' months') : Math.floor(m / 12) + ' years'; };
+const KID_COLORS = [['var(--l-2F7F7A)', 'Teal'], ['var(--l-8A4C8F)', 'Plum'], ['var(--l-9A3E2E)', 'Brick'], ['var(--l-5E430F)', 'Bronze']];
+const CALS = [['outlook', 'Office', 'Outlook · Exchange', '#6C64AD'], ['icloud', 'Family', 'iCloud', '#4E7FA8'], ['google', 'Rossi', 'Google', '#5E8A62'], ['holidays', 'US Holidays', 'Subscribed', '#BC8C36']];
+// Jarvis stages 1-3: what it remembers, each with how it knows (F11)
+const MEMORIES0 = [
+  { text: 'Thursdays are chaotic, so I keep Thursday afternoons light.', src: 'You told me · Nov 1' },
+  { text: 'Mateo’s wake window is about 2h 15m.', src: 'From your last 10 days of logs' },
+  { text: 'Lunch gets skipped on meeting days, so I protect it.', src: 'You told me · Nov 1' },
+  { text: 'You usually skip the 8:30 PM breathing on Tuesdays.', src: 'From the last 2 weeks of your plan' },
+  { text: 'A pack of diapers lasts you about 6 days.', src: 'From 3 weeks of diaper logs' },
+  { text: 'Diego does the 6 AM bottle.', src: 'You told me · Nov 1' },
+];
+const tm = v => +v.slice(0, 2) * 60 + +v.slice(3, 5);
 const TX = {
   dump: fam => ((fam === 'twins' ? 'Okay so… I have twins, Mateo and Sofi, they’re four months, and my leave ends in two weeks.' : fam === 'one' ? 'Okay so… I have Mateo, he’s seven months.' : 'Okay so… I have Mateo, he’s seven months, and Lia, who’s three.') + ' I’m back at work, hybrid, mostly nine to five. Tuesdays and Thursdays are packed with meetings. His naps are all over the place, and when he skips one the whole day falls apart. I keep forgetting to eat lunch. Diego helps a lot in the mornings.'),
   happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
@@ -1312,13 +1548,14 @@ function parseReminder(t) {
 }
 console.assert(JSON.stringify(parseReminder('Remind me to check on Mateo every 6 hours for 3 days')) === JSON.stringify({ text: 'Check on Mateo', time: '8:00 PM', every: 6, days: 3 }), 'parseReminder');
 const FLOW = [
-  { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
-  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth'], [33, 'Home: meals, pantry, cleaning', 'home'], [37, 'Sick day: home today', 'reminder'], [39, 'Sick day: next morning', 'sickmorning']] },
-  { title: 'Self-Love', items: [[20, 'Self-Love mode', 'self'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
-  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [35, 'Night log: add an earlier wake', 'nightpast'], [14, 'Kids: nights & rough patch', 'kids'], [36, 'Kids: correct wake window', 'wakewin'], [34, 'Kids: new skill', 'skill'], [38, 'Kids: private note', 'kidnote'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
-  { title: 'Family', items: [[22, 'Invite a caregiver', 'invite'], [23, 'See as Diego (partner)', 'asDiego'], [24, 'See as Carmen (nanny)', 'asCarmen'], [15, 'Settings & data', 'me']] },
-  { title: 'Assistant', items: [[13, 'Chat: Kids · Work · Me', 'allie']] },
-  { title: 'Business & safety', items: [[16, 'Paywall (day 2)', 'paywall'], [17, 'Crisis screen', 'crisis']] },
+  { title: 'Onboarding', items: [['01', 'Welcome', 'welcome'], ['02', 'Data consent', 'consent'], ['03', 'The brain dump', 'dump'], ['03b', 'Building your day', 'thinking'], ['04', 'Here’s what I understood', 'summary'], ['05', 'Permissions', 'perm'], ['41', 'Sign in (returning mom)', 'signin']] },
+  { title: 'Full Mom', items: [['06', 'Today: day brief', 'today'], ['06b', 'Block detail', 'block'], ['29', 'Today: first day (empty)', 'dayone'], ['42', 'Save your day', 'save'], ['49', 'Notifications (lock screen)', 'lock'], ['48', 'Notifications off', 'notifoff'], ['53', 'I learned something', 'jarvis'], ['25', 'The + menu', 'add'], ['26', 'Logs', 'addlog'], ['27', 'For you', 'addyou'], ['06c', '5-second pause', 'pause'], ['07', 'Something happened', 'happened'], ['08', 'Replan proposal', 'replan'], ['50', 'Replan failed', 'replanerr'], ['09', 'Quick log', 'log'], ['18', 'Calendar: 3 days', 'cal3day'], ['18b', 'Calendar: week', 'calweek'], ['18c', 'Calendar: month', 'calmonth'], ['33', 'Home: meals', 'home'], ['33b', 'Home: pantry & list', 'pantry'], ['33c', 'Home: cleaning', 'clean'], ['37', 'Sick day: home today', 'reminder'], ['39', 'Sick day: next morning', 'sickmorning'], ['37b', 'New reminder', 'remnew']] },
+  { title: 'Self-Love', items: [['20', 'Self-Love mode', 'self'], ['11', 'Breathing', 'breathe'], ['12', 'Close of day', 'close']] },
+  { title: 'Kids & nights', items: [['10', 'Bedtime (night mode)', 'bedrun'], ['54', 'Bedtime: who and steps', 'bedpick'], ['19', 'Night log (2 AM)', 'nightnow'], ['19b', 'Nap cut short (1:40 PM)', 'nap'], ['19c', 'Night log: offline', 'nightoff'], ['35', 'Night log: add an earlier wake', 'nightpast'], ['14', 'Kids: nights & rough patch', 'kids'], ['40', 'Kids: edit a child', 'kidedit'], ['40b', 'Kids: add a child', 'kidadd'], ['51', 'Kids: fix a log', 'logedit'], ['36', 'Kids: correct wake window', 'wakewin'], ['34', 'Kids: new skill', 'skill'], ['37c', 'Kids: private note', 'kidnote'], ['30', 'Kids: no nights yet (empty)', 'kidsempty']] },
+  { title: 'Family', items: [['21', 'Invite a caregiver', 'invite'], ['22', 'See as Diego (partner)', 'asDiego'], ['23', 'See as Carmen (nanny)', 'asCarmen']] },
+  { title: 'You & your data', items: [['15', 'Settings & account', 'me'], ['47', 'Which calendars are work', 'cals'], ['52', 'What I know about you', 'memory'], ['45', 'Export my data', 'export'], ['46', 'Delete account', 'delete'], ['46b', 'Account deleted', 'deleted']] },
+  { title: 'Assistant', items: [['13', 'Chat: Kids · Work · Me', 'allie']] },
+  { title: 'Business & safety', items: [['16', 'Paywall (day 2)', 'paywall'], ['44', 'Subscribed', 'subok'], ['43', 'Free day ended (no plan)', 'locked'], ['17', 'Crisis screen', 'crisis']] },
 ];
 
 class Component extends DCLogic {
@@ -1346,6 +1583,12 @@ class Component extends DCLogic {
       chores: [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'me', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }],
       deep: { on: true, who: 'cleaner' }, sickKid: null, sickDay: 1, sickAsk: false, notes: [{ kid: 'a', date: 'Nov 14', text: 'Didn’t want the bottle before his nap. Fine after a walk outside.' }], noteKid: 'a', noteIdx: -1, noteText: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3, remShare: [],
       settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
+      kidEdits: {}, newKids: [], kidEditId: null, kidDraft: { name: '', born: '2026-11', color: 0 },
+      signinFor: 'signin', signinStep: 'form', email: '', acct: 'Apple', subscribed: false, locked: false, subKind: 'buy',
+      exportFmt: 'json', delOk: false, cals: { outlook: 'work', icloud: 'personal', google: 'personal', holidays: 'ignore' },
+      notifDenied: false, quiet: ['21:30', '06:30'], replanErr: false, replanSimple: false,
+      logEdit: 0, leT: 0, leEnd: null, memories: MEMORIES0, jarvisNews: false,
+      bedPick: false, bedWho: fam === 'twins' ? 'all' : 'a', bedSteps: BED.map(b => ({ ...b })), bedEditing: false,
     };
   }
   componentDidMount() {
@@ -1364,7 +1607,8 @@ class Component extends DCLogic {
   componentDidUpdate(prev) {
     if ((prev.family || 'two') !== (this.props.family || 'two')) { const f = this.props.family || 'two'; this.setState({ fam: f, blocks: buildBlocks(f), logs: seedLogs(f), summary: this.buildSummary(f) }); }
   }
-  kids() { return FAMS[this.state.fam] || FAMS.two; }
+  allKids() { const s = this.state; return [...(FAMS[s.fam] || FAMS.two), ...s.newKids].map(k => ({ ...k, ...s.kidEdits[k.id] })); }
+  kids() { return this.allKids().filter(k => !k.archived); }
   buildSummary(fam) {
     fam = fam || this.state.fam;
     const k = fam === 'twins' ? ['Mateo & Sofi, twins, 4 months', 'Your leave ends in 2 weeks'] : fam === 'one' ? ['Mateo, 7 months'] : ['Mateo, 7 months', 'Lia, 3 years, in daycare'];
@@ -1435,14 +1679,35 @@ class Component extends DCLogic {
       case 'add': return this.setState({ ...base, screen: 'app', tab: 'today', radial: true });
       case 'happened': case 'log': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW });
       case 'replan': return this.openReplan('nonap');
-      case 'bed': return this.setState({ ...base, screen: 'bed', bedStep: 0, bedLeft: BED[0].d * 60, bedRun: true, bedDone: false });
+      case 'bed': case 'bedrun': case 'bedpick': { const st = this.state, pick = k === 'bedpick' || (k === 'bed' && this.kids().length > 1);
+        return this.setState({ ...base, screen: 'bed', bedStep: 0, bedLeft: st.bedSteps[0].d * 60, bedRun: !pick, bedDone: false, bedPick: pick, bedEditing: false, bedWho: st.fam === 'twins' ? 'all' : st.bedWho }); }
+      case 'signin': return this.setState({ ...base, screen: 'signin', signinFor: 'signin', signinStep: 'form' });
+      case 'thinking': return this.thinking('Building your first day…', ['Reading your calendar', 'Fitting Mateo’s naps around your 3:00', 'Protecting your lunch'], 'today');
+      case 'block': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'block', selBlock: 'walk' });
+      case 'save': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'save' });
+      case 'addlog': case 'addyou': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'add', addPart: k.slice(3), addEdit: false });
+      case 'pause': return this.setState({ ...base, screen: 'app', tab: 'today', pauseLeft: 5 });
+      case 'pantry': case 'clean': return this.setState({ ...base, screen: 'app', tab: 'home', homeSeg: k, mealPick: null });
+      case 'remnew': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: 'reminder', remText: '', remShare: [] });
+      case 'lock': case 'subok': case 'deleted': return this.setState({ ...base, screen: k });
+      case 'notifoff': return this.setState({ ...base, screen: 'app', tab: 'today', notifDenied: true });
+      case 'jarvis': return this.setState({ ...base, screen: 'app', tab: 'today', jarvisNews: true });
+      case 'locked': return this.setState({ ...base, screen: 'app', tab: 'today', locked: true, subscribed: false });
+      case 'replanerr': this.openReplan('nonap'); return this.setState({ replanErr: true, replanLoading: false });
+      case 'kidedit': { const kd = this.kids()[0]; return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'kid', kidEditId: kd.id, kidDraft: { name: kd.name, born: toYm(kd.born), color: Math.max(0, KID_COLORS.findIndex(c => c[0] === kd.color)) } }); }
+      case 'kidadd': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'kid', kidEditId: null, kidDraft: { name: '', born: '2026-11', color: this.kids().length % KID_COLORS.length } });
+      case 'logedit': { const i = Math.max(0, this.state.logs.findIndex(l => l.end)), l = this.state.logs[i]; return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'logedit', logEdit: i, leT: l.t, leEnd: l.end ?? null }); }
+      case 'cals': case 'memory': case 'export': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: k });
+      case 'delete': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: 'delete', delOk: false });
       case 'breathe': return this.setState({ ...base, screen: 'breathe', bSec: 0, bRun: true });
       default: return this.setState({ ...base, screen: k });
     }
   }
   openReplan(key) {
+    // F13: after the free day, without a plan she can look, log, export or delete, but gets no new plans
+    if (this.state.locked) { this.go('paywall'); return this.toastMsg('New plans need a subscription. Logs still work.'); }
     const on = {}; PRESETS[key].changes.forEach((c, i) => { on[i] = true; });
-    this.setState({ screen: 'replan', replanKey: key, replanLoading: true, replanAt: Date.now() + 1500, on, sheet: null, listening: false });
+    this.setState({ screen: 'replan', replanKey: key, replanLoading: true, replanAt: Date.now() + 1500, on, sheet: null, listening: false, replanErr: false, replanSimple: false });
   }
   mut(fn, text, extra) {
     const prev = this.state.blocks; const bl = fn(prev.map(b => ({ ...b }))); bl.sort((a, b) => a.t - b.t);
@@ -1562,7 +1827,7 @@ class Component extends DCLogic {
     const nAcc = changes.filter(c => c._on).length;
 
     // bedtime / breathe
-    const bedTot = BED[s.bedStep].d * 60, bm = Math.floor(s.bedLeft / 60), bsec = s.bedLeft % 60;
+    const BS = s.bedSteps, bedTot = BS[s.bedStep].d * 60, bm = Math.floor(s.bedLeft / 60), bsec = s.bedLeft % 60;
     const bm2 = s.bSec % 10, inP = bm2 < 4, bl = 300 - s.bSec;
 
     // close
@@ -1575,9 +1840,16 @@ class Component extends DCLogic {
       { title: 'Remind you before each thing', why: 'A short heads-up with the why: “Mateo sleeps in 15 min. Start the bath now.”', detail: 'At most 8 nudges a day, plus baby routines and meetings. You set quiet hours.', cta: 'Allow notifications', icon: 'M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 21h4', bg: 'var(--d-F4E6C8)', fg: 'var(--l-7A5714)' },
     ];
     const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
-    const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else toApp(); };
+    const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else { this.setState({ notifDenied: !!denied }); toApp(); } };
 
-    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add' : s.dayOne && s.tab === 'today' ? 'dayone' : ['add', 'happened', 'log', 'invite', 'skill', 'wakewin'].includes(s.sheet) ? s.sheet : s.sheet === 'note' ? 'kidnote' : s.sickAsk && s.tab === 'today' ? 'sickmorning' : s.sickKid && s.tab === 'today' && !s.sheet ? 'reminder' : ['add'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr === 'night' && s.pastOpen ? 'nightpast' : scr;
+    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add'
+      : s.sheet === 'add' ? 'add' + s.addPart : s.sheet === 'note' ? 'kidnote' : s.sheet === 'reminder' ? 'remnew' : s.sheet === 'kid' ? (s.kidEditId ? 'kidedit' : 'kidadd') : s.sheet ? s.sheet
+      : s.pauseLeft > 0 ? 'pause' : s.dayOne && s.tab === 'today' ? 'dayone' : s.dayOne && s.tab === 'kids' ? 'kidsempty'
+      : s.sickAsk && s.tab === 'today' ? 'sickmorning' : s.sickKid && s.tab === 'today' ? 'reminder'
+      : s.tab === 'today' && s.locked ? 'locked' : s.tab === 'today' && s.notifDenied ? 'notifoff' : s.tab === 'today' && s.jarvisNews ? 'jarvis'
+      : s.tab === 'cal' ? 'cal' + s.calView : s.tab === 'home' ? (s.homeSeg === 'meals' ? 'home' : s.homeSeg) : selfMode && s.tab === 'today' ? 'self' : s.tab)
+      : scr === 'bed' ? (s.bedPick ? 'bedpick' : 'bedrun') : scr === 'night' ? (s.pastOpen ? 'nightpast' : s.nightOff ? 'nightoff' : s.wakeKind === 'nap' ? 'nap' : 'nightnow')
+      : scr === 'replan' && s.replanErr ? 'replanerr' : scr;
     const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
     const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
     const micActive = s.listening;
@@ -1912,13 +2184,13 @@ class Component extends DCLogic {
       sendInvite: () => { const name = invWho === 'they' ? 'Carmen' : invWho; this.setState(st => ({ sheet: null, members: [...st.members.filter(m => m.id !== 'carmen'), { id: 'carmen', name, role: st.invRole }] })); this.toastMsg(name + ' joined as ' + ROLES[s.invRole].label + '. Tap “See as ' + name + '” to check her view.'); },
       an, anInitial: an[0], offline, ghostBars: [10, 16, 12, 20, 14, 18, 12, 24, 16, 12, 20, 14, 18, 16].map(h => ({ h })),
       nightSaved: offline || s.nightOff ? 'Offline · saved on this phone. Syncs when you’re back online.' : 'Saved on this phone · synced', showFlow, toggleDark: () => this.go('dark'), darkAria: s.dark ? 'Dark mode on. Switch to light' : 'Light mode on. Switch to dark', darkIcon: s.dark ? 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z' : 'M12 16a4 4 0 1 0 0-8a4 4 0 1 0 0 8M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4', darkLabel: s.dark ? 'Phone in Dark mode · switch to Light' : 'Phone in Light mode · switch to Dark',
-      isDark: s.dark || scr === 'bed' || scr === 'breathe' || (scr === 'night' && s.wakeKind !== 'nap'), scheme: s.dark ? 'dark' : 'light',
+      isDark: s.dark || scr === 'bed' || scr === 'lock' || scr === 'breathe' || (scr === 'night' && s.wakeKind !== 'nap'), scheme: s.dark ? 'dark' : 'light',
       shVars: [2, 4, 8, 16, 28, 64].map(n => '--sh' + n + ':0 0 ' + (n > 16 ? 8 : 2) + 'px rgba(0,0,0,' + (s.dark ? .24 : .12) + '),0 ' + n / 2 + 'px ' + n + 'px rgba(0,0,0,' + (s.dark ? .28 : .14) + ')').join(';'),
       darkVars: s.dark ? Object.entries(PALETTE_DARK).map(([k, v]) => k + ':' + v).join(';') : '',
       sWelcome: scr === 'welcome', sConsent: scr === 'consent', sDump: scr === 'dump', sThinking: scr === 'thinking', sSummary: scr === 'summary', sPerm: scr === 'perm',
-      sApp: scr === 'app', sReplan: scr === 'replan', sBed: scr === 'bed', sBreathe: scr === 'breathe', sClose: scr === 'close', sPaywall: scr === 'paywall', sCrisis: scr === 'crisis',
+      sApp: scr === 'app', sReplan: scr === 'replan', sBed: scr === 'bed', sBreathe: scr === 'breathe', sClose: scr === 'close', sPaywall: scr === 'paywall', sCrisis: scr === 'crisis', sSignin: scr === 'signin', sSubok: scr === 'subok', sDeleted: scr === 'deleted', sLock: scr === 'lock',
       tToday: s.tab === 'today', tKids: s.tab === 'kids', tAllie: s.tab === 'allie', tMe: s.tab === 'me',
-      hasSheet: !!s.sheet && scr === 'app', shHappened: s.sheet === 'happened', shLog: s.sheet === 'log', shBlock: s.sheet === 'block' && !!sb, shSave: s.sheet === 'save', shInvite: s.sheet === 'invite',
+      hasSheet: !!s.sheet && scr === 'app', shHappened: s.sheet === 'happened', shLog: s.sheet === 'log', shBlock: s.sheet === 'block' && !!sb, shSave: s.sheet === 'save', shInvite: s.sheet === 'invite', shKid: s.sheet === 'kid', shExport: s.sheet === 'export', shDelete: s.sheet === 'delete', shCals: s.sheet === 'cals', shMemory: s.sheet === 'memory', shLogEdit: s.sheet === 'logedit' && !!s.logs[s.logEdit],
       closeSheet: () => this.setState({ sheet: null, listening: false, addEdit: false, radial: false }), stop: e => e.stopPropagation(),
       // onboarding
       toConsent: () => this.go('consent'),
@@ -1949,13 +2221,47 @@ class Component extends DCLogic {
       addSummary: () => this.setState(st => ({ summary: [...st.summary, ''], editIdx: st.summary.length })),
       toPerm: () => this.go('perm'),
       perm: perms[s.permStep], perm2Bar: s.permStep === 1 ? 'var(--acc)' : 'var(--line2)',
-      permAllow: () => permNext(false), permDeny: () => permNext(s.permStep === 0 ? true : s.calDenied),
+      permAllow: () => permNext(false), permDeny: () => permNext(true),
       // today
-      toAllie: () => this.go('allie'), calDenied: s.calDenied, fixCal: () => { this.setState({ calDenied: false }); this.toastMsg('Calendar on. I can see your meetings now.'); },
+      toAllie: () => this.go('allie'), notifDenied: s.notifDenied && V === 'ana', fixNotif: () => { this.setState({ notifDenied: false }); this.toastMsg('Notifications on. I’ll give you a heads-up before each thing.'); }, calDenied: s.calDenied, fixCal: () => { this.setState({ calDenied: false }); this.toastMsg('Calendar on. I can see your meetings now.'); },
       hero, needCheckin: !s.checkin && V === 'ana', hasCheckin: !!s.checkin,
       faces: MOUTHS.map((mouth, i) => ({ mouth, label: FACE_LABELS[i], pick: () => this.setState({ checkin: i + 1 }) })),
       checkinReply: s.checkin ? (s.checkin <= 2 ? 'Energy ' + s.checkin + '/5. Thanks for telling me. I’ll keep tonight light and skip the extras.' : 'Energy ' + s.checkin + '/5. Good to hear. I’ll keep the afternoon as planned.') : '',
-      notSaved: !s.saved && V === 'ana', openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
+      notSaved: !s.saved && V === 'ana', openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, acct: 'Apple', sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
+      doSaveGoogle: () => { this.setState({ saved: true, acct: 'Google', sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
+      saveEmail: () => this.setState({ screen: 'signin', signinFor: 'save', signinStep: 'form', sheet: null }),
+      toSignin: () => this.go('signin'), signinForm: s.signinStep === 'form', signinSent: s.signinStep === 'sent',
+      signinTitle: s.signinFor === 'save' ? 'Save your day' : 'Welcome back',
+      signinSub: s.signinFor === 'save' ? 'Keep today’s plan, logs and reminders safe, and pick up on any phone.' : 'Sign in to get your plan, logs and family back on this phone.',
+      signinVerb: s.signinFor === 'save' ? 'save your day' : 'sign in',
+      email: s.email, onEmail: e => this.setState({ email: e.target.value.trim() }), linkOp: /\S+@\S+\.\S+/.test(s.email) ? 1 : 0.4,
+      sendLink: () => { if (/\S+@\S+\.\S+/.test(s.email)) this.setState({ signinStep: 'sent' }); },
+      signinRetry: () => this.setState({ signinStep: 'form' }),
+      signinBack: () => s.signinStep === 'sent' ? this.setState({ signinStep: 'form' }) : s.signinFor === 'save' ? this.setState({ screen: 'app', tab: 'today', sheet: 'save' }) : this.go('welcome'),
+      ...(() => { const done = acct => () => { const save = s.signinFor === 'save'; this.setState({ saved: true, acct, signinStep: 'form' }); this.go('today'); this.toastMsg(save ? 'Saved. Your day is safe.' : 'Welcome back, Rossi. Everything is here.'); };
+        return { signinDone: done('Apple'), signinGoogle: done('Google'), signinLink: done('email') }; })(),
+      isSaved: s.saved, acctTitle: s.saved ? (s.acct === 'email' ? 'Signed in with email' : 'Signed in with ' + s.acct) : 'Not saved yet',
+      acctSub: s.saved ? (s.acct === 'email' && s.email ? s.email + ' · ' : '') + 'Your plan and logs are backed up.' : 'Your plan lives only on this phone.',
+      signOut: () => { this.setState({ saved: false, screen: 'signin', signinFor: 'signin', signinStep: 'form', sheet: null }); this.toastMsg('Signed out. Everything is safe in your account.'); },
+      subRowSub: s.subscribed ? (s.plan === 'year' ? 'Yearly · renews Nov 18, 2027' : 'Monthly · renews Dec 18, 2026') : s.locked ? 'No plan. Your free day ended.' : 'Free first day · ends tonight',
+      subRowCta: s.subscribed ? 'Manage' : 'See plans',
+      subRowGo: () => s.subscribed ? this.toastMsg('Opens your App Store subscriptions. Cancel there anytime.') : this.go('paywall'),
+      restore: () => s.subscribed ? this.toastMsg('Your subscription is already active.') : (this.setState({ subscribed: true, locked: false, subKind: 'restore' }), this.go('subok')),
+      notNow: () => { this.setState({ locked: true }); this.go('today'); },
+      lockedOn: s.locked && V === 'ana',
+      subHead: s.subKind === 'restore' ? 'Welcome back. Your plan is restored.' : 'You’re in. Let’s keep going.',
+      subLine: s.subKind === 'restore' ? 'I found your BestMom ' + (s.plan === 'year' ? 'yearly' : 'monthly') + ' plan on this account.' : (s.plan === 'year' ? 'BestMom yearly · $59.99 a year · renews Nov 18, 2027.' : 'BestMom monthly · $9.99 a month · renews Dec 18, 2026.'),
+      subContinue: () => this.go('today'),
+      startOver: () => this.setState(this.initState(s.fam)),
+      // Jarvis
+      jarvisOn: s.jarvisNews && V === 'ana', jarvisOk: () => this.setState({ jarvisNews: false }), openMemory: () => this.setState({ sheet: 'memory', radial: false }),
+      memCount: s.memories.length, memEmpty: !s.memories.length,
+      memRows: s.memories.map((m, i) => ({ ...m, forget: () => { this.setState(st => ({ memories: st.memories.filter((_, j) => j !== i) })); this.toastMsg('Forgotten. I won’t plan with it anymore.'); } })),
+      stages: [['Memory', 'Since day 1'], ['Patterns', 'Since Nov 8'], ['Supplies', 'Since Nov 14']].map(([name, since]) => ({ name, since })),
+      memCorrect: () => this.setState({ sheet: null, tab: 'allie', chatTopic: 'me', chatInput: 'Something changed: ' }),
+      // lock screen notifications (F4)
+      lockNotes: [['meet', 'now', 'Meeting with Sarah in 10 min', 'The bottle is already in the fridge. You’re set.'], ['walk', '1:58 PM', 'Stroller walk · 20 min', '20 free minutes before your 3:00. A short walk recharges you.'], ['nap2', '1:15 PM', kidName('a') + '’s nap in 15 min', 'Awake 2h 10m, right on his rhythm. Start winding down now.']]
+        .map(([id, when, title, body]) => ({ when, title, body, go: () => this.setState({ screen: 'app', tab: 'today', sheet: 'block', selBlock: id, viewer: 'ana', mode: 'mom' }) })),
       doneLabel: doneCount + ' of ' + live.length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
       openLog: () => this.go('log'), openHappened: () => this.go('happened'),
       tabs: [['today', 'Today'], ['cal', 'Calendar'], ['plus', ''], ['kids', 'Kids'], ['allie', an]].map(([k, label]) => ({ label, plus: k === 'plus', tab: k !== 'plus', icon: ICONS[k] || '', ...((on => ({ color: on ? 'var(--acc)' : 'var(--mute)', fill: on ? .22 : 0, cur: on ? 'page' : 'false' }))(s.tab === k || (k === 'today' && (s.tab === 'me' || s.tab === 'home')))), go: () => this.go(k) })),
@@ -1991,7 +2297,9 @@ class Component extends DCLogic {
       },
       sel,
       // replan
-      replanLoading: s.replanLoading, replanReady: !s.replanLoading, replanTag: s.replanLoading ? 'Something happened' : 'New plan',
+      replanLoading: s.replanLoading && !s.replanErr, replanReady: !s.replanLoading && !s.replanErr, replanError: s.replanErr,
+      retryReplan: () => this.openReplan(s.replanKey), simpleReplan: () => this.setState({ replanErr: false, replanSimple: true }),
+      replanSimpleNote: offline || s.replanSimple, replanSimpleText: offline ? 'Offline: this is a simpler on-phone replan.' : 'A simpler plan, made on your phone. Fixed blocks stay, optional ones go first.', replanTag: s.replanLoading ? 'Something happened' : 'New plan',
       replanHead: RP.head, replanNotice: !!RP.notice, replanNoticeText: RP.notice || '', changes,
       acceptLabel: nAcc ? 'Accept ' + nAcc + (nAcc === 1 ? ' change' : ' changes') : 'Done',
       acceptReplan: () => this.acceptReplan(), cancelReplan: () => this.setState({ screen: 'app', tab: 'today' }),
@@ -1999,15 +2307,25 @@ class Component extends DCLogic {
       hasToast: !!s.toast, toastText: s.toast, toastUndo: s.toastUndo && !!s.prevBlocks,
       undo: () => this.setState(st => ({ blocks: st.prevBlocks, prevBlocks: null, toast: null, replans: st.screen === 'app' && st.toast && st.toast.startsWith('Plan updated') ? Math.max(0, st.replans - 1) : st.replans })),
       // bed
-      bedKid: kidName(s.fam === 'twins' ? 'all' : 'a'), bedActive: !s.bedDone, bedDone: s.bedDone,
-      bedDots: BED.map((_, i) => ({ bg: i <= s.bedStep ? 'var(--d-E0A46A)' : 'var(--l-2E241E)' })),
-      bedStepLabel: 'Step ' + (s.bedStep + 1) + ' of 3', bedTitle: BED[s.bedStep].t, bedHint: BED[s.bedStep].hint,
+      bedKid: kidName(s.bedWho), bedActive: !s.bedDone && !s.bedPick, bedDone: s.bedDone, bedPicking: s.bedPick && !s.bedDone,
+      bedOpenPick: () => this.setState({ bedPick: true, bedRun: false }), bedMulti: multi,
+      bedPickHead: multi ? 'Who’s going down?' : kidName('a') + '’s three steps',
+      bedWhoChips: [...kids.map(k => [k.id, k.name]), ['all', kids.length > 2 ? 'All together' : 'Both, together']].map(([id, label]) => { const on = s.bedWho === id; return { label, on: on ? 'true' : 'false', bg: on ? '#E0A46A' : 'transparent', fg: on ? '#1A1411' : '#EBDDCF', border: on ? '#E0A46A' : '#3A2E27', pick: () => this.setState({ bedWho: id }) }; }),
+      bedWhoNote: s.bedWho === 'all' ? 'One routine for everyone: bath together, then lotion and song side by side.' : 'Just ' + kidName(s.bedWho) + ' for now. Start the next one when you’re ready.',
+      bedEditLabel: s.bedEditing ? 'Done' : 'Edit', bedToggleEdit: () => this.setState({ bedEditing: !s.bedEditing }),
+      bedStepRows: BS.map((b, i) => { const set = ch => this.setState(st => ({ bedSteps: st.bedSteps.map((x, j) => j === i ? { ...x, ...ch } : x) })); return {
+        n: i + 1, t: b.t, d: b.d, view: !s.bedEditing, editing: s.bedEditing, onT: e => set({ t: e.target.value, hint: '' }),
+        minus: () => set({ d: Math.max(1, b.d - 1) }), plus: () => set({ d: Math.min(30, b.d + 1) }) }; }),
+      bedStartLabel: 'Start · ' + BS.reduce((a, b) => a + b.d, 0) + ' min',
+      bedStart: () => this.setState({ bedPick: false, bedEditing: false, bedStep: 0, bedLeft: BS[0].d * 60, bedRun: true }),
+      bedDots: BS.map((_, i) => ({ bg: i <= s.bedStep ? 'var(--d-E0A46A)' : 'var(--l-2E241E)' })),
+      bedStepLabel: 'Step ' + (s.bedStep + 1) + ' of 3', bedTitle: BS[s.bedStep].t, bedHint: BS[s.bedStep].hint,
       bedOffset: 703.7 * (1 - s.bedLeft / bedTot), bedClock: bm + ':' + String(bsec).padStart(2, '0'), bedRunLabel: s.bedRun ? 'left' : 'paused',
       bedPause: () => this.setState({ bedRun: !s.bedRun }), bedPauseLabel: s.bedRun ? 'Pause' : 'Resume',
-      bedNextLabel: s.bedStep < 2 ? 'Next: ' + BED[s.bedStep + 1].t : 'Finish',
+      bedNextLabel: s.bedStep < 2 ? 'Next: ' + BS[s.bedStep + 1].t : 'Finish',
       bedNext: () => {
-        if (s.bedStep < 2) this.setState({ bedStep: s.bedStep + 1, bedLeft: BED[s.bedStep + 1].d * 60, bedRun: true });
-        else { this.setState(st => ({ bedDone: true, blocks: st.blocks.map(b => b.id === 'bath' ? { ...b, status: 'done' } : b), logs: [...st.logs, { kid: 'a', type: 'sleep', t: 1161 }] })); }
+        if (s.bedStep < 2) this.setState({ bedStep: s.bedStep + 1, bedLeft: BS[s.bedStep + 1].d * 60, bedRun: true });
+        else { this.setState(st => ({ bedDone: true, blocks: st.blocks.map(b => b.id === 'bath' ? { ...b, status: 'done' } : b), logs: [...st.logs, ...(st.bedWho === 'all' ? kids.map(k => k.id) : [st.bedWho]).map(kid => ({ kid, type: 'sleep', t: 1161 }))] })); }
       },
       exitNight: () => this.setState({ screen: 'app', tab: 'today' }),
       breathLeft: Math.floor(bl / 60) + ':' + String(bl % 60).padStart(2, '0'),
@@ -2019,15 +2337,16 @@ class Component extends DCLogic {
       toPaywall: () => this.go('paywall'),
       yesterday: [{ text: doneCount + ' things done, on your terms' }, { text: s.replans ? s.replans + ' replans, nothing lost' : 'Your 3:00 with Sarah, on time' }, { text: kidName('a') + ' asleep by 7:21 PM' }],
       plans: [['year', 'Yearly', '$5.00 a month, billed yearly. Save 50%', '$59.99'], ['month', 'Monthly', 'Cancel anytime', '$9.99']].map(([k, name, sub, price]) => ({ name, sub, price, border: s.plan === k ? 'var(--acc)' : 'var(--line)', dot: s.plan === k ? 'var(--acc)' : 'transparent', pick: () => this.setState({ plan: k }) })),
-      planPrice, subscribe: () => { this.go('today'); this.toastMsg('Welcome back. Today’s plan is ready.'); },
+      planPrice, subscribe: () => { this.setState({ subscribed: true, locked: false, subKind: 'buy' }); this.go('subok'); },
       toTodayPlain: () => this.go('today'),
       // kids tab
       kidCards: kids.map(k => ({
-        ...k, initial: k.name[0],
-        play: (PLAY[k.id] || PLAY.a).map(([label, n]) => ({ label, n: n + s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === label).length }))
+        ...k, initial: k.name[0], canEdit: V === 'ana',
+        edit: () => this.setState({ sheet: 'kid', kidEditId: k.id, kidDraft: { name: k.name, born: toYm(k.born), color: Math.max(0, KID_COLORS.findIndex(c => c[0] === k.color)) } }),
+        play: (k.isNew ? [] : PLAY[k.id] || PLAY.a).map(([label, n]) => ({ label, n: n + s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === label).length }))
           .concat(ACTS.map(a => ACT_KEY[a] || a).filter(a => !(PLAY[k.id] || PLAY.a).some(([x]) => x === a)).map(a => ({ label: a, n: s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === a).length })).filter(x => x.n > 0)),
-        logs: s.logs.filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : '') })),
-        hasLearn: true, hasNights: !s.dayOne, name: k.name, nightsEmpty: s.dayOne, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
+        logs: s.logs.map((l, i) => ({ ...l, i })).filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : ''), open: () => this.setState({ sheet: 'logedit', logEdit: l.i, leT: l.t, leEnd: l.end ?? null }) })),
+        hasLearn: !k.isNew, hasNights: !s.dayOne && !k.isNew, name: k.name, nightsEmpty: s.dayOne || !!k.isNew, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
         skills: s.skills.filter(x => x.kid === k.id), learnSrc: s.wakeWin[k.id] != null && s.wakeWin[k.id] !== k.ww ? 'Set by you. My estimate was ' + fmtDur(k.ww) : 'Based on your last 10 days',
         nights: k.nights.map((w, i) => ({ h: w ? w * 16 : 4, c: k.at >= 0 && i > k.at ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === k.at })),
         ...(() => { const usual = k.at >= 0 ? 1 : [...k.nights].sort((x, y) => x - y)[7], through = k.nights.filter(w => !w).length; return {
@@ -2051,16 +2370,49 @@ class Component extends DCLogic {
       chatChips: TOPICS[s.chatTopic].chips.map(text => ({ text, send: () => this.sendChat(text) })),
       onChatInput: e => this.setState({ chatInput: e.target.value }), onChatKey: e => { if (e.key === 'Enter') this.sendChat(s.chatInput); },
       sendChat: () => this.sendChat(s.chatInput),
+      // kid profile (F14: add, edit, archive)
+      ...(() => { const d = s.kidDraft, name = d.name.trim(), ed = s.kidEditId; return {
+        kidSheetTitle: ed ? 'Edit ' + (kids.find(k => k.id === ed) || {}).name : 'Add a child', kidDraftName: d.name, kidDraftBorn: d.born, kidDraftAge: ageOf(d.born),
+        onKidName: e => this.setState({ kidDraft: { ...d, name: e.target.value } }), onKidBorn: e => this.setState({ kidDraft: { ...d, born: e.target.value || d.born } }),
+        kidColors: KID_COLORS.map(([color, label], i) => ({ color, label, on: d.color === i ? 'true' : 'false', ring: d.color === i ? 'var(--ink)' : 'transparent', pick: () => this.setState({ kidDraft: { ...d, color: i } }) })),
+        kidSaveOp: name ? 1 : 0.4, kidSaveLabel: ed ? 'Save' : name ? 'Add ' + name : 'Add child', kidCanArchive: !!ed && kids.length > 1,
+        kidSave: () => { if (!name) return; const patch = { name, born: ymLabel(d.born), age: ageOf(d.born), color: KID_COLORS[d.color][0] };
+          if (ed) this.setState(st => ({ kidEdits: { ...st.kidEdits, [ed]: { ...st.kidEdits[ed], ...patch } }, sheet: null }));
+          else this.setState(st => ({ newKids: [...st.newKids, { id: 'k' + (st.newKids.length + 1), isNew: true, ww: 180, his: 'their', he: 'they', nights: Array(14).fill(0), at: -1, ...patch }], sheet: null }));
+          this.toastMsg(ed ? 'Saved.' : name + ' is in. I’ll plan around ' + name + ' from tomorrow.'); },
+        kidArchive: () => { this.setState(st => ({ kidEdits: { ...st.kidEdits, [ed]: { ...st.kidEdits[ed], archived: true } }, sheet: null })); this.toastMsg(name + ' archived. Restore anytime from Kids.'); },
+      }; })(),
+      canAddKid: V === 'ana', addKidOpen: () => this.setState({ sheet: 'kid', kidEditId: null, kidDraft: { name: '', born: '2026-11', color: kids.length % KID_COLORS.length } }),
+      archivedKids: V === 'ana' ? this.allKids().filter(k => k.archived).map(k => ({ name: k.name, restore: () => this.setState(st => ({ kidEdits: { ...st.kidEdits, [k.id]: { ...st.kidEdits[k.id], archived: false } } })) })) : [],
+      // fix a log (F5: correct the time)
+      ...(() => { const le = s.logs[s.logEdit] || s.logs[0] || { kid: 'a', type: 'sleep', t: NOW }, name = kidName(le.kid); return {
+        leTitle: name + ' · ' + TYPES[le.type], leSub: (le.detail ? le.detail + ' · ' : '') + 'Logged today', leName: name,
+        leTimes: [{ label: le.type === 'sleep' ? 'Fell asleep' : 'At', text: fmt(s.leT), minus: () => this.setState({ leT: s.leT - 5 }), plus: () => this.setState({ leT: Math.min(s.leT + 5, s.leEnd != null ? s.leEnd - 5 : NOW) }) }]
+          .concat(s.leEnd != null ? [{ label: 'Woke up', text: fmt(s.leEnd), minus: () => this.setState({ leEnd: Math.max(s.leEnd - 5, s.leT + 5) }), plus: () => this.setState({ leEnd: Math.min(s.leEnd + 5, NOW) }) }] : []),
+        leSave: () => { this.setState(st => ({ logs: st.logs.map((l, i) => i === st.logEdit ? { ...l, t: st.leT, ...(st.leEnd != null ? { end: st.leEnd } : {}) } : l), sheet: null })); this.toastMsg('Fixed: ' + name + ' · ' + TYPES[le.type] + ' · ' + fmt(s.leT) + '.'); },
+        leDelete: () => { this.setState(st => ({ logs: st.logs.filter((_, i) => i !== st.logEdit), sheet: null })); this.toastMsg('Deleted.'); },
+      }; })(),
       // settings
+      openCals: () => this.setState({ sheet: 'cals' }),
+      calSummary: (w => w.length ? w.join(' and ') + (w.length > 1 ? ' count' : ' counts') + ' as work. I write only to “BestMom”.' : 'None marked as work yet')(CALS.filter(([id]) => s.cals[id] === 'work').map(c => c[1])),
+      calRows: CALS.map(([id, name, src, dot]) => ({ name, src, dot, opts: [['work', 'Work'], ['personal', 'Personal'], ['ignore', 'Ignore']].map(([v, label]) => { const on = s.cals[id] === v; return { label, on: on ? 'true' : 'false', bg: on ? 'var(--card)' : 'transparent', sh: on ? 'var(--sh4)' : 'none', pick: () => this.setState(st => ({ cals: { ...st.cals, [id]: v } })) }; }) })),
+      quietFrom: s.quiet[0], quietTo: s.quiet[1], quietText: fmt(tm(s.quiet[0])) + ' to ' + fmt(tm(s.quiet[1])),
+      onQuietFrom: e => this.setState({ quiet: [e.target.value || s.quiet[0], s.quiet[1]] }), onQuietTo: e => this.setState({ quiet: [s.quiet[0], e.target.value || s.quiet[1]] }),
+      expOpts: [['json', 'JSON', 'One file. Best for moving to another app.'], ['csv', 'CSV', 'One file per kind. Opens in any spreadsheet.']].map(([k, name, sub]) => { const on = s.exportFmt === k; return { name, sub, on: on ? 'true' : 'false', border: on ? 'var(--acc)' : 'var(--line)', dot: on ? 'var(--acc)' : 'transparent', pick: () => this.setState({ exportFmt: k }) }; }),
+      expFmtLabel: s.exportFmt.toUpperCase(),
+      doExport: () => { this.setState({ sheet: null }); this.toastMsg('Your share sheet opens with ' + (s.exportFmt === 'json' ? 'bestmom-export.json' : 'bestmom-export.zip (CSV files)') + '.'); },
+      delFamily: s.members.length > 1, delFamilyText: s.members.filter(m => m.role !== 'owner').map(m => m.name).join(' and ') + (s.members.length > 2 ? ' all' : ''),
+      delBox: { bg: s.delOk ? '#A33A2A' : 'transparent', border: s.delOk ? '#A33A2A' : 'var(--line2)', op: s.delOk ? 1 : 0 }, toggleDelOk: () => this.setState({ delOk: !s.delOk }),
+      delOp: s.delOk ? 1 : 0.4, doDelete: () => { if (s.delOk) this.go('deleted'); },
       settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing'], ['work', 'Work', 'Meeting prep, focus blocks'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Support person', 'Up to 3 a week, never on hard days']].map(([k, label, sub]) => ({
         label, sub, dot: DIMS[k].fg, track: s.settings[k] ? 'var(--l-3D6142)' : 'var(--line2)', justify: s.settings[k] ? 'flex-end' : 'flex-start',
         toggle: () => this.setState(st => ({ settings: { ...st.settings, [k]: !st.settings[k] } })),
       })),
       budget: s.budget, budgetDown: () => this.setState({ budget: Math.max(0, s.budget - 1) }), budgetUp: () => this.setState({ budget: Math.min(20, s.budget + 1) }),
-      exportData: () => this.toastMsg('Preparing your export. I’ll let you know when it’s ready.'),
-      deleteData: () => this.toastMsg('I’ll ask you to confirm first. Everything is erased within 30 days, backups included.'),
+      exportData: () => this.setState({ sheet: 'export' }),
+      deleteData: () => this.setState({ sheet: 'delete', delOk: false }),
       // flow panel
-      flowGroups: FLOW.map(g => ({ title: g.title, items: g.items.map(([n, label, key]) => ({ n, label: key === 'allie' ? an + ' chat' : label, bg: curKey === key ? 'var(--l-2A211C)' : 'transparent', fg: curKey === key ? '#FFF8F0' : 'var(--l-2A211C)', go: () => { this.setState({ viewer: 'ana', mode: key === 'self' ? 'self' : 'mom', dayOne: key === 'dayone' || key === 'kidsempty' }); this.go(key); } })) })),
+      flowGroups: FLOW.map(g => ({ title: g.title, items: g.items.map(([n, label, key]) => ({ n, label: key === 'allie' ? an + ' chat' : label, bg: curKey === key ? 'var(--l-2A211C)' : 'transparent', fg: curKey === key ? '#FFF8F0' : 'var(--l-2A211C)', go: () => { this.setState({ viewer: 'ana', mode: key === 'self' ? 'self' : 'mom', dayOne: key === 'dayone' || key === 'kidsempty', locked: false, notifDenied: false, jarvisNews: false, pauseLeft: 0 }); this.go(key); } })) })),
       legend: LEGEND.map(k => DIMS[k]).map(d => ({ label: d.label, fg: d.fg, bg: d.bg })),
     };
   }
