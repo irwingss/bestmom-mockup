@@ -421,19 +421,18 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         </div>
         <sc-if value="{{ k.hasNights }}">
           <div data-screen-label="14b Nights" style="margin-bottom:16px;background:var(--d-ECEBF6);border-radius:16px;padding:12px 16px 16px">
-            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-3E3F78)">Nights · last 14</span><span style="font-size:12px;color:#5B5C8F">wakes per night</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-3E3F78)">Nights · last 14</span><span style="font-size:12px;color:#5B5C8F;display:flex;align-items:center;gap:6px">wakes per night <span style="width:14px;border-top:1.5px dashed var(--d-9C9CC8)"></span> {{ k.his }} usual</span></div>
             <div style="position:relative;display:flex;align-items:flex-end;gap:4px;height:64px;margin:12px 0 4px">
-              <div style="position:absolute;left:0;right:0;bottom:16px;border-top:1.5px dashed var(--d-9C9CC8)"></div>
-              <span style="position:absolute;right:0;bottom:19px;font-size:11px;font-weight:700;color:#5B5C8F">his usual</span>
+              <div style="position:absolute;left:0;right:0;bottom:{{ k.usualY }}px;border-top:1.5px dashed var(--d-9C9CC8)"></div>
               <sc-for list="{{ k.nights }}" as="n"><div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px">
                 <sc-if value="{{ n.mark }}"><div title="New skill logged" style="width:8px;height:8px;border-radius:4px;background:#B88A35;box-shadow:0 0 0 2px var(--d-ECEBF6)"></div></sc-if>
                 <div style="width:100%;height:{{ n.h }}px;border-radius:4px;background:{{ n.c }}"></div>
               </div></sc-for>
             </div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;color:#5B5C8F"><span>Nov 3</span><span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:4px;background:#B88A35"></span>Started crawling</span><span>Last night</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:#5B5C8F"><span>Nov 3</span><sc-if value="{{ k.rough }}"><span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:4px;background:#B88A35"></span>New skill</span></sc-if><span>Last night</span></div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"><sc-for list="{{ k.skills }}" as="sk"><span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;background:var(--card);padding:4px 10px;border-radius:12px"><span style="width:7px;height:7px;border-radius:4px;background:#B88A35"></span>{{ sk.label }} · {{ sk.date }}</span></sc-for></div>
-            <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--l-3E3F78)">Rough patch · night 4</div>
-            <div style="font-size:15px;line-height:1.4;margin-top:4px">Nights got choppier the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.</div>
+            <div style="margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--l-3E3F78)">{{ k.nightHead }}</div>
+            <div style="font-size:15px;line-height:1.4;margin-top:4px">{{ k.nightText }}</div>
             <div style="font-size:12px;color:#5B5C8F;margin-top:8px;line-height:1.4">Pattern from your own logs, not a chart of what babies “should” do. Worried about something? Your pediatrician is the right call.</div>
             <div style="display:flex;gap:8px;margin-top:12px"><button onClick="{{ k.night }}" style="height:40px;padding:0 16px;border-radius:20px;border:none;background:#3E3F78;color:#FFFFFF;font-weight:600;font-size:14px;cursor:pointer">Night log</button><button onClick="{{ k.skill }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #3E3F78;background:transparent;color:var(--l-3E3F78);font-weight:600;font-size:14px;cursor:pointer">Log a new skill</button></div>
           </div>
@@ -443,7 +442,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
             <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l-3E3F78)">Nights · last 14</div>
             <div style="display:flex;align-items:flex-end;gap:4px;height:48px;margin:12px 0 8px"><sc-for list="{{ ghostBars }}" as="g"><div style="flex:1;height:{{ g.h }}px;border-radius:4px;border:1.5px dashed var(--d-9C9CC8)"></div></sc-for></div>
             <div style="font-size:15px;line-height:1.4">No nights logged yet. After about a week I’ll show {{ k.name }}’s usual and tell you when a night is off pattern.</div>
-            <div style="font-size:12px;color:#5B5C8F;margin-top:8px;line-height:1.4">One tap when he wakes is enough. The screen stays red and dim.</div>
+            <div style="font-size:12px;color:#5B5C8F;margin-top:8px;line-height:1.4">One tap when {{ k.he }} wakes is enough. The screen stays red and dim.</div>
             <button onClick="{{ k.night }}" style="margin-top:12px;height:44px;padding:0 16px;border-radius:22px;border:none;background:#3E3F78;color:#FFFFFF;font-weight:600;font-size:15px;cursor:pointer">Log tonight</button>
           </div>
         </sc-if>
@@ -1070,6 +1069,7 @@ const DAYN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], TODAY_I = 2, WEE
 const H0 = 360, H1 = 1320, HR = 34; // calendar grid: 6 AM to 10 PM, 34px per hour
 const MPCT = [1, .92, .85, 1, .78, .9, .88, 1, .95, .7, .82, 1, .9, .93]; // Nov 1-14 done ratio (demo)
 const NIGHTS = [1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 3, 2, 3, 3], SKILL_AT = 9; // wakes, last 14 nights; crawling logged on night 10
+const MATEO = { ww: 135, his: 'his', he: 'he', nights: NIGHTS, at: SKILL_AT };
 const MOMENT_TONES = ['linear-gradient(135deg,var(--d-F3D5C0),var(--d-E4A98F))', 'linear-gradient(135deg,var(--d-D7E3EE),var(--d-A9C1D9))', 'linear-gradient(135deg,var(--d-E7DDF0),var(--d-C7B3DD))', 'linear-gradient(135deg,var(--d-E1EBD9),var(--d-B7CFA8))'];
 const ROLES = {
   owner: { label: 'Owner', fg: 'var(--l-7E3A1D)', bg: 'var(--d-F1DFD2)', color: 'var(--l-A9502B)' },
@@ -1102,9 +1102,9 @@ function weekDays(fam, today, extra) {
 }
 const KINDS = { fixed: 'Fixed', flex: 'Flexible', routine: 'Routine', optional: 'Optional' };
 const FAMS = {
-  two: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)' }, { id: 'b', name: 'Lia', age: '3 years', born: 'Jun 2023', color: 'var(--l-8A4C8F)' }],
-  one: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)' }],
-  twins: [{ id: 'a', name: 'Mateo', age: '4 months', born: 'Jul 2026', color: 'var(--l-2F7F7A)' }, { id: 'b', name: 'Sofi', age: '4 months', born: 'Jul 2026', color: 'var(--l-8A4C8F)' }],
+  two: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)', ...MATEO }, { id: 'b', name: 'Lia', age: '3 years', born: 'Jun 2023', color: 'var(--l-8A4C8F)', ww: 330, his: 'her', he: 'she', nights: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0], at: -1 }],
+  one: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)', ...MATEO }],
+  twins: [{ id: 'a', name: 'Mateo', age: '4 months', born: 'Jul 2026', color: 'var(--l-2F7F7A)', ...MATEO }, { id: 'b', name: 'Sofi', age: '4 months', born: 'Jul 2026', color: 'var(--l-8A4C8F)', ww: 105, his: 'her', he: 'she', nights: [2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2], at: -1 }],
 };
 const B = (id, t, dur, title, dim, kind, child, why, status) => ({ id, t, dur, title, dim, kind, child, why, status: status || 'pending' });
 function buildBlocks(fam) {
@@ -1321,7 +1321,7 @@ class Component extends DCLogic {
       members: [{ id: 'ana', name: 'Rossi', role: 'owner' }, { id: 'diego', name: 'Diego', role: 'partner' }],
       moments: [{ t: '10:12 AM', text: 'Mateo laughed at the dog. Real belly laughs.', tone: MOMENT_TONES[0] }, { t: '8:05 AM', text: 'Lia at drop-off: “Love you to the moon, mama.”', tone: MOMENT_TONES[1] }],
       nightAwake: false, nightSec: 0, nightTagsOn: {}, nightWakes: [{ t: '11:52 PM', dur: '12 min', tags: 'Fed', m: 1432, d: 12 }], napWakes: [{ t: '10:05 AM', dur: '6 min', tags: 'Rocked', m: 605, d: 6 }], wakeKind: 'night',
-      pastOpen: false, pastTime: '00:40', pastDur: 10, wakeWin: 135, wwDraft: 135, wwSet: false,
+      pastOpen: false, pastTime: '00:40', pastDur: 10, wakeWin: {}, wwDraft: 135, wwKid: 'a',
       skills: [{ kid: 'a', label: 'Started crawling', date: 'Nov 12' }], skillKid: 'a', skillPick: 'Pulling to stand', skillText: '', skillDate: '2026-11-17', logDiaper: 'wet',
       homeSeg: 'meals', mealPlan: ['Veggie omelet', 'Pasta with tomato sauce', 'Chicken tacos', 'Arroz con pollo', 'Lentil soup', 'Salmon and rice', null], mealPick: null,
       pantry: PANTRY0, pantryText: '', pantryHeard: 0, shopExtra: [],
@@ -1389,7 +1389,7 @@ class Component extends DCLogic {
       case 'perm': return this.setState({ ...base, screen: 'perm', permStep: 0 });
       case 'today': case 'kids': case 'me': case 'cal': case 'home': return this.setState({ ...base, screen: 'app', tab: k });
       case 'skill': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'skill', skillKid: 'a', skillText: '' });
-      case 'wakewin': return this.setState(st => ({ ...base, screen: 'app', tab: 'kids', sheet: 'wakewin', wwDraft: st.wakeWin }));
+      case 'wakewin': return this.setState(st => ({ ...base, screen: 'app', tab: 'kids', sheet: 'wakewin', wwKid: 'a', wwDraft: st.wakeWin.a ?? 135 }));
       case 'reminder': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sickDay: 1, sickAsk: false });
       case 'sickmorning': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sickDay: 2, sickAsk: true });
       case 'kidnote': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'note', noteKid: 'a', noteIdx: -1, noteText: '' });
@@ -1830,10 +1830,11 @@ class Component extends DCLogic {
           noteSave: () => { const text = s.noteText.trim(); if (!text) return;
             this.setState(st => ({ sheet: null, notes: st.noteIdx >= 0 ? st.notes.map((n, j) => j === st.noteIdx ? { ...n, text } : n) : [{ kid: st.noteKid, date: 'Nov 17', text }, ...st.notes] }));
             this.toastMsg('Saved on this phone. Only you can see it.'); },
-          shWakeWin: s.sheet === 'wakewin', wwName: kidName('a'), wwText: fmtDur(ww), wwPct: (ww - 60) / 180 * 100, wwEstPct: (135 - 60) / 180 * 100,
-          wwMinus: () => this.setState({ wwDraft: Math.max(60, ww - 5) }), wwPlus: () => this.setState({ wwDraft: Math.min(240, ww + 5) }),
-          wwChips: chips(ww, [105, 120, 135, 150, 180].map(v => [v, fmtDur(v)]), v => this.setState({ wwDraft: v })),
-          wwSave: () => { this.setState({ wakeWin: ww, wwSet: ww !== 135, sheet: null }); this.toastMsg('Got it. From tomorrow I plan ' + kidName('a') + '’s naps around ' + fmtDur(ww) + '.'); },
+          ...(() => { const wk = kids.find(k => k.id === s.wwKid) || kids[0], est = wk.ww, lo = Math.max(45, est - 75), hi = est + 105; return {
+          shWakeWin: s.sheet === 'wakewin', wwName: wk.name, wwText: fmtDur(ww), wwPct: (ww - lo) / (hi - lo) * 100, wwEstPct: (est - lo) / (hi - lo) * 100,
+          wwMinus: () => this.setState({ wwDraft: Math.max(lo, ww - 5) }), wwPlus: () => this.setState({ wwDraft: Math.min(hi, ww + 5) }),
+          wwChips: chips(ww, [-30, -15, 0, 15, 45].map(d => [est + d, fmtDur(est + d)]), v => this.setState({ wwDraft: v })),
+          wwSave: () => { this.setState(st => ({ wakeWin: { ...st.wakeWin, [wk.id]: ww }, sheet: null })); this.toastMsg('Got it. From tomorrow I plan ' + wk.name + '’s naps around ' + fmtDur(ww) + '.'); } }; })(),
           shSkill: s.sheet === 'skill', skillWho, skillText: s.skillText, onSkillText: e => this.setState({ skillText: e.target.value }), skillDate: s.skillDate, onSkillDate: e => this.setState({ skillDate: e.target.value || '2026-11-17' }),
           skillChips: chips(s.skillText.trim() ? null : s.skillPick, SKILLS.map(x => [x, x]), v => this.setState({ skillPick: v, skillText: '' })),
           skillDays: chips(s.skillDate, [['2026-11-17', 'Today'], ['2026-11-16', 'Yesterday']], v => this.setState({ skillDate: v })),
@@ -2001,10 +2002,15 @@ class Component extends DCLogic {
         play: (PLAY[k.id] || PLAY.a).map(([label, n]) => ({ label, n: n + s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === label).length }))
           .concat(ACTS.map(a => ACT_KEY[a] || a).filter(a => !(PLAY[k.id] || PLAY.a).some(([x]) => x === a)).map(a => ({ label: a, n: s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === a).length })).filter(x => x.n > 0)),
         logs: s.logs.filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : '') })),
-        hasLearn: k.id === 'a', hasNights: k.id === 'a' && !s.dayOne, name: k.name, nightsEmpty: k.id === 'a' && s.dayOne, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
-        skills: s.skills.filter(x => x.kid === k.id), learnSrc: s.wwSet ? 'Set by you. My estimate was 2h 15m' : 'Based on your last 10 days',
-        nights: NIGHTS.map((w, i) => ({ h: w ? w * 16 : 4, c: i > SKILL_AT ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === SKILL_AT })), learn: k.name + '’s wake window is about ' + fmtDur(s.wakeWin) + '. I plan his naps around it.',
-        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.setState({ sheet: 'wakewin', wwDraft: s.wakeWin }),
+        hasLearn: true, hasNights: !s.dayOne, name: k.name, nightsEmpty: s.dayOne, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
+        skills: s.skills.filter(x => x.kid === k.id), learnSrc: s.wakeWin[k.id] != null && s.wakeWin[k.id] !== k.ww ? 'Set by you. My estimate was ' + fmtDur(k.ww) : 'Based on your last 10 days',
+        nights: k.nights.map((w, i) => ({ h: w ? w * 16 : 4, c: k.at >= 0 && i > k.at ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === k.at })),
+        ...(() => { const usual = k.at >= 0 ? 1 : [...k.nights].sort((x, y) => x - y)[7], through = k.nights.filter(w => !w).length; return {
+          usualY: Math.max(4, usual * 16), rough: k.at >= 0, nightHead: k.at >= 0 ? 'Rough patch · night 4' : 'Steady · nothing new',
+          nightText: k.at >= 0 ? 'Nights got choppier the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.'
+            : usual ? 'About ' + usual + ' wakes a night, same as ' + k.his + ' usual. Your mornings stay as planned.' : k.name + ' slept through ' + through + ' of the last 14 nights. Nothing to adjust.' }; })(),
+        learn: k.name + '’s wake window is about ' + fmtDur(s.wakeWin[k.id] ?? k.ww) + '. I plan ' + k.his + ' naps around it.',
+        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.setState({ sheet: 'wakewin', wwKid: k.id, wwDraft: s.wakeWin[k.id] ?? k.ww }),
         log: () => this.setState({ sheet: 'log', tab: 'today', logKid: k.id, logTime: NOW, logHeard: null }),
         ...(() => { const mine = s.notes.map((n, i) => ({ ...n, i })).filter(n => n.kid === k.id); return {
           canNotes: V === 'ana', hasNotes: mine.length > 0, noNotes: !mine.length,
