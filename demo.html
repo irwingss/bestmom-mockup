@@ -751,6 +751,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           <div style="width:51px;height:31px;border-radius:999px;background:{{ r.track }};padding:2px;display:flex;justify-content:{{ r.justify }};flex:none"><div style="width:27px;height:27px;border-radius:50%;background:var(--d-FFFFFF);box-shadow:var(--sh4)"></div></div>
         </button>
       </sc-for>
+      <button onClick="{{ openSupport }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:0 16px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer"><div style="flex:1;font-size:17px;font-weight:600;color:var(--acc)">Who is your support person?</div><div style="font-size:15px;color:var(--mute)">{{ supRel }}</div></button>
       <div style="padding:12px 16px;border-bottom:1px solid var(--hair)"><div style="font-size:17px;font-weight:600">Quiet hours</div><div style="font-size:13px;color:var(--mute)">No nudges or tips from {{ quietText }}.</div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><input type="time" value="{{ quietFrom }}" onChange="{{ onQuietFrom }}" aria-label="Quiet hours start" style="flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;font-size:17px;outline:none"><span style="color:var(--mute)">to</span><input type="time" value="{{ quietTo }}" onChange="{{ onQuietTo }}" aria-label="Quiet hours end" style="flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;font-size:17px;outline:none"></div>
       </div>
@@ -948,6 +949,19 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         </div>
       </sc-if>
 
+      <sc-if value="{{ shSupport }}">
+        <div data-screen-label="59 Support person">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Your support person</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">The person I suggest small kind gestures for. A partner, your mom, a friend: anyone who has your back.</div>
+        <label style="display:block;font-size:13px;font-weight:600;color:var(--mute);margin:0 2px 8px">Name</label>
+        <input value="{{ supName }}" onChange="{{ onSupName }}" aria-label="Support person name" placeholder="Their name" style="width:100%;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 16px;font-size:17px;outline:none;box-sizing:border-box">
+        <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 2px 8px">Who they are to you</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ supRels }}" as="c"><button onClick="{{ c.pick }}" aria-pressed="{{ c.on }}" style="height:40px;padding:0 16px;border-radius:999px;border:{{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;cursor:pointer">{{ c.label }}</button></sc-for></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 12px 8px 16px;min-height:60px"><div style="flex:1"><div style="font-size:17px;font-weight:600">Ideas a week, at most</div><div style="font-size:13px;color:var(--mute)">Only on good-energy days with a free gap</div></div><button onClick="{{ supDown }}" aria-label="Fewer" style="width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:20px;cursor:pointer">−</button><div style="width:30px;text-align:center;font-size:17px;font-weight:600">{{ supWeek }}</div><button onClick="{{ supUp }}" aria-label="More" style="width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;font-size:20px;cursor:pointer">+</button></div>
+        <div style="font-size:13px;color:var(--mute);line-height:1.45;margin-top:12px">These ideas are only for you. {{ supName }} never gets a message from BestMom, and this doesn’t give them access to your family plan. To share the plan, invite them in Family.</div>
+        <button onClick="{{ supDone }}" style="width:100%;height:56px;margin-top:16px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ supOp }}">Done</button>
+        </div>
+      </sc-if>
       <sc-if value="{{ shShortcuts }}">
         <div data-screen-label="58c Widget and Siri">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Widget and Siri</div>
@@ -1556,7 +1570,7 @@ function buildBlocks(fam) {
     B('cook', 1030, 20, 'Start dinner: chicken tacos', 'home', 'flex', null, 'From your meals list. 20 min of prep, ready by 5:30.'),
     B('dinner', 1050, 40, 'Family dinner', 'home', 'flex', fam === 'one' ? 'a' : 'all', ''),
     B('bath', 1125, 30, tw ? 'Twins’ bedtime routine' : 'Mateo’s bedtime routine', 'kids', 'routine', tw ? 'all' : 'a', 'Bath, lotion, song. The same 3 steps every night help him sleep longer.'),
-    B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good-energy day and a free gap. Thank him for the 6 AM bottle.'),
+    B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good-energy day and a free gap. Thank Diego for the 6 AM bottle.'),
     B('chore', 1205, 20, 'Vacuum', 'home', 'flex', null, 'From your cleaning plan. Skip it if tonight is rough.'),
     B('breathe', 1230, 5, '5-minute breathing', 'mom', 'optional', null, 'Slow breathing, about 6 breaths a minute, helps you wind down.'),
     B('close', 1275, 5, 'Close your day', 'self', 'flex', null, '2 minutes. Tomorrow’s plan builds itself from tonight.'),
@@ -1748,13 +1762,14 @@ function parseReminder(t) {
   return rest ? { text: rest[0].toUpperCase() + rest.slice(1), time, every, days } : null;
 }
 console.assert(JSON.stringify(parseReminder('Remind me to check on Mateo every 6 hours for 3 days')) === JSON.stringify({ text: 'Check on Mateo', time: '8:00 PM', every: 6, days: 3 }), 'parseReminder');
+const SUP_RELS = [['partner', 'Partner'], ['mom', 'My mom'], ['family', 'Family'], ['friend', 'Friend'], ['other', 'Someone else']];
 const FLOW = [
   { title: 'Onboarding', items: [['01', 'Welcome', 'welcome'], ['02', 'Data consent', 'consent'], ['03', 'The brain dump', 'dump'], ['03b', 'Building your day', 'thinking'], ['04', 'Here’s what I understood', 'summary'], ['05', 'Permissions', 'perm'], ['41', 'Sign in (returning mom)', 'signin']] },
   { title: 'Full Mom', items: [['06', 'Today: day brief', 'today'], ['06b', 'Block detail', 'block'], ['29', 'Today: first day (empty)', 'dayone'], ['42', 'Save your day', 'save'], ['49', 'Notifications (lock screen)', 'lock'], ['48', 'Notifications off', 'notifoff'], ['53', 'I learned something', 'jarvis'], ['25', 'The + menu', 'add'], ['26', 'Logs', 'addlog'], ['27', 'For you', 'addyou'], ['06c', '5-second pause', 'pause'], ['07', 'Something happened', 'happened'], ['08', 'Replan proposal', 'replan'], ['50', 'Replan failed', 'replanerr'], ['09', 'Quick log', 'log'], ['18', 'Calendar: 3 days', 'cal3day'], ['18b', 'Calendar: week', 'calweek'], ['18c', 'Calendar: month', 'calmonth'], ['18d', 'Calendar: not connected', 'calnone'], ['33', 'Home: meals', 'home'], ['33b', 'Home: pantry & list', 'pantry'], ['33c', 'Home: cleaning', 'clean'], ['33d', 'Home: empty (new user)', 'homeempty'], ['37', 'Sick day: home today', 'reminder'], ['39', 'Sick day: next morning', 'sickmorning'], ['37b', 'New reminder', 'remnew']] },
   { title: 'Self-Love', items: [['20', 'Self-Love mode', 'self'], ['11', 'Breathing', 'breathe'], ['57', 'Micro-meditation player', 'meditate'], ['12', 'Close of day', 'close']] },
   { title: 'Kids & nights', items: [['10', 'Bedtime (night mode)', 'bedrun'], ['54', 'Bedtime: who and steps', 'bedpick'], ['19', 'Night log (2 AM)', 'nightnow'], ['19b', 'Nap cut short (1:40 PM)', 'nap'], ['19c', 'Night log: offline', 'nightoff'], ['35', 'Night log: add an earlier wake', 'nightpast'], ['58', 'Lock Screen widget', 'widget'], ['58b', 'Siri: “Baby woke up”', 'siri'], ['14', 'Kids: nights & rough patch', 'kids'], ['40', 'Kids: edit a child', 'kidedit'], ['40b', 'Kids: add a child', 'kidadd'], ['51', 'Kids: fix a log', 'logedit'], ['36', 'Kids: correct wake window', 'wakewin'], ['34', 'Kids: new skill', 'skill'], ['37c', 'Kids: private note', 'kidnote'], ['30', 'Kids: no nights yet (empty)', 'kidsempty']] },
   { title: 'Family', items: [['21', 'Invite a caregiver', 'invite'], ['55', 'Invite received (their phone)', 'guestinvite'], ['55b', 'Join: their first setup', 'guestsetup'], ['56', 'Change role or remove', 'member'], ['22', 'See as Diego (partner)', 'asDiego'], ['23', 'See as Carmen (nanny)', 'asCarmen']] },
-  { title: 'You & your data', items: [['15', 'Settings & account', 'me'], ['47', 'Which calendars are work', 'cals'], ['58c', 'Widget and Siri setup', 'shortcuts'], ['52', 'What I know about you', 'memory'], ['45', 'Export my data', 'export'], ['46', 'Delete account', 'delete'], ['46b', 'Account deleted', 'deleted']] },
+  { title: 'You & your data', items: [['15', 'Settings & account', 'me'], ['47', 'Which calendars are work', 'cals'], ['58c', 'Widget and Siri setup', 'shortcuts'], ['59', 'Support person', 'support'], ['52', 'What I know about you', 'memory'], ['45', 'Export my data', 'export'], ['46', 'Delete account', 'delete'], ['46b', 'Account deleted', 'deleted']] },
   { title: 'Assistant', items: [['13', 'Chat: Kids · Work · Me', 'allie'], ['13b', 'Chat: no conversations yet', 'allieempty']] },
   { title: 'Business & safety', items: [['16', 'Paywall (day 2)', 'paywall'], ['44', 'Subscribed', 'subok'], ['43', 'Free day ended (no plan)', 'locked'], ['17', 'Crisis screen', 'crisis']] },
 ];
@@ -1784,7 +1799,7 @@ class Component extends DCLogic {
       pantry: PANTRY0, pantryText: '', pantryHeard: 0, shopExtra: [],
       chores: [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'me', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }],
       deep: { on: true, who: 'cleaner' }, sickKid: null, sickDay: 1, sickAsk: false, notes: [{ kid: 'a', date: 'Nov 14', text: 'Didn’t want the bottle before his nap. Fine after a walk outside.' }], noteKid: 'a', noteIdx: -1, noteText: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3, remShare: [],
-      settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
+      settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8, sup: { name: 'Diego', rel: 'partner', week: 3 },
       kidEdits: {}, newKids: [], kidEditId: null, kidDraft: { name: '', born: '2026-11', color: 0 },
       signinFor: 'signin', signinStep: 'form', email: '', acct: 'Apple', subscribed: false, locked: false, subKind: 'buy',
       exportFmt: 'json', delOk: false, cals: { outlook: 'work', icloud: 'personal', google: 'personal', holidays: 'ignore' },
@@ -1911,7 +1926,7 @@ class Component extends DCLogic {
         ...(st.members.length > 1 ? { memberId: st.members[1].id } : { memberId: 'diego', members: [...st.members, { id: 'diego', name: 'Diego', role: 'partner' }] }) }));
       // the timer starts on the Lock Screen: Siri starts it too, so 'siri' opens already awake
       case 'widget': case 'siri': return this.setState({ ...base, screen: 'widget', siri: k === 'siri', nightAwake: k === 'siri', nightSec: 0, nightTagsOn: {} });
-      case 'shortcuts': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: 'shortcuts' });
+      case 'shortcuts': case 'support': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: k });
       case 'allieempty': return this.setState({ ...base, screen: 'app', tab: 'allie', chatTopic: 'kids', chats: { kids: [], work: [], me: [] } });
       case 'homeempty': return this.setState({ ...base, screen: 'app', tab: 'home', homeSeg: 'meals', mealPick: null, dishes: [], pantry: [], mealPlan: Array(7).fill(null), shopExtra: [], chores: [] });
       case 'calnone': return this.setState({ ...base, screen: 'app', tab: 'cal', calView: '3day', calDenied: true });
@@ -1970,6 +1985,8 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state, kids = this.kids(), an = this.props.assistantName || 'Allie';
     const offline = !!this.props.offline, showFlow = this.props.showFlow !== false;
+    // ponytail: only partner ideas name Diego, so a plain replace is enough
+    const sp = t => t && s.sup.name !== 'Diego' ? t.replace(/Diego/g, s.sup.name) : t;
     const wakeName = isNightAt(NOW) ? 'Night wake' : 'Nap wake';
     const multi = kids.length > 1, allLabel = 'Both';
     const kidsOf = ch => ch === 'all' ? kids : ch ? kids.filter(k => k.id === ch) : [];
@@ -1987,14 +2004,14 @@ class Component extends DCLogic {
     const nowB = live.find(b => b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur);
     const nextB = live.find(b => b.status === 'pending' && b.t > NOW && b !== nowB);
     const mins = nextB ? nextB.t - NOW : 0;
-    const hero = nowB ? { bg: DIMS[nowB.dim].bg, fg: DIMS[nowB.dim].fg, range: fmt(nowB.t) + ' – ' + fmt(nowB.t + nowB.dur), title: nowB.title, why: nowB.why || '' }
+    const hero = nowB ? { bg: DIMS[nowB.dim].bg, fg: DIMS[nowB.dim].fg, range: fmt(nowB.t) + ' – ' + fmt(nowB.t + nowB.dur), title: sp(nowB.title), why: sp(nowB.why) || '' }
       : { bg: 'var(--soft)', fg: 'var(--mute)', range: fmt(NOW), title: 'Open time', why: 'Nothing scheduled right now. Sit for a minute.' };
-    hero.next = nextB ? fmt(nextB.t) + ' · ' + nextB.title : 'Nothing else today';
+    hero.next = nextB ? fmt(nextB.t) + ' · ' + sp(nextB.title) : 'Nothing else today';
     hero.nextIn = nextB ? (mins >= 60 ? 'in ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm' : 'in ' + mins + ' min') : '';
     const visBlocks = live.map(b => {
       const d = DIMS[b.dim], done = b.status === 'done', sk = b.status === 'skipped', isNow = nowB && nowB.id === b.id;
       return {
-        time: fmt(b.t), title: b.title, why: b.why, hasWhy: !!b.why && !done && !sk, dimLabel: d.label, dimFg: d.fg, dimBg: d.bg,
+        time: fmt(b.t), title: sp(b.title), why: sp(b.why), hasWhy: !!b.why && !done && !sk, dimLabel: d.label, dimFg: d.fg, dimBg: d.bg,
         dot: done || sk ? 'var(--d-C9BBAB)' : d.fg, meta: (sk ? 'Skipped' : KINDS[b.kind]) + ' · ' + b.dur + ' min',
         kids: kidsOf(b.child).map(k => ({ initial: k.name[0], color: k.color })),
         cardBg: 'var(--card)', cardBorder: isNow ? d.fg : 'var(--line)', op: done || sk ? 0.6 : 1, deco: done || sk ? 'line-through' : 'none',
@@ -2026,7 +2043,7 @@ class Component extends DCLogic {
         acts.push(S('Snooze 15 min', () => this.mut(bl => { bl.find(x => x.id === sb.id).t += 15; return bl; }, sb.title + ' moved to ' + fmt(sb.t + 15))));
         acts.push(S('Let it go for today', () => this.mut(bl => { bl.find(x => x.id === sb.id).status = 'tomorrow'; return bl; }, 'On tomorrow’s list. Nothing lost.')));
       }
-      sel = { dimLabel: d.label, dimFg: d.fg, dimBg: d.bg, kind: KINDS[sb.kind], title: sb.title, range: fmt(sb.t) + ' – ' + fmt(sb.t + sb.dur), why: sb.why, hasWhy: !!sb.why, actions: acts, fixed };
+      sel = { dimLabel: d.label, dimFg: d.fg, dimBg: d.bg, kind: KINDS[sb.kind], title: sp(sb.title), range: fmt(sb.t) + ' – ' + fmt(sb.t + sb.dur), why: sp(sb.why), hasWhy: !!sb.why, actions: acts, fixed };
     }
 
     // replan
@@ -2115,15 +2132,15 @@ class Component extends DCLogic {
       { icon: 'M12 7a2.5 2.5 0 1 0 0-5a2.5 2.5 0 1 0 0 5M4 20c2.5-1 5-1.5 8-1.5s5.5.5 8 1.5M6.5 15.5l5.5-3.5 5.5 3.5M12 12V9.5', title: '3-minute body scan', sub: 'Lights low, before sleep', cta: 'Begin', deco: 'none', go: () => { this.setState({ medKey: 'scan' }); this.go('meditate'); } },
     ].map(i => ({ ...i, bg: i.cta === 'Done ✓' ? 'var(--d-DFE9DC)' : 'var(--acc)', fg: i.cta === 'Done ✓' ? 'var(--l-3D6142)' : 'var(--on)' }));
     const hasCarmen = s.members.some(m => m.id === 'carmen');
-    const usOpts = [['note', '5 min', 'A voice note to Diego', 'Thank him for the 6 AM bottle.'], ['tea', '20 min', 'Tea after bedtime, Thursday', 'Phones away. Your calmest night this week.'], ['date', '2 hours', 'Date night, Friday 7:30', hasCarmen ? 'Carmen could stay until 9:30.' : 'Needs a sitter. Invite one in a tap.']]
+    const usOpts = [['note', '5 min', 'A voice note to Diego', 'Thank Diego for the 6 AM bottle.'], ['tea', '20 min', 'Tea after bedtime, Thursday', 'Phones away. Your calmest night this week.'], ['date', '2 hours', 'Date night, Friday 7:30', hasCarmen ? 'Carmen could stay until 9:30.' : 'Needs a sitter. Invite one in a tap.']]
       .map(([k, size, title, sub]) => {
-        const on = !!s.us[k];
+        const on = !!s.us[k]; title = sp(title); sub = sp(sub);
         return { size, title, sub, cta: on ? 'Planned ✓' : k === 'note' ? 'Remind me' : 'Add', bg: on ? 'var(--d-F4DDDD)' : 'var(--l-8A3B44)', fg: on ? 'var(--l-8A3B44)' : 'var(--card)', border: 'none',
           go: () => {
             if (on) return;
             if (k === 'date' && !hasCarmen) { this.setState({ tab: 'me', sheet: 'invite', invRole: 'caregiver' }); return this.toastMsg('First, invite a sitter. Then I’ll plan Friday.'); }
             this.setState(st => ({ us: { ...st.us, [k]: true } }));
-            this.toastMsg(k === 'note' ? 'I’ll nudge you at 8:15, after bedtime.' : k === 'tea' ? 'Added: tea with Diego, Thursday 8:15 PM.' : 'Added Friday 7:30. I asked Carmen if she can stay until 9:30.');
+            this.toastMsg(k === 'note' ? 'I’ll nudge you at 8:15, after bedtime.' : k === 'tea' ? sp('Added: tea with Diego, Thursday 8:15 PM.') : 'Added Friday 7:30. I asked Carmen if she can stay until 9:30.');
           } };
       });
 
@@ -2137,7 +2154,7 @@ class Component extends DCLogic {
         left: i * 100 / 7, isToday, colBg: isToday ? 'rgba(169,80,43,.06)' : 'transparent', pick: () => this.setState({ calView: 'month', calSel: d.date }),
         ev: d.blocks.filter(b => b.status !== 'tomorrow' && b.t + b.dur > H0 && b.t < H1 && !(s.calDenied && b.id === 'meet')).map(b => {
           const D = DIMS[b.dim], done = b.status === 'done', sk = b.status === 'skipped';
-          return { title: (done ? '✓ ' : '') + b.title, top: Math.max(0, (b.t - H0) / 60 * HR), h: Math.max(15, b.dur / 60 * HR - 2),
+          return { title: (done ? '✓ ' : '') + sp(b.title), top: Math.max(0, (b.t - H0) / 60 * HR), h: Math.max(15, b.dur / 60 * HR - 2),
             bg: done ? D.fg : sk ? 'transparent' : D.bg, fg: done ? 'var(--card)' : D.fg, bar: D.solid, border: sk ? '1px dashed ' + D.solid : 'none', op: sk ? .55 : 1, deco: sk ? 'line-through' : 'none',
             open: () => isToday && !(V === 'carmen' && b.dim === 'work') ? this.setState({ sheet: 'block', selBlock: b.id }) : this.setState({ calView: 'month', calSel: d.date }) };
         }) };
@@ -2454,6 +2471,13 @@ class Component extends DCLogic {
         wTap: () => this.setState({ nightAwake: true, nightSec: 0, siri: false }), wSiri: () => this.setState({ nightAwake: true, nightSec: 0, siri: true }),
         wOpen: () => this.setState({ screen: 'night', wakeKind: 'night', siri: false }),
         wBack: () => { const d = Math.max(1, Math.round(s.nightSec / 60)); this.setState(st => ({ nightAwake: false, siri: false, nightWakes: [...st.nightWakes, { t: '2:14 AM', dur: d + ' min', tags: 'From the Lock Screen', m: 134, d }] })); this.toastMsg('Logged: ' + kid + ' awake at 2:14 AM for ' + d + ' min. Back to sleep, you too.'); },
+        shSupport: s.sheet === 'support', openSupport: () => this.setState({ sheet: 'support' }),
+        supName: s.sup.name, supWeek: s.sup.week, supOp: s.sup.name.trim() ? 1 : 0.4,
+        supRel: s.sup.name + ' · ' + SUP_RELS.find(r => r[0] === s.sup.rel)[1],
+        onSupName: e => this.setState({ sup: { ...s.sup, name: e.target.value } }),
+        supRels: SUP_RELS.map(([k, label]) => { const on = s.sup.rel === k; return { label, on: on ? 'true' : 'false', border: on ? 'none' : '1.5px solid var(--line2)', bg: on ? 'var(--acc)' : 'transparent', fg: on ? 'var(--on)' : 'var(--ink)', pick: () => this.setState({ sup: { ...s.sup, rel: k } }) }; }),
+        supDown: () => this.setState({ sup: { ...s.sup, week: Math.max(1, s.sup.week - 1) } }), supUp: () => this.setState({ sup: { ...s.sup, week: Math.min(3, s.sup.week + 1) } }),
+        supDone: () => { if (!s.sup.name.trim()) return; this.setState({ sheet: null, settings: { ...s.settings, partner: true } }); this.toastMsg('Saved. Ideas for ' + s.sup.name.trim() + ', up to ' + s.sup.week + ' a week.'); },
         shShortcuts: s.sheet === 'shortcuts', openShortcuts: () => this.setState({ sheet: 'shortcuts' }), seeWidget: () => this.go('widget'),
         siriRows: [['wake', 'Baby woke up', 'Starts the night timer for ' + kid], ['back', 'Back asleep', 'Stops it and saves the wake'], ['diaper', 'Log a diaper', 'Asks wet, dirty or both'], ['happened', 'Something happened', 'Opens BestMom to replan']].map(([k, phrase, sub]) => { const on = !!s.siriOn[k]; return {
           phrase, sub, on: on ? 'true' : 'false', label: on ? 'Added ✓' : 'Add to Siri', bg: on ? 'var(--d-DFE9DC)' : 'var(--acc)', fg: on ? 'var(--l-3D6142)' : 'var(--on)', border: 'none',
@@ -2683,7 +2707,7 @@ class Component extends DCLogic {
       delFamily: s.members.length > 1, delFamilyText: s.members.filter(m => m.role !== 'owner').map(m => m.name).join(' and ') + (s.members.length > 2 ? ' all' : ''),
       delBox: { bg: s.delOk ? '#A33A2A' : 'transparent', border: s.delOk ? '#A33A2A' : 'var(--line2)', op: s.delOk ? 1 : 0 }, toggleDelOk: () => this.setState({ delOk: !s.delOk }),
       delOp: s.delOk ? 1 : 0.4, doDelete: () => { if (s.delOk) this.go('deleted'); },
-      settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing'], ['work', 'Work', 'Meeting prep, focus blocks'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Support person', 'Up to 3 a week, never on hard days']].map(([k, label, sub]) => ({
+      settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing'], ['work', 'Work', 'Meeting prep, focus blocks'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Support person', s.sup.name + ' · up to ' + s.sup.week + ' a week, never on hard days']].map(([k, label, sub]) => ({
         label, sub, dot: DIMS[k].fg, track: s.settings[k] ? 'var(--l-3D6142)' : 'var(--line2)', justify: s.settings[k] ? 'flex-end' : 'flex-start',
         toggle: () => this.setState(st => ({ settings: { ...st.settings, [k]: !st.settings[k] } })),
       })),
