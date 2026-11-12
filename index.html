@@ -1123,7 +1123,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <input type="month" value="{{ kidDraftBorn }}" max="2026-11" onChange="{{ onKidBorn }}" aria-label="Birth month" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink)">
         <div style="font-size:12px;color:var(--mute);margin-top:4px">{{ kidDraftAge }}</div>
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 0 8px">Their color</div>
-        <div style="display:flex;gap:12px"><sc-for list="{{ kidColors }}" as="c"><button onClick="{{ c.pick }}" aria-label="{{ c.label }}" aria-pressed="{{ c.on }}" style="width:44px;height:44px;border-radius:50%;background:{{ c.color }};border:3px solid {{ c.ring }};box-shadow:inset 0 0 0 2px var(--sheet);cursor:pointer;flex:none"></button></sc-for></div>
+        <div style="display:flex;gap:12px"><sc-for list="{{ kidColors }}" as="c"><button onClick="{{ c.pick }}" aria-label="{{ c.label }}" aria-pressed="{{ c.on }}" style="width:44px;height:44px;border-radius:50%;background:{{ c.color }};border:3px solid {{ c.ring }};box-shadow:inset 0 0 0 2px var(--sheet);cursor:pointer;flex:none"></button></sc-for><label aria-label="Pick any color" style="position:relative;width:44px;height:44px;border-radius:50%;background:{{ kidCustomBg }};border:3px solid {{ kidCustomRing }};box-shadow:inset 0 0 0 2px var(--sheet);cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;box-sizing:border-box"><span style="width:20px;height:20px;border-radius:50%;background:var(--sheet);color:var(--ink);font-size:17px;font-weight:700;line-height:20px;text-align:center">+</span><input type="color" value="{{ kidCustomHex }}" onChange="{{ onKidCustom }}" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0"></label></div>
         <div style="font-size:12px;color:var(--mute);margin-top:8px;line-height:1.4">It marks their blocks, logs and avatar everywhere.</div>
         <button onClick="{{ kidSave }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ kidSaveOp }}">{{ kidSaveLabel }}</button>
         <sc-if value="{{ kidCanArchive }}">
@@ -1776,6 +1776,7 @@ const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct
 const toYm = label => { const [m, y] = label.split(' '); return y + '-' + String(MON.indexOf(m) + 1).padStart(2, '0'); };
 const ymLabel = ym => MON[+ym.slice(5) - 1] + ' ' + ym.slice(0, 4);
 const ageOf = ym => { const m = (2026 - +ym.slice(0, 4)) * 12 + 11 - +ym.slice(5); return m < 1 ? 'Newborn' : m < 24 ? m + (m === 1 ? ' month' : ' months') : Math.floor(m / 12) + ' years'; };
+const kidColorOf = c => { const i = KID_COLORS.findIndex(x => x[0] === c); return i < 0 ? { color: -1, custom: c } : { color: i, custom: null }; };
 const KID_COLORS = [['var(--l-2F7F7A)', 'Teal'], ['var(--l-8A4C8F)', 'Plum'], ['var(--l-9A3E2E)', 'Brick'], ['var(--l-5E430F)', 'Bronze']];
 const CALS = [['outlook', 'Office', 'Outlook · Exchange', '#6C64AD'], ['icloud', 'Family', 'iCloud', '#4E7FA8'], ['google', 'Rossi', 'Google', '#5E8A62'], ['holidays', 'US Holidays', 'Subscribed', '#BC8C36']];
 // Jarvis stages 1-3: what it remembers, each with how it knows (F11)
@@ -2066,7 +2067,7 @@ class Component extends DCLogic {
       case 'jarvis': return this.setState({ ...base, screen: 'app', tab: 'today', jarvisNews: true });
       case 'locked': return this.setState({ ...base, screen: 'app', tab: 'today', locked: true, subscribed: false });
       case 'replanerr': this.openReplan('nonap'); return this.setState({ replanErr: true, replanLoading: false });
-      case 'kidedit': { const kd = this.kids()[0]; return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'kid', kidEditId: kd.id, kidDraft: { name: kd.name, born: toYm(kd.born), color: Math.max(0, KID_COLORS.findIndex(c => c[0] === kd.color)) } }); }
+      case 'kidedit': { const kd = this.kids()[0]; return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'kid', kidEditId: kd.id, kidDraft: { name: kd.name, born: toYm(kd.born), ...kidColorOf(kd.color) } }); }
       case 'kidadd': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'kid', kidEditId: null, kidDraft: { name: '', born: '2026-11', color: this.kids().length % KID_COLORS.length } });
       case 'logedit': { const i = Math.max(0, this.state.logs.findIndex(l => l.end)), l = this.state.logs[i]; return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'logedit', logEdit: i, leT: l.t, leEnd: l.end ?? null }); }
       case 'cals': case 'memory': case 'export': return this.setState({ ...base, screen: 'app', tab: 'me', sheet: k });
@@ -2888,7 +2889,7 @@ class Component extends DCLogic {
       // kids tab
       kidCards: kids.map(k => ({
         ...k, initial: k.name[0], canEdit: V === 'ana',
-        edit: () => this.setState({ sheet: 'kid', kidEditId: k.id, kidDraft: { name: k.name, born: toYm(k.born), color: Math.max(0, KID_COLORS.findIndex(c => c[0] === k.color)) } }),
+        edit: () => this.setState({ sheet: 'kid', kidEditId: k.id, kidDraft: { name: k.name, born: toYm(k.born), ...kidColorOf(k.color) } }),
         play: (k.isNew ? [] : PLAY[k.id] || PLAY.a).map(([label, n]) => ({ label, n: n + s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === label).length }))
           .concat(ACTS.map(a => ACT_KEY[a] || a).filter(a => !(PLAY[k.id] || PLAY.a).some(([x]) => x === a)).map(a => ({ label: a, n: s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === a).length })).filter(x => x.n > 0)),
         logs: s.logs.map((l, i) => ({ ...l, i })).filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : ''), open: () => this.setState({ sheet: 'logedit', logEdit: l.i, leT: l.t, leEnd: l.end ?? null }) })),
@@ -2922,8 +2923,11 @@ class Component extends DCLogic {
         kidSheetTitle: ed ? 'Edit ' + (kids.find(k => k.id === ed) || {}).name : 'Add a child', kidDraftName: d.name, kidDraftBorn: d.born, kidDraftAge: ageOf(d.born),
         onKidName: e => this.setState({ kidDraft: { ...d, name: e.target.value } }), onKidBorn: e => this.setState({ kidDraft: { ...d, born: e.target.value || d.born } }),
         kidColors: KID_COLORS.map(([color, label], i) => ({ color, label, on: d.color === i ? 'true' : 'false', ring: d.color === i ? 'var(--ink)' : 'transparent', pick: () => this.setState({ kidDraft: { ...d, color: i } }) })),
+        kidCustomBg: d.color < 0 && d.custom ? d.custom : 'conic-gradient(#e05a4f, #e8a33d, #d9cf4a, #5fb36a, #3f9fc4, #6a6fd1, #b25bb8, #e05a4f)',
+        kidCustomRing: d.color < 0 ? 'var(--ink)' : 'transparent', kidCustomHex: d.custom || '#c06c84',
+        onKidCustom: e => this.setState({ kidDraft: { ...d, color: -1, custom: e.target.value } }),
         kidSaveOp: name ? 1 : 0.4, kidSaveLabel: ed ? 'Save' : name ? 'Add ' + name : 'Add child', kidCanArchive: !!ed && kids.length > 1,
-        kidSave: () => { if (!name) return; const patch = { name, born: ymLabel(d.born), age: ageOf(d.born), color: KID_COLORS[d.color][0] };
+        kidSave: () => { if (!name) return; const patch = { name, born: ymLabel(d.born), age: ageOf(d.born), color: d.color < 0 ? d.custom : KID_COLORS[d.color][0] };
           if (ed) this.setState(st => ({ kidEdits: { ...st.kidEdits, [ed]: { ...st.kidEdits[ed], ...patch } }, sheet: null }));
           else this.setState(st => ({ newKids: [...st.newKids, { id: 'k' + (st.newKids.length + 1), isNew: true, ww: 180, his: 'their', he: 'they', nights: Array(14).fill(0), at: -1, ...patch }], sheet: null }));
           this.toastMsg(ed ? 'Saved.' : name + ' is in. I’ll plan around ' + name + ' from tomorrow.'); },
