@@ -955,6 +955,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="21 Invite">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Invite to the family</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">They get their own BestMom, with only what their role allows.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <input value="{{ invName }}" onChange="{{ onInvName }}" placeholder="Their name" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);margin-bottom:12px">
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
           <sc-for list="{{ roleCards }}" as="r"><button onClick="{{ r.pick }}" style="min-height:76px;border-radius:16px;border:2px solid {{ r.border }};background:var(--card);padding:8px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;font-weight:600">{{ r.label }}</span><span style="font-size:12px;line-height:1.3;color:var(--mute)">{{ r.sub }}</span></button></sc-for>
@@ -1004,6 +1009,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="59 Support person">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Your support person</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">The person I suggest small kind gestures for. A partner, your mom, a friend: anyone who has your back.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <label style="display:block;font-size:13px;font-weight:600;color:var(--mute);margin:0 2px 8px">Name</label>
         <input value="{{ supName }}" onChange="{{ onSupName }}" aria-label="Support person name" placeholder="Their name" style="width:100%;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 16px;font-size:17px;outline:none;box-sizing:border-box">
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 2px 8px">Who they are to you</div>
@@ -1037,6 +1047,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="36 Wake window">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ wwName }}’s wake window</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">How long {{ wwName }} is usually awake between naps. I plan naps around it.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><button onClick="{{ wwMinus }}" aria-label="5 minutes less" style="width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;color:var(--ink);font-size:22px;cursor:pointer;flex:none">−</button><div style="font-family:'Young Serif',serif;font-size:44px;line-height:1">{{ wwText }}</div><button onClick="{{ wwPlus }}" aria-label="5 minutes more" style="width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line2);background:transparent;color:var(--ink);font-size:22px;cursor:pointer;flex:none">+</button></div>
           <div style="position:relative;height:28px;margin:16px 4px 0"><div style="position:absolute;left:0;right:0;top:10px;height:8px;border-radius:999px;background:var(--d-DCE8F2)"></div><div style="position:absolute;left:0;top:10px;height:8px;border-radius:999px;width:{{ wwPct }}%;background:#4E7FA8;transition:width .25s var(--ease-out)"></div><div style="position:absolute;left:{{ wwEstPct }}%;top:3px;width:2px;height:22px;background:var(--ink)"></div></div>
@@ -1053,6 +1068,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="34 New skill">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">New skill</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">What did {{ skillWho }} start doing?</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><sc-for list="{{ skillChips }}" as="c"><button onClick="{{ c.pick }}" style="min-height:52px;padding:0 16px;border-radius:16px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:15px;font-weight:600;text-align:left;cursor:pointer">{{ c.label }}</button></sc-for></div>
         <input value="{{ skillText }}" onChange="{{ onSkillText }}" placeholder="Or in your words: waved bye-bye…" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box;margin-top:8px">
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin-top:16px">When</div>
@@ -1066,6 +1086,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="37b Reminder">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">New reminder</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">Your words, your times. I’ll ping you on this phone.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <input value="{{ remText }}" onChange="{{ onRemText }}" placeholder="What should I remind you of?" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box">
         <div style="display:flex;align-items:center;gap:12px;margin-top:12px"><span style="font-size:13px;font-weight:600;color:var(--mute);flex:none">Starts at</span><input type="time" value="{{ remTime }}" onChange="{{ onRemTime }}" aria-label="Start time" style="flex:1;min-width:0;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 16px;font-size:20px;font-family:'Young Serif',serif;outline:none;box-sizing:border-box"></div>
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin-top:16px">Repeat</div>
@@ -1089,6 +1114,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="18e Add a date">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ dateHead }}</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">The things that live in your head: daycare days, payments, visits, closures.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <input value="{{ dateT }}" onChange="{{ onDateT }}" onKeyDown="{{ onDateKey }}" placeholder="What is it? Photo day, tuition due…" aria-label="What is it" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px"><span style="font-size:13px;font-weight:600;color:var(--mute)">When</span><span style="font-size:13px;font-weight:600;color:var(--ink)">{{ dateWhen }}</span></div>
         <div style="display:flex;gap:6px;overflow-x:auto;margin:8px -20px 0;padding:0 20px 4px;scroll-snap-type:x proximity">
@@ -1110,6 +1140,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="33e Add a dish or chore">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ homeAddHead }}</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ homeAddSub }}</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <input value="{{ homeName }}" onChange="{{ onHomeName }}" onKeyDown="{{ onHomeKey }}" placeholder="{{ homeAddPh }}" aria-label="Name" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink);box-sizing:border-box">
         <sc-if value="{{ isDishAdd }}">
           <div style="font-size:13px;font-weight:600;color:var(--mute);margin-top:16px">What goes in it? <span style="font-weight:400">Optional</span></div>
@@ -1132,6 +1167,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="37c Private note">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ noteTitle }}</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ noteDate }} · in your words. For you, or to show your pediatrician.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <textarea value="{{ noteText }}" onChange="{{ onNoteText }}" placeholder="{{ notePh }}" style="width:100%;min-height:130px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px 16px;font-size:17px;line-height:1.45;resize:none;outline:none;color:var(--ink);box-sizing:border-box;font-family:inherit"></textarea>
         <div style="display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:12px 16px;margin-top:12px"><svg style="stroke:var(--mute);flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="font-size:13px;line-height:1.45;color:var(--ink2)"><b>Only on this phone.</b> BestMom doesn’t upload or back it up, {{ an }} doesn’t read it, and nobody else in your family sees it. Use Export to keep a copy or send it.</div></div>
         <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:16px"><button onClick="{{ noteDelete }}" style="height:56px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;color:{{ noteDelFg }};font-size:17px;font-weight:600;cursor:pointer">{{ noteDelLabel }}</button><button onClick="{{ noteSave }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ noteOp }}">Save</button></div>
@@ -1142,6 +1182,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="37d A win, a moment, a change">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ jotHead }}</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ jotSub }}</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <textarea value="{{ jotText }}" onChange="{{ onJotText }}" placeholder="{{ jotPh }}" aria-label="{{ jotHead }}" style="width:100%;min-height:110px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px 16px;font-size:17px;line-height:1.45;resize:none;outline:none;color:var(--ink);box-sizing:border-box;font-family:inherit"></textarea>
         <button onClick="{{ saveJot }}" style="margin-top:16px;width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ jotOp }}">{{ jotCta }}</button>
         </div>
@@ -1161,6 +1206,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div data-screen-label="40 Child profile">
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ kidSheetTitle }}</div>
         <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">I only keep a nickname and the birth month. No full name, no exact birthday, no photos.</div>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:16px;padding:8px 12px 8px 8px;margin:-4px 0 16px">
+          <button onClick="{{ fillMic }}" aria-label="{{ fillAria }}" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:{{ fillMicBg }};box-shadow:{{ fillRing }};color:var(--on);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+          <div aria-live="polite" style="flex:1;min-width:0;font-size:14px;line-height:1.35;color:{{ fillColor }};font-style:{{ fillStyle }}">{{ fillText }}</div>
+        </div>
+        <sc-if value="{{ fillDoneOn }}"><div style="display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--l-3D6142);margin:-8px 2px 12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg><span>{{ an }} filled this in. Check it, change anything, then save.</span></div></sc-if>
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:8px">What you call them</div>
         <input value="{{ kidDraftName }}" onChange="{{ onKidName }}" placeholder="Nickname" aria-label="Nickname" style="width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--card);padding:0 16px;font-size:17px;outline:none;color:var(--ink)">
         <div style="font-size:13px;font-weight:600;color:var(--mute);margin:16px 0 8px">Born</div>
@@ -1870,6 +1920,21 @@ const TX = {
   happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
   log: () => 'He fell asleep at one thirty-five.',
   pantry: () => 'We have rice, potatoes, chicken, eggs and onions. Dish soap is almost out and we need snacks for the kids.',
+  // what she says into a form; Allie fills the fields and she checks them before saving
+  f_date: fam => (fam === 'two' ? 'Lia has pajama day at daycare on Friday. I need to pack her pajamas' : 'Mateo has pajama day at daycare on Friday. I need to pack his pajamas') + ' and the stuffed bunny the night before.',
+  f_dish: () => 'Add chicken soup. It has chicken, carrots, potatoes and rice.',
+  f_chore: () => 'Diego changes the sheets every Saturday. It takes about half an hour.',
+  f_reminder: () => 'Remind me to call the pediatrician’s office today at four.',
+  f_win: () => 'I got the Q4 deck to Sarah a day early.',
+  f_moment: () => 'Mateo grabbed my finger and wouldn’t let go.',
+  f_changed: () => 'Mateo doesn’t nap in the morning anymore. Just one long nap after lunch.',
+  f_changedkid: () => 'Her daycare ends at three thirty on Fridays now.',
+  f_note: () => 'He had a low fever this morning, a hundred point two, and didn’t want the bottle at ten. I want to ask the pediatrician if it’s still there Thursday.',
+  f_skill: () => 'He started waving bye-bye today.',
+  f_ww: () => 'He’s usually awake about two and a half hours between naps.',
+  f_kid: () => 'Her name is Sofi. She was born in March this year.',
+  f_invite: () => 'Invite my mom, Elena. She just wants to see the plan.',
+  f_support: () => 'My sister Ana. She always has my back. Maybe two ideas a week.',
 };
 const LOG_ICONS = {
   feed: 'M9 2h6M10 2v3M14 2v3M8.5 5h7l1 4v10a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V9zM7.5 12h9',
@@ -1902,9 +1967,9 @@ const ICONS = {
 const MOUTHS = ['M8 16.5c1.2-1.6 2.5-2.3 4-2.3s2.8.7 4 2.3', 'M8.5 16c1-.8 2.2-1.2 3.5-1.2s2.5.4 3.5 1.2', 'M8.5 15.5h7', 'M8.5 14.5c1 .9 2.2 1.3 3.5 1.3s2.5-.4 3.5-1.3', 'M8 14c1.1 1.8 2.4 2.7 4 2.7s2.9-.9 4-2.7'];
 const FACE_LABELS = ['Drained', 'Low', 'Okay', 'Good', 'Great'];
 const TOPICS = {
-  kids: { label: 'Kids', dim: 'kids', empty: 'Ask me about the kids', hello: 'Ask me about the kids’ routines, nights and logs, or tell me what to move.', chips: ['Why are his nights choppier?', 'What time did Mateo fall asleep yesterday?', 'How many diapers this week?', 'Is his cough something to worry about?'] },
+  kids: { label: 'Kids', dim: 'kids', empty: 'Ask me about the kids', hello: 'Ask me about the kids’ routines, nights and logs, or tell me what to move.', chips: ['Why are his nights choppier?', 'Add pajama day on Friday', 'How many diapers this week?', 'Is his cough something to worry about?'] },
   work: { label: 'Work', dim: 'work', empty: 'Talk through your work', hello: 'Your work counts here too. Meetings, focus time, the hard conversations.', chips: ['What’s my hardest day this week?', 'Protect 2 focus hours tomorrow', 'Help me say I leave at 4:15', 'Help me tell work I’m out tomorrow'] },
-  me: { label: 'Me', dim: 'mom', empty: 'Just about you', hello: 'This one is just about you. How are you, really?', chips: ['I feel like I’m failing', 'Remind me to check on Mateo every 6 hours for 3 days', 'When can I work out this week?', 'Plan a sweet moment with Diego'] },
+  me: { label: 'Me', dim: 'mom', empty: 'Just about you', hello: 'This one is just about you. How are you, really?', chips: ['I feel like I’m failing', 'Remind me to check on Mateo every 6 hours for 3 days', 'Add a chore: Diego changes the sheets on Saturdays, 30 min', 'Plan a sweet moment with Diego'] },
 };
 const REPLY = q => {
   if (/hurt myself|kill myself|end it all|suicid|can.t go on|no point in living/i.test(q)) return { crisis: true };
@@ -2026,7 +2091,7 @@ class Component extends DCLogic {
       dishes: MEALS, viewerId: null, memberId: null, memAsk: false, guestStep: 'invite', guestDays: [1, 2, 3, 4, 5], guestPing: true,
       medKey: 'scan', mSec: 0, mRun: true, mVoice: true, siri: false, siriOn: {},
       dateDraft: { idx: null, t: '', d: TODAY_D + 1, kid: '', prep: '' }, homeDraft: { name: '', parts: '', days: [3], who: 'me', min: 20 },
-      jot: { kind: 'win', text: '', kid: null }, wins: [], retTab: 'today',
+      jot: { kind: 'win', text: '', kid: null }, wins: [], retTab: 'today', fillDone: null,
     };
   }
   componentDidMount() {
@@ -2042,7 +2107,8 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this.onKey);
   }
   componentWillUnmount() { clearInterval(this.iv); document.removeEventListener('keydown', this.onKey); }
-  componentDidUpdate(prev) {
+  componentDidUpdate(prev, prevState) {
+    if (prevState && prevState.sheet !== this.state.sheet && (this.state.fillDone || (this.state.ctx || '').startsWith('f_'))) this.setState({ fillDone: null, ctx: null, ...(this.state.listening ? { listening: false } : {}) });
     if ((prev.family || 'two') !== (this.props.family || 'two')) { const f = this.props.family || 'two'; this.setState({ fam: f, blocks: buildBlocks(f), logs: seedLogs(f), summary: this.buildSummary(f) }); }
   }
   allKids() { const s = this.state; return [...(FAMS[s.fam] || FAMS.two), ...s.newKids].map(k => ({ ...k, ...s.kidEdits[k.id] })); }
@@ -2069,6 +2135,7 @@ class Component extends DCLogic {
         if (s.ctx === 'dump') up.followUp = true;
         if (s.ctx === 'log') { up.logHeard = '“' + this.tx.join(' ') + '”'; up.logTime = 815; up.logType = 'sleep'; up.logKid = 'a'; }
         if (s.ctx === 'happened') setTimeout(() => this.openReplan('voice'), 500);
+        if (s.ctx && s.ctx.startsWith('f_')) setTimeout(() => this.applyFill(s.ctx), 0);
         if (s.ctx === 'pantry') { const got = parsePantry(this.tx.join(' ')); up.pantry = mergePantry(s.pantry, got); up.pantryHeard = got.length; setTimeout(() => this.toastMsg('Pantry updated: ' + got.length + ' items from what you said.'), 0); }
       }
     }
@@ -2222,6 +2289,27 @@ class Component extends DCLogic {
       this.toastMsg(cap(name) + ': ' + h.days.slice().sort().map(d => DAYN[d]).join(', ') + ', ' + (h.who === 'me' ? 'you' : WHO_NAME[h.who]) + '. It lands in the day as a Home block.');
     }
   }
+  // Allie fills the open form from what she said; nothing is saved until she taps the form's own button
+  applyFill(ctx) {
+    const s = this.state, kids = this.kids(), partner = s.members.find(m => m.role === 'partner');
+    const up = {
+      f_date: () => ({ dateDraft: { ...s.dateDraft, t: 'Pajama day', d: TODAY_D + 3, kid: s.fam === 'two' ? 'b' : kids[0].id, prep: 'Pajamas and the stuffed bunny in ' + (s.fam === 'two' ? 'Lia' : kids[0].name) + '’s bag' } }),
+      f_dish: () => ({ homeDraft: { ...s.homeDraft, name: 'Chicken soup', parts: 'Chicken, carrots, potatoes, rice' } }),
+      f_chore: () => ({ homeDraft: { ...s.homeDraft, name: 'Change the sheets', days: [6], who: partner ? partner.id : 'me', min: 30 } }),
+      f_reminder: () => ({ remText: 'Call the pediatrician’s office', remTime: '16:00', remEvery: 0, remDays: 1 }),
+      f_win: () => ({ jot: { ...s.jot, text: 'Got the Q4 deck to Sarah a day early' } }),
+      f_moment: () => ({ jot: { ...s.jot, text: kids[0].name + ' grabbed my finger and wouldn’t let go' } }),
+      f_changed: () => ({ jot: { ...s.jot, text: 'No morning nap anymore. One long nap after lunch' } }),
+      f_changedkid: () => ({ jot: { ...s.jot, text: 'Daycare ends at 3:30 PM on Fridays' } }),
+      f_note: () => ({ noteText: 'Low fever this morning (100.2 °F). Didn’t want the 10 AM bottle. Ask the pediatrician if it’s still there Thursday.' }),
+      f_skill: () => ({ skillText: 'Waving bye-bye', skillDate: '2026-11-17' }),
+      f_ww: () => ({ wwDraft: 150 }),
+      f_kid: () => ({ kidDraft: { ...s.kidDraft, name: 'Sofi', born: '2026-03' } }),
+      f_invite: () => ({ invName: 'Elena', invRole: 'family' }),
+      f_support: () => ({ sup: { ...s.sup, name: 'Ana', rel: 'family', week: 2 } }),
+    }[ctx];
+    if (up) this.setState({ ...up(), fillDone: ctx });
+  }
   openJot(kind, kid) { this.setState({ sheet: 'jot', radial: false, jot: { kind, text: '', kid: kid || null } }); }
   saveJot() {
     const j = this.state.jot, t = cap(j.text.trim()); if (!t) return;
@@ -2233,23 +2321,35 @@ class Component extends DCLogic {
   }
   sendChat(text) {
     const t = (text || '').trim(); if (!t) return;
-    // "+ Add a dish" and "+ Add a chore" in Home prefill these; same intent call as reminders in the real app
-    const hm = /^add a (dish to my list|chore):\s*(.+?)[.!]?$/i.exec(t), item = hm && cap(hm[2].trim()), dish = hm && /dish/i.test(hm[1]);
-    // ponytail: regex stand-in for the intent call. "Add a date: pajama day Friday" → this week's Friday; no day found → shown as "date to confirm".
-    const dm = /^add a date:\s*(.+?)[.!]?$/i.exec(t);
+    // In the chat a request is done, not drafted: dates, dishes, chores and "something changed" are created right away.
+    // ponytail: regexes stand in for the intent call of the real app.
+    const say = (m, patch) => { this.setState(st => ({ chats: { ...st.chats, [st.chatTopic]: [...st.chats[st.chatTopic], { me: true, text: t }] }, chatInput: '', chatTyping: true })); setTimeout(() => this.setState(st => ({ ...(patch ? patch(st) : {}), chats: { ...st.chats, [st.chatTopic]: [...st.chats[st.chatTopic], { me: false, ...m }] }, chatTyping: false })), 900); };
+    const dayIn = x => { const wd = DAYN.findIndex(d => new RegExp('\\b' + d, 'i').test(x)), nd = /nov(?:ember)? (\d{1,2})/i.exec(x); return nd ? +nd[1] : wd >= 0 ? WEEK0 + wd + (wd <= TODAY_I ? 7 : 0) : null; };
+    const dish = /^add (?:a dish(?: to my list)?:\s*)?(.+?) to (?:my )?(?:dishes|dinners|dish list|meals)[.!]?$/i.exec(t) || /^add a dish(?: to my list)?:\s*(.+?)[.!]?$/i.exec(t);
+    if (dish) { const name = cap(dish[1].trim()); return say({ text: 'Added “' + name + '” to your dishes. Pick it for any night in Home → Meals. Tell me what goes in it and I’ll match it to your pantry.', src: 'Saved to Home' }, st => ({ dishes: [...st.dishes, [name, []]] })); }
+    const ch = /^add (?:a )?chore:?\s*(.+?)[.!]?$/i.exec(t);
+    if (ch) {
+      const x = ch[1], who = /\bdiego\b/i.test(x) ? 'diego' : /\bcleaner\b/i.test(x) ? 'cleaner' : 'me';
+      const days = /every ?day|daily/i.test(x) ? [0, 1, 2, 3, 4, 5, 6] : DAYN.map((d, i) => new RegExp('\\b' + d, 'i').test(x) ? i : -1).filter(i => i >= 0);
+      const mm = /(\d+)\s*min/i.exec(x), min = mm ? +mm[1] : /half an hour/i.test(x) ? 30 : /an hour/i.test(x) ? 60 : 20;
+      const name = cap(x.replace(/\b(diego|the cleaner|a cleaner|cleaner|i)\b\s*/ig, '').replace(/\s*(on|every)\s+(sun|mon|tue|wed|thu|fri|sat)\w*(\s*(and|,)\s*(sun|mon|tue|wed|thu|fri|sat)\w*)*/ig, '').replace(/\s*(every ?day|daily)/ig, '').replace(/[,.]?\s*(for |it takes |takes )?(about )?(\d+\s*min\w*|half an hour|an hour)/ig, '').trim() || x);
+      const dd = days.length ? days : [TODAY_I + 1];
+      return say({ text: 'Added “' + name + '”: ' + dd.map(d => DAYN[d]).join(', ') + ', ' + min + ' min, ' + (who === 'me' ? 'you' : WHO_NAME[who]) + '. It lands in your day as a Home block.', src: 'Saved to Home → Cleaning' },
+        st => ({ chores: [...st.chores, { id: 'c' + Date.now(), t: name, days: dd, min, who, done: false }] }));
+    }
+    const mem = /^(?:something changed|from now on|remember that|note that)[:,]?\s*(.+?)[.!]?$/i.exec(t);
+    if (mem) { const text = cap(mem[1].trim()); return say({ text: 'Got it. I plan with this from tomorrow: “' + text + '.”', src: 'Saved to What I know' }, st => ({ memories: [{ text, src: 'You told me · today' }, ...st.memories] })); }
+    const nat = /^(?:add|put|save)\s+(.+?)(?:\s+(?:to|on|in) (?:the|my) calendar)?[.!]?$/i.exec(t);
+    const dm = /^add a date:\s*(.+?)[.!]?$/i.exec(t) || (nat && dayIn(t) ? nat : null);
     if (dm) {
-      const wd = DAYN.findIndex(d => new RegExp('\\b' + d, 'i').test(dm[1])), nd = /nov(?:ember)? (\d{1,2})/i.exec(dm[1]);
-      const d = nd ? +nd[1] : wd >= 0 ? WEEK0 + wd + (wd <= TODAY_I ? 7 : 0) : null, title = cap(dm[1].replace(/\s*(on )?(\b(sun|mon|tue|wed|thu|fri|sat)\w*|nov(ember)? \d{1,2})\b/ig, '').trim() || dm[1]);
-      const m = { me: false, text: d ? 'Added “' + title + '” on Nov ' + d + '. If it needs anything, I’ll put it on your bag list the night before.' : 'Added “' + title + '”. Which day is it? Tell me and I’ll put it on the calendar.', src: 'Saved to your dates' };
-      this.setState(st => ({ chats: { ...st.chats, [st.chatTopic]: [...st.chats[st.chatTopic], { me: true, text: t }, m] }, chatInput: '', dates: d ? [...st.dates, { d, t: title }] : st.dates }));
-      return;
+      const d = dayIn(dm[1]), title = cap(dm[1].replace(/\s*(on |for )?(\b(sun|mon|tue|wed|thu|fri|sat)\w*|nov(ember)? \d{1,2})\b/ig, '').trim() || dm[1]);
+      return say({ text: d ? 'Added “' + title + '” on ' + DAYN[(d - 1) % 7] + ' Nov ' + d + '. If it needs anything, tell me and I’ll put it on your list the night before.' : 'Added “' + title + '”. Which day is it? Tell me and I’ll put it on the calendar.', src: 'Saved to your dates' },
+        st => ({ dates: d ? [...st.dates, { d, t: title }] : st.dates }));
     }
     const topic = this.state.chatTopic, rm = parseReminder(t), r = rm
       ? { text: 'Done. “' + rm.text + '” at ' + rm.time + (rm.every ? ', every ' + rm.every + ' h' : '') + (rm.days ? ' for ' + rm.days + (rm.days === 1 ? ' day' : ' days') : '') + '. Change it in You → Your reminders.', src: 'Reminder on this phone' }
-      : hm ? { text: dish ? 'Added “' + item + '” to your dishes. Pick it for any night in Home → Meals. Tell me what goes in it and I’ll match it to your pantry.' : 'Added “' + item + '”, Wednesdays, 20 minutes, by you. Change who does it in Home → Cleaning.', src: 'Saved to Home' }
       : REPLY(t);
     if (rm) setTimeout(() => this.setState(st => ({ reminders: [...st.reminders, rm] })), 900);
-    if (hm) setTimeout(() => this.setState(st => dish ? { dishes: [...st.dishes, [item, []]] } : { chores: [...st.chores, { id: 'c' + st.chores.length, t: item, days: [3], min: 20, who: 'me', done: false }] }), 900);
     if (r.crisis) { this.setState({ chatInput: '' }); return this.go('crisis'); }
     const add = (st, m) => ({ chats: { ...st.chats, [topic]: [...st.chats[topic], m] } });
     this.setState(st => ({ ...add(st, { me: true, text: t }), chatInput: '', chatTyping: true }));
@@ -2845,6 +2945,19 @@ class Component extends DCLogic {
         shJot: s.sheet === 'jot', jotHead: J[0], jotSub: J[1], jotPh: J[2], jotCta: J[3], jotText: j.text, jotOp: j.text.trim() ? 1 : .4,
         onJotText: e => { const v = e.target.value; this.setState(st => ({ jot: { ...st.jot, text: v } })); }, saveJot: () => this.saveJot(),
       }; })(),
+      ...(() => {
+        // Tell Allie: one voice button on every manual form. She listens, fills the fields, you check and save.
+        const j = s.jot, kind = { date: 'date', dish: 'dish', chore: 'chore', reminder: 'reminder', note: 'note', skill: 'skill', wakewin: 'ww', kid: 'kid', invite: 'invite', support: 'support',
+          jot: j.kind === 'changed' ? (j.kid ? 'changedkid' : 'changed') : j.kind }[s.sheet], ctx = kind && 'f_' + kind;
+        const hearing = !!ctx && s.listening && s.ctx === ctx, filled = !!ctx && s.fillDone === ctx;
+        return {
+          fillMic: () => ctx && this.startListen(ctx), fillDoneOn: filled && !hearing,
+          fillAria: hearing ? 'Stop listening' : 'Tell ' + an + ' instead of typing',
+          fillMicBg: hearing ? 'var(--acc2)' : 'var(--acc)', fillRing: hearing ? '0 0 0 6px rgba(169,80,43,.18)' : 'none',
+          fillText: hearing ? ((this.tx || []).slice(0, s.words).join(' ') || 'I’m listening…') : filled ? '“' + (this.tx || []).join(' ') + '”' : 'Tap and tell ' + an + '. I fill this in, you check it.',
+          fillColor: hearing || filled ? 'var(--ink)' : 'var(--mute)', fillStyle: filled && !hearing ? 'italic' : 'normal',
+        };
+      })(),
       // ---- empty states: Allie (13b) and Calendar not connected (18d)
       chatEmpty: !s.chats[s.chatTopic].length, chatEmptyTitle: TOPICS[s.chatTopic].empty, chatEmptyBody: TOPICS[s.chatTopic].hello,
       chatEmptyBg: DIMS[TOPICS[s.chatTopic].dim].bg, chatEmptyFg: DIMS[TOPICS[s.chatTopic].dim].fg, calNone: s.calDenied && V === 'ana',
