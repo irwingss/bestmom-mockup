@@ -38,7 +38,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <h1 style="font-family:'Young Serif',serif;font-weight:400;font-size:42px;line-height:1.08;margin:16px 0 16px;text-wrap:pretty">Tell me about your life. I’ll plan your day in 5 minutes.</h1>
   <p style="font-size:17px;line-height:1.45;color:var(--mute);margin:0 0 36px;text-wrap:pretty">When a nap moves or a meeting pops up, I rearrange the rest in one tap. Nothing gets lost.</p>
   <button onClick="{{ toConsent }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Let’s start</button>
-  <div style="text-align:center;font-size:15px;color:var(--mute);margin-top:16px">No account needed to try your first day.</div>
+  <div style="text-align:center;font-size:15px;color:var(--mute);margin-top:16px">Your first day is free, no account needed. Then 7 days free.</div>
   <button onClick="{{ toSignin }}" style="height:44px;margin-top:4px;border:none;background:transparent;font-size:15px;font-weight:600;color:var(--acc);cursor:pointer">I already have an account</button>
 </div>
 </sc-if>
@@ -137,13 +137,14 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
     <button onClick="{{ tC1 }}" style="display:flex;gap:16px;align-items:flex-start;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer">
       <div style="width:26px;height:26px;border-radius:8px;flex:none;border:2px solid {{ c1.border }};background:{{ c1.bg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ c1.op }}"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
-      <div style="font-size:15px;line-height:1.4">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</div>
+      <div style="font-size:15px;line-height:1.4">I agree to the <a href="#">Terms</a>, the <a href="#">Privacy Policy</a> and the <a href="#">Health Data Policy</a>.</div>
     </button>
     <button onClick="{{ tC2 }}" style="display:flex;gap:16px;align-items:flex-start;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer">
       <div style="width:26px;height:26px;border-radius:8px;flex:none;border:2px solid {{ c2.border }};background:{{ c2.bg }};display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" style="opacity:{{ c2.op }}"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
-      <div style="font-size:15px;line-height:1.4">I consent to BestMom using what I share about my mood and wellbeing to plan my day. I can withdraw this anytime.</div>
+      <div style="font-size:15px;line-height:1.4"><b>Optional.</b> I consent to BestMom using what I share about my mood and energy to plan my day. Without it, BestMom plans from my schedule and logs only. I can change this anytime in You.</div>
     </button>
   </div>
+  <div style="font-size:13px;color:var(--mute);line-height:1.4;margin:-12px 4px 12px">Either way, if something you share sounds like a crisis, I show you where to get help right away.</div>
   <button onClick="{{ toDump }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer;opacity:{{ consentOp }}">Continue</button>
 </div>
 </sc-if>
@@ -151,11 +152,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 <sc-if value="{{ sDump }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="03 Brain dump" style="position:absolute;inset:0;display:flex;flex-direction:column;padding:64px 24px 40px;background:var(--bg)">
   <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px"><div style="width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--on);font-family:'Young Serif',serif;font-size:15px;display:flex;align-items:center;justify-content:center">{{ anInitial }}</div><div style="font-size:15px;font-weight:600;color:var(--mute)">{{ an }}</div></div>
-  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.25;text-wrap:pretty">Tell me what your life looks like today: your kids, your work, what’s weighing on you. Talk or type, however it comes.</div>
+  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.25;text-wrap:pretty">{{ dumpPrompt }}</div>
   <div style="flex:1;overflow:auto;margin:20px 0 12px">
     <sc-if value="{{ dumpVoice }}" hint-placeholder-val="{{ true }}">
       <sc-if value="{{ hasWords }}" hint-placeholder-val="{{ false }}"><div style="font-size:20px;line-height:1.5">{{ dumpWords }}</div></sc-if>
-      <sc-if value="{{ noWords }}" hint-placeholder-val="{{ true }}"><div style="font-size:17px;line-height:1.5;color:var(--mute)">Like: “Mateo is 7 months, I work 9 to 5, and I never eat lunch.” Take as long as you need. Up to 10 minutes.</div></sc-if>
+      <sc-if value="{{ noWords }}" hint-placeholder-val="{{ true }}"><div style="font-size:17px;line-height:1.5;color:var(--mute)">Like: “Mateo is 7 months, our nanny comes 9 to 5, I’m in the office Wednesdays, and I never eat lunch.” Take as long as you need. Up to 10 minutes.</div></sc-if>
     </sc-if>
     <sc-if value="{{ dumpType }}" hint-placeholder-val="{{ false }}">
       <textarea value="{{ dumpText }}" onChange="{{ onDumpText }}" placeholder="Start anywhere…" style="width:100%;height:100%;min-height:220px;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:16px;font-size:17px;line-height:1.5;resize:none;outline:none;color:var(--ink)"></textarea>
@@ -266,6 +267,15 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <div style="font-size:13px;color:var(--ink2)">From today’s logs. Not perfect. Present.</div>
     </div>
 
+    <sc-if value="{{ shiftAsk }}"><div data-screen-label="20b Your night" style="margin-top:12px;background:var(--d-E6E5F3);border-radius:24px;padding:16px">
+      <div style="font-size:13px;font-weight:600;color:var(--l-3E3F78)">Your night</div>
+      <div style="font-size:17px;font-weight:600;line-height:1.3;margin:4px 0">You were up 3 times with {{ kid1 }} last night.</div>
+      <div style="font-size:15px;line-height:1.4;color:var(--ink2)">Tonight Diego could take the wakes before 2 AM, so you get one long stretch.</div>
+      <sc-if value="{{ shiftCanAsk }}"><button onClick="{{ askShift }}" style="margin-top:8px;height:40px;padding:0 16px;border-radius:999px;border:none;background:#3E3F78;color:#FFFFFF;font-size:15px;font-weight:600;cursor:pointer">Ask Diego</button></sc-if>
+      <sc-if value="{{ shiftAsked }}"><div style="margin-top:8px;font-size:13px;color:var(--l-3E3F78)">Asked. Waiting for Diego…</div></sc-if>
+    </div></sc-if>
+    <sc-if value="{{ shiftYes }}"><div style="margin-top:12px;background:var(--d-E6E5F3);border-radius:24px;padding:16px;font-size:15px;line-height:1.4"><b>Tonight, Diego takes the wakes until 2 AM.</b> Go to bed when the kids do if you can.</div></sc-if>
+
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin:24px 4px 8px"><div style="font-size:13px;font-weight:600;color:var(--mute)">Your time today</div><div style="font-size:13px;color:var(--mute)">Pick one, or none</div></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden">
       <sc-for list="{{ selfItems }}" as="i" hint-placeholder-count="3">
@@ -285,8 +295,8 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     </div>
 
     <div style="margin-top:12px;background:var(--d-FBF0F0);border:1px solid var(--d-EFD5D7);border-radius:24px;padding:16px 16px">
-      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:var(--l-8A3B44);background:var(--d-F4DDDD);padding:4px 8px;border-radius:4px">Us · a sweet moment</span><span style="font-size:12px;color:var(--l-8A3B44)">Last: Sunday coffee · 9 days</span></div>
-      <div style="font-family:'Young Serif',serif;font-size:20px;line-height:1.25;margin:8px 0 4px">Time for you and Diego?</div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:600;color:var(--l-8A3B44);background:var(--d-F4DDDD);padding:4px 8px;border-radius:4px">Us · a sweet moment</span><span style="font-size:12px;color:var(--l-8A3B44)">When you have the energy</span></div>
+      <div style="font-family:'Young Serif',serif;font-size:20px;line-height:1.25;margin:8px 0 4px">Time for you and {{ supName }}?</div>
       <div style="font-size:15px;line-height:1.4;color:var(--mute);margin-bottom:8px">No pressure. Pick what fits tonight’s energy.</div>
       <sc-for list="{{ usOpts }}" as="u" hint-placeholder-count="3">
         <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--d-EFD5D7)">
@@ -340,6 +350,12 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Last night: 3 wakes</div><div style="font-size:13px;color:var(--mute)">Longest stretch 3h 10m · usual is 1</div></div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none"><div style="display:flex;align-items:flex-end;gap:4px;height:22px"><sc-for list="{{ nightMini }}" as="n"><div style="width:6px;height:{{ n.h }}px;border-radius:2px;background:{{ n.c }}"></div></sc-for></div><span style="font-size:12px;font-weight:600;color:var(--l-3E3F78)">Rough patch ›</span></div>
       </button>
+      <sc-if value="{{ shiftAsk }}"><div data-screen-label="06e Night shift" style="display:flex;align-items:center;gap:12px;min-height:52px;border-bottom:1px solid var(--hair);padding:4px 0 4px 44px">
+        <div style="flex:1;min-width:0;font-size:13px;line-height:1.35;color:var(--ink2)">Up 3 times last night. Tonight, Diego takes the wakes before 2 AM?</div>
+        <sc-if value="{{ shiftCanAsk }}"><button onClick="{{ askShift }}" style="height:36px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;flex:none;border:none;background:#3E3F78;color:#FFFFFF">Ask Diego</button></sc-if>
+        <sc-if value="{{ shiftAsked }}"><span style="font-size:13px;color:var(--l-3E3F78);flex:none">Asked…</span></sc-if>
+      </div></sc-if>
+      <sc-if value="{{ shiftYes }}"><div style="min-height:44px;display:flex;align-items:center;border-bottom:1px solid var(--hair);padding-left:44px;font-size:13px;color:var(--ink2)">Tonight Diego takes the wakes until 2 AM.</div></sc-if>
       <sc-if value="{{ sickOn }}" hint-placeholder-val="{{ false }}">
       <div data-screen-label="37 Sick day" style="padding:12px 0;border-bottom:1px solid var(--hair)">
         <div style="display:flex;align-items:center;gap:12px">
@@ -355,7 +371,10 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           <button onClick="{{ openSickReminder }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">+ Reminder</button>
           <button onClick="{{ openSickNote }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">+ Note</button>
           <button onClick="{{ sickBetter }}" style="height:36px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink);border-color:#2F5A7A;color:var(--l-2F5A7A)">{{ betterLabel }}</button>
-        </div></sc-if>
+        </div>
+        <div style="margin:12px 0 0 44px;font-size:13px;font-weight:600;color:var(--mute)">If {{ sickName }} is still home tomorrow, who’s with {{ sickName }}?</div>
+        <div style="display:flex;gap:8px;margin:8px 0 0 44px;flex-wrap:wrap"><sc-for list="{{ sickWhoChips }}" as="c"><button onClick="{{ c.pick }}" style="height:36px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;flex:none;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button></sc-for>
+          <button onClick="{{ sickWorkNote }}" style="height:36px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;flex:none;border:none;background:var(--d-E4E1F0);color:var(--l-4B4580)">Note for work</button></div></sc-if>
       </div>
       </sc-if>
       <button onClick="{{ toHome }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
@@ -363,6 +382,11 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: {{ dinnerName }}</div><div style="font-size:13px;color:var(--mute)">Prep at 5:10 PM · see the week ›</div></div>
         <div style="text-align:right;flex:none"><div style="font-family:'Young Serif',serif;font-size:17px;color:var(--l-7A5714)">{{ mealIn }}</div><div style="font-size:12px;color:var(--mute)">to prep</div></div>
       </button>
+      <sc-if value="{{ hasDates }}"><button onClick="{{ datesRow.go }}" data-screen-label="06f Coming up" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;border-top:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
+        <div style="width:32px;height:32px;border-radius:8px;background:var(--d-F4E6C8);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-7A5714)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10.5h16M8.5 3.5v5M15.5 3.5v5"></path></svg></div>
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">{{ datesRow.title }}</div><div style="font-size:13px;color:var(--mute)">{{ datesRow.sub }}</div></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;flex:none"><path d="M9 5l7 7-7 7"></path></svg>
+      </button></sc-if>
       <sc-if value="{{ showHomeStrip }}"><div data-screen-label="06d Home strip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 8px">
         <sc-for list="{{ homeTiles }}" as="h" hint-placeholder-count="3"><button onClick="{{ h.go }}" style="min-height:64px;border:none;border-radius:12px;background:var(--d-F4E6C8);padding:8px 10px;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:4px;color:var(--ink)">
           <div style="display:flex;align-items:center;justify-content:space-between;width:100%"><svg style="stroke:var(--l-7A5714)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ h.icon }}"></path></svg><span style="font-family:'Young Serif',serif;font-size:17px;line-height:1;color:var(--l-7A5714)">{{ h.n }}</span></div>
@@ -373,12 +397,15 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 
     <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--soft);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4"><b>You’re offline.</b> Logs and reminders still work. Replans use a simpler on-phone version until you’re back.</div></sc-if>
     <sc-if value="{{ calDenied }}" hint-placeholder-val="{{ false }}"><div style="margin-top:16px;background:var(--d-E4E1F0);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4;display:flex;gap:8px;align-items:center"><div style="flex:1"><b>I can’t see your meetings.</b> Turn on calendar access so I plan around them.</div><button onClick="{{ fixCal }}" style="height:40px;padding:0 16px;border-radius:999px;border:none;background:#4B4580;color:#FFFFFF;font-weight:600;cursor:pointer">Turn on</button></div></sc-if>
+    <sc-if value="{{ calChange }}" hint-placeholder-val="{{ false }}"><div data-screen-label="60 Calendar changed" style="margin-top:16px;background:var(--d-E4E1F0);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4"><b>Sarah moved your 3:00 to 3:30</b> in Outlook. Want me to fit the rest of your afternoon around it?
+      <div style="display:flex;gap:8px;margin-top:8px"><button onClick="{{ calChangeGo }}" style="height:40px;padding:0 16px;border-radius:999px;border:none;background:#4B4580;color:#FFFFFF;font-weight:600;cursor:pointer">See the new plan</button><button onClick="{{ calChangeLater }}" style="height:40px;padding:0 12px;border-radius:999px;border:none;background:transparent;color:var(--l-4B4580);font-weight:600;cursor:pointer">Later</button></div></div></sc-if>
     <sc-if value="{{ notifDenied }}" hint-placeholder-val="{{ false }}"><div data-screen-label="48 Notifications off" style="margin-top:16px;background:var(--d-F4E6C8);border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.4"><b>Notifications are off.</b> I can’t give you a heads-up before naps or meetings. Your plan still updates here.<div style="font-size:13px;color:var(--l-5E430F);margin-top:4px">To turn them back on: Settings › BestMom › Notifications › Allow.</div><button onClick="{{ fixNotif }}" style="margin-top:8px;height:40px;padding:0 16px;border-radius:999px;border:none;background:#7A5714;color:#FFFFFF;font-weight:600;cursor:pointer">Open Settings</button></div></sc-if>
 
     <div style="margin-top:16px;background:{{ hero.bg }};border-radius:24px;padding:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:{{ hero.fg }}"><span>Now</span><span>{{ hero.range }}</span></div>
       <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.15;margin:8px 0 8px">{{ hero.title }}</div>
       <div style="font-size:15px;line-height:1.4;color:var(--ink2)">{{ hero.why }}</div>
+      <sc-if value="{{ hero.hasKids }}"><div style="display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:13px;line-height:1.4;color:var(--ink2)"><span style="font-weight:600;color:var(--l-2F5A7A);flex:none">Kids now</span><span>{{ hero.kids }}</span></div></sc-if>
       <div style="height:1px;background:rgba(42,33,28,.12);margin:16px 0 12px"></div>
       <div style="display:flex;align-items:center;gap:8px">
         <div style="font-size:13px;font-weight:600;color:{{ hero.fg }}">Next</div>
@@ -424,6 +451,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
               <span style="font-size:13px;font-weight:600;color:{{ b.dimFg }};background:{{ b.dimBg }};padding:4px 8px;border-radius:4px">{{ b.dimLabel }}</span>
               <span style="font-size:12px;color:var(--mute)">{{ b.meta }}</span>
               <div style="display:flex"><sc-for list="{{ b.kids }}" as="k"><div style="width:20px;height:20px;border-radius:50%;background:{{ k.color }};color:var(--on);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;border:2px solid var(--card);margin-right:-4px">{{ k.initial }}</div></sc-for></div>
+              <sc-if value="{{ b.hasWho }}"><span style="display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px {{ b.whoStyle }} {{ b.whoColor }};color:var(--ink2)"><span style="width:7px;height:7px;border-radius:50%;background:{{ b.whoColor }}"></span>{{ b.whoLabel }}</span></sc-if>
             </div>
             <div style="font-size:17px;font-weight:600;line-height:1.25;text-decoration:{{ b.deco }}">{{ b.title }}</div>
             <sc-if value="{{ b.hasWhy }}"><div style="font-size:13px;line-height:1.38;color:var(--mute);margin-top:4px;text-wrap:pretty">{{ b.why }}</div></sc-if>
@@ -455,6 +483,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <div style="display:flex;align-items:center;gap:8px;margin-top:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px">
         <svg width="18" height="18" viewBox="0 0 36 36" style="flex:none"><circle style="stroke:var(--d-DCE6DA)" cx="18" cy="18" r="14" fill="none" stroke-width="5"></circle><circle style="stroke:#5E8A62" cx="18" cy="18" r="14" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="87.96" stroke-dashoffset="{{ weekOff }}" transform="rotate(-90 18 18)"></circle></svg>
         <div style="font-size:13px;line-height:1.35;flex:1">{{ calSub }}</div>
+        <button onClick="{{ openWeek }}" style="height:32px;padding:0 12px;border-radius:999px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">Your week</button>
       </div>
       <sc-if value="{{ calNone }}" hint-placeholder-val="{{ false }}"><div data-screen-label="18d Calendar: not connected" style="margin-top:8px;background:var(--d-E4E1F0);border-radius:12px;padding:12px 16px">
         <div style="font-size:15px;font-weight:600;color:var(--l-4B4580)">Only BestMom’s plan is here</div>
@@ -468,7 +497,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div style="display:grid;grid-template-columns:30px repeat({{ calCols }},minmax(0,1fr));padding:0 8px 8px;border-bottom:1px solid var(--line)">
       <div></div>
       <sc-for list="{{ calDays }}" as="d"><button onClick="{{ d.pick }}" style="display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;cursor:pointer;padding:2px 0">
-        <span style="font-size:12px;font-weight:600;color:var(--mute)">{{ d.name }}</span>
+        <span style="font-size:12px;font-weight:600;color:var(--mute)">{{ d.name }}</span><span style="font-size:11px;line-height:1;height:11px;color:var(--l-4B4580);font-weight:600">{{ d.where }}</span>
         <span style="position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center">
           <svg width="32" height="32" viewBox="0 0 36 36" style="position:absolute;inset:0"><circle style="fill:{{ d.fill }};stroke:var(--d-E6E1D8)" cx="18" cy="18" r="15" stroke-width="3"></circle><circle style="stroke:#5E8A62" cx="18" cy="18" r="15" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="{{ d.off }}" transform="rotate(-90 18 18)"></circle></svg>
           <span style="position:relative;font-size:13px;font-weight:600;color:{{ d.numFg }}">{{ d.date }}</span>
@@ -485,7 +514,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
           </div>
         </sc-for>
       </div>
-      <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:12px;line-height:1.4">Solid = done · Light = coming up · Faded = skipped or moved<br>Rings fill as the day gets done.</div>
+      <div style="font-size:13px;color:var(--mute);text-align:center;margin-top:12px;line-height:1.4">Solid = done · Light = coming up · Faded = skipped or moved<br>Rings show what got done. A light ring isn’t a bad day.</div>
     </div>
     </sc-if>
 
@@ -505,6 +534,7 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-family:'Young Serif',serif;font-size:20px">{{ selDay.title }}</div><div style="font-size:13px;color:var(--mute)">{{ selDay.stat }}</div></div>
         <div style="font-size:15px;line-height:1.4;color:var(--ink2);margin-top:8px">{{ selDay.note }}</div>
         <sc-for list="{{ selDay.items }}" as="i"><div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--hair);margin-top:8px;font-size:15px"><span style="width:9px;height:9px;border-radius:50%;background:{{ i.c }};flex:none"></span><span style="flex:1;text-decoration:{{ i.deco }};opacity:{{ i.op }}">{{ i.title }}</span><span style="font-size:13px;color:var(--mute)">{{ i.time }}</span></div></sc-for>
+        <button onClick="{{ addDate }}" style="margin-top:8px;height:36px;padding:0;border:none;background:transparent;color:var(--acc);font-size:15px;font-weight:600;cursor:pointer">+ Add a date</button>
       </div>
     </div>
     </sc-if>
@@ -790,6 +820,10 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     </div>
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin:0 4px 8px">Your data</div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden">
+      <button onClick="{{ toggleWellbeing }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;min-height:60px;color:var(--ink)">
+        <div style="flex:1"><div style="font-size:17px;font-weight:600">Use my mood to plan</div><div style="font-size:13px;color:var(--mute)">{{ wellSub }}</div></div>
+        <div style="width:51px;height:31px;border-radius:999px;background:{{ wellTrack }};padding:2px;display:flex;justify-content:{{ wellJustify }};flex:none"><div style="width:27px;height:27px;border-radius:50%;background:var(--d-FFFFFF);box-shadow:var(--sh4)"></div></div>
+      </button>
       <button onClick="{{ exportData }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;font-size:17px;font-weight:600;cursor:pointer">Export my data (JSON or CSV)</button>
       <button onClick="{{ deleteData }}" style="width:100%;text-align:left;padding:0 16px;min-height:56px;border:none;background:transparent;font-size:17px;font-weight:600;color:var(--l-A33A2A);cursor:pointer">Delete my account and everything</button>
     </div>
@@ -892,12 +926,27 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       <sc-if value="{{ shBlock }}">
         <div data-screen-label="06b Block detail" style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:13px;font-weight:600;color:{{ sel.dimFg }};background:{{ sel.dimBg }};padding:4px 8px;border-radius:4px">{{ sel.dimLabel }}</span><span style="font-size:13px;color:var(--mute)">{{ sel.kind }}</span></div>
         <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.12">{{ sel.title }}</div>
-        <div style="font-size:15px;color:var(--mute);margin:4px 0 8px">{{ sel.range }}</div>
+        <div style="font-size:15px;color:var(--mute);margin:4px 0 8px">{{ sel.range }}<sc-if value="{{ sel.hasWho }}"> · {{ sel.whoLine }}</sc-if></div>
         <sc-if value="{{ sel.hasWhy }}"><div style="font-size:15px;line-height:1.45;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:16px"><b>Why: </b>{{ sel.why }}</div></sc-if>
         <div style="display:flex;flex-direction:column;gap:8px">
           <sc-for list="{{ sel.actions }}" as="a"><button onClick="{{ a.go }}" style="height:54px;border-radius:999px;border:{{ a.border }};background:{{ a.bg }};color:{{ a.fg }};font-size:17px;font-weight:600;cursor:pointer">{{ a.label }}</button></sc-for>
         </div>
         <sc-if value="{{ sel.fixed }}"><div style="font-size:13px;color:var(--mute);text-align:center;margin-top:8px">Fixed. I never move this without asking you.</div></sc-if>
+      </sc-if>
+
+      <sc-if value="{{ shWeek }}">
+        <div data-screen-label="61 Your week">
+        <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Your week</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">Where you work and who does pickup. Every day of the plan reads it.</div>
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden">
+          <sc-for list="{{ weekRows }}" as="w"><div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--hair);opacity:{{ w.op }};min-height:56px">
+            <div style="width:56px;font-size:15px;font-weight:600;flex:none">{{ w.name }}</div>
+            <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px;border-radius:999px;background:var(--soft)"><sc-for list="{{ w.where }}" as="c"><button onClick="{{ c.go }}" style="height:32px;border:none;border-radius:999px;background:{{ c.bg }};box-shadow:{{ c.sh }};font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)">{{ c.label }}</button></sc-for></div>
+            <sc-if value="{{ w.hasPick }}"><div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px;border-radius:999px;background:var(--soft)"><sc-for list="{{ w.pick }}" as="c"><button onClick="{{ c.go }}" style="height:32px;border:none;border-radius:999px;background:{{ c.bg }};box-shadow:{{ c.sh }};font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)">{{ c.label }}</button></sc-for></div></sc-if>
+          </div></sc-for>
+        </div>
+        <div style="font-size:13px;color:var(--mute);margin-top:12px;line-height:1.4">Second column: who picks up Lia. Past days stay as they were. Sunday at 7 PM I ask you to check this: 2 minutes, and the whole week plans itself. Diego sees his pickups on his phone.</div>
+        </div>
       </sc-if>
 
       <sc-if value="{{ shInvite }}">
@@ -1318,13 +1367,27 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
 
 <sc-if value="{{ sClose }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="12 Close of day" style="position:absolute;inset:0;overflow:auto;background:var(--bg);padding:64px 24px 40px">
-  <div style="font-size:15px;font-weight:600;color:var(--mute)">Tuesday, 9:15 PM</div>
+  <div style="font-size:15px;font-weight:600;color:var(--mute)">Tuesday, 9:00 PM</div>
   <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.08;margin:8px 0 16px">Today, wrapped.</div>
   <div style="font-family:'Young Serif',serif;font-size:22px;line-height:1.32;color:var(--acc);margin-bottom:20px;text-wrap:pretty">{{ earned }}</div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ doneCount }}</div><div style="font-size:13px;color:var(--mute)">done</div></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ replans }}</div><div style="font-size:13px;color:var(--mute)">plan changes</div></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px"><div style="font-family:'Young Serif',serif;font-size:28px">{{ tomorrowCount }}</div><div style="font-size:13px;color:var(--mute)">to tomorrow</div></div>
+  </div>
+  <sc-if value="{{ hasCloseRows }}"><div data-screen-label="12b Did these happen" style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:16px">
+    <div style="font-size:15px;font-weight:600">Did these happen?</div>
+    <div style="font-size:13px;color:var(--mute);line-height:1.4;margin:2px 0 4px">These passed without a tick, so I marked them done. Untick what didn’t happen and it moves to tomorrow.</div>
+    <sc-for list="{{ closeRows }}" as="r"><button onClick="{{ r.pick }}" aria-pressed="{{ r.on }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:48px;border:none;border-top:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:4px 0;color:var(--ink)">
+      <div style="width:24px;height:24px;border-radius:8px;border:2px solid {{ r.border }};background:{{ r.bg }};flex:none;display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 24 24" style="opacity:{{ r.op }}"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3.2" fill="none" stroke-linecap="round"></path></svg></div>
+      <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">{{ r.title }}</div><div style="font-size:12px;color:var(--mute)">{{ r.sub }}</div></div><span style="font-size:13px;color:var(--mute)">{{ r.time }}</span></button></sc-for>
+  </div></sc-if>
+  <div data-screen-label="12c Tomorrow" style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:15px;font-weight:600">{{ tmrwTitle }}</div><button onClick="{{ seeTomorrow }}" style="height:32px;padding:0;border:none;background:transparent;color:var(--acc);font-size:13px;font-weight:600;cursor:pointer">See it ›</button></div>
+    <sc-for list="{{ tmrwLines }}" as="l"><div style="display:flex;gap:12px;font-size:13px;padding:4px 0;color:var(--ink2)"><span style="width:62px;flex:none;color:var(--mute)">{{ l.time }}</span><span>{{ l.text }}</span></div></sc-for>
+    <div style="font-size:13px;font-weight:600;color:var(--mute);margin:8px 0 0">Get ready tonight</div>
+    <sc-for list="{{ prepRows }}" as="r"><button onClick="{{ r.pick }}" aria-pressed="{{ r.on }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:44px;border:none;border-top:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
+      <div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ r.border }};background:{{ r.bg }};flex:none;display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 24 24" style="opacity:{{ r.op }}"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3.2" fill="none" stroke-linecap="round"></path></svg></div><span style="font-size:15px;text-decoration:{{ r.deco }}">{{ r.t }}</span></button></sc-for>
   </div>
   <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px;margin-bottom:16px">
     <div style="font-size:13px;font-weight:600;color:var(--l-7A5714);margin-bottom:8px">Today’s note</div>
@@ -1335,24 +1398,25 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:24px">
     <sc-for list="{{ ratings }}" as="r" hint-placeholder-count="5"><button onClick="{{ r.pick }}" style="height:52px;border-radius:16px;border:1.5px solid {{ r.border }};background:{{ r.bg }};color:{{ r.fg }};font-size:17px;font-weight:600;cursor:pointer">{{ r.n }}</button></sc-for>
   </div>
-  <button onClick="{{ toPaywall }}" style="width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Tomorrow’s plan is ready. Good night</button>
+  <button onClick="{{ closeDay }}" style="width:100%;height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Done. Good night</button>
 </div>
 </sc-if>
 
 <sc-if value="{{ sPaywall }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="16 Paywall" style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding:64px 24px 32px">
-  <div style="font-size:15px;font-weight:600;color:var(--mute)">Wednesday, 6:52 AM</div>
-  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1;margin:8px 0 16px">Good morning, Rossi. Yesterday, together:</div>
+  <div style="font-size:15px;font-weight:600;color:var(--mute)">Tuesday, 9:05 PM</div>
+  <div role="heading" aria-level="1" style="font-family:'Young Serif',serif;font-size:34px;line-height:1.1;margin:8px 0 16px">Your first day, together:</div>
   <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
     <sc-for list="{{ yesterday }}" as="y" hint-placeholder-count="3"><div style="display:flex;gap:8px;align-items:center;font-size:17px"><div style="width:22px;height:22px;border-radius:50%;background:#3D6142;flex:none;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 24 24"><path style="stroke:var(--d-FFF8F0)" d="M5 12.5l4.5 4.5L19 7.5" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg></div>{{ y.text }}</div></sc-for>
   </div>
-  <div style="font-size:17px;font-weight:600;margin-bottom:8px">Keep me planning your days</div>
+  <div style="font-size:17px;font-weight:600;margin-bottom:8px">Keep going: 7 days free</div>
+  <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px"><sc-for list="{{ trialSteps }}" as="t"><div style="display:flex;gap:12px;font-size:13px;line-height:1.35"><span style="width:62px;flex:none;font-weight:600;color:var(--acc)">{{ t.when }}</span><span style="color:var(--ink2)">{{ t.what }}</span></div></sc-for></div>
   <div style="display:flex;flex-direction:column;gap:8px">
     <sc-for list="{{ plans }}" as="p" hint-placeholder-count="2"><button onClick="{{ p.pick }}" style="display:flex;align-items:center;gap:12px;text-align:left;min-height:68px;border-radius:16px;border:2px solid {{ p.border }};background:var(--card);padding:8px 16px;cursor:pointer"><div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ p.border }};display:flex;align-items:center;justify-content:center;flex:none"><div style="width:10px;height:10px;border-radius:50%;background:{{ p.dot }}"></div></div><div style="flex:1"><div style="font-size:17px;font-weight:600">{{ p.name }}</div><div style="font-size:13px;color:var(--mute)">{{ p.sub }}</div></div><div style="font-size:17px;font-weight:600">{{ p.price }}</div></button></sc-for>
   </div>
-  <div style="flex:1"></div>
-  <button onClick="{{ subscribe }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Continue · {{ planPrice }}</button>
-  <div style="font-size:12px;color:var(--mute);text-align:center;line-height:1.45;margin:8px 4px">Renews automatically until you cancel. Cancel anytime in your App Store settings at least 24 hours before renewal.</div>
+  <div style="flex:1;min-height:12px"></div>
+  <button onClick="{{ subscribe }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Start 7 days free</button>
+  <div style="font-size:12px;color:var(--mute);text-align:center;line-height:1.45;margin:8px 4px">{{ planFine }}</div>
   <div style="display:flex;justify-content:center;gap:8px;font-size:13px;font-weight:600"><button onClick="{{ restore }}" style="height:44px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:13px;font-weight:600;cursor:pointer">Restore purchases</button><button onClick="{{ notNow }}" style="height:44px;padding:0 8px;border:none;background:transparent;color:var(--acc);font-size:13px;font-weight:600;cursor:pointer">Not now</button></div>
 </div>
 </sc-if>
@@ -1364,12 +1428,12 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
   <div style="font-size:17px;line-height:1.45;color:var(--mute);margin:8px 0 24px">{{ subLine }}</div>
   <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px">
     <div style="font-size:13px;font-weight:600;color:var(--mute);margin-bottom:8px">What happens now</div>
-    <div style="font-size:15px;line-height:1.5">Today’s plan is ready, built from last night’s close.</div>
-    <div style="font-size:15px;line-height:1.5;margin-top:8px">Replans, reminders and {{ an }} are on again.</div>
+    <div style="font-size:15px;line-height:1.5">Tomorrow’s plan is ready, built from tonight’s close.</div>
+    <div style="font-size:15px;line-height:1.5;margin-top:8px">Replans, reminders and {{ an }} stay on all week.</div>
     <div style="font-size:15px;line-height:1.5;margin-top:8px">Manage or cancel anytime in your App Store settings.</div>
   </div>
   <div style="flex:1"></div>
-  <button onClick="{{ subContinue }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">See today’s plan</button>
+  <button onClick="{{ subContinue }}" style="height:56px;border-radius:999px;border:none;background:var(--acc);color:var(--on);font-size:17px;font-weight:600;cursor:pointer">Back to my plan</button>
 </div>
 </sc-if>
 
@@ -1480,8 +1544,8 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
     <div style="font-size:13px;font-weight:600;color:var(--l-6E625A);margin-bottom:8px">Color key (same everywhere)</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ legend }}" as="d"><span style="font-size:13px;font-weight:600;color:{{ d.fg }};background:{{ d.bg }};padding:4px 8px;border-radius:4px">{{ d.label }}</span></sc-for></div>
   </div>
-  <div style="font-size:13px;line-height:1.5;color:var(--l-6E625A)">Try: flip <b>Full Mom → Self-Love</b> in Today’s header. Open <b>Calendar</b> (week and month). In Kids, open <b>Night log</b>. In You, <b>Invite someone</b> as Caregiver, then tap Carmen in Family to change the role or “See as Carmen”. On the Lock Screen (58), tap the moon. Tap <b>+ → Home &amp; Meals</b> and say what’s in your pantry. Use <b>Something happened → is sick</b> for reminders and private notes.</div>
-  <div style="font-size:12px;line-height:1.5;color:#8A7D73">Assumptions: English copy for the US launch. Demo clock is Tuesday Nov 17, 1:40 PM. Sharing: one household, each member has a role (partner, caregiver, family) that scopes what syncs to their phone. Recipes stay out of v1: meals are her own dishes, planned by week and matched to her pantry. Nothing medical is stored: reminders are free text and the sick-day note stays on the phone. The attached design system was empty, so type is Young Serif + Figtree on warm paper tones, with a warm dark mode for night screens.</div>
+  <div style="font-size:13px;line-height:1.5;color:var(--l-6E625A)">Try: flip <b>Full Mom → Self-Love</b> in Today’s header. Open <b>Calendar</b> (week and month). In Kids, open <b>Night log</b>. In You, <b>Invite someone</b> as Caregiver, then tap Carmen in Family to change the role or “See as Carmen”. On the Lock Screen (58), tap the moon. Tap <b>+ → Home &amp; Meals</b> and say what’s in your pantry. Use <b>Something happened → is sick</b> for reminders and private notes. Tap a kids or home block and <b>Ask Diego to do it</b>. Try <b>Carmen has to leave early</b> (62). Answer <b>Good</b> in the energy check-in and a partner idea appears; say <b>I’m exhausted</b> and it goes. Close the day (12) to confirm what happened and pack for tomorrow.</div>
+  <div style="font-size:12px;line-height:1.5;color:#8A7D73">Assumptions: English copy for the US launch. Demo clock is Tuesday Nov 17, 1:40 PM. Sharing: one household, each member has a role (partner, caregiver, family) that scopes what syncs to their phone. Recipes stay out of v1: meals are her own dishes, planned by week and matched to her pantry. Nothing medical is stored: reminders are free text and the sick-day note stays on the phone. Care: Carmen (nanny) has Mateo on weekdays 9 to 5, Lia is at daycare 8:15 to 4:15, Rossi works from home Mon, Tue and Fri and at the office Wed and Thu. Every block has one person; the console checks that nobody is in two places at once. Type follows Fluent 2: system font, Young Serif for titles.</div>
 </div>
 </sc-if>
 </div>
@@ -1526,56 +1590,84 @@ const ROLES = {
 const ACCESS = [
   ['Kids’ routines and their plan for today', true, true, true],
   ['Log naps, feeds, diapers and night wakes', true, true, false],
+  ['Get tasks you hand them, and say yes or no', true, true, false],
   ['Tell you “something happened”. You approve the replan', true, true, false],
   ['Your meetings', 'Titles and times', 'Only “Rossi busy”', false],
   ['Moments you choose to share', true, false, true],
+  ['Your own time: meals, walks, pumping breaks', false, false, false],
   ['Your check-ins, notes and Self-Love', false, false, false],
 ];
-function weekDays(fam, today, extra) {
+// Each weekday: where she works and who does Lia's pickup. Set on Sunday in "Your week" (61); the plan of each day reads it.
+// demo cleaning plan (Home → Cleaning); each weekday's plan takes the chore due that day
+const CHORES0 = [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'diego', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }];
+const choreOn = (chores, i) => chores.find(c => c.days.includes(i)) || null;
+const WEEK0_SETUP = [null, { where: 'home', pickup: 'me' }, { where: 'home', pickup: 'me' }, { where: 'office', pickup: 'diego' }, { where: 'office', pickup: 'diego' }, { where: 'home', pickup: 'me' }, null];
+function weekDays(fam, today, extra, week, meals, chores) {
   return DAYN.map((name, i) => {
-    if (i === TODAY_I) return { name, date: WEEK0 + i, blocks: today };
-    const wk = i === 0 || i === 6;
-    let bl = buildBlocks(fam).filter(b => !['partner', 'breathe', 'close', 'prep', 'chore'].includes(b.id) && !(wk && (b.dim === 'work' || b.id === 'pickup' || b.id === 'walk')));
-    if (wk) bl.push(B('park', 570, 90, 'Park, all four of us', 'partner', 'flex', 'all', ''));
+    if (i === TODAY_I) return { name, date: WEEK0 + i, blocks: today, where: (week[i] || {}).where };
+    // ponytail: the week view leaves out the small evening extras so the grid stays readable
+    let bl = buildBlocks(fam, { i, ...(week[i] || {}), meal: meals[i], chore: choreOn(chores, i) }).filter(b => !['partner', 'breathe', 'close', 'prep', 'feed2'].includes(b.id));
     if (i === 3) bl.push(B('gym', 375, 30, 'Workout', 'mom', 'flex', null, ''));
     if (i === 4) bl.push(B('tea', 1215, 25, 'Tea with Diego', 'partner', 'optional', null, ''));
     if (i === 4) bl = bl.map(b => b.id === 'meet' ? { ...b, title: 'Client review' } : b);
     bl = bl.concat(extra.filter(x => x.day === i).map(x => x.b));
-    bl = bl.map(b => ({ ...b, status: i < TODAY_I ? (i === 1 && b.id === 'walk' ? 'skipped' : 'done') : 'pending' }));
-    return { name, date: WEEK0 + i, blocks: bl.sort((a, b) => a.t - b.t) };
+    bl = bl.map(b => ({ ...b, status: b.status === 'tomorrow' ? 'tomorrow' : i < TODAY_I ? (i === 1 && b.id === 'walk' ? 'skipped' : 'done') : 'pending' }));
+    return { name, date: WEEK0 + i, blocks: bl.sort((a, b) => a.t - b.t), where: (week[i] || {}).where };
   });
 }
-const KINDS = { fixed: 'Fixed', flex: 'Flexible', routine: 'Routine', optional: 'Optional' };
+// care: someone has a child for a stretch; routines of that child can sit inside it (the only allowed overlap in one lane)
+const KINDS = { fixed: 'Fixed', flex: 'Flexible', routine: 'Routine', optional: 'Optional', care: 'Care' };
+// Who does it. Blocks belong to one person's lane; a child's state (asleep, at daycare) lives in the blocks of whoever has them.
+const WHO_NAME = { me: 'Rossi', diego: 'Diego', carmen: 'Carmen', cleaner: 'Cleaner' }, WHO_COLOR = { me: '#A9502B', diego: '#B35C67', carmen: '#4E7FA8', cleaner: '#BC8C36' };
+// Who has each child when nobody's block says otherwise: Carmen (nanny) weekdays 9 to 5; Lia at daycare 8:15 to 4:15.
+const careOf = (fam, kid, m, i) => (i === 0 || i === 6) ? null : fam === 'two' && kid === 'b' ? (m >= 495 && m < 975 ? { who: 'daycare', label: 'at daycare', until: 975 } : null) : (m >= 540 && m < 1020 ? { who: 'carmen', label: 'with Carmen', until: 1020 } : null);
+const ROUGH_NIGHT = NIGHTS[NIGHTS.length - 1] > 1; // last night: 3 wakes against a usual of 1
 const FAMS = {
   two: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)', ...MATEO }, { id: 'b', name: 'Lia', age: '3 years', born: 'Jun 2023', color: 'var(--l-8A4C8F)', ww: 330, his: 'her', he: 'she', nights: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0], at: -1 }],
   one: [{ id: 'a', name: 'Mateo', age: '7 months', born: 'Apr 2026', color: 'var(--l-2F7F7A)', ...MATEO }],
   twins: [{ id: 'a', name: 'Mateo', age: '4 months', born: 'Jul 2026', color: 'var(--l-2F7F7A)', ...MATEO }, { id: 'b', name: 'Sofi', age: '4 months', born: 'Jul 2026', color: 'var(--l-8A4C8F)', ww: 105, his: 'her', he: 'she', nights: [2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2], at: -1 }],
 };
-const B = (id, t, dur, title, dim, kind, child, why, status) => ({ id, t, dur, title, dim, kind, child, why, status: status || 'pending' });
-function buildBlocks(fam) {
-  const tw = fam === 'twins';
+// who: 'me' (Rossi), 'diego', 'carmen' or 'all'. Every "why" names a fact the app has: a log, a memory, the calendar or the care schedule.
+const B = (id, t, dur, title, dim, kind, child, why, status, who) => ({ id, t, dur, title, dim, kind, child, why, status: status || 'pending', who: who || 'me' });
+// One day of the plan. o = { i: weekday, where: 'home' | 'office', pickup: 'me' | 'diego', meal, chore: { t, who, min } | null }. Defaults are today (Tuesday, a home day).
+function buildBlocks(fam, o) {
+  o = { i: TODAY_I, where: 'home', pickup: 'me', meal: 'Chicken tacos', chore: { t: 'Vacuum', who: 'diego', min: 20 }, ...(o || {}) };
+  const tw = fam === 'twins', two = fam === 'two', wk = o.i === 0 || o.i === 6, office = !wk && o.where === 'office';
+  const ct = office && o.pickup === 'me' && two ? 1045 : 1030; // dinner starts after pickup
+  const baby = tw ? 'all' : 'a', nanny = wk ? 'me' : 'carmen', nap = (n) => tw ? 'Twins’ ' + n + ' nap' : 'Mateo’s ' + n + ' nap';
   const b = [
-    B('feed1', 420, 20, tw ? 'Morning bottles' : 'Morning bottle', 'kids', 'routine', tw ? 'all' : 'a', '', 'done'),
-    B('focus', 540, 90, 'Focus block: Q4 deck', 'work', 'fixed', null, 'Protected. Replans try not to touch it.', 'done'),
-    B('nap1', 630, 75, tw ? 'Twins’ morning nap' : 'Mateo’s morning nap', 'kids', 'routine', tw ? 'all' : 'a', '', 'done'),
-    B('lunch', 735, 25, 'Lunch, sitting down', 'mom', 'flex', null, 'You said lunch gets skipped. This one is protected.', 'done'),
-    B('nap2', 810, 75, tw ? 'Twins’ afternoon nap' : 'Mateo’s afternoon nap', 'kids', 'routine', tw ? 'all' : 'a', 'Awake 2h 10m. Right on his rhythm.'),
-    B('walk', 840, 20, 'Stroller walk', 'mom', 'flex', null, '20 free minutes before your 3:00. A short walk recharges you.'),
-    B('prep', 885, 10, 'Prep for Sarah', 'work', 'flex', null, 'Meeting in 15 min. The bottle is already in the fridge.'),
-    B('meet', 900, 45, 'Meeting with Sarah', 'work', 'fixed', null, 'From your Outlook calendar.'),
+    B('bottle', 360, 15, tw ? 'Morning bottles' : 'Morning bottle', 'kids', 'routine', baby, 'Diego’s shift. You told me he does the 6 AM bottle.', 'done', 'diego'),
+    B('nap1', 630, 75, nap('morning'), 'kids', 'routine', baby, '', 'done', nanny),
+    B('nap2', 810, 75, nap('afternoon'), 'kids', 'routine', baby, 'Awake 2h 10m. Right on ' + (tw ? 'their' : 'his') + ' rhythm.', 'pending', nanny),
+    B('cook', ct, 20, 'Start dinner: ' + (o.meal || 'leftovers').toLowerCase(), 'home', 'flex', null, o.meal ? 'From your meals list. 20 min of prep, ready by ' + fmt(ct + 20) + '.' : 'No dinner picked for tonight. Leftovers count.'),
+    B('dinner', ct + 20, 40, 'Family dinner', 'home', 'flex', fam === 'one' ? 'a' : 'all', '', 'pending', 'all'),
+    B('bath', 1125, 30, tw ? 'Twins’ bedtime routine' : 'Mateo’s bedtime routine', 'kids', 'routine', baby, 'Bath, lotion, song. The same 3 steps every night help ' + (tw ? 'them' : 'him') + ' sleep longer.'),
+    B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good energy and a free gap tonight. Thank him for the 6 AM bottle.'),
+    B('close', 1260, 5, 'Close your day', 'self', 'flex', null, '2 minutes: check tomorrow’s bag list, then rest.'),
+    // learned (memory): she skips the 8:30 PM breathing on Tuesdays, so on Tuesdays it moves to bedtime
+    o.i === 2 ? B('breathe', 1280, 5, 'Breathing, in bed', 'mom', 'optional', null, 'You usually skip the 8:30 one on Tuesdays, so tonight it’s in bed.')
+      : B('breathe', 1230, 5, '5-minute breathing', 'mom', 'optional', null, 'Slow breathing, about 6 breaths a minute, helps you wind down.'),
   ];
-  if (fam === 'two') b.push(B('pickup', 975, 30, 'Pick up Lia', 'kids', 'fixed', 'b', 'Daycare closes at 5:30.'));
-  if (tw) b.push(B('pickup', 960, 30, 'Twin feed', 'kids', 'routine', 'all', 'Feeding both together saves you about 25 minutes.'));
-  b.push(
-    B('cook', 1030, 20, 'Start dinner: chicken tacos', 'home', 'flex', null, 'From your meals list. 20 min of prep, ready by 5:30.'),
-    B('dinner', 1050, 40, 'Family dinner', 'home', 'flex', fam === 'one' ? 'a' : 'all', ''),
-    B('bath', 1125, 30, tw ? 'Twins’ bedtime routine' : 'Mateo’s bedtime routine', 'kids', 'routine', tw ? 'all' : 'a', 'Bath, lotion, song. The same 3 steps every night help him sleep longer.'),
-    B('partner', 1200, 5, 'Send Diego something kind', 'partner', 'optional', null, 'Good-energy day and a free gap. Thank Diego for the 6 AM bottle.'),
-    B('chore', 1205, 20, 'Vacuum', 'home', 'flex', null, 'From your cleaning plan. Skip it if tonight is rough.'),
-    B('breathe', 1230, 5, '5-minute breathing', 'mom', 'optional', null, 'Slow breathing, about 6 breaths a minute, helps you wind down.'),
-    B('close', 1275, 5, 'Close your day', 'self', 'flex', null, '2 minutes. Tomorrow’s plan builds itself from tonight.'),
+  if (!wk) b.push(
+    B('focus', 540, 90, 'Focus block: Q4 deck', 'work', 'fixed', null, 'Protected. Replans try not to touch it.', 'done'),
+    B('pump1', 640, 20, 'Pumping break', 'mom', 'flex', null, 'Your usual time. Others only see “busy”.', 'done'),
+    B('lunch', 735, 25, 'Lunch, sitting down', 'mom', 'flex', null, 'You said lunch gets skipped. This one is protected.', 'done'),
+    B('walk', 840, 20, 'Walk around the block', 'mom', 'flex', null, '20 free minutes before your 3:00. ' + (tw ? 'Carmen has the twins.' : 'Carmen has Mateo.')),
+    B('pump2', 860, 20, 'Pumping break', 'mom', 'flex', null, 'About 3 hours after the last one, before your meeting.'),
+    B('feed2', 890, 15, tw ? 'Afternoon bottles' : 'Afternoon bottle', 'kids', 'routine', baby, 'After the nap.', 'pending', 'carmen'),
+    B('prep', 885, 10, 'Prep for Sarah', 'work', 'flex', null, 'Meeting in 15 min. Carmen has ' + (tw ? 'the twins' : 'Mateo') + ' until 5:00.'),
+    B('meet', 900, 45, 'Meeting with Sarah', 'work', 'fixed', null, 'From your Outlook calendar.'),
   );
-  return b;
+  if (office) b.push(B('commute', 495, 40, 'To the office', 'work', 'flex', null, 'Office day. Carmen arrives at 9:00.'), B('backhome', 975, 35, 'Back home', 'work', 'flex', null, 'Out at 4:15. Carmen stays until 5:00.'));
+  if (two) b.push(B('liabed', 1155, 30, 'Lia’s bath and bedtime', 'kids', 'routine', 'b', 'Diego’s turn. Bath, pajamas, two books.', 'pending', 'diego'));
+  if (two && !wk) b.push(B('dropoff', 480, 20, 'Lia to daycare', 'kids', 'fixed', 'b', '', 'done', 'diego'),
+    B('pickup', office && o.pickup === 'me' ? 1010 : 975, 30, 'Pick up Lia', 'kids', 'fixed', 'b', 'Daycare closes at 5:30.' + (o.pickup === 'diego' ? ' Diego’s day for pickup.' : (office ? ' Straight from the office.' : ' You leave work at 4:15.')), 'pending', o.pickup));
+  // chores from the cleaning plan: on weekdays after dinner and before bedtime (noise), on weekends after the afternoon nap
+  // what doesn't fit before bedtime goes to tomorrow's list, never silently dropped
+  const chT = wk ? 900 : ct + 60, fits = wk || chT + (o.chore || {}).min <= 1125;
+  if (o.chore) b.push(B('chore', chT, o.chore.min, o.chore.t, 'home', 'flex', null, !fits ? 'No room before bedtime tonight, so it’s on tomorrow’s list.' : wk ? 'From your cleaning plan.' : 'Before ' + (tw ? 'the twins’' : 'Mateo’s') + ' bedtime, so the noise won’t wake ' + (tw ? 'them' : 'him') + '.', fits ? 'pending' : 'tomorrow', o.chore.who));
+  if (wk) b.push(B('park', 570, 90, two ? 'Park, all four of us' : 'Park, all of us', 'partner', 'flex', 'all', '', 'pending', 'all'));
+  return b.sort((x, y) => x.t - y.t);
 }
 function seedLogs(fam) {
   const l = [{ kid: 'a', type: 'sleep', t: 630, end: 705 }, { kid: 'a', type: 'feed', t: 730, detail: 'Solids: avocado' }, { kid: 'a', type: 'diaper', t: 785, detail: 'Wet' }];
@@ -1590,46 +1682,102 @@ const PLAY = { a: [['Movement', 6], ['Reading', 4], ['Outdoor', 3], ['Music', 2]
 const ACT_KEY = { 'Outdoor play': 'Outdoor' };
 const MOM_ICONS = { water: 'M12 3c3.5 4.5 6 7.6 6 10.5a6 6 0 0 1-12 0C6 10.6 8.5 7.5 12 3z', move: 'M13 4.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 1 0 0 3M9.5 21l2-5.5 3 2.5v3M7 12.5l2.5-4.5 4 .8 3 3.7M11.5 15.5L10.5 9', focus: 'M12 21a9 9 0 1 0 0-18a9 9 0 1 0 0 18M12 16a4 4 0 1 0 0-8a4 4 0 1 0 0 8', pause: 'M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7' };
 const KEEP = (id, note) => ({ type: 'keep', id, note: note || 'Fixed. I didn’t touch it.' });
+// ask: hand an existing block to someone ({ id, to }) or add a new one in their lane ({ block, to }). They answer on their phone.
+const ASK = (id, to, note) => ({ type: 'ask', id, to, note });
+// {k} {he} {He} {his} {him} are filled with the child picked in "Something happened"; child 'k' is that child.
 const PRESETS = {
-  early: { head: 'He went down early, so your walk can start now.', changes: [
+  early: { head: '{He} went down early. Carmen has {him}, so your afternoon stays as planned.', changes: [
     { type: 'move', id: 'nap2', to: 795, note: 'Logged: asleep at 1:15 PM.' },
-    { type: 'move', id: 'walk', to: 825, note: 'Go now while he sleeps.' }, KEEP('meet')] },
-  late: { head: 'The nap started late, so I nudged the evening by 15 minutes.', changes: [
+    KEEP('walk', 'Carmen has {him}. Your walk stays at 2:00.'), KEEP('meet')] },
+  late: { head: 'The nap started late, so {his} bedtime moves 15 minutes. Your afternoon stays.', changes: [
     { type: 'move', id: 'nap2', to: 835, note: 'Logged: asleep at 1:55 PM.' },
-    { type: 'move', id: 'walk', to: 855, note: 'Still fits before your prep.' },
-    { type: 'move', id: 'bath', to: 1140, note: 'Later nap, later bedtime.' }, KEEP('meet')] },
-  nonap: { head: 'No nap today. I moved 3 things and kept your 3:00 with Sarah.', changes: [
+    { type: 'move', id: 'feed2', to: 915, note: 'Carmen gives it after the later nap.' },
+    { type: 'move', id: 'bath', to: 1140, note: 'Later nap, later bedtime.' },
+    KEEP('walk', 'Carmen has {him}, so nothing moves for you.'), KEEP('meet')] },
+  nonap: { head: 'No nap today. Carmen takes {him} out in the stroller, bedtime moves earlier, and your 3:00 stays.', changes: [
     { type: 'skip', id: 'nap2', note: 'Logged: no afternoon nap.' },
-    { type: 'move', id: 'walk', to: 820, note: 'Stroller walk now. He may doze off on it.' },
+    { type: 'add', block: B('stroll', 825, 30, 'Stroller walk with {k}', 'kids', 'flex', 'k', '{He} may doze off on it.', 'pending', 'carmen'), note: 'Carmen does it. She sees it on her phone.' },
     { type: 'move', id: 'bath', to: 1095, note: 'Earlier bedtime after a skipped nap.' },
-    { type: 'drop', id: 'partner', note: 'Tonight will be busy.' }, KEEP('meet')] },
-  sick: { head: 'A slower afternoon at home. Your meeting stays unless you move it.', notice: 'I can’t give medical advice. Check with your pediatrician if you’re worried. I held time for a call.', changes: [
-    { type: 'add', block: B('call', 840, 15, 'Time to call the pediatrician', 'kids', 'flex', 'a', 'Held for you, if you want to call.'), note: 'Only if you want it.' },
+    { type: 'drop', id: 'partner', note: 'Tonight will be busy.' }, KEEP('meet', 'Fixed. Carmen has {k} until 5:00, so you’re covered.')] },
+  sick: { head: 'A slower day for {k}. Carmen has {him} until 5:00, and your meeting stays unless you move it.', notice: 'I can’t give medical advice. Check with your pediatrician if you’re worried. I held time for a call.', changes: [
+    { type: 'add', block: B('call', 840, 15, 'Time to call the pediatrician', 'kids', 'flex', 'k', 'Held for you, if you want to call.'), note: 'Only if you want it.' },
     { type: 'drop', id: 'walk', note: 'A home day. It fits better tomorrow.' },
     { type: 'drop', id: 'partner', note: 'Not tonight.' }, KEEP('meet', 'Fixed. Want it on video? Only you can move it.')] },
+  daycall: { head: 'Daycare called. You get {k} now, and Carmen could keep both kids during your 3:00.', notice: 'If it’s about {his} health, your pediatrician is the right call.', changes: [
+    { type: 'add', block: B('getnow', 830, 30, 'Pick up {k} now', 'kids', 'fixed', 'k', 'Daycare called. Back by 2:20.'), note: 'Right now. Back by 2:20.' },
+    { type: 'skip', id: 'pickup', note: '{He}’s already home.' },
+    { type: 'drop', id: 'walk', note: 'Not today.' },
+    { type: 'ask', block: B('both', 870, 150, '{k} home with Carmen', 'kids', 'care', 'k', 'Carmen has both kids until 5:00.', 'pending', 'carmen'), to: 'carmen', note: 'Carmen gets the request. If she can’t, I’ll tell you right away.' },
+    KEEP('meet', 'Fixed. Carmen has both kids, so you’re covered.')] },
+  carmenleave: { head: 'Carmen leaves at 2:45. Diego could cover your 3:00, then you take Mateo.', changes: [
+    { type: 'ask', block: B('cover', 885, 60, 'Mateo, during Rossi’s 3:00', 'kids', 'care', 'a', 'Carmen leaves at 2:45.', 'pending', 'diego'), to: 'diego', note: 'Diego gets the request on his phone. If he says no, I’ll tell you right away.' },
+    ASK('feed2', 'diego', 'Same time, part of his hour with Mateo.'),
+    KEEP('meet', 'Fixed. Diego covers it.'), KEEP('pickup', 'Fixed. Take Mateo along.')] },
   meeting: { head: 'Sarah moved to 3:30. I shifted your prep to match.', changes: [
-    { type: 'move', id: 'meet', to: 930, note: 'Updated in your Outlook calendar. You confirmed it there.' },
-    { type: 'move', id: 'prep', to: 915, note: 'Still 15 minutes before.' }, KEEP('pickup', 'Fixed. Still fits after the meeting.')] },
-  noeat: { head: 'He didn’t eat much at lunch. I moved his snack earlier.', notice: 'If it keeps happening or something feels off, your pediatrician is the right call.', changes: [
-    { type: 'add', block: B('snack', 870, 10, 'Early snack for Mateo', 'home', 'flex', 'a', 'Offer it, no pressure.'), note: 'Earlier than usual, so he isn’t too hungry by dinner.' },
+    { type: 'move', id: 'meet', to: 930, note: 'Sarah moved it in Outlook. I only read your work calendar.' },
+    { type: 'move', id: 'prep', to: 915, note: 'Still 15 minutes before.' }, KEEP('pickup', 'Fixed. Still fits right after.')] },
+  noeat: { head: '{He} didn’t eat much at lunch. Carmen gives {him} a snack earlier, and dinner is a little earlier.', notice: 'If it keeps happening or something feels off, your pediatrician is the right call.', changes: [
+    { type: 'add', block: B('snack', 905, 10, 'Early snack for {k}', 'kids', 'flex', 'k', 'Offer it, no pressure.', 'pending', 'carmen'), note: 'Carmen gives it after {his} bottle, so {he} isn’t too hungry by dinner.' },
     { type: 'move', id: 'cook', to: 1020, note: 'Dinner a little earlier.' }, { type: 'move', id: 'dinner', to: 1040, note: 'Ready by 5:20.' }, KEEP('meet')] },
-  skipmeal: { head: 'Missed meal noted. A snack now, and dinner a bit earlier.', changes: [
-    { type: 'add', block: B('snack', 840, 10, 'Snack for Mateo', 'home', 'flex', 'a', 'Something small to hold him until dinner.'), note: 'Right after he wakes up.' },
+  skipmeal: { head: 'Missed meal noted. A snack after {his} nap, and dinner a bit earlier.', changes: [
+    { type: 'add', block: B('snack', 905, 10, 'Snack for {k}', 'kids', 'flex', 'k', 'Something small to hold {him} until dinner.', 'pending', 'carmen'), note: 'Carmen gives it after the nap.' },
     { type: 'move', id: 'cook', to: 1020, note: 'Start prep at 5:00.' }, { type: 'move', id: 'dinner', to: 1040, note: 'Dinner at 5:20.' }, KEEP('meet')] },
   momskip: { head: 'You skipped lunch. I made room for you to eat now.', changes: [
     { type: 'skip', id: 'lunch', note: 'Logged: your lunch got skipped.' },
-    { type: 'add', block: B('msnack', 825, 10, 'Eat something', 'mom', 'flex', null, 'Even 10 minutes of food helps your afternoon.'), note: 'Now, before your 3:00.' },
-    { type: 'add', block: B('water', 885, 2, 'Glass of water before the meeting', 'mom', 'flex', null, ''), note: '2 minutes, with your prep.' }, KEEP('meet')] },
-  tired: { head: 'You’ve carried a lot today. I cleared what can wait.', changes: [
-    { type: 'add', block: B('rest', 820, 20, 'Rest while Mateo sleeps', 'mom', 'flex', null, 'Lie down. The dishes can wait.'), note: '20 minutes, just for you.' },
+    { type: 'add', block: B('msnack', 825, 10, 'Eat something', 'mom', 'flex', null, 'Even 10 minutes of food helps your afternoon.'), note: 'Now, before your walk.' },
+    { type: 'add', block: B('water', 883, 2, 'Glass of water before the meeting', 'mom', 'flex', null, ''), note: '2 minutes, before your prep.' }, KEEP('meet')] },
+  tired: { head: 'You’ve carried a lot today. I cleared what can wait, and Diego could take bedtime.', changes: [
+    { type: 'add', block: B('rest', 820, 20, 'Rest for 20 minutes', 'mom', 'flex', null, 'Lie down. Carmen has Mateo.'), note: '20 minutes, just for you.' },
+    ASK('bath', 'diego', 'Same time. Diego gets the request on his phone.'),
     { type: 'drop', id: 'walk', note: 'Tomorrow, when you have more in the tank.' },
     { type: 'drop', id: 'partner', note: 'Optional. Let it go tonight.' },
     { type: 'drop', id: 'breathe', note: 'Optional. Sleep counts more tonight.' }, KEEP('meet')] },
-  sos: { head: 'Day cleared. Only fixed things and the kids’ routines are left.', changes: [
+  sos: { head: 'Day cleared. Only fixed things and the kids’ routines are left, and Diego could do pickup.', changes: [
     { type: 'drop', id: 'walk' }, { type: 'drop', id: 'prep' }, { type: 'drop', id: 'partner' }, { type: 'drop', id: 'breathe' },
-    KEEP('meet', 'Fixed. Want to ask Sarah to reschedule?'), KEEP('pickup', 'Fixed.')] },
+    ASK('pickup', 'diego', 'Same time. Diego gets the request on his phone.'),
+    KEEP('meet', 'Fixed. Want to ask Sarah to reschedule?')] },
 };
-PRESETS.voice = { ...PRESETS.nonap, head: 'Heard you: no nap, and Sarah at 3:00. Here’s the new afternoon.' };
+PRESETS.voice = { ...PRESETS.nonap, head: 'Heard you: no nap, and Sarah at 3:00. Carmen has him, so your 3:00 stays.' };
+// The planner's lane rule: one person can't do two things at once. The only allowed overlap is a routine
+// (nap, bottle) inside a care stretch or a family block. The server validator applies the same rule (PRD 11).
+function laneClashes(bl) {
+  const out = [], live = bl.filter(b => b.status !== 'tomorrow' && b.status !== 'skipped');
+  const lanes = b => b.who === 'all' ? ['me', 'diego'] : [b.who];
+  live.forEach((x, i) => live.slice(i + 1).forEach(y => {
+    if (!lanes(x).some(l => lanes(y).includes(l)) || x.t >= y.t + y.dur || y.t >= x.t + x.dur) return;
+    const holds = (c, r) => (c.kind === 'care' || c.who === 'all') && r.kind === 'routine';
+    if (!holds(x, y) && !holds(y, x)) out.push(x.id + '/' + y.id);
+  }));
+  return out;
+}
+const HIM = he => he === 'she' ? 'her' : he === 'they' ? 'them' : 'him';
+function presetFor(key, k) {
+  const t = x => typeof x === 'string' ? x.replace(/\{k\}/g, k.name).replace(/\{he\}/g, k.he).replace(/\{He\}/g, k.he[0].toUpperCase() + k.he.slice(1)).replace(/\{his\}/g, k.his).replace(/\{him\}/g, HIM(k.he)) : x;
+  const P = PRESETS[key];
+  return { ...P, head: t(P.head), notice: t(P.notice), changes: P.changes.map(c => ({ ...c, note: t(c.note), ...(c.block ? { block: { ...c.block, title: t(c.block.title), why: t(c.block.why), child: c.block.child === 'k' ? k.id : c.block.child } } : {}) })) };
+}
+// Applies the changes she kept (on[i]). Nothing is deleted: dropped blocks go to tomorrow's list.
+function applyChanges(bl, changes, on) {
+  bl = bl.map(b => ({ ...b }));
+  changes.forEach((c, i) => {
+    if (!on[i] || c.type === 'keep') return;
+    const b = c.id && bl.find(x => x.id === c.id);
+    if (c.type === 'move' && b) b.t = c.to;
+    if (c.type === 'drop' && b) b.status = 'tomorrow';
+    if (c.type === 'skip' && b) b.status = 'skipped';
+    if (c.type === 'ask' && b) { b.who = c.to; b.asked = true; }
+    if (c.block && !bl.some(x => x.id === c.block.id)) bl.push({ ...c.block, ...(c.type === 'ask' ? { asked: true } : {}) });
+  });
+  return bl.sort((a, b) => a.t - b.t);
+}
+// ponytail: runnable check of the demo data. Every day of every family, and every replan, keeps the lane rule.
+['one', 'two', 'twins'].forEach(f => {
+  DAYN.forEach((_, i) => ['me', 'diego'].forEach(pickup => ['home', 'office'].forEach(where => { const c = laneClashes(buildBlocks(f, { i, where, pickup, chore: choreOn(CHORES0, i) })); console.assert(!c.length, 'lane clash', f, i, pickup, where, c); })));
+  Object.keys(PRESETS).filter(key => key !== 'daycall' || f === 'two').forEach(key => {
+    const P = presetFor(key, key === 'daycall' ? FAMS.two[1] : FAMS[f][0]), c = laneClashes(applyChanges(buildBlocks(f), P.changes, P.changes.map(() => true)));
+    console.assert(!c.length, 'replan clash', f, key, c);
+  });
+});
 const BED = [
   { t: 'Bath', d: 10, hint: 'Warm water, low lights. Same time every night.' },
   { t: 'Lotion & massage', d: 5, hint: 'Slow strokes, in the same order each night.' },
@@ -1647,9 +1795,11 @@ const MEMORIES0 = [
   { text: 'Thursdays are chaotic, so I keep Thursday afternoons light.', src: 'You told me · Nov 1' },
   { text: 'Mateo’s wake window is about 2h 15m.', src: 'From your last 10 days of logs' },
   { text: 'Lunch gets skipped on meeting days, so I protect it.', src: 'You told me · Nov 1' },
-  { text: 'You usually skip the 8:30 PM breathing on Tuesdays.', src: 'From the last 2 weeks of your plan' },
+  { text: 'You usually skip the 8:30 PM breathing on Tuesdays, so on Tuesdays I move it to bedtime.', src: 'From the last 2 weeks of your plan' },
   { text: 'A pack of diapers lasts you about 6 days.', src: 'From 3 weeks of diaper logs' },
-  { text: 'Diego does the 6 AM bottle.', src: 'You told me · Nov 1' },
+  { text: 'Diego does the 6 AM bottle and Lia’s drop-off.', src: 'You told me · Nov 1' },
+  { text: 'Carmen has Mateo on weekdays, 9 to 5.', src: 'You told me · Nov 1' },
+  { text: 'You pump twice on work days, around 10:40 and 2:20.', src: 'You told me · Nov 1' },
 ];
 // F7 micro-meditations: recorded audio in our own voice (PRD 16.7). The text is what the voice says, for a muted phone.
 // [second it starts, part name, what she hears]
@@ -1660,7 +1810,7 @@ const MEDS = {
 };
 const tm = v => +v.slice(0, 2) * 60 + +v.slice(3, 5);
 const TX = {
-  dump: fam => ((fam === 'twins' ? 'Okay so… I have twins, Mateo and Sofi, they’re four months, and my leave ends in two weeks.' : fam === 'one' ? 'Okay so… I have Mateo, he’s seven months.' : 'Okay so… I have Mateo, he’s seven months, and Lia, who’s three.') + ' I’m back at work, hybrid, mostly nine to five. Tuesdays and Thursdays are packed with meetings. His naps are all over the place, and when he skips one the whole day falls apart. I keep forgetting to eat lunch. Diego helps a lot in the mornings.'),
+  dump: fam => ((fam === 'twins' ? 'Okay so… I have twins, Mateo and Sofi, they’re four months, and my leave ends in two weeks.' : fam === 'one' ? 'Okay so… I have Mateo, he’s seven months.' : 'Okay so… I have Mateo, he’s seven months, and Lia, who’s three.') + ' I’m back at work, hybrid: home most days, the office on Wednesdays and Thursdays. Carmen watches ' + (fam === 'twins' ? 'them' : 'Mateo') + ' nine to five, and I still pump twice a day. Tuesdays and Thursdays are packed with meetings. When a nap goes wrong the whole day falls apart. I keep forgetting to eat lunch. Diego does the early bottle' + (fam === 'two' ? ' and takes Lia to daycare.' : '.')),
   happened: () => 'Mateo won’t nap and I still have the call with Sarah at three.',
   log: () => 'He fell asleep at one thirty-five.',
   pantry: () => 'We have rice, potatoes, chicken, eggs and onions. Dish soap is almost out and we need snacks for the kids.',
@@ -1697,20 +1847,21 @@ const MOUTHS = ['M8 16.5c1.2-1.6 2.5-2.3 4-2.3s2.8.7 4 2.3', 'M8.5 16c1-.8 2.2-1
 const FACE_LABELS = ['Drained', 'Low', 'Okay', 'Good', 'Great'];
 const TOPICS = {
   kids: { label: 'Kids', dim: 'kids', empty: 'Ask me about the kids', hello: 'Ask me about the kids’ routines, nights and logs, or tell me what to move.', chips: ['Why are his nights choppier?', 'What time did Mateo fall asleep yesterday?', 'How many diapers this week?', 'Is his cough something to worry about?'] },
-  work: { label: 'Work', dim: 'work', empty: 'Talk through your work', hello: 'Your work counts here too. Meetings, focus time, the hard conversations.', chips: ['What’s my hardest day this week?', 'Protect 2 focus hours tomorrow', 'Help me say I leave at 4:15'] },
+  work: { label: 'Work', dim: 'work', empty: 'Talk through your work', hello: 'Your work counts here too. Meetings, focus time, the hard conversations.', chips: ['What’s my hardest day this week?', 'Protect 2 focus hours tomorrow', 'Help me say I leave at 4:15', 'Help me tell work I’m out tomorrow'] },
   me: { label: 'Me', dim: 'mom', empty: 'Just about you', hello: 'This one is just about you. How are you, really?', chips: ['I feel like I’m failing', 'Remind me to check on Mateo every 6 hours for 3 days', 'When can I work out this week?', 'Plan a sweet moment with Diego'] },
 };
 const REPLY = q => {
   if (/hurt myself|kill myself|end it all|suicid|can.t go on|no point in living/i.test(q)) return { crisis: true };
+  if (/tell work|out tomorrow|my (boss|manager)/i.test(q)) return { text: 'Try: “I’m out tomorrow morning with my kid at home. I’ll be online from 1, and our 3:00 still works.” Short and clear. No apology needed.', src: '' };
   if (/fever|cough|tylenol|medic|rash|vaccin|dose|sick|worry/i.test(q)) return { text: 'That’s best checked with your pediatrician or doctor. If it’s urgent, call 911. What I can do is clear time in your day so you can call or go.', src: '' };
-  if (/choppier|nights|wake/i.test(q)) return { text: 'Last night he woke 3 times; his usual is 1. It started the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.', src: 'From your logs, last 14 nights' };
+  if (/choppier|nights|wake/i.test(q)) return { text: 'Last night he woke 3 times; his usual is 1. It started the day after you logged “started crawling”. I can’t tell you why, but I’m keeping your mornings light until it settles. If something worries you, your pediatrician is the right call.', src: 'From your logs, last 14 nights' };
   if (/asleep|sleep/i.test(q)) return { text: '7:22 PM, after bath, lotion and his song. That’s 8 minutes later than his usual.', src: 'From your logs, Monday' };
   if (/diaper/i.test(q)) return { text: '38 so far, about 6 a day: 32 wet and 14 dirty (some were both). Same pace as last week.', src: 'From your logs, last 7 days' };
-  if (/hardest/i.test(q)) return { text: 'Thursday: 4 meetings plus Lia’s pickup. I already kept that afternoon light and moved your walk to lunch.', src: 'From your Outlook calendar' };
+  if (/hardest/i.test(q)) return { text: 'Thursday: 4 meetings at the office. Diego has Lia’s pickup, and I kept the afternoon light.', src: 'From your Outlook calendar and your week' };
   if (/focus/i.test(q)) return { text: 'Done. Tomorrow 9:00 to 11:00 is a focus block. Replans won’t touch it.', src: 'Added to your BestMom calendar' };
   if (/4:15|leave/i.test(q)) return { text: 'Try: “I’m stepping out at 4:15 for pickup and back online at 8 if anything is urgent.” Short and clear. No apology needed.', src: '' };
   if (/\bwin\b/i.test(q)) return { text: 'Saved to your wins. Three this month already. They’ll be ready for your next review.', src: '' };
-  if (/failing/i.test(q)) return { text: 'That feeling is heavy, and so many moms carry it. Your day says something else: fed, held, dropped off, and you still made your 9:00. Want me to clear 20 minutes for you tonight?', src: 'From today’s logs' };
+  if (/failing/i.test(q)) return { text: 'That feeling is heavy, and so many moms carry it. Your day says something else: Mateo fed and held, lunch sitting down, and you still made your 9:00. Want me to clear 20 minutes for you tonight?', src: 'From today’s logs' };
   if (/work out|workout|exercise/i.test(q)) return { text: 'Wednesday at 6:15 AM, before anyone’s up, or Saturday at 9:00 while Diego has the kids. Want both?', src: '' };
   if (/sweet|diego|date/i.test(q)) return { text: 'Thursday after bedtime looks calm: 20 minutes of tea, phones away. Or a real date Friday at 7:30 if Carmen can stay. Want me to ask her?', src: '' };
   if (/move|walk/i.test(q)) return { text: 'Done. Your walk is now Thursday at 12:30, during Mateo’s nap.', src: 'Updated in your BestMom calendar' };
@@ -1725,6 +1876,15 @@ const MEALS = [
   ['Veggie omelet', ['eggs', 'spinach', 'cheese']],
   ['Lentil soup', ['lentils', 'carrots', 'onion']],
   ['Salmon and rice', ['salmon', 'rice', 'broccoli']],
+];
+// Dates that load her head: daycare events, payments, closures, visits. Plain calendar items, no medical content.
+// The night before, any prep lands in the close-of-day bag list. kid 'b' is Lia (two-kid family only).
+const DATES0 = [
+  { d: 18, t: 'Photo day at daycare', kid: 'b', prep: 'Lia’s photo-day outfit' },
+  { d: 20, t: 'Pajama day at daycare', kid: 'b', prep: 'Pajamas in Lia’s bag' },
+  { d: 24, t: 'Daycare tuition due', kid: 'b' },
+  { d: 26, t: 'Daycare closed: Thanksgiving', kid: 'b' },
+  { d: 30, t: 'Mateo’s checkup, 9:30 AM', kid: 'a', prep: 'Insurance card in the diaper bag' },
 ];
 const SKILLS = ['Rolling over', 'Sitting up', 'Crawling', 'Pulling to stand', 'First steps', 'First words'];
 const HOME_ICON = 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6';
@@ -1765,13 +1925,13 @@ console.assert(JSON.stringify(parseReminder('Remind me to check on Mateo every 6
 const SUP_RELS = [['partner', 'Partner'], ['mom', 'My mom'], ['family', 'Family'], ['friend', 'Friend'], ['other', 'Someone else']];
 const FLOW = [
   { title: 'Onboarding', items: [['01', 'Welcome', 'welcome'], ['02', 'Data consent', 'consent'], ['03', 'The brain dump', 'dump'], ['03b', 'Building your day', 'thinking'], ['04', 'Here’s what I understood', 'summary'], ['05', 'Permissions', 'perm'], ['41', 'Sign in (returning mom)', 'signin']] },
-  { title: 'Full Mom', items: [['06', 'Today: day brief', 'today'], ['06b', 'Block detail', 'block'], ['29', 'Today: first day (empty)', 'dayone'], ['42', 'Save your day', 'save'], ['49', 'Notifications (lock screen)', 'lock'], ['48', 'Notifications off', 'notifoff'], ['53', 'I learned something', 'jarvis'], ['25', 'The + menu', 'add'], ['26', 'Logs', 'addlog'], ['27', 'For you', 'addyou'], ['06c', '5-second pause', 'pause'], ['07', 'Something happened', 'happened'], ['08', 'Replan proposal', 'replan'], ['50', 'Replan failed', 'replanerr'], ['09', 'Quick log', 'log'], ['18', 'Calendar: 3 days', 'cal3day'], ['18b', 'Calendar: week', 'calweek'], ['18c', 'Calendar: month', 'calmonth'], ['18d', 'Calendar: not connected', 'calnone'], ['33', 'Home: meals', 'home'], ['33b', 'Home: pantry & list', 'pantry'], ['33c', 'Home: cleaning', 'clean'], ['33d', 'Home: empty (new user)', 'homeempty'], ['37', 'Sick day: home today', 'reminder'], ['39', 'Sick day: next morning', 'sickmorning'], ['37b', 'New reminder', 'remnew']] },
+  { title: 'Full Mom', items: [['06', 'Today: day brief', 'today'], ['06b', 'Block detail', 'block'], ['29', 'Today: first day (empty)', 'dayone'], ['42', 'Save your day', 'save'], ['60', 'Calendar changed (Outlook)', 'calchange'], ['49', 'Notifications (lock screen)', 'lock'], ['48', 'Notifications off', 'notifoff'], ['53', 'I learned something', 'jarvis'], ['25', 'The + menu', 'add'], ['26', 'Logs', 'addlog'], ['27', 'For you', 'addyou'], ['06c', '5-second pause', 'pause'], ['07', 'Something happened', 'happened'], ['08', 'Replan proposal', 'replan'], ['62', 'Replan: ask for help', 'replanhelp'], ['50', 'Replan failed', 'replanerr'], ['09', 'Quick log', 'log'], ['18', 'Calendar: 3 days', 'cal3day'], ['18b', 'Calendar: week', 'calweek'], ['18c', 'Calendar: month', 'calmonth'], ['18d', 'Calendar: not connected', 'calnone'], ['61', 'Your week (Sunday setup)', 'weeksetup'], ['33', 'Home: meals', 'home'], ['33b', 'Home: pantry & list', 'pantry'], ['33c', 'Home: cleaning', 'clean'], ['33d', 'Home: empty (new user)', 'homeempty'], ['37', 'Sick day: home today', 'reminder'], ['39', 'Sick day: next morning', 'sickmorning'], ['37b', 'New reminder', 'remnew']] },
   { title: 'Self-Love', items: [['20', 'Self-Love mode', 'self'], ['11', 'Breathing', 'breathe'], ['57', 'Micro-meditation player', 'meditate'], ['12', 'Close of day', 'close']] },
   { title: 'Kids & nights', items: [['10', 'Bedtime (night mode)', 'bedrun'], ['54', 'Bedtime: who and steps', 'bedpick'], ['19', 'Night log (2 AM)', 'nightnow'], ['19b', 'Nap cut short (1:40 PM)', 'nap'], ['19c', 'Night log: offline', 'nightoff'], ['35', 'Night log: add an earlier wake', 'nightpast'], ['58', 'Lock Screen widget', 'widget'], ['58b', 'Siri: “Baby woke up”', 'siri'], ['14', 'Kids: nights & rough patch', 'kids'], ['40', 'Kids: edit a child', 'kidedit'], ['40b', 'Kids: add a child', 'kidadd'], ['51', 'Kids: fix a log', 'logedit'], ['36', 'Kids: correct wake window', 'wakewin'], ['34', 'Kids: new skill', 'skill'], ['37c', 'Kids: private note', 'kidnote'], ['30', 'Kids: no nights yet (empty)', 'kidsempty']] },
   { title: 'Family', items: [['21', 'Invite a caregiver', 'invite'], ['55', 'Invite received (their phone)', 'guestinvite'], ['55b', 'Join: their first setup', 'guestsetup'], ['56', 'Change role or remove', 'member'], ['22', 'See as Diego (partner)', 'asDiego'], ['23', 'See as Carmen (nanny)', 'asCarmen']] },
   { title: 'You & your data', items: [['15', 'Settings & account', 'me'], ['47', 'Which calendars are work', 'cals'], ['58c', 'Widget and Siri setup', 'shortcuts'], ['59', 'Support person', 'support'], ['52', 'What I know about you', 'memory'], ['45', 'Export my data', 'export'], ['46', 'Delete account', 'delete'], ['46b', 'Account deleted', 'deleted']] },
   { title: 'Assistant', items: [['13', 'Chat: Kids · Work · Me', 'allie'], ['13b', 'Chat: no conversations yet', 'allieempty']] },
-  { title: 'Business & safety', items: [['16', 'Paywall (day 2)', 'paywall'], ['44', 'Subscribed', 'subok'], ['43', 'Free day ended (no plan)', 'locked'], ['17', 'Crisis screen', 'crisis']] },
+  { title: 'Business & safety', items: [['16', 'Paywall: 7 days free', 'paywall'], ['44', 'Subscribed', 'subok'], ['43', 'Free day ended (no plan)', 'locked'], ['17', 'Crisis screen', 'crisis']] },
 ];
 
 class Component extends DCLogic {
@@ -1797,9 +1957,10 @@ class Component extends DCLogic {
       skills: [{ kid: 'a', label: 'Started crawling', date: 'Nov 12' }], skillKid: 'a', skillPick: 'Pulling to stand', skillText: '', skillDate: '2026-11-17', logDiaper: 'wet',
       homeSeg: 'meals', mealPlan: ['Veggie omelet', 'Pasta with tomato sauce', 'Chicken tacos', 'Arroz con pollo', 'Lentil soup', 'Salmon and rice', null], mealPick: null,
       pantry: PANTRY0, pantryText: '', pantryHeard: 0, shopExtra: [],
-      chores: [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'me', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }],
+      chores: CHORES0,
+      wellbeing: true, dayFlags: {}, prevFlags: null, closeChk: {}, prepDone: {}, week: WEEK0_SETUP, dates: DATES0, nightShift: null, sickWho: null, calChange: false, trial: false,
       deep: { on: true, who: 'cleaner' }, sickKid: null, sickDay: 1, sickAsk: false, notes: [{ kid: 'a', date: 'Nov 14', text: 'Didn’t want the bottle before his nap. Fine after a walk outside.' }], noteKid: 'a', noteIdx: -1, noteText: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3, remShare: [],
-      settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8, sup: { name: 'Diego', rel: 'partner', week: 3 },
+      settings: { kids: true, mom: true, work: true, home: true, self: true, partner: true }, budget: 8, sup: { name: 'Diego', rel: 'partner', week: 3 },
       kidEdits: {}, newKids: [], kidEditId: null, kidDraft: { name: '', born: '2026-11', color: 0 },
       signinFor: 'signin', signinStep: 'form', email: '', acct: 'Apple', subscribed: false, locked: false, subKind: 'buy',
       exportFmt: 'json', delOk: false, cals: { outlook: 'work', icloud: 'personal', google: 'personal', holidays: 'ignore' },
@@ -1830,8 +1991,8 @@ class Component extends DCLogic {
   kids() { return this.allKids().filter(k => !k.archived); }
   buildSummary(fam) {
     fam = fam || this.state.fam;
-    const k = fam === 'twins' ? ['Mateo & Sofi, twins, 4 months', 'Your leave ends in 2 weeks'] : fam === 'one' ? ['Mateo, 7 months'] : ['Mateo, 7 months', 'Lia, 3 years, in daycare'];
-    return [...k, 'Mateo’s bedtime is around 7:15 PM', 'You work 9–5, hybrid', 'Meetings pile up Tue & Thu', 'Lunch often gets skipped', 'Diego helps in the mornings'];
+    const k = fam === 'twins' ? ['Mateo & Sofi, twins, 4 months', 'Carmen has the twins, weekdays 9–5'] : fam === 'one' ? ['Mateo, 7 months', 'Carmen has Mateo, weekdays 9–5'] : ['Mateo, 7 months', 'Lia, 3 years, daycare 8:15–4:15', 'Carmen has Mateo, weekdays 9–5'];
+    return [...k, 'Mateo’s bedtime is around 7:15 PM', 'You work 9–5: office Wed & Thu, home the rest', 'You pump twice on work days', 'Meetings pile up Tue & Thu', 'Lunch often gets skipped', 'Diego: the 6 AM bottle' + (fam === 'two' ? ' and Lia’s drop-off' : '')];
   }
   toastMsg(text, undo) { this.setState({ toast: text, toastUndo: !!undo, toastUntil: Date.now() + 4500 }); }
   startListen(ctx) {
@@ -1897,12 +2058,15 @@ class Component extends DCLogic {
       case 'asDiego': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'diego', viewerId: 'diego' });
       case 'asCarmen': return this.setState(st => ({ ...base, screen: 'app', tab: 'today', mode: 'mom', viewer: 'carmen', viewerId: 'carmen', members: st.members.some(m => m.id === 'carmen') ? st.members : [...st.members, { id: 'carmen', name: 'Carmen', role: 'caregiver' }] }));
       case 'add': return this.setState({ ...base, screen: 'app', tab: 'today', radial: true });
-      case 'happened': case 'log': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW });
+      case 'happened': case 'log': return this.setState(st => ({ ...base, screen: 'app', tab: 'today', sheet: k, words: 0, logHeard: null, logTime: NOW, hKid: st.hKid === 'all' ? 'a' : st.hKid }));
       case 'replan': return this.openReplan('nonap');
+      case 'replanhelp': return this.openReplan('carmenleave');
+      case 'calchange': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', calChange: true });
+      case 'weeksetup': return this.setState({ ...base, screen: 'app', tab: 'cal', sheet: 'weeksetup' });
       case 'bed': case 'bedrun': case 'bedpick': { const st = this.state, pick = k === 'bedpick' || (k === 'bed' && this.kids().length > 1);
         return this.setState({ ...base, screen: 'bed', bedStep: 0, bedLeft: st.bedSteps[0].d * 60, bedRun: !pick, bedDone: false, bedPick: pick, bedEditing: false, bedWho: st.fam === 'twins' ? 'all' : st.bedWho }); }
       case 'signin': return this.setState({ ...base, screen: 'signin', signinFor: 'signin', signinStep: 'form' });
-      case 'thinking': return this.thinking('Building your first day…', ['Reading your calendar', 'Fitting Mateo’s naps around your 3:00', 'Protecting your lunch'], 'today');
+      case 'thinking': return this.thinking('Building your first day…', ['Reading your calendar', 'Who has the kids, hour by hour', 'Protecting your lunch'], 'today');
       case 'block': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'block', selBlock: 'walk' });
       case 'save': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'save' });
       case 'addlog': case 'addyou': return this.setState({ ...base, screen: 'app', tab: 'today', sheet: 'add', addPart: k.slice(3), addEdit: false });
@@ -1941,26 +2105,25 @@ class Component extends DCLogic {
   }
   mut(fn, text, extra) {
     const prev = this.state.blocks; const bl = fn(prev.map(b => ({ ...b }))); bl.sort((a, b) => a.t - b.t);
-    this.setState({ prevBlocks: prev, blocks: bl, sheet: null, selBlock: null, ...(extra || {}) });
+    this.setState({ prevBlocks: prev, prevFlags: this.state.dayFlags, blocks: bl, sheet: null, selBlock: null, ...(extra || {}) });
     if (text) this.toastMsg(text, true);
   }
+  replanKid() { const s = this.state, ks = this.kids(); return ks.find(k => k.id === s.hKid) || ks[0]; }
+  preset() { return presetFor(this.state.replanKey, this.replanKid()); }
   visibleChanges() {
-    const s = this.state, P = PRESETS[s.replanKey];
-    return P.changes.map((c, i) => ({ c, i })).filter(({ c }) => c.type === 'add' || s.blocks.some(b => b.id === c.id && b.status !== 'tomorrow'));
+    const s = this.state, P = this.preset();
+    return P.changes.map((c, i) => ({ c, i })).filter(({ c }) => c.block || s.blocks.some(b => b.id === c.id && b.status !== 'tomorrow'));
   }
   acceptReplan() {
-    const s = this.state, vis = this.visibleChanges();
-    this.mut(bl => {
-      vis.forEach(({ c, i }) => {
-        if (!s.on[i] || c.type === 'keep') return;
-        const b = bl.find(x => x.id === c.id);
-        if (c.type === 'move' && b) b.t = c.to;
-        if (c.type === 'drop' && b) b.status = 'tomorrow';
-        if (c.type === 'skip' && b) b.status = 'skipped';
-        if (c.type === 'add' && !bl.some(x => x.id === c.block.id)) bl.push({ ...c.block });
-      });
-      return bl;
-    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1, ...(s.replanKey === 'sick' ? { sickKid: s.hKid === 'all' ? 'a' : s.hKid, sickDay: 1, sickAsk: false } : {}) });
+    const s = this.state, P = this.preset(), on = {}, vis = this.visibleChanges();
+    vis.forEach(({ i }) => { on[i] = !!s.on[i]; });
+    const asks = [...new Set(vis.filter(({ c, i }) => on[i] && c.type === 'ask').map(({ c }) => WHO_NAME[c.to]))];
+    // day flags, not "last replan": a later replan can't bring back what a hard day turned off
+    const flags = s.replanKey === 'tired' ? { tired: true } : s.replanKey === 'sos' ? { sos: true } : {};
+    this.mut(bl => applyChanges(bl, P.changes, on), 'Plan updated. Reminders rescheduled.' + (asks.length ? ' Asked ' + asks.join(' and ') + '.' : ''),
+      { screen: 'app', tab: 'today', replans: s.replans + 1, dayFlags: { ...s.dayFlags, ...flags }, ...(s.replanKey === 'sick' ? { sickKid: this.replanKid().id, sickDay: 1, sickAsk: false, sickWho: null } : {}) });
+    // demo: the person answers on their phone a moment later
+    if (asks.length) setTimeout(() => { this.setState(st => ({ blocks: st.blocks.map(b => b.asked ? { ...b, asked: false } : b) })); this.toastMsg(asks.join(' and ') + (asks.length > 1 ? ' said yes.' : ' said yes. It’s on their plan now.')); }, 3500);
   }
   toggleDone(id) {
     const b = this.state.blocks.find(x => x.id === id); const done = b.status !== 'done';
@@ -1970,6 +2133,15 @@ class Component extends DCLogic {
     const t = (text || '').trim(); if (!t) return;
     // "+ Add a dish" and "+ Add a chore" in Home prefill these; same intent call as reminders in the real app
     const hm = /^add a (dish to my list|chore):\s*(.+?)[.!]?$/i.exec(t), item = hm && cap(hm[2].trim()), dish = hm && /dish/i.test(hm[1]);
+    // ponytail: regex stand-in for the intent call. "Add a date: pajama day Friday" → this week's Friday; no day found → shown as "date to confirm".
+    const dm = /^add a date:\s*(.+?)[.!]?$/i.exec(t);
+    if (dm) {
+      const wd = DAYN.findIndex(d => new RegExp('\\b' + d, 'i').test(dm[1])), nd = /nov(?:ember)? (\d{1,2})/i.exec(dm[1]);
+      const d = nd ? +nd[1] : wd >= 0 ? WEEK0 + wd + (wd <= TODAY_I ? 7 : 0) : null, title = cap(dm[1].replace(/\s*(on )?(\b(sun|mon|tue|wed|thu|fri|sat)\w*|nov(ember)? \d{1,2})\b/ig, '').trim() || dm[1]);
+      const m = { me: false, text: d ? 'Added “' + title + '” on Nov ' + d + '. If it needs anything, I’ll put it on your bag list the night before.' : 'Added “' + title + '”. Which day is it? Tell me and I’ll put it on the calendar.', src: 'Saved to your dates' };
+      this.setState(st => ({ chats: { ...st.chats, [st.chatTopic]: [...st.chats[st.chatTopic], { me: true, text: t }, m] }, chatInput: '', dates: d ? [...st.dates, { d, t: title }] : st.dates }));
+      return;
+    }
     const topic = this.state.chatTopic, rm = parseReminder(t), r = rm
       ? { text: 'Done. “' + rm.text + '” at ' + rm.time + (rm.every ? ', every ' + rm.every + ' h' : '') + (rm.days ? ' for ' + rm.days + (rm.days === 1 ? ' day' : ' days') : '') + '. Change it in You → Your reminders.', src: 'Reminder on this phone' }
       : hm ? { text: dish ? 'Added “' + item + '” to your dishes. Pick it for any night in Home → Meals. Tell me what goes in it and I’ll match it to your pantry.' : 'Added “' + item + '”, Wednesdays, 20 minutes, by you. Change who does it in Home → Cleaning.', src: 'Saved to Home' }
@@ -1986,7 +2158,8 @@ class Component extends DCLogic {
     const s = this.state, kids = this.kids(), an = this.props.assistantName || 'Allie';
     const offline = !!this.props.offline, showFlow = this.props.showFlow !== false;
     // ponytail: only partner ideas name Diego, so a plain replace is enough
-    const sp = t => t && s.sup.name !== 'Diego' ? t.replace(/Diego/g, s.sup.name) : t;
+    // ponytail: only partner ideas name the support person, so a plain replace is enough. Assignee names (Diego, Carmen) never change.
+    const sp = (t, b) => t && s.sup.name !== 'Diego' && (!b || (b.dim === 'partner' && b.kind === 'optional')) ? t.replace(/Diego/g, s.sup.name) : t;
     const wakeName = isNightAt(NOW) ? 'Night wake' : 'Nap wake';
     const multi = kids.length > 1, allLabel = 'Both';
     const kidsOf = ch => ch === 'all' ? kids : ch ? kids.filter(k => k.id === ch) : [];
@@ -1995,24 +2168,39 @@ class Component extends DCLogic {
     const pills = (cur, pick) => [...kids.map(k => ({ id: k.id, label: k.name, dot: k.color })), ...(multi ? [{ id: 'all', label: allLabel, dot: 'var(--mute)' }] : [])]
       .map(p => ({ ...p, bg: cur === p.id ? 'var(--ink)' : 'var(--card)', fg: cur === p.id ? 'var(--on)' : 'var(--ink)', border: cur === p.id ? 'var(--ink)' : 'var(--line2)', pick: () => pick(p.id) }));
     const scr = s.screen;
-    const hideBlock = b => b.dim === 'partner' && (!s.settings.partner || (s.checkin && s.checkin <= 2) || s.replanKey === 'tired' && s.replans > 0);
-    const V = s.viewer, selfMode = s.mode === 'self' && V === 'ana';
-    // ponytail: preview filters on the client; the real app syncs to each phone only what the role allows
+    // F9: a partner idea needs a good-energy day: check-in of 4+ or, without one, no rough night and few replans. Never after "exhausted" or "clear my day".
+    const partnerOk = s.settings.partner && !s.dayFlags.tired && !s.dayFlags.sos && (s.checkin ? s.checkin >= 4 : !ROUGH_NIGHT && s.replans < 2);
+    const hideBlock = b => b.dim === 'partner' && b.kind === 'optional' && !partnerOk;
+    const V = s.viewer, selfMode = s.mode === 'self' && V === 'ana', meWho = V === 'ana' ? 'me' : V, mine = b => b.who === meWho || b.who === 'all';
+    // ponytail: preview filters on the client; the real app syncs to each phone only what the role allows. Her own time (You) never leaves her phone.
     const viewBlock = b => V === 'carmen' ? (b.dim === 'kids' || b.dim === 'home' ? b : b.dim === 'work' ? { ...b, title: 'Rossi busy', why: '' } : null)
-      : V === 'diego' ? (b.dim === 'partner' || b.dim === 'self' || b.id === 'breathe' ? null : b) : b;
+      : V === 'diego' ? ((b.dim === 'partner' && b.kind === 'optional') || b.dim === 'self' || b.dim === 'mom' ? null : b) : b;
     const live = s.blocks.filter(b => b.status !== 'tomorrow' && !hideBlock(b)).map(viewBlock).filter(Boolean);
-    const nowB = live.find(b => b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur);
-    const nextB = live.find(b => b.status === 'pending' && b.t > NOW && b !== nowB);
+    const nowB = live.find(b => mine(b) && b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur);
+    const nextB = live.find(b => mine(b) && b.status === 'pending' && b.t > NOW && b !== nowB);
     const mins = nextB ? nextB.t - NOW : 0;
-    const hero = nowB ? { bg: DIMS[nowB.dim].bg, fg: DIMS[nowB.dim].fg, range: fmt(nowB.t) + ' – ' + fmt(nowB.t + nowB.dur), title: sp(nowB.title), why: sp(nowB.why) || '' }
-      : { bg: 'var(--soft)', fg: 'var(--mute)', range: fmt(NOW), title: 'Open time', why: 'Nothing scheduled right now. Sit for a minute.' };
-    hero.next = nextB ? fmt(nextB.t) + ' · ' + sp(nextB.title) : 'Nothing else today';
+    // the kids' lane: where each child is right now and who has them
+    const kidsNow = kids.map(k => {
+      const kb = live.find(b => (b.child === k.id || b.child === 'all') && b.status === 'pending' && b.t <= NOW && NOW < b.t + b.dur && (b.kind === 'routine' || b.kind === 'care'));
+      const care = kb && kb.who !== 'all' && kb.who !== 'me' ? { who: kb.who, label: 'with ' + WHO_NAME[kb.who], until: kb.kind === 'care' ? kb.t + kb.dur : (careOf(s.fam, k.id, NOW, TODAY_I) || {}).until } : careOf(s.fam, k.id, NOW, TODAY_I);
+      const where = care ? (care.who === meWho ? 'with you' : care.label) + (care.until ? ' until ' + fmt(care.until) : '') : V === 'ana' ? 'with you' : 'with Rossi';
+      return k.name + ': ' + (kb && /nap/i.test(kb.title) ? 'asleep, ' : '') + where;
+    }).join(' · ');
+    const workNow = V === 'ana' && NOW >= 540 && NOW < 975;
+    const hero = nowB ? { bg: DIMS[nowB.dim].bg, fg: DIMS[nowB.dim].fg, range: fmt(nowB.t) + ' – ' + fmt(nowB.t + nowB.dur), title: sp(nowB.title, nowB), why: sp(nowB.why, nowB) || '' }
+      : workNow ? { bg: DIMS.work.bg, fg: DIMS.work.fg, range: fmt(NOW), title: 'Work time', why: 'Your hours run until 4:15 PM.' }
+      : { bg: 'var(--soft)', fg: 'var(--mute)', range: fmt(NOW), title: V === 'ana' ? 'Open time' : 'Nothing for you right now', why: V === 'ana' ? 'Nothing scheduled right now. Sit for a minute.' : 'Rossi has the plan. Your next thing is below.' };
+    hero.kids = kidsNow; hero.hasKids = !!kids.length;
+    hero.next = nextB ? fmt(nextB.t) + ' · ' + sp(nextB.title, nextB) : 'Nothing else today';
     hero.nextIn = nextB ? (mins >= 60 ? 'in ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm' : 'in ' + mins + ' min') : '';
     const visBlocks = live.map(b => {
       const d = DIMS[b.dim], done = b.status === 'done', sk = b.status === 'skipped', isNow = nowB && nowB.id === b.id;
+      const unmarked = mine(b) && b.status === 'pending' && b.t + b.dur <= NOW;
+      // a why talks to whoever does it, so other people's whys stay off guest phones
       return {
-        time: fmt(b.t), title: sp(b.title), why: sp(b.why), hasWhy: !!b.why && !done && !sk, dimLabel: d.label, dimFg: d.fg, dimBg: d.bg,
-        dot: done || sk ? 'var(--d-C9BBAB)' : d.fg, meta: (sk ? 'Skipped' : KINDS[b.kind]) + ' · ' + b.dur + ' min',
+        time: fmt(b.t), title: sp(b.title, b), why: sp(b.why, b), hasWhy: !!b.why && !done && !sk && (V === 'ana' || mine(b)), dimLabel: d.label, dimFg: d.fg, dimBg: d.bg,
+        hasWho: b.who !== meWho && b.who !== 'all', whoLabel: (b.asked ? 'Asked ' : '') + WHO_NAME[b.who], whoColor: WHO_COLOR[b.who], whoStyle: b.asked ? 'dashed' : 'solid',
+        dot: done || sk ? 'var(--d-C9BBAB)' : d.fg, meta: (sk ? 'Skipped' : unmarked ? 'Not marked · I’ll ask tonight' : KINDS[b.kind]) + ' · ' + b.dur + ' min',
         kids: kidsOf(b.child).map(k => ({ initial: k.name[0], color: k.color })),
         cardBg: 'var(--card)', cardBorder: isNow ? d.fg : 'var(--line)', op: done || sk ? 0.6 : 1, deco: done || sk ? 'line-through' : 'none',
         chkBorder: done ? 'var(--l-3D6142)' : 'var(--line2)', chkBg: done ? 'var(--l-3D6142)' : 'transparent', chkOp: done ? 1 : 0,
@@ -2021,7 +2209,7 @@ class Component extends DCLogic {
       };
     });
     const tomorrow = s.blocks.filter(b => b.status === 'tomorrow').map(b => ({ title: b.title }));
-    const doneCount = s.blocks.filter(b => b.status === 'done').length;
+    const doneCount = s.blocks.filter(b => b.status === 'done' && b.who === 'me').length;
 
     // sheet: block
     const sb = s.blocks.find(b => b.id === s.selBlock);
@@ -2039,22 +2227,30 @@ class Component extends DCLogic {
       if (sb.id === 'chore') acts.push(S('Open cleaning', () => this.setState({ sheet: null, tab: 'home', homeSeg: 'clean' })));
       if (sb.id === 'nap2') acts.push(P('Log: he woke up', () => { this.setState({ sheet: null }); this.toastMsg('Logged: ' + kidName('a') + ' woke at ' + fmt(NOW), true); }));
       acts.push((acts.length ? S : P)(isDone ? 'Mark not done' : 'Mark done', () => this.toggleDone(sb.id)));
+      // hand it over: kids and home blocks only (her own time and work stay hers). Diego answers on his phone.
+      const partnerM = s.members.find(m => m.role === 'partner');
+      if (V === 'ana' && partnerM && !isDone && (sb.dim === 'kids' || sb.dim === 'home')) {
+        if (sb.who === 'me') acts.push(S('Ask ' + partnerM.name + ' to do it', () => { this.mut(bl => { const x = bl.find(y => y.id === sb.id); x.who = partnerM.id; x.asked = true; return bl; }, 'Asked ' + partnerM.name + '. You’ll see the answer here.');
+          setTimeout(() => { this.setState(st => ({ blocks: st.blocks.map(b => b.id === sb.id && b.asked ? { ...b, asked: false } : b) })); this.toastMsg(partnerM.name + ' said yes: ' + sb.title + '.'); }, 3000); }));
+        else if (sb.who === partnerM.id) acts.push(S('I’ll do it', () => this.mut(bl => { const x = bl.find(y => y.id === sb.id); x.who = 'me'; x.asked = false; return bl; }, sb.title + ' is yours again. I told ' + partnerM.name + '.')));
+      }
       if (!fixed && !isDone) {
         acts.push(S('Snooze 15 min', () => this.mut(bl => { bl.find(x => x.id === sb.id).t += 15; return bl; }, sb.title + ' moved to ' + fmt(sb.t + 15))));
         acts.push(S('Let it go for today', () => this.mut(bl => { bl.find(x => x.id === sb.id).status = 'tomorrow'; return bl; }, 'On tomorrow’s list. Nothing lost.')));
       }
-      sel = { dimLabel: d.label, dimFg: d.fg, dimBg: d.bg, kind: KINDS[sb.kind], title: sp(sb.title), range: fmt(sb.t) + ' – ' + fmt(sb.t + sb.dur), why: sp(sb.why), hasWhy: !!sb.why, actions: acts, fixed };
+      sel = { dimLabel: d.label, dimFg: d.fg, dimBg: d.bg, kind: KINDS[sb.kind], title: sp(sb.title, sb), range: fmt(sb.t) + ' – ' + fmt(sb.t + sb.dur), why: sp(sb.why, sb), hasWhy: !!sb.why, actions: acts, fixed,
+        hasWho: sb.who !== 'me', whoLine: sb.who === 'all' ? 'Everyone' : (sb.asked ? 'Waiting for ' + WHO_NAME[sb.who] + ' to say yes' : WHO_NAME[sb.who] + ' does this') };
     }
 
     // replan
-    const RP = PRESETS[s.replanKey];
-    const TT = { move: ['Moved', 'var(--l-2F5A7A)', 'var(--d-DCE8F2)'], drop: ['To tomorrow', 'var(--l-7A5714)', 'var(--d-F4E6C8)'], add: ['Added', 'var(--l-3D6142)', 'var(--d-DFE9DC)'], skip: ['Skipped', 'var(--mute)', 'var(--soft)'], keep: ['Unchanged', 'var(--mute)', 'var(--soft)'] };
+    const RP = this.preset();
+    const TT = { move: ['Moved', 'var(--l-2F5A7A)', 'var(--d-DCE8F2)'], drop: ['To tomorrow', 'var(--l-7A5714)', 'var(--d-F4E6C8)'], add: ['Added', 'var(--l-3D6142)', 'var(--d-DFE9DC)'], skip: ['Skipped', 'var(--mute)', 'var(--soft)'], keep: ['Unchanged', 'var(--mute)', 'var(--soft)'], ask: ['Ask', 'var(--l-8A3B44)', 'var(--d-F4DDDD)'] };
     const changes = this.visibleChanges().map(({ c, i }) => {
-      const b = c.type === 'add' ? c.block : s.blocks.find(x => x.id === c.id); const on = !!s.on[i]; const T = TT[c.type];
+      const b = c.block || s.blocks.find(x => x.id === c.id); const on = !!s.on[i]; const T = TT[c.type];
       return {
-        title: b.title, label: T[0], fg: T[1], bg: T[2], note: c.note || 'Nothing deleted. It’s on tomorrow’s list.', isMove: c.type === 'move', notMove: c.type !== 'move',
+        title: b.title, label: c.type === 'ask' ? 'Ask ' + WHO_NAME[c.to] : (c.block && b.who !== 'me' ? 'Added for ' + WHO_NAME[b.who] : T[0]), fg: T[1], bg: T[2], note: c.note || 'Nothing deleted. It’s on tomorrow’s list.', isMove: c.type === 'move', notMove: c.type !== 'move',
         from: fmt(b.t), to: c.type === 'move' ? fmt(c.to) : '',
-        detail: c.type === 'add' ? fmt(b.t) + ' · ' + b.dur + ' min' : c.type === 'drop' ? 'Moved to tomorrow’s list' : c.type === 'skip' ? fmt(b.t) : 'Fixed · ' + fmt(b.t),
+        detail: c.block ? fmt(b.t) + ' · ' + b.dur + ' min' : c.type === 'ask' ? 'Same time · ' + fmt(b.t) : c.type === 'drop' ? 'Moved to tomorrow’s list' : c.type === 'skip' ? fmt(b.t) : (b.kind === 'fixed' ? 'Fixed · ' : '') + fmt(b.t),
         canToggle: c.type !== 'keep', isKeep: c.type === 'keep', boxBg: on ? 'var(--acc)' : 'transparent', boxBorder: on ? 'var(--acc)' : 'var(--line2)', chkOp: on ? 1 : 0,
         op: c.type === 'keep' || on ? 1 : 0.5, toggle: () => this.setState(st => ({ on: { ...st.on, [i]: !st.on[i] } })),
         _on: on && c.type !== 'keep',
@@ -2066,28 +2262,32 @@ class Component extends DCLogic {
     const BS = s.bedSteps, bedTot = BS[s.bedStep].d * 60, bm = Math.floor(s.bedLeft / 60), bsec = s.bedLeft % 60;
     const bm2 = s.bSec % 10, inP = bm2 < 4, bl = 300 - s.bSec;
 
-    // close
+    // close (9:00 PM): what passed unmarked is confirmed in one list, pre-ticked from the calendar and logs. Unticked moves to tomorrow.
+    const CLOSE_T = 1260, closeIds = s.blocks.filter(b => (b.who === 'me' || b.who === 'all') && b.status === 'pending' && b.t + b.dur <= CLOSE_T && !hideBlock(b)).map(b => b.id);
+    const hit = id => { const b = s.blocks.find(x => x.id === id); return !!b && (b.status === 'done' || (closeIds.includes(id) && s.closeChk[id] !== false)); };
+    const wins = [hit('meet') && 'made your meeting with Sarah', hit('lunch') && 'ate lunch sitting down', hit('bath') && 'got ' + kidName('a') + ' to bed'].filter(Boolean);
+    const winText = wins.length ? wins.slice(0, -1).join(', ') + (wins.length > 1 ? ' and ' : '') + wins[wins.length - 1] : '';
     const earned = s.replans > 0
-      ? (s.replans === 1 ? 'One plan change' : s.replans + ' plan changes') + ' today, and you still made your 3:00 with Sarah and got ' + kidName('a') + ' to bed. That’s huge.'
-      : 'A steady day. You protected your lunch and made your 3:00 with Sarah. That counts.';
+      ? (s.replans === 1 ? 'One plan change' : s.replans + ' plan changes') + ' today' + (winText ? ', and you still ' + winText + '. That’s huge.' : ', and you got through it. That counts.')
+      : winText ? 'A steady day. You ' + winText + '. That counts.' : 'You got through today. That counts.';
 
     const perms = [
       { title: 'See your meetings', why: 'So I can plan naps, meals and walks around them, not on top of them.', detail: 'I only read your calendars. I write only to a calendar of my own called “BestMom”.', cta: 'Allow calendar', icon: 'M4 6.5h16v13H4zM4 10.5h16M8.5 3.5v5M15.5 3.5v5', bg: 'var(--d-E4E1F0)', fg: 'var(--l-4B4580)' },
       { title: 'Remind you before each thing', why: 'A short heads-up with the why: “Mateo sleeps in 15 min. Start the bath now.”', detail: 'At most 8 nudges a day, plus baby routines and meetings. You set quiet hours.', cta: 'Allow notifications', icon: 'M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 21h4', bg: 'var(--d-F4E6C8)', fg: 'var(--l-7A5714)' },
     ];
-    const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
+    const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Who has the kids, hour by hour', 'Protecting your lunch'], 'today');
     const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else { this.setState({ notifDenied: !!denied }); toApp(); } };
 
     const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add'
       : s.sheet === 'add' ? 'add' + s.addPart : s.sheet === 'note' ? 'kidnote' : s.sheet === 'reminder' ? 'remnew' : s.sheet === 'kid' ? (s.kidEditId ? 'kidedit' : 'kidadd') : s.sheet ? s.sheet
       : s.pauseLeft > 0 ? 'pause' : s.dayOne && s.tab === 'today' ? 'dayone' : s.dayOne && s.tab === 'kids' ? 'kidsempty'
-      : s.sickAsk && s.tab === 'today' ? 'sickmorning' : s.sickKid && s.tab === 'today' ? 'reminder'
+      : s.sickAsk && s.tab === 'today' ? 'sickmorning' : s.sickKid && s.tab === 'today' ? 'reminder' : s.calChange && s.tab === 'today' ? 'calchange'
       : s.tab === 'today' && s.locked ? 'locked' : s.tab === 'today' && s.notifDenied ? 'notifoff' : s.tab === 'today' && s.jarvisNews ? 'jarvis'
       : s.tab === 'cal' ? (s.calDenied ? 'calnone' : 'cal' + s.calView) : s.tab === 'home' ? (!s.dishes.length && !s.pantry.length ? 'homeempty' : s.homeSeg === 'meals' ? 'home' : s.homeSeg)
       : s.tab === 'allie' && !s.chats.kids.length && !s.chats.work.length && !s.chats.me.length ? 'allieempty' : selfMode && s.tab === 'today' ? 'self' : s.tab)
       : scr === 'guest' ? 'guest' + s.guestStep : scr === 'widget' ? (s.siri && s.nightAwake ? 'siri' : 'widget')
       : scr === 'bed' ? (s.bedPick ? 'bedpick' : 'bedrun') : scr === 'night' ? (s.pastOpen ? 'nightpast' : s.nightOff ? 'nightoff' : s.wakeKind === 'nap' ? 'nap' : 'nightnow')
-      : scr === 'replan' && s.replanErr ? 'replanerr' : scr;
+      : scr === 'replan' && s.replanErr ? 'replanerr' : scr === 'replan' && s.replanKey === 'carmenleave' ? 'replanhelp' : scr;
     const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
     const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
     const micActive = s.listening;
@@ -2101,34 +2301,43 @@ class Component extends DCLogic {
     const greeting = selfMode ? 'This time is yours, Rossi' : 'Good afternoon, ' + vName;
     const pv = { title: 'Preview: ' + vm.name + '’s phone · ' + ROLES[vm.role].label, sub: V === 'diego' ? 'Whole family plan. Your check-ins and Self-Love stay hidden.' : vm.role === 'family' ? 'View only. Your work shows as “Rossi busy”.' : 'Only the kids’ day. Your work shows as “Rossi busy”.' };
     const span = (a, b) => { const m = b - a; return m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'; };
-    const fixedLeft = live.filter(b => b.kind === 'fixed' && b.status === 'pending').length;
+    const fixedLeft = live.filter(b => mine(b) && b.kind === 'fixed' && b.status === 'pending').length;
+    const listT = l => l.length > 1 ? l.slice(0, -1).join(', ') + ' and ' + l[l.length - 1] : l[0] || '';
+    const pickupB = live.find(b => b.id === 'pickup' && b.status === 'pending');
     const low = s.checkin && s.checkin <= 2;
-    const briefLine = V === 'carmen' ? kidName('all') + ': afternoon nap at 1:30' + (s.fam === 'two' ? ', Lia’s pickup at 4:15' : '') + ', bedtime routine at 6:45. Rough night, so expect a sleepy afternoon.'
+    const yours = live.filter(b => b.who === meWho && b.status === 'pending' && b.t >= NOW).map(b => b.title + ' at ' + fmt(b.t));
+    const carmenKids = kids.filter(k => (careOf(s.fam, k.id, NOW, TODAY_I) || {}).who === 'carmen').map(k => k.name);
+    const briefLine = V === 'carmen' ? (carmenKids.length ? listT(carmenKids) + (carmenKids.length > 1 ? ' are' : ' is') + ' with you until 5:00 PM. ' : '') + (yours.length ? 'Next: ' + listT(yours) + '.' : '') + (pickupB ? ' ' + WHO_NAME[pickupB.who] + ' picks up Lia at ' + fmt(pickupB.t) + '.' : '') + (ROUGH_NIGHT ? ' Rough night, so expect a sleepy afternoon.' : '')
+      : V === 'diego' ? (yours.length ? 'Your part today: ' + listT(yours) + '.' : 'Nothing left on your side today.') + (pickupB && pickupB.who !== 'diego' ? ' Rossi picks up Lia at ' + fmt(pickupB.t) + '.' : '')
       : low ? 'You’re running low, so tonight is just the essentials. Everything else can wait.'
-      : V === 'diego' ? 'Rossi has ' + fixedLeft + ' fixed things left. Rough night again, so the evening stays light.'
-      : 'A full Tuesday with ' + fixedLeft + ' fixed things left. Last night was rough, so I kept tonight light.';
-    const priIds = (V === 'carmen' ? ['nap2', 'pickup', 'bath'] : ['meet', 'pickup', 'bath']).concat(['cook', 'dinner']);
+      : 'A full Tuesday with ' + fixedLeft + ' fixed things left for you. ' + (ROUGH_NIGHT ? 'Last night was rough, so I kept tonight light.' : 'Tonight stays as planned.');
+    const priIds = V === 'ana' ? ['meet', 'pickup', 'bath'] : live.filter(b => b.who === meWho).sort((a, b) => (a.status === 'done') - (b.status === 'done') || a.t - b.t).map(b => b.id);
     const brief = {
       title: V === 'carmen' ? 'The kids today' : 'Tuesday at a glance', line: briefLine,
       shape: live.map(b => ({ l: Math.max(0, (b.t - H0) / (H1 - H0) * 100), w: b.dur / (H1 - H0) * 100, c: DIMS[b.dim].solid, op: b.status === 'done' ? 1 : b.status === 'skipped' ? .2 : .42 })),
       now: (NOW - H0) / (H1 - H0) * 100,
       pri: priIds.map(id => live.find(b => b.id === id)).filter(Boolean).slice(0, 3).map(b => {
         const d = DIMS[b.dim], done = b.status === 'done';
-        return { title: b.title, time: fmt(b.t), ring: done ? d.solid : d.fg, fill: done ? d.solid : 'transparent', chk: done ? 1 : 0, deco: done ? 'line-through' : 'none', op: done ? .55 : 1, toggle: () => V === 'carmen' && b.dim === 'work' ? null : this.toggleDone(b.id) };
+        return { title: (V === 'ana' && b.who !== 'me' && b.who !== 'all' ? WHO_NAME[b.who] + ': ' : '') + b.title, time: fmt(b.t), ring: done ? d.solid : d.fg, fill: done ? d.solid : 'transparent', chk: done ? 1 : 0, deco: done ? 'line-through' : 'none', op: done ? .55 : 1, toggle: () => V === 'carmen' && b.dim === 'work' ? null : this.toggleDone(b.id) };
       }),
     };
+    const soon = s.dates.filter(x => (x.kid !== 'b' || s.fam === 'two') && x.d > TODAY_D && x.d <= TODAY_D + 10).sort((a, b) => a.d - b.d);
+    const dayWord = d => d === TODAY_D + 1 ? 'tomorrow' : DAYN[(d - WEEK0) % 7] + ' ' + d;
+    const datesRow = soon.length ? { title: 'Coming up: ' + soon[0].t.toLowerCase() + ' ' + dayWord(soon[0].d), sub: soon.slice(1, 3).map(x => x.t + ', ' + dayWord(x.d)).join(' · ') || 'Nothing else this week', go: () => this.setState({ tab: 'cal', calView: 'month', calSel: soon[0].d }) } : null;
     const cook = s.blocks.find(b => b.id === 'cook');
     const mealIn = cook && cook.status === 'pending' && cook.t > NOW ? span(NOW, cook.t) : 'Now';
 
     // ---- self-love
-    const kidsDone = s.blocks.filter(b => b.dim === 'kids' && b.status === 'done').length + s.logs.length;
-    const ml = s.momLog, you = [ml.water && 'had ' + ml.water + (ml.water === 1 ? ' glass' : ' glasses') + ' of water', ml.move && 'got moving ' + (ml.move === 1 ? 'once' : ml.move + ' times'), ml.pause && 'paused for yourself ' + (ml.pause === 1 ? 'once' : ml.pause + ' times')].filter(Boolean);
-    const goodMom = 'You’ve done ' + kidsDone + ' things for ' + kidName('all') + ' today' + (s.fam === 'two' ? ', got Lia to daycare on time' : '') + ', showed up for your 9:00' + (you.length ? ', and you ' + (you.length > 1 ? you.slice(0, -1).join(', ') + ' and ' + you[you.length - 1] : you[0]) : '') + '. That’s what a good mom looks like.';
-    const walk = s.blocks.find(b => b.id === 'walk');
+    // receipts only from what she did today (her own blocks and logs), never from what Diego or Carmen did
+    const doneId = id => s.blocks.some(b => b.id === id && b.status === 'done');
+    const ml = s.momLog, you = [doneId('focus') && 'showed up for your 9:00', doneId('lunch') && 'ate lunch sitting down', (doneId('pump1') || doneId('pump2')) && 'made time to pump',
+      ml.water && 'had ' + ml.water + (ml.water === 1 ? ' glass' : ' glasses') + ' of water', ml.move && 'got moving ' + (ml.move === 1 ? 'once' : ml.move + ' times'), ml.pause && 'paused for yourself ' + (ml.pause === 1 ? 'once' : ml.pause + ' times')].filter(Boolean);
+    const goodMom = 'Today you kept ' + kidName('all') + '’s day running with Diego and Carmen' + (you.length ? ', ' + (you.length > 1 ? you.slice(0, -1).join(', ') + ' and ' + you[you.length - 1] : you[0]) : '') + '. That’s what a good mom looks like.';
+    const walk = s.blocks.find(b => b.id === 'walk' && b.status !== 'tomorrow'), breathe = s.blocks.find(b => b.id === 'breathe' && b.status !== 'tomorrow');
     const walkDone = walk && walk.status === 'done';
     const selfItems = [
-      { icon: 'M13 4.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 1 0 0 3M9.5 21l2-5.5 3 2.5v3M7 12.5l2.5-4.5 4 .8 3 3.7M11.5 15.5L10.5 9', title: 'Stroller walk', sub: walk ? fmt(walk.t) + ' · 20 min, while ' + kidName('a') + ' naps' : 'Moved to tomorrow', cta: walkDone ? 'Done ✓' : 'Start', deco: walkDone ? 'line-through' : 'none', go: () => walk && this.toggleDone('walk') },
-      { icon: 'M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7', title: '5-minute breathing', sub: 'Tonight at 8:30, or right now', cta: 'Begin', deco: 'none', go: () => this.go('breathe') },
+      { icon: 'M13 4.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 1 0 0 3M9.5 21l2-5.5 3 2.5v3M7 12.5l2.5-4.5 4 .8 3 3.7M11.5 15.5L10.5 9', title: 'Walk around the block', sub: walk ? fmt(walk.t) + ' · 20 min, Carmen has ' + kidName('a') : 'Moved to tomorrow', cta: walkDone ? 'Done ✓' : 'Start', deco: walkDone ? 'line-through' : 'none', go: () => walk && this.toggleDone('walk') },
+      { icon: 'M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7', title: '5-minute breathing', sub: breathe ? 'Tonight at ' + fmt(breathe.t) + (breathe.t >= 1260 ? ', in bed' : '') + ', or right now' : 'Anytime, right now', cta: 'Begin', deco: 'none', go: () => this.go('breathe') },
       { icon: 'M12 7a2.5 2.5 0 1 0 0-5a2.5 2.5 0 1 0 0 5M4 20c2.5-1 5-1.5 8-1.5s5.5.5 8 1.5M6.5 15.5l5.5-3.5 5.5 3.5M12 12V9.5', title: '3-minute body scan', sub: 'Lights low, before sleep', cta: 'Begin', deco: 'none', go: () => { this.setState({ medKey: 'scan' }); this.go('meditate'); } },
     ].map(i => ({ ...i, bg: i.cta === 'Done ✓' ? 'var(--d-DFE9DC)' : 'var(--acc)', fg: i.cta === 'Done ✓' ? 'var(--l-3D6142)' : 'var(--on)' }));
     const hasCarmen = s.members.some(m => m.id === 'carmen');
@@ -2146,15 +2355,15 @@ class Component extends DCLogic {
 
     // ---- calendar
     const extra = s.us.date ? [{ day: 5, b: B('date', 1170, 120, 'Date night', 'partner', 'fixed', null, '') }] : [];
-    const days = weekDays(s.fam, live, extra);
+    const days = weekDays(s.fam, live, extra, s.week, s.mealPlan, s.chores);
     const ratio = bl => { const c = bl.filter(b => b.status !== 'tomorrow'); return c.length ? c.filter(b => b.status === 'done').length / c.length : 0; };
     const week = days.map((d, i) => {
       const r = i <= TODAY_I ? ratio(d.blocks) : 0, isToday = i === TODAY_I;
-      return { name: d.name[0], date: d.date, off: 94.25 * (1 - r), fill: isToday ? 'var(--acc)' : r === 1 ? 'var(--d-DFE9DC)' : 'transparent', numFg: isToday ? 'var(--on)' : 'var(--ink)',
+      return { name: d.name[0], date: d.date, where: d.where === 'office' ? 'Office' : '', off: 94.25 * (1 - r), fill: isToday ? 'var(--acc)' : r === 1 ? 'var(--d-DFE9DC)' : 'transparent', numFg: isToday ? 'var(--on)' : 'var(--ink)',
         left: i * 100 / 7, isToday, colBg: isToday ? 'rgba(169,80,43,.06)' : 'transparent', pick: () => this.setState({ calView: 'month', calSel: d.date }),
         ev: d.blocks.filter(b => b.status !== 'tomorrow' && b.t + b.dur > H0 && b.t < H1 && !(s.calDenied && b.id === 'meet')).map(b => {
           const D = DIMS[b.dim], done = b.status === 'done', sk = b.status === 'skipped';
-          return { title: (done ? '✓ ' : '') + sp(b.title), top: Math.max(0, (b.t - H0) / 60 * HR), h: Math.max(15, b.dur / 60 * HR - 2),
+          return { title: (done ? '✓ ' : '') + (V === 'ana' && b.who !== 'me' && b.who !== 'all' ? WHO_NAME[b.who] + ': ' : '') + sp(b.title, b), top: Math.max(0, (b.t - H0) / 60 * HR), h: Math.max(15, b.dur / 60 * HR - 2),
             bg: done ? D.fg : sk ? 'transparent' : D.bg, fg: done ? 'var(--card)' : D.fg, bar: D.solid, border: sk ? '1px dashed ' + D.solid : 'none', op: sk ? .55 : 1, deco: sk ? 'line-through' : 'none',
             open: () => isToday && !(V === 'carmen' && b.dim === 'work') ? this.setState({ sheet: 'block', selBlock: b.id }) : this.setState({ calView: 'month', calSel: d.date }) };
         }) };
@@ -2166,11 +2375,12 @@ class Component extends DCLogic {
     const allWeek = days.reduce((n, d) => n + d.blocks.length, 0);
     const hours = Array.from({ length: (H1 - H0) / 60 + 1 }, (_, i) => { const h = 6 + i; return { top: i * HR, label: h === 12 ? 'Noon' : (h % 12 || 12) + (h < 12 ? 'a' : 'p') }; });
     const dayRatio = d => d < WEEK0 ? MPCT[d - 1] : d <= TODAY_D ? ratio(days[d - WEEK0].blocks) : 0;
+    const myDates = s.dates.filter(x => x.kid !== 'b' || s.fam === 'two');
     const monthCells = Array.from({ length: 30 }, (_, i) => {
       const d = i + 1, w = i % 7, wk = w === 0 || w === 6, r = dayRatio(d), sel = s.calSel === d, isToday = d === TODAY_D;
       const dims = wk ? ['kids', 'partner', 'home'] : ['kids', 'work', 'mom', 'home'];
       return { d, off: 94.25 * (1 - r), fill: isToday ? 'var(--acc)' : r === 1 ? 'var(--d-DFE9DC)' : 'transparent', numFg: isToday ? 'var(--on)' : d > TODAY_D ? 'var(--mute)' : 'var(--ink)',
-        bg: sel ? 'var(--card)' : 'transparent', border: sel ? 'var(--acc)' : 'transparent', dotOp: d > TODAY_D ? .45 : 1,
+        bg: sel ? 'var(--card)' : myDates.some(x => x.d === d) ? 'var(--d-F4E6C8)' : 'transparent', border: sel ? 'var(--acc)' : 'transparent', dotOp: d > TODAY_D ? .45 : 1,
         dots: dims.map(k => ({ c: DIMS[k].solid })), pick: () => this.setState({ calSel: d }) };
     });
     const sd = s.calSel, sdw = DAYN[(sd - 1) % 7], inWeek = sd >= WEEK0 && sd < WEEK0 + 7;
@@ -2180,8 +2390,9 @@ class Component extends DCLogic {
       title: { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' }[sdw] + ', Nov ' + sd,
       stat: sd > TODAY_D ? (inWeek ? sdBlocks.length + ' planned' : 'Not planned yet') : sdDone + ' of ' + (inWeek ? sdBlocks.length : 13) + ' done',
       note: sd > TODAY_D ? (inWeek ? 'Planned around your meetings and the kids’ rhythm. I’ll adjust the night before.' : 'I plan each day the night before, from how today went.')
-        : sd === TODAY_D ? 'Today, still filling in.' : dayRatio(sd) === 1 ? 'Everything done. A full ring.' : 'Most of it done. What didn’t fit moved forward. Nothing lost.',
-      items: sdBlocks.slice(0, 7).map(b => ({ title: b.title, time: fmt(b.t), c: DIMS[b.dim].solid, deco: b.status === 'skipped' ? 'line-through' : 'none', op: b.status === 'skipped' ? .5 : 1 })),
+        : sd === TODAY_D ? 'Today, still filling in.' : dayRatio(sd) === 1 ? 'All of it happened.' : 'What didn’t fit moved forward. Nothing lost.',
+      items: myDates.filter(x => x.d === sd).map(x => ({ title: x.t, time: 'Date', c: '#BC8C36', deco: 'none', op: 1 }))
+        .concat(sdBlocks.slice(0, 7).map(b => ({ title: (b.who !== 'me' && b.who !== 'all' ? WHO_NAME[b.who] + ': ' : '') + b.title, time: fmt(b.t), c: DIMS[b.dim].solid, deco: b.status === 'skipped' ? 'line-through' : 'none', op: b.status === 'skipped' ? .5 : 1 }))),
     };
 
     // ---- nights + family + invite
@@ -2309,7 +2520,8 @@ class Component extends DCLogic {
         const chores = s.chores.map(c => ({ t: c.t, deco: c.done ? 'line-through' : 'none', ring: c.done ? '#5E8A62' : 'var(--line2)', fill: c.done ? '#5E8A62' : 'transparent', chk: c.done ? 1 : 0,
           sub: c.days.map(d => DAYN[d]).join(' & ') + ' · ' + c.min + ' min' + (c.days.includes(TODAY_I) ? ' · today' : ''), whoLabel: WHO[c.who][0], whoC: WHO[c.who][1],
           toggle: () => this.setState(st => ({ chores: st.chores.map(x => x.id === c.id ? { ...x, done: !x.done } : x) })),
-          next: () => this.setState(st => ({ chores: st.chores.map(x => x.id === c.id ? { ...x, who: { me: 'diego', diego: 'cleaner', cleaner: 'me' }[x.who] } : x) })) }));
+          next: () => this.setState(st => { const who = { me: 'diego', diego: 'cleaner', cleaner: 'me' }[c.who];
+            return { chores: st.chores.map(x => x.id === c.id ? { ...x, who } : x), blocks: c.days.includes(TODAY_I) ? st.blocks.map(b => b.id === 'chore' ? { ...b, who } : b) : st.blocks }; }) }));
         const dp = s.deep;
         return {
           showHomeStrip: V !== 'carmen',
@@ -2358,6 +2570,9 @@ class Component extends DCLogic {
           sickStill: () => { this.setState({ sickAsk: false }); this.toastMsg('Got it. I kept today slow and held time for a call.'); },
           sickBetter: () => { const n = s.reminders.length; this.setState({ sickKid: null, sickAsk: false, sickDay: 1 }); this.toastMsg('Glad ' + sickName + ' is better.' + (n ? ' Your ' + (n === 1 ? 'reminder keeps' : n + ' reminders keep') + ' running until you stop ' + (n === 1 ? 'it' : 'them') + ' in You.' : '')); },
           openSickReminder: () => this.setState({ sheet: 'reminder', remText: sickName + ': ', remShare: [] }), openSickNote: () => this.setState({ sheet: 'note', noteKid: s.sickKid, noteIdx: -1, noteText: '' }),
+          sickWhoChips: [['carmen', 'Carmen'], ['me', 'You'], ['diego', 'Diego']].map(([v, label]) => ({ label, bg: s.sickWho === v ? 'var(--ink)' : 'transparent', fg: s.sickWho === v ? 'var(--on)' : 'var(--ink)', border: s.sickWho === v ? 'var(--ink)' : 'var(--line2)',
+            pick: () => { this.setState({ sickWho: v }); this.toastMsg(v === 'me' ? 'Tomorrow you’re home with ' + sickName + '. I’ll plan a lighter workday.' : 'Tomorrow ' + WHO_NAME[v] + ' has ' + sickName + '. I’ll ask ' + (v === 'diego' ? 'him' : 'her') + ' and plan around it.'); } })),
+          sickWorkNote: () => this.setState({ tab: 'allie', chatTopic: 'work', chatInput: 'Help me tell work I’m out tomorrow' }),
           openReminder: () => this.setState({ sheet: 'reminder', remText: '', remShare: [] }),
           shReminder: s.sheet === 'reminder', remText: s.remText, onRemText: e => this.setState({ remText: e.target.value }), remTime: s.remTime, onRemTime: e => this.setState({ remTime: e.target.value }),
           remEveryChips: chips(s.remEvery, [[0, 'Once'], [4, 'Every 4 h'], [6, 'Every 6 h'], [8, 'Every 8 h'], [12, 'Every 12 h'], [24, 'Daily']], v => this.setState({ remEvery: v })),
@@ -2389,7 +2604,7 @@ class Component extends DCLogic {
           saveSkill: () => {
             const label = s.skillText.trim() || s.skillPick, date = new Date(s.skillDate + 'T12:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
             this.setState(st => ({ skills: [...st.skills, { kid: st.skillKid, label, date }], sheet: null, skillText: '' }));
-            this.toastMsg('Noted: ' + skillWho + ' · ' + label + ' · ' + date + '. I’ll watch how sleep responds.');
+            this.toastMsg('Noted: ' + skillWho + ' · ' + label + ' · ' + date + '. It shows up next to ' + (s.skillKid === 'b' ? 'her' : 'his') + ' nights.');
           },
         };
       })(), toKids: () => this.go('kids'), toNights: () => this.go('night'),
@@ -2399,7 +2614,11 @@ class Component extends DCLogic {
       tCal: s.tab === 'cal', calWeek: s.calView !== 'month', calMonth: s.calView === 'month', calTitle: s.calView === '3day' ? 'Nov 16–18' : s.calView === 'week' ? 'This week' : 'November',
       calDays, calCols: visI.length, colW: 100 / visI.length, evFs: 12,
       calSeg: [['3day', '3 Days'], ['week', 'Week'], ['month', 'Month']].map(([k, label]) => ({ label, bg: s.calView === k ? 'var(--card)' : 'transparent', sh: s.calView === k ? 'var(--sh4)' : 'none', go: () => this.setState({ calView: k }) })),
-      calSub: s.calView !== 'month' ? doneWeek + ' things done this week · ' + (allWeek - doneWeek) + ' to go · nothing lost' : monthCells.filter(c => c.d < TODAY_D && dayRatio(c.d) === 1).length + ' full rings so far this month. The rest were mostly done, and nothing got lost.',
+      calSub: s.calView !== 'month' ? doneWeek + ' things done this week. Nothing lost.' : 'What didn’t fit on a day moved forward. Nothing got lost.',
+      openWeek: () => this.setState({ sheet: 'weeksetup' }), shWeek: s.sheet === 'weeksetup', addDate: () => this.setState({ tab: 'allie', chatTopic: 'me', chatInput: 'Add a date: ' }),
+      weekRows: [1, 2, 3, 4, 5].map(i => { const w = s.week[i], past = i <= TODAY_I, set = ch => !past && this.setState(st => ({ week: st.week.map((x, j) => j === i ? { ...x, ...ch } : x) }));
+        const seg2 = (cur, opts, key) => opts.map(([v, label]) => ({ label, bg: cur === v ? 'var(--card)' : 'transparent', sh: cur === v ? 'var(--sh4)' : 'none', go: () => set({ [key]: v }) }));
+        return { name: DAYN[i] + ' ' + (WEEK0 + i), op: past ? .5 : 1, past, where: seg2(w.where, [['home', 'Home'], ['office', 'Office']], 'where'), pick: seg2(w.pickup, [['me', 'You'], ['diego', 'Diego']], 'pickup'), hasPick: s.fam === 'two' }; }),
       weekOff: 87.96 * (1 - doneWeek / allWeek), week, hours, gridH: (H1 - H0) / 60 * HR, nowTop: (NOW - H0) / 60 * HR,
       dayLetters: DAYN.map(d => ({ t: d[0] })), monthCells, selDay,
       ...(() => {
@@ -2500,8 +2719,10 @@ class Component extends DCLogic {
       c1: { bg: s.consent1 ? 'var(--acc)' : 'transparent', border: s.consent1 ? 'var(--acc)' : 'var(--line2)', op: s.consent1 ? 1 : 0 },
       c2: { bg: s.consent2 ? 'var(--acc)' : 'transparent', border: s.consent2 ? 'var(--acc)' : 'var(--line2)', op: s.consent2 ? 1 : 0 },
       tC1: () => this.setState({ consent1: !s.consent1 }), tC2: () => this.setState({ consent2: !s.consent2 }),
-      consentOp: s.consent1 && s.consent2 ? 1 : 0.4,
-      toDump: () => { if (s.consent1 && s.consent2) this.go('dump'); },
+      // MHMDA: the health-data consent is separate, optional and revocable. Without it the app plans from schedule and logs only.
+      consentOp: s.consent1 ? 1 : 0.4,
+      toDump: () => { if (!s.consent1) return; this.setState({ wellbeing: s.consent2 }); this.go('dump'); },
+      dumpPrompt: s.consent2 ? 'Tell me what your life looks like today: your kids, your work, what’s weighing on you. Talk or type, however it comes.' : 'Tell me what your days look like: your kids, your work, your week. Talk or type, however it comes.',
       dumpVoice: s.dumpMode === 'voice', dumpType: s.dumpMode === 'type', hasWords: s.words > 0 && s.ctx === 'dump', noWords: !(s.words > 0 && s.ctx === 'dump'),
       dumpWords, dumpText: s.dumpText, onDumpText: e => this.setState({ dumpText: e.target.value }),
       dumpModeLabel: s.dumpMode === 'voice' ? 'Type instead' : 'Talk instead',
@@ -2527,9 +2748,16 @@ class Component extends DCLogic {
       permAllow: () => permNext(false), permDeny: () => permNext(true),
       // today
       toAllie: () => this.go('allie'), notifDenied: s.notifDenied && V === 'ana', fixNotif: () => { this.setState({ notifDenied: false }); this.toastMsg('Notifications on. I’ll give you a heads-up before each thing.'); }, calDenied: s.calDenied, fixCal: () => { this.setState({ calDenied: false }); this.toastMsg('Calendar on. I can see your meetings now.'); },
-      hero, needCheckin: !s.checkin && V === 'ana', hasCheckin: !!s.checkin,
+      hero, needCheckin: !s.checkin && V === 'ana' && s.wellbeing, hasCheckin: !!s.checkin && s.wellbeing, datesRow: datesRow || {}, hasDates: !!datesRow && V !== 'carmen',
+      calChange: s.calChange && V === 'ana', calChangeGo: () => { this.setState({ calChange: false }); this.openReplan('meeting'); }, calChangeLater: () => this.setState({ calChange: false }),
+      // her sleep: after a rough night, offer the first half of tonight to Diego
+      shiftAsk: V === 'ana' && ROUGH_NIGHT && s.nightShift !== 'yes', shiftAsked: s.nightShift === 'asked', shiftCanAsk: !s.nightShift, shiftYes: V === 'ana' && s.nightShift === 'yes',
+      askShift: () => { this.setState({ nightShift: 'asked' }); setTimeout(() => { this.setState({ nightShift: 'yes' }); this.toastMsg('Diego said yes. He takes the wakes until 2 AM.'); }, 2500); },
+      wellTrack: s.wellbeing ? 'var(--l-3D6142)' : 'var(--line2)', wellJustify: s.wellbeing ? 'flex-end' : 'flex-start',
+      wellSub: s.wellbeing ? 'Energy check-ins shape your day. Withdraw anytime.' : 'Off. I plan from your schedule and logs only.',
+      toggleWellbeing: () => { this.setState({ wellbeing: !s.wellbeing, checkin: null }); this.toastMsg(s.wellbeing ? 'Off. I stopped using your mood and deleted today’s check-in.' : 'On. I’ll ask about your energy once a day.'); },
       faces: MOUTHS.map((mouth, i) => ({ mouth, label: FACE_LABELS[i], pick: () => this.setState({ checkin: i + 1 }) })),
-      checkinReply: s.checkin ? (s.checkin <= 2 ? 'Energy ' + s.checkin + '/5. Thanks for telling me. I’ll keep tonight light and skip the extras.' : 'Energy ' + s.checkin + '/5. Good to hear. I’ll keep the afternoon as planned.') : '',
+      checkinReply: s.checkin ? (s.checkin <= 2 ? 'Energy ' + s.checkin + '/5. Thanks for telling me. I’ll keep tonight light and skip the extras.' : s.checkin >= 4 && partnerOk ? 'Energy ' + s.checkin + '/5. Good to hear. There’s room for a small idea tonight.' : 'Energy ' + s.checkin + '/5. Good to hear. I’ll keep the afternoon as planned.') : '',
       notSaved: !s.saved && V === 'ana', openSave: () => this.setState({ sheet: 'save' }), doSave: () => { this.setState({ saved: true, acct: 'Apple', sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
       doSaveGoogle: () => { this.setState({ saved: true, acct: 'Google', sheet: null }); this.toastMsg('Saved. Your day is safe.'); },
       saveEmail: () => this.setState({ screen: 'signin', signinFor: 'save', signinStep: 'form', sheet: null }),
@@ -2546,14 +2774,14 @@ class Component extends DCLogic {
       isSaved: s.saved, acctTitle: s.saved ? (s.acct === 'email' ? 'Signed in with email' : 'Signed in with ' + s.acct) : 'Not saved yet',
       acctSub: s.saved ? (s.acct === 'email' && s.email ? s.email + ' · ' : '') + 'Your plan and logs are backed up.' : 'Your plan lives only on this phone.',
       signOut: () => { this.setState({ saved: false, screen: 'signin', signinFor: 'signin', signinStep: 'form', sheet: null }); this.toastMsg('Signed out. Everything is safe in your account.'); },
-      subRowSub: s.subscribed ? (s.plan === 'year' ? 'Yearly · renews Nov 18, 2027' : 'Monthly · renews Dec 18, 2026') : s.locked ? 'No plan. Your free day ended.' : 'Free first day · ends tonight',
+      subRowSub: s.subscribed ? (s.trial ? 'Free week · ends Nov 24, then ' + planPrice : s.plan === 'year' ? 'Yearly · renews Nov 24, 2027' : 'Monthly · renews Dec 24, 2026') : s.locked ? 'No plan. Your free day ended.' : 'Free first day · then 7 days free',
       subRowCta: s.subscribed ? 'Manage' : 'See plans',
       subRowGo: () => s.subscribed ? this.toastMsg('Opens your App Store subscriptions. Cancel there anytime.') : this.go('paywall'),
-      restore: () => s.subscribed ? this.toastMsg('Your subscription is already active.') : (this.setState({ subscribed: true, locked: false, subKind: 'restore' }), this.go('subok')),
+      restore: () => s.subscribed ? this.toastMsg('Your subscription is already active.') : (this.setState({ subscribed: true, trial: false, locked: false, subKind: 'restore' }), this.go('subok')),
       notNow: () => { this.setState({ locked: true }); this.go('today'); },
       lockedOn: s.locked && V === 'ana',
-      subHead: s.subKind === 'restore' ? 'Welcome back. Your plan is restored.' : 'You’re in. Let’s keep going.',
-      subLine: s.subKind === 'restore' ? 'I found your BestMom ' + (s.plan === 'year' ? 'yearly' : 'monthly') + ' plan on this account.' : (s.plan === 'year' ? 'BestMom yearly · $59.99 a year · renews Nov 18, 2027.' : 'BestMom monthly · $9.99 a month · renews Dec 18, 2026.'),
+      subHead: s.subKind === 'restore' ? 'Welcome back. Your plan is restored.' : 'Your free week started.',
+      subLine: s.subKind === 'restore' ? 'I found your BestMom ' + (s.plan === 'year' ? 'yearly' : 'monthly') + ' plan on this account.' : '7 days free, then BestMom ' + (s.plan === 'year' ? 'yearly · $59.99 a year' : 'monthly · $9.99 a month') + ' from Nov 24. I’ll remind you on Nov 22.',
       subContinue: () => this.go('today'),
       startOver: () => this.setState(this.initState(s.fam)),
       // Jarvis
@@ -2563,14 +2791,20 @@ class Component extends DCLogic {
       stages: [['Memory', 'Since day 1'], ['Patterns', 'Since Nov 8'], ['Supplies', 'Since Nov 14']].map(([name, since]) => ({ name, since })),
       memCorrect: () => this.setState({ sheet: null, tab: 'allie', chatTopic: 'me', chatInput: 'Something changed: ' }),
       // lock screen notifications (F4)
-      lockNotes: [['meet', 'now', 'Meeting with Sarah in 10 min', 'The bottle is already in the fridge. You’re set.'], ['walk', '1:58 PM', 'Stroller walk · 20 min', '20 free minutes before your 3:00. A short walk recharges you.'], ['nap2', '1:15 PM', kidName('a') + '’s nap in 15 min', 'Awake 2h 10m, right on his rhythm. Start winding down now.']]
+      // private blocks stay discreet on the Lock Screen: "your 2:20 break", never "pumping"
+      lockNotes: [['meet', 'now', 'Meeting with Sarah in 10 min', 'Carmen has ' + kidName('a') + ' until 5:00. You’re set.'], ['pump2', '2:15 PM', 'Your 2:20 break · 20 min', 'Others see it as “busy”.'], ['walk', '1:58 PM', 'Walk · 20 min', '20 free minutes before your 3:00. A short walk recharges you.']]
         .map(([id, when, title, body]) => ({ when, title, body, go: () => this.setState({ screen: 'app', tab: 'today', sheet: 'block', selBlock: id, viewer: 'ana', mode: 'mom' }) })),
-      doneLabel: doneCount + ' of ' + live.length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
+      doneLabel: 'Yours: ' + live.filter(b => mine(b) && b.status === 'done').length + ' of ' + live.filter(mine).length + ' done', visBlocks, hasTomorrow: tomorrow.length > 0, tomorrow,
       openLog: () => this.go('log'), openHappened: () => this.go('happened'),
       tabs: [['today', 'Today'], ['cal', 'Calendar'], ['plus', ''], ['kids', 'Kids'], ['allie', an]].map(([k, label]) => ({ label, plus: k === 'plus', tab: k !== 'plus', icon: ICONS[k] || '', ...((on => ({ color: on ? 'var(--acc)' : 'var(--mute)', fill: on ? .22 : 0, cur: on ? 'page' : 'false' }))(s.tab === k || (k === 'today' && (s.tab === 'me' || s.tab === 'home')))), go: () => this.go(k) })),
       // happened
-      multiKid: multi, hKidPills: pills(s.hKid, id => this.setState({ hKid: id })),
-      presetBtns: (() => { const n = kidName(s.hKid); return [['early', n + ' fell asleep early'], ['late', n + ' fell asleep late'], ['nonap', n + ' skipped the nap'], ['noeat', n + ' didn’t eat well'], ['skipmeal', n + ' skipped a meal'], ['sick', n + ' is sick or home'], ['meeting', 'A meeting moved or was added'], ['momskip', 'I skipped my lunch'], ['tired', 'I’m exhausted']].map(([k, label]) => ({ label, go: () => this.openReplan(k) })); })(),
+      multiKid: multi, hKidPills: pills(s.hKid, id => this.setState({ hKid: id })).filter(p => p.id !== 'all'),
+      presetBtns: (() => {
+        // shortcuts fit the child: naps and meals for a baby with Carmen; for a kid in daycare, sick or a call from daycare
+        const k = this.replanKid(), n = k.name, school = /year/.test(k.age) && s.fam === 'two';
+        const kidKeys = school ? [['sick', n + ' is sick or home'], ['daycall', 'Daycare called: pick up ' + n]]
+          : [['early', n + ' fell asleep early'], ['late', n + ' fell asleep late'], ['nonap', n + ' skipped the nap'], ['noeat', n + ' didn’t eat well'], ['skipmeal', n + ' skipped a meal'], ['sick', n + ' is sick or home']];
+        return [...kidKeys, ['carmenleave', 'Carmen has to leave early'], ['meeting', 'A meeting moved or was added'], ['momskip', 'I skipped my lunch'], ['tired', 'I’m exhausted']].map(([key, label]) => ({ label, go: () => this.openReplan(key) })); })(),
       goSos: () => this.openReplan('sos'),
       micHappened: () => this.startListen('happened'),
       hVoiceText: hTx || (s.listening && s.ctx === 'happened' ? 'I’m listening…' : 'Or just tell me what happened'),
@@ -2608,7 +2842,7 @@ class Component extends DCLogic {
       acceptReplan: () => this.acceptReplan(), cancelReplan: () => this.setState({ screen: 'app', tab: 'today' }),
       // undo / toast
       hasToast: !!s.toast, toastText: s.toast, toastUndo: s.toastUndo && !!s.prevBlocks,
-      undo: () => this.setState(st => ({ blocks: st.prevBlocks, prevBlocks: null, toast: null, replans: st.screen === 'app' && st.toast && st.toast.startsWith('Plan updated') ? Math.max(0, st.replans - 1) : st.replans })),
+      undo: () => this.setState(st => ({ blocks: st.prevBlocks, prevBlocks: null, toast: null, dayFlags: st.prevFlags || st.dayFlags, replans: st.screen === 'app' && st.toast && st.toast.startsWith('Plan updated') ? Math.max(0, st.replans - 1) : st.replans })),
       // bed
       bedKid: kidName(s.bedWho), bedActive: !s.bedDone && !s.bedPick, bedDone: s.bedDone, bedPicking: s.bedPick && !s.bedDone,
       bedOpenPick: () => this.setState({ bedPick: true, bedRun: false }), bedMulti: multi,
@@ -2635,12 +2869,33 @@ class Component extends DCLogic {
       breathScale: inP ? 1 : 0.6, breathDur: inP ? '4s' : '6s', breathLabel: inP ? 'Breathe in' : 'Breathe out', breathCount: inP ? 4 - bm2 : 10 - bm2,
       breathPause: () => this.setState({ bRun: !s.bRun }), breathPauseLabel: s.bRun ? 'Pause' : 'Resume',
       // close
-      earned, doneCount, replans: s.replans, tomorrowCount: tomorrow.length, journal: s.journal, onJournal: e => this.setState({ journal: e.target.value }),
+      earned, doneCount: doneCount + closeIds.filter(id => s.closeChk[id] !== false && s.blocks.find(b => b.id === id).who === 'me').length, replans: s.replans, tomorrowCount: tomorrow.length + closeIds.filter(id => s.closeChk[id] === false).length, journal: s.journal, onJournal: e => this.setState({ journal: e.target.value }),
+      closeRows: closeIds.map(id => { const b = s.blocks.find(x => x.id === id), on = s.closeChk[id] !== false; return { title: b.title, time: fmt(b.t), on: on ? 'true' : 'false', bg: on ? 'var(--acc)' : 'transparent', border: on ? 'var(--acc)' : 'var(--line2)', op: on ? 1 : 0, sub: on ? (b.who === 'all' ? 'Everyone' : 'Done') : 'Moves to tomorrow', pick: () => this.setState(st => ({ closeChk: { ...st.closeChk, [id]: !on } })) }; }),
+      hasCloseRows: closeIds.length > 0,
+      ...(() => {
+        // tomorrow, from the same planner: first things, and what to get ready tonight
+        const ti = TODAY_I + 1, tw = s.week[ti] || { where: 'home' }, tb = buildBlocks(s.fam, { i: ti, ...tw, meal: s.mealPlan[ti], chore: choreOn(s.chores, ti) });
+        const prep = [tw.where === 'office' && 'Pump bag: parts, cooler, ice pack', tw.where === 'office' && 'Laptop and charger', s.fam === 'two' && 'Lia’s daycare bag: spare clothes, water bottle',
+          ...s.dates.filter(d => d.d === TODAY_D + 1 && d.prep && (d.kid !== 'b' || s.fam === 'two')).map(d => d.prep)].filter(Boolean);
+        return {
+          tmrwTitle: 'Tomorrow, Wednesday · ' + (tw.where === 'office' ? 'office day' : 'home day'),
+          tmrwLines: tb.filter(b => b.t < 600).slice(0, 4).map(b => ({ time: fmt(b.t), text: (b.who === 'me' ? '' : (b.who === 'all' ? 'Everyone' : WHO_NAME[b.who]) + ': ') + b.title })),
+          prepRows: prep.map(t => { const on = !!s.prepDone[t]; return { t, on: on ? 'true' : 'false', bg: on ? 'var(--l-3D6142)' : 'transparent', border: on ? 'var(--l-3D6142)' : 'var(--line2)', op: on ? 1 : 0, deco: on ? 'line-through' : 'none', pick: () => this.setState(st => ({ prepDone: { ...st.prepDone, [t]: !on } })) }; }),
+          seeTomorrow: () => this.setState({ screen: 'app', tab: 'cal', calView: '3day' }),
+          closeDay: () => {
+            this.setState(st => ({ blocks: st.blocks.map(b => closeIds.includes(b.id) ? { ...b, status: st.closeChk[b.id] === false ? 'tomorrow' : 'done' } : b), closeChk: {} }));
+            if (s.subscribed) { this.go('today'); this.toastMsg('Good night. Tomorrow is ready.'); } else this.go('paywall');
+          },
+        };
+      })(),
       ratings: [1, 2, 3, 4, 5].map(n => ({ n, bg: s.rating === n ? 'var(--ink)' : 'var(--card)', fg: s.rating === n ? 'var(--on)' : 'var(--ink)', border: s.rating === n ? 'var(--ink)' : 'var(--line)', pick: () => this.setState({ rating: n }) })),
       toPaywall: () => this.go('paywall'),
-      yesterday: [{ text: doneCount + ' things done, on your terms' }, { text: s.replans ? s.replans + ' replans, nothing lost' : 'Your 3:00 with Sarah, on time' }, { text: kidName('a') + ' asleep by 7:21 PM' }],
-      plans: [['year', 'Yearly', '$5.00 a month, billed yearly. Save 50%', '$59.99'], ['month', 'Monthly', 'Cancel anytime', '$9.99']].map(([k, name, sub, price]) => ({ name, sub, price, border: s.plan === k ? 'var(--acc)' : 'var(--line)', dot: s.plan === k ? 'var(--acc)' : 'transparent', pick: () => this.setState({ plan: k }) })),
-      planPrice, subscribe: () => { this.setState({ subscribed: true, locked: false, subKind: 'buy' }); this.go('subok'); },
+      yesterday: [doneCount + ' things done, on your terms', s.replans ? s.replans + (s.replans === 1 ? ' replan' : ' replans') + ', nothing lost' : hit('meet') && 'Your meeting with Sarah, on time', hit('bath') && kidName('a') + ' asleep by ' + fmt(s.blocks.find(b => b.id === 'bath').t + 30)].filter(Boolean).map(text => ({ text })),
+      // F13: the first day is free with no account; then a 7-day free trial through the store (intro offer), then paid
+      trialSteps: [['Today', 'Your first day ✓'], ['Tomorrow', 'Your free week starts: plans, replans, reminders, ' + an], ['Nov 22', 'I remind you 2 days before it ends'], ['Nov 24', 'I know ' + kidName('a') + '’s rhythm by now. Billing starts; cancel before and pay nothing']].map(([when, what]) => ({ when, what })),
+      plans: [['year', 'Yearly', '7 days free, then $59.99 a year ($5.00 a month). Save 50%', '$59.99'], ['month', 'Monthly', '7 days free, then $9.99 a month', '$9.99']].map(([k, name, sub, price]) => ({ name, sub, price, border: s.plan === k ? 'var(--acc)' : 'var(--line)', dot: s.plan === k ? 'var(--acc)' : 'transparent', pick: () => this.setState({ plan: k }) })),
+      planPrice, planFine: 'Free for 7 days, then ' + (s.plan === 'year' ? '$59.99 a year' : '$9.99 a month') + '. Renews automatically until you cancel. Cancel in your App Store settings at least 24 hours before the trial ends and you won’t be charged.',
+      subscribe: () => { this.setState({ subscribed: true, trial: true, locked: false, subKind: 'buy' }); this.go('subok'); },
       toTodayPlain: () => this.go('today'),
       // kids tab
       kidCards: kids.map(k => ({
@@ -2650,14 +2905,15 @@ class Component extends DCLogic {
           .concat(ACTS.map(a => ACT_KEY[a] || a).filter(a => !(PLAY[k.id] || PLAY.a).some(([x]) => x === a)).map(a => ({ label: a, n: s.logs.filter(l => l.kid === k.id && l.act && (ACT_KEY[l.act] || l.act) === a).length })).filter(x => x.n > 0)),
         logs: s.logs.map((l, i) => ({ ...l, i })).filter(l => l.kid === k.id).map(l => ({ label: TYPES[l.type] + (l.detail ? ' · ' + l.detail : ''), time: fmt(l.t) + (l.end ? ' – ' + fmt(l.end) : ''), open: () => this.setState({ sheet: 'logedit', logEdit: l.i, leT: l.t, leEnd: l.end ?? null }) })),
         hasLearn: !k.isNew, hasNights: !s.dayOne && !k.isNew, name: k.name, nightsEmpty: s.dayOne || !!k.isNew, night: () => this.go('night'), skill: () => this.setState({ sheet: 'skill', skillKid: k.id, skillText: '' }),
-        skills: s.skills.filter(x => x.kid === k.id), learnSrc: s.wakeWin[k.id] != null && s.wakeWin[k.id] !== k.ww ? 'Set by you. My estimate was ' + fmtDur(k.ww) : 'Based on your last 10 days',
+        skills: s.skills.filter(x => x.kid === k.id), learnSrc: /year/.test(k.age) ? 'You told me · Nov 1' : s.wakeWin[k.id] != null && s.wakeWin[k.id] !== k.ww ? 'Set by you. My estimate was ' + fmtDur(k.ww) : 'Based on your last 10 days',
         nights: k.nights.map((w, i) => ({ h: w ? w * 16 : 4, c: k.at >= 0 && i > k.at ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === k.at })),
         ...(() => { const usual = k.at >= 0 ? 1 : [...k.nights].sort((x, y) => x - y)[7], through = k.nights.filter(w => !w).length; return {
           usualY: Math.max(4, usual * 16), rough: k.at >= 0, nightHead: k.at >= 0 ? 'Rough patch · night 4' : 'Steady · nothing new',
-          nightText: k.at >= 0 ? 'Nights got choppier the day after you logged “started crawling”. New skills often shake up sleep for a week or two. I’m keeping your mornings light until it settles.'
+          nightText: k.at >= 0 ? 'Nights got choppier the day after you logged “started crawling”. I’m keeping your mornings light until they settle.'
             : usual ? 'About ' + usual + ' wakes a night, same as ' + k.his + ' usual. Your mornings stay as planned.' : k.name + ' slept through ' + through + ' of the last 14 nights. Nothing to adjust.' }; })(),
-        learn: k.name + '’s wake window is about ' + fmtDur(s.wakeWin[k.id] ?? k.ww) + '. I plan ' + k.his + ' naps around it.',
-        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.setState({ sheet: 'wakewin', wwKid: k.id, wwDraft: s.wakeWin[k.id] ?? k.ww }),
+        // past the nap years, the plan runs on her schedule (daycare, school, activities), not a wake window
+        learn: /year/.test(k.age) ? k.name + '’s day: daycare 8:15 AM to 4:15 PM, bedtime around 7:45 PM with Diego.' : k.name + '’s wake window is about ' + fmtDur(s.wakeWin[k.id] ?? k.ww) + '. I plan ' + k.his + ' naps around it.',
+        confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => /year/.test(k.age) ? this.setState({ tab: 'allie', chatTopic: 'kids', chatInput: 'Something changed about ' + k.name + ': ' }) : this.setState({ sheet: 'wakewin', wwKid: k.id, wwDraft: s.wakeWin[k.id] ?? k.ww }),
         log: () => this.setState({ sheet: 'log', tab: 'today', logKid: k.id, logTime: NOW, logHeard: null }),
         ...(() => { const mine = s.notes.map((n, i) => ({ ...n, i })).filter(n => n.kid === k.id); return {
           canNotes: V === 'ana', hasNotes: mine.length > 0, noNotes: !mine.length,
@@ -2707,7 +2963,7 @@ class Component extends DCLogic {
       delFamily: s.members.length > 1, delFamilyText: s.members.filter(m => m.role !== 'owner').map(m => m.name).join(' and ') + (s.members.length > 2 ? ' all' : ''),
       delBox: { bg: s.delOk ? '#A33A2A' : 'transparent', border: s.delOk ? '#A33A2A' : 'var(--line2)', op: s.delOk ? 1 : 0 }, toggleDelOk: () => this.setState({ delOk: !s.delOk }),
       delOp: s.delOk ? 1 : 0.4, doDelete: () => { if (s.delOk) this.go('deleted'); },
-      settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing'], ['work', 'Work', 'Meeting prep, focus blocks'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Support person', s.sup.name + ' · up to ' + s.sup.week + ' a week, never on hard days']].map(([k, label, sub]) => ({
+      settingRows: [['kids', 'Kids’ routines', 'Naps, feeds, bedtime'], ['mom', 'You', 'Meals, walks, breathing, pumping breaks'], ['work', 'Work', 'Meeting prep, focus blocks'], ['home', 'Home', 'Dinner prep, chores, dates, the night-before list'], ['self', 'Check-ins', 'Energy check and close of day'], ['partner', 'Us', 'Ideas for you and ' + s.sup.name + ' · up to ' + s.sup.week + ' a week, never on hard days']].map(([k, label, sub]) => ({
         label, sub, dot: DIMS[k].fg, track: s.settings[k] ? 'var(--l-3D6142)' : 'var(--line2)', justify: s.settings[k] ? 'flex-end' : 'flex-start',
         toggle: () => this.setState(st => ({ settings: { ...st.settings, [k]: !st.settings[k] } })),
       })),
@@ -2717,7 +2973,7 @@ class Component extends DCLogic {
       // flow panel
       flowGroups: FLOW.map(g => ({ title: g.title, items: g.items.map(([n, label, key]) => ({ n, label: key === 'allie' ? an + ' chat' : label, bg: curKey === key ? 'var(--l-2A211C)' : 'transparent', fg: curKey === key ? '#FFF8F0' : 'var(--l-2A211C)', go: () => {
         // map jumps reset demo flags; seeded data comes back if an empty-state jump cleared it
-        this.setState(st => { const i = this.initState(st.fam); return { viewer: 'ana', mode: key === 'self' ? 'self' : 'mom', dayOne: key === 'dayone' || key === 'kidsempty', locked: false, notifDenied: false, jarvisNews: false, pauseLeft: 0, calDenied: false,
+        this.setState(st => { const i = this.initState(st.fam); return { viewer: 'ana', mode: key === 'self' ? 'self' : 'mom', dayOne: key === 'dayone' || key === 'kidsempty', locked: false, notifDenied: false, jarvisNews: false, pauseLeft: 0, calDenied: false, sickKid: null, sickAsk: false, calChange: false, hKid: 'a',
           ...(key === 'allie' && !st.chats.kids.length ? { chats: i.chats } : {}), ...(['home', 'pantry', 'clean'].includes(key) && !st.pantry.length ? { dishes: i.dishes, pantry: i.pantry, mealPlan: i.mealPlan, chores: i.chores } : {}) }; });
         this.go(key); } })) })),
       legend: LEGEND.map(k => DIMS[k]).map(d => ({ label: d.label, fg: d.fg, bg: d.bg })),
