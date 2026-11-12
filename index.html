@@ -249,20 +249,30 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
       </button></sc-for>
       <button onClick="{{ toNights }}" aria-label="Open the night log" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;padding:0">
         <div style="width:32px;height:32px;border-radius:10px;background:var(--d-E6E5F3);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-3E3F78)" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></div>
-        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Last night: 3 wakes</div><div style="font-size:13px;color:var(--mute)">Longest stretch 3h 10m · {{ kid1 }}’s usual is 1 wake</div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Last night: 3 wakes</div><div style="font-size:13px;color:var(--mute)">Longest stretch 3h 10m · usual is 1</div></div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none"><div style="display:flex;align-items:flex-end;gap:3px;height:22px"><sc-for list="{{ nightMini }}" as="n"><div style="width:6px;height:{{ n.h }}px;border-radius:2px;background:{{ n.c }}"></div></sc-for></div><span style="font-size:11px;font-weight:700;color:var(--l-3E3F78)">Rough patch ›</span></div>
       </button>
       <sc-if value="{{ sickOn }}" hint-placeholder-val="{{ false }}">
-      <div data-screen-label="37 Sick day" style="display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--hair)">
-        <div style="width:32px;height:32px;border-radius:10px;background:var(--d-DCE8F2);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-2F5A7A)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18M5 18V9l7-5 7 5v9M10 18v-5h4v5"></path></svg></div>
-        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">{{ sickName }} is home sick</div><div style="font-size:13px;color:var(--mute)">{{ sickSub }}</div></div>
-        <button onClick="{{ openReminder }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none">Reminder</button>
-        <button onClick="{{ openSickNote }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none">Note</button>
+      <div data-screen-label="37 Sick day" style="padding:12px 0;border-bottom:1px solid var(--hair)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:32px;height:32px;border-radius:10px;background:var(--d-DCE8F2);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-2F5A7A)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-7M3 14h18v4M21 18v-4a3 3 0 0 0-3-3h-7v3M7 11.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 1 0 0 3"></path></svg></div>
+          <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">{{ sickTitle }}</div><div style="font-size:13px;color:var(--mute)">{{ sickSub }}</div></div>
+          <span style="font-size:11px;font-weight:700;color:var(--l-2F5A7A);background:var(--d-DCE8F2);padding:4px 8px;border-radius:8px;white-space:nowrap;flex:none">{{ sickDayLabel }}</span>
+        </div>
+        <sc-if value="{{ sickAsk }}"><div style="margin:12px 0 0 44px;background:var(--d-DCE8F2);border-radius:14px;padding:12px">
+          <div style="font-size:15px;font-weight:600">Is {{ sickName }} still home today?</div>
+          <div style="display:flex;gap:8px;margin-top:8px"><button onClick="{{ sickStill }}" style="height:36px;padding:0 14px;border-radius:18px;border:none;background:#2F5A7A;color:#FFFFFF;font-size:13px;font-weight:600;cursor:pointer">Still home</button><button onClick="{{ sickBetter }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">{{ betterLabel }}</button></div>
+        </div></sc-if>
+        <sc-if value="{{ sickTools }}"><div style="display:flex;gap:8px;margin:10px 0 0 44px;flex-wrap:wrap">
+          <button onClick="{{ openSickReminder }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">+ Reminder</button>
+          <button onClick="{{ openSickNote }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink)">+ Note</button>
+          <button onClick="{{ sickBetter }}" style="height:36px;padding:0 12px;border-radius:18px;border:1.5px solid var(--line2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;flex:none;color:var(--ink);border-color:#2F5A7A;color:var(--l-2F5A7A)">{{ betterLabel }}</button>
+        </div></sc-if>
       </div>
       </sc-if>
       <button onClick="{{ toHome }}" style="width:100%;display:flex;align-items:center;gap:12px;min-height:56px;border:none;background:transparent;text-align:left;cursor:pointer;padding:0;color:var(--ink)">
         <div style="width:32px;height:32px;border-radius:10px;background:var(--d-F4E6C8);flex:none;display:flex;align-items:center;justify-content:center"><svg style="stroke:var(--l-7A5714)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM2 10h20M9.5 7c0-1.2 1-1.3 1-2.5M13.5 7c0-1.2 1-1.3 1-2.5"></path></svg></div>
-        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: {{ dinnerName }}</div><div style="font-size:13px;color:var(--mute)">Start prep at 5:10 PM · this week’s meals ›</div></div>
+        <div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:600">Dinner: {{ dinnerName }}</div><div style="font-size:13px;color:var(--mute)">Prep at 5:10 PM · see the week ›</div></div>
         <div style="text-align:right;flex:none"><div style="font-family:'Young Serif',serif;font-size:17px;color:var(--l-7A5714)">{{ mealIn }}</div><div style="font-size:11px;color:var(--mute)">to prep</div></div>
       </button>
       <sc-if value="{{ showHomeStrip }}"><div data-screen-label="06d Home strip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 8px">
@@ -448,6 +458,12 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
             <div style="display:flex;gap:8px"><button onClick="{{ k.confirm }}" style="height:40px;padding:0 16px;border-radius:20px;border:none;background:#2F5A7A;color:var(--on);font-weight:600;cursor:pointer">That’s right</button><button onClick="{{ k.correct }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #2F5A7A;background:transparent;color:var(--l-2F5A7A);font-weight:600;cursor:pointer">Correct it</button></div>
           </div>
         </sc-if>
+        <sc-if value="{{ k.canNotes }}"><div data-screen-label="38 Kid notes" style="margin-top:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:6px"><svg style="stroke:var(--mute)" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="2.4"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>Your notes</span>
+            <div style="display:flex;gap:4px"><sc-if value="{{ k.hasNotes }}"><button onClick="{{ k.exportNotes }}" style="height:32px;padding:0 10px;border:none;background:transparent;color:var(--mute);font-size:13px;font-weight:600;cursor:pointer">Export</button></sc-if><button onClick="{{ k.addNote }}" style="height:32px;padding:0 10px;border:none;background:transparent;color:var(--acc);font-size:14px;font-weight:700;cursor:pointer">+ Note</button></div></div>
+          <sc-for list="{{ k.notes }}" as="n"><button onClick="{{ n.open }}" style="width:100%;display:flex;gap:12px;padding:8px 0;border:none;border-bottom:1px solid var(--hair);background:transparent;text-align:left;cursor:pointer;color:var(--ink)"><span style="font-size:12px;font-weight:700;color:var(--mute);width:44px;flex:none;padding-top:2px">{{ n.date }}</span><span style="flex:1;min-width:0;font-size:15px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ n.text }}</span></button></sc-for>
+          <sc-if value="{{ k.noNotes }}"><div style="font-size:14px;color:var(--mute);padding:4px 0;line-height:1.4">Anything you want to remember about {{ k.name }}. Only on this phone.</div></sc-if>
+        </div></sc-if>
         <button onClick="{{ k.log }}" style="margin-top:12px;width:100%;height:48px;border-radius:24px;border:1.5px solid var(--line2);background:transparent;font-size:15px;font-weight:600;cursor:pointer">Log for {{ k.name }}</button>
       </div>
     </sc-for>
@@ -790,6 +806,9 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ remEveryChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
         <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:16px">For</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ remDaysChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:16px">Who gets it</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"><sc-for list="{{ remShareChips }}" as="c"><button onClick="{{ c.pick }}" style="height:38px;padding:0 12px;border-radius:19px;border:1.5px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font-size:14px;font-weight:600;cursor:pointer;flex:none">{{ c.label }}</button></sc-for></div>
+        <div style="font-size:12px;color:var(--mute);margin-top:6px;line-height:1.4">{{ remShareNote }}</div>
         <div style="background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 16px 16px;margin-top:16px">
           <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)">Your next 24 hours</div>
           <div style="position:relative;height:20px;margin:12px 6px 4px"><div style="position:absolute;left:0;right:0;top:9px;height:2px;background:var(--line2)"></div><sc-for list="{{ remDots }}" as="d"><div style="position:absolute;left:{{ d.l }}%;top:3px;width:14px;height:14px;margin-left:-7px;border-radius:7px;background:var(--acc);box-shadow:0 0 0 3px var(--card)"></div></sc-for></div>
@@ -800,13 +819,13 @@ button::after{content:'';position:absolute;top:min(0px,calc(50% - 22px));bottom:
         </div>
       </sc-if>
 
-      <sc-if value="{{ shSickNote }}">
+      <sc-if value="{{ shNote }}">
         <div data-screen-label="37c Private note">
-        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">Private note</div>
-        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ sickName }}’s day at home, in your words. For you, or to read to your pediatrician.</div>
-        <textarea value="{{ sickNote }}" onChange="{{ onSickNote }}" placeholder="Write anything you want to remember…" style="width:100%;min-height:130px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px 16px;font-size:16px;line-height:1.45;resize:none;outline:none;color:var(--ink);box-sizing:border-box;font-family:inherit"></textarea>
-        <div style="display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:12px 16px;margin-top:12px"><svg style="stroke:var(--mute);flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="font-size:13px;line-height:1.45;color:var(--ink2)"><b>Stays on this phone.</b> It isn’t uploaded or backed up by BestMom, {{ an }} doesn’t read it, and nobody else in your family sees it.</div></div>
-        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:16px"><button onClick="{{ deleteSickNote }}" style="height:56px;border-radius:28px;border:1.5px solid var(--line2);background:transparent;color:var(--l-A33A2A);font-size:16px;font-weight:600;cursor:pointer">Delete</button><button onClick="{{ closeSheet }}" style="height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:16px;font-weight:600;cursor:pointer">Done</button></div>
+        <div style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1">{{ noteTitle }}</div>
+        <div style="font-size:15px;color:var(--mute);margin:8px 0 16px;line-height:1.4">{{ noteDate }} · in your words. For you, or to show your pediatrician.</div>
+        <textarea value="{{ noteText }}" onChange="{{ onNoteText }}" placeholder="{{ notePh }}" style="width:100%;min-height:130px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px 16px;font-size:16px;line-height:1.45;resize:none;outline:none;color:var(--ink);box-sizing:border-box;font-family:inherit"></textarea>
+        <div style="display:flex;gap:12px;align-items:flex-start;background:var(--soft);border-radius:16px;padding:12px 16px;margin-top:12px"><svg style="stroke:var(--mute);flex:none;margin-top:2px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><div style="font-size:13px;line-height:1.45;color:var(--ink2)"><b>Only on this phone.</b> BestMom doesn’t upload or back it up, {{ an }} doesn’t read it, and nobody else in your family sees it. Use Export to keep a copy or send it.</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:8px;margin-top:16px"><button onClick="{{ noteDelete }}" style="height:56px;border-radius:28px;border:1.5px solid var(--line2);background:transparent;color:{{ noteDelFg }};font-size:16px;font-weight:600;cursor:pointer">{{ noteDelLabel }}</button><button onClick="{{ noteSave }}" style="height:56px;border-radius:28px;border:none;background:var(--acc);color:var(--on);font-size:16px;font-weight:600;cursor:pointer;opacity:{{ noteOp }}">Save</button></div>
         </div>
       </sc-if>
 
@@ -1210,7 +1229,7 @@ const FACE_LABELS = ['Drained', 'Low', 'Okay', 'Good', 'Great'];
 const TOPICS = {
   kids: { label: 'Kids', dim: 'kids', hello: 'Ask me about the kids’ routines, nights and logs, or tell me what to move.', chips: ['Why are his nights choppier?', 'What time did Mateo fall asleep yesterday?', 'How many diapers this week?', 'Is his cough something to worry about?'] },
   work: { label: 'Work', dim: 'work', hello: 'Your work counts here too. Meetings, focus time, the hard conversations.', chips: ['What’s my hardest day this week?', 'Protect 2 focus hours tomorrow', 'Help me say I leave at 4:15'] },
-  me: { label: 'Me', dim: 'mom', hello: 'This one is just about you. How are you, really?', chips: ['I feel like I’m failing', 'When can I work out this week?', 'Plan a sweet moment with Diego'] },
+  me: { label: 'Me', dim: 'mom', hello: 'This one is just about you. How are you, really?', chips: ['I feel like I’m failing', 'Remind me to check on Mateo every 6 hours for 3 days', 'When can I work out this week?', 'Plan a sweet moment with Diego'] },
 };
 const REPLY = q => {
   if (/hurt myself|kill myself|end it all|suicid|can.t go on|no point in living/i.test(q)) return { crisis: true };
@@ -1264,11 +1283,21 @@ const mergePantry = (cur, items) => items.reduce((list, it) => list.some(p => sa
 const PANTRY0 = [['Chicken'], ['Tortillas'], ['Avocado'], ['Tomato', 'low'], ['Rice'], ['Onion'], ['Pasta'], ['Cheese'], ['Eggs'], ['Spinach'],
   ['Diapers, size 3', 'low', 'At this month’s pace they run out Thursday'], ['Wipes'], ['Kids’ snacks'], ['Dish soap'], ['Laundry detergent']]
   .map(([n, lvl, note]) => ({ n, lvl: lvl || 'ok', note: note || '', cat: catOf(n) }));
+// ponytail: regex stand-in for the intent call (small model) that reads "remind me …" in chat or by voice.
+function parseReminder(t) {
+  const m = /^(?:please\s+)?remind me(?: to)?\s+(.+)$/i.exec(t.trim()); if (!m) return null;
+  let rest = m[1], every = 0, days = 0, time = '8:00 PM';
+  rest = rest.replace(/\s*every (\d+) ?(?:h|hours?)\b/i, (_, n) => { every = +n; return ''; }).replace(/\s*every day\b|\s*daily\b/i, () => { every = 24; return ''; })
+    .replace(/\s*for (\d+) days?\b/i, (_, n) => { days = +n; return ''; })
+    .replace(/\s*at (\d{1,2})(?::(\d\d))? ?(am|pm)\b/i, (_, h, mi, ap) => { time = (+h) + ':' + (mi || '00') + ' ' + ap.toUpperCase(); return ''; }).trim().replace(/[.!]$/, '');
+  return rest ? { text: rest[0].toUpperCase() + rest.slice(1), time, every, days } : null;
+}
+console.assert(JSON.stringify(parseReminder('Remind me to check on Mateo every 6 hours for 3 days')) === JSON.stringify({ text: 'Check on Mateo', time: '8:00 PM', every: 6, days: 3 }), 'parseReminder');
 const FLOW = [
   { title: 'Onboarding', items: [[1, 'Welcome', 'welcome'], [2, 'Data consent', 'consent'], [3, 'The brain dump', 'dump'], [4, 'Here’s what I understood', 'summary'], [5, 'Permissions', 'perm']] },
-  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth'], [33, 'Home: meals, pantry, cleaning', 'home'], [37, 'Sick day: reminder & note', 'reminder']] },
+  { title: 'Full Mom', items: [[6, 'Today: day brief', 'today'], [29, 'Today: first day (empty)', 'dayone'], [25, 'The + menu', 'add'], [7, 'Something happened', 'happened'], [8, 'Replan proposal', 'replan'], [9, 'Quick log', 'log'], [28, 'Calendar: 3 days', 'cal3day'], [18, 'Calendar: week', 'calweek'], [19, 'Calendar: month', 'calmonth'], [33, 'Home: meals, pantry, cleaning', 'home'], [37, 'Sick day: home today', 'reminder'], [39, 'Sick day: next morning', 'sickmorning']] },
   { title: 'Self-Love', items: [[20, 'Self-Love mode', 'self'], [11, 'Breathing', 'breathe'], [12, 'Close of day', 'close']] },
-  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [35, 'Night log: add an earlier wake', 'nightpast'], [14, 'Kids: nights & rough patch', 'kids'], [36, 'Kids: correct wake window', 'wakewin'], [34, 'Kids: new skill', 'skill'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
+  { title: 'Nights', items: [[10, 'Bedtime (night mode)', 'bed'], [21, 'Night log (2 AM)', 'nightnow'], [32, 'Nap cut short (1:40 PM)', 'nap'], [31, 'Night log: offline', 'nightoff'], [35, 'Night log: add an earlier wake', 'nightpast'], [14, 'Kids: nights & rough patch', 'kids'], [36, 'Kids: correct wake window', 'wakewin'], [34, 'Kids: new skill', 'skill'], [38, 'Kids: private note', 'kidnote'], [30, 'Kids: no nights yet (empty)', 'kidsempty']] },
   { title: 'Family', items: [[22, 'Invite a caregiver', 'invite'], [23, 'See as Diego (partner)', 'asDiego'], [24, 'See as Carmen (nanny)', 'asCarmen'], [15, 'Settings & data', 'me']] },
   { title: 'Assistant', items: [[13, 'Chat: Kids · Work · Me', 'allie']] },
   { title: 'Business & safety', items: [[16, 'Paywall (day 2)', 'paywall'], [17, 'Crisis screen', 'crisis']] },
@@ -1297,7 +1326,7 @@ class Component extends DCLogic {
       homeSeg: 'meals', mealPlan: ['Veggie omelet', 'Pasta with tomato sauce', 'Chicken tacos', 'Arroz con pollo', 'Lentil soup', 'Salmon and rice', null], mealPick: null,
       pantry: PANTRY0, pantryText: '', pantryHeard: 0, shopExtra: [],
       chores: [{ id: 'laundry', t: 'Laundry', days: [1, 4], min: 30, who: 'me', done: false }, { id: 'vacuum', t: 'Vacuum', days: [2], min: 20, who: 'me', done: false }, { id: 'bath', t: 'Bathrooms', days: [3], min: 25, who: 'diego', done: false }, { id: 'kitchen', t: 'Kitchen and floors', days: [6], min: 45, who: 'me', done: false }],
-      deep: { on: true, who: 'cleaner' }, sickKid: null, sickNote: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3,
+      deep: { on: true, who: 'cleaner' }, sickKid: null, sickDay: 1, sickAsk: false, notes: [{ kid: 'a', date: 'Nov 14', text: 'Didn’t want the bottle before his nap. Fine after a walk outside.' }], noteKid: 'a', noteIdx: -1, noteText: '', reminders: [], remText: '', remTime: '20:00', remEvery: 6, remDays: 3, remShare: [],
       settings: { kids: true, mom: true, work: true, self: true, partner: true }, budget: 8,
     };
   }
@@ -1361,7 +1390,9 @@ class Component extends DCLogic {
       case 'today': case 'kids': case 'me': case 'cal': case 'home': return this.setState({ ...base, screen: 'app', tab: k });
       case 'skill': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'skill', skillKid: 'a', skillText: '' });
       case 'wakewin': return this.setState(st => ({ ...base, screen: 'app', tab: 'kids', sheet: 'wakewin', wwDraft: st.wakeWin }));
-      case 'reminder': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sheet: 'reminder' });
+      case 'reminder': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sickDay: 1, sickAsk: false });
+      case 'sickmorning': return this.setState({ ...base, screen: 'app', tab: 'today', mode: 'mom', sickKid: 'a', sickDay: 2, sickAsk: true });
+      case 'kidnote': return this.setState({ ...base, screen: 'app', tab: 'kids', sheet: 'note', noteKid: 'a', noteIdx: -1, noteText: '' });
       case 'nightpast': return this.setState({ ...base, screen: 'night', wakeKind: 'night', nightAwake: false, nightSec: 0, nightTagsOn: {}, pastOpen: true, pastTime: '00:40' });
       case 'allie': return this.setState({ ...base, screen: 'app', tab: 'allie', chatTopic: this.state.mode === 'self' ? 'me' : this.state.chatTopic });
       case 'cal3day': case 'calweek': case 'calmonth': return this.setState({ ...base, screen: 'app', tab: 'cal', calView: k.slice(3) });
@@ -1410,7 +1441,7 @@ class Component extends DCLogic {
         if (c.type === 'add' && !bl.some(x => x.id === c.block.id)) bl.push({ ...c.block });
       });
       return bl;
-    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1, ...(s.replanKey === 'sick' ? { sickKid: s.hKid === 'all' ? 'a' : s.hKid } : {}) });
+    }, 'Plan updated. Reminders rescheduled.', { screen: 'app', tab: 'today', replans: s.replans + 1, ...(s.replanKey === 'sick' ? { sickKid: s.hKid === 'all' ? 'a' : s.hKid, sickDay: 1, sickAsk: false } : {}) });
   }
   toggleDone(id) {
     const b = this.state.blocks.find(x => x.id === id); const done = b.status !== 'done';
@@ -1418,7 +1449,10 @@ class Component extends DCLogic {
   }
   sendChat(text) {
     const t = (text || '').trim(); if (!t) return;
-    const topic = this.state.chatTopic, r = REPLY(t);
+    const topic = this.state.chatTopic, rm = parseReminder(t), r = rm
+      ? { text: 'Done. “' + rm.text + '” at ' + rm.time + (rm.every ? ', every ' + rm.every + ' h' : '') + (rm.days ? ' for ' + rm.days + (rm.days === 1 ? ' day' : ' days') : '') + '. Change it in You → Your reminders.', src: 'Reminder on this phone' }
+      : REPLY(t);
+    if (rm) setTimeout(() => this.setState(st => ({ reminders: [...st.reminders, rm] })), 900);
     if (r.crisis) { this.setState({ chatInput: '' }); return this.go('crisis'); }
     const add = (st, m) => ({ chats: { ...st.chats, [topic]: [...st.chats[topic], m] } });
     this.setState(st => ({ ...add(st, { me: true, text: t }), chatInput: '', chatTyping: true }));
@@ -1519,7 +1553,7 @@ class Component extends DCLogic {
     const toApp = () => this.thinking('Building your first day…', ['Reading your calendar', 'Fitting ' + kidName('a') + '’s naps around your 3:00', 'Protecting your lunch'], 'today');
     const permNext = denied => { if (s.permStep === 0) this.setState({ permStep: 1, calDenied: !!denied }); else toApp(); };
 
-    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add' : s.dayOne && s.tab === 'today' ? 'dayone' : ['add', 'happened', 'log', 'invite', 'skill', 'wakewin', 'reminder'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr === 'night' && s.pastOpen ? 'nightpast' : scr;
+    const curKey = scr === 'app' ? (V === 'diego' ? 'asDiego' : V === 'carmen' ? 'asCarmen' : s.radial ? 'add' : s.dayOne && s.tab === 'today' ? 'dayone' : ['add', 'happened', 'log', 'invite', 'skill', 'wakewin'].includes(s.sheet) ? s.sheet : s.sheet === 'note' ? 'kidnote' : s.sickAsk && s.tab === 'today' ? 'sickmorning' : s.sickKid && s.tab === 'today' && !s.sheet ? 'reminder' : ['add'].includes(s.sheet) ? s.sheet : s.tab === 'cal' ? 'cal' + s.calView : selfMode && s.tab === 'today' ? 'self' : s.tab) : scr === 'bed' ? 'bed' : scr === 'night' && s.pastOpen ? 'nightpast' : scr;
     const dumpWords = this.tx && s.ctx === 'dump' ? this.tx.slice(0, s.words).join(' ') : '';
     const hTx = this.tx && s.ctx === 'happened' && s.words > 0 ? this.tx.slice(0, s.words).join(' ') : '';
     const micActive = s.listening;
@@ -1635,7 +1669,7 @@ class Component extends DCLogic {
         const groups = [
           [['Type to ' + an, 'M4 6h16M4 12h10M4 18h7', () => { this.go('allie'); setTimeout(() => { const el = document.querySelector('input[placeholder^="Ask or tell"]'); if (el) el.focus(); }, 60); }],
            ['Talk to ' + an, 'M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3', () => { this.go('allie'); this.setState({ chatMic: true }); setTimeout(() => { this.setState({ chatMic: false }); this.sendChat('Can you move my walk? Today got busy.'); }, 1800); }]],
-          [V !== 'carmen' && ['Home & Meals', HOME_ICON, () => this.go('home'), 'home']],
+          [V !== 'carmen' && ['Home & Meals', HOME_ICON, () => this.go('home'), 'home'], V === 'ana' && ['Reminder', 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0', () => this.setState({ radial: false, sheet: 'reminder', remText: '', remShare: [] })]],
           [V === 'ana' && ['Clear My Day', 'M4 7h16M10 11v6M14 11v6M5 7l1 13h12l1-13M9 7V4h6v3', () => this.openReplan('sos')],
            [V === 'carmen' ? 'Tell Rossi' : 'Something Happened?', 'M13 2L4.5 13.5H11L10 22l8.5-11.5H12z', () => this.go('happened')]],
           [V === 'ana' && ['For You', MOM_ICONS.water, sheet('you'), 'mom'],
@@ -1766,18 +1800,36 @@ class Component extends DCLogic {
         const sickName = kidName(s.sickKid || 'a');
         const start = (() => { const [h, mi] = (s.remTime || '0:0').split(':').map(Number); return (h || 0) * 60 + (mi || 0); })();
         const times = s.remEvery ? Array.from({ length: Math.min(6, Math.floor(24 / s.remEvery)) }, (_, k) => start + k * s.remEvery * 60) : [start];
-        const remLabel = r => r.time + (r.every === 24 ? ' · every day' : r.every ? ' · every ' + r.every + ' h' : ' · once') + (r.every ? (r.days ? ' · for ' + r.days + (r.days === 1 ? ' day' : ' days') : ' · until you stop it') : '');
+        const remLabel = r => r.time + (r.every === 24 ? ' · every day' : r.every ? ' · every ' + r.every + ' h' : ' · once') + (r.every ? (r.days ? ' · for ' + r.days + (r.days === 1 ? ' day' : ' days') : ' · until you stop it') : '') + (r.share && r.share.length ? ' · also ' + r.share.join(', ') : '');
         const ww = s.wwDraft, skillWho = kidName(s.skillKid);
         return {
-          sickOn: !!s.sickKid && V === 'ana', sickName, sickSub: s.reminders.length ? 'Next reminder ' + s.reminders[s.reminders.length - 1].time + (s.sickNote ? ' · note saved' : '') : s.sickNote ? 'Private note saved on this phone' : 'Set a reminder or keep a private note',
-          openReminder: () => this.setState({ sheet: 'reminder', remText: '' }), openSickNote: () => this.setState({ sheet: 'sicknote' }),
+          sickOn: !!s.sickKid, sickName, sickTools: V === 'ana' && !s.sickAsk, sickAsk: V === 'ana' && s.sickAsk,
+          sickTitle: V === 'ana' ? sickName + ' is home sick' : sickName + ' is home today', sickDayLabel: 'Day ' + s.sickDay,
+          sickSub: V !== 'ana' ? 'Rossi adjusted the day around it.' : s.sickAsk ? 'Yesterday he stayed home.' : [s.reminders.length && s.reminders.length + (s.reminders.length === 1 ? ' reminder' : ' reminders'), s.notes.some(n => n.kid === s.sickKid && n.date === 'Nov 17') && 'note saved'].filter(Boolean).join(' · ') || 'Add a reminder or a note for today.',
+          betterLabel: (s.sickKid === 'b' ? 'She' : 'He') + '’s better',
+          sickStill: () => { this.setState({ sickAsk: false }); this.toastMsg('Got it. I kept today slow and held time for a call.'); },
+          sickBetter: () => { const n = s.reminders.length; this.setState({ sickKid: null, sickAsk: false, sickDay: 1 }); this.toastMsg('Glad ' + sickName + ' is better.' + (n ? ' Your ' + (n === 1 ? 'reminder keeps' : n + ' reminders keep') + ' running until you stop ' + (n === 1 ? 'it' : 'them') + ' in You.' : '')); },
+          openSickReminder: () => this.setState({ sheet: 'reminder', remText: sickName + ': ', remShare: [] }), openSickNote: () => this.setState({ sheet: 'note', noteKid: s.sickKid, noteIdx: -1, noteText: '' }),
+          openReminder: () => this.setState({ sheet: 'reminder', remText: '', remShare: [] }),
           shReminder: s.sheet === 'reminder', remText: s.remText, onRemText: e => this.setState({ remText: e.target.value }), remTime: s.remTime, onRemTime: e => this.setState({ remTime: e.target.value }),
           remEveryChips: chips(s.remEvery, [[0, 'Once'], [4, 'Every 4 h'], [6, 'Every 6 h'], [8, 'Every 8 h'], [12, 'Every 12 h'], [24, 'Daily']], v => this.setState({ remEvery: v })),
           remDaysChips: chips(s.remDays, [[1, 'Today'], [3, '3 days'], [7, '7 days'], [0, 'Until I stop it']], v => this.setState({ remDays: v })),
+          remShareChips: [{ id: 'me', name: 'Only me' }, ...s.members.filter(m => m.role !== 'owner' && m.role !== 'family')].map(m => {
+            const on = m.id === 'me' ? !s.remShare.length : s.remShare.includes(m.id);
+            return { label: m.id === 'me' ? m.name : (on ? '✓ ' : '+ ') + m.name, bg: on ? 'var(--ink)' : 'var(--card)', fg: on ? 'var(--on)' : 'var(--ink)', border: on ? 'var(--ink)' : 'var(--line2)',
+              pick: () => this.setState(st => ({ remShare: m.id === 'me' ? [] : on ? st.remShare.filter(x => x !== m.id) : [...st.remShare, m.id] })) };
+          }),
+          remShareNote: s.remShare.length ? s.remShare.map(id => (s.members.find(m => m.id === id) || {}).name).join(' and ') + (s.remShare.length > 1 ? ' get' : ' gets') + ' this text and these times on their phone. Nothing else of yours.' : 'Only on your phone.',
           remDots: times.map(t => ({ l: (t - start) / 1440 * 100, t: fmt(t % 1440) })), remOp: s.remText.trim() ? 1 : .4,
-          saveReminder: () => { const text = s.remText.trim(); if (!text) return; const r = { text, time: fmt(start % 1440), every: s.remEvery, days: s.remDays }; this.setState(st => ({ reminders: [...st.reminders, r], sheet: null, remText: '' })); this.toastMsg('Reminder set: ' + remLabel(r) + '.'); },
+          saveReminder: () => { const text = s.remText.trim(); if (!text) return; const r = { text, time: fmt(start % 1440), every: s.remEvery, days: s.remDays, share: s.remShare.map(id => (s.members.find(m => m.id === id) || {}).name).filter(Boolean) }; this.setState(st => ({ reminders: [...st.reminders, r], sheet: null, remText: '', remShare: [] })); this.toastMsg('Reminder set: ' + remLabel(r) + '.'); },
           reminderRows: s.reminders.map((r, i) => ({ text: r.text, sub: remLabel(r), remove: () => this.setState(st => ({ reminders: st.reminders.filter((_, j) => j !== i) })) })),
-          shSickNote: s.sheet === 'sicknote', sickNote: s.sickNote, onSickNote: e => this.setState({ sickNote: e.target.value }), deleteSickNote: () => { this.setState({ sickNote: '', sheet: null }); this.toastMsg('Note deleted from this phone.'); },
+          shNote: s.sheet === 'note', noteTitle: (s.noteIdx >= 0 ? 'Note about ' : 'New note about ') + kidName(s.noteKid), noteDate: s.noteIdx >= 0 ? s.notes[s.noteIdx].date : 'Today, Nov 17',
+          notePh: 'What happened, what you noticed, what to ask…', noteText: s.noteText, onNoteText: e => this.setState({ noteText: e.target.value }), noteOp: s.noteText.trim() ? 1 : .4,
+          noteDelLabel: s.noteIdx >= 0 ? 'Delete' : 'Cancel', noteDelFg: s.noteIdx >= 0 ? 'var(--l-A33A2A)' : 'var(--ink)',
+          noteDelete: () => { if (s.noteIdx < 0) return this.setState({ sheet: null }); this.setState(st => ({ notes: st.notes.filter((_, j) => j !== st.noteIdx), sheet: null })); this.toastMsg('Note deleted from this phone.'); },
+          noteSave: () => { const text = s.noteText.trim(); if (!text) return;
+            this.setState(st => ({ sheet: null, notes: st.noteIdx >= 0 ? st.notes.map((n, j) => j === st.noteIdx ? { ...n, text } : n) : [{ kid: st.noteKid, date: 'Nov 17', text }, ...st.notes] }));
+            this.toastMsg('Saved on this phone. Only you can see it.'); },
           shWakeWin: s.sheet === 'wakewin', wwName: kidName('a'), wwText: fmtDur(ww), wwPct: (ww - 60) / 180 * 100, wwEstPct: (135 - 60) / 180 * 100,
           wwMinus: () => this.setState({ wwDraft: Math.max(60, ww - 5) }), wwPlus: () => this.setState({ wwDraft: Math.min(240, ww + 5) }),
           wwChips: chips(ww, [105, 120, 135, 150, 180].map(v => [v, fmtDur(v)]), v => this.setState({ wwDraft: v })),
@@ -1954,6 +2006,12 @@ class Component extends DCLogic {
         nights: NIGHTS.map((w, i) => ({ h: w ? w * 16 : 4, c: i > SKILL_AT ? '#5B5CA8' : 'var(--d-B9B9DA)', mark: i === SKILL_AT })), learn: k.name + '’s wake window is about ' + fmtDur(s.wakeWin) + '. I plan his naps around it.',
         confirm: () => this.toastMsg('Thanks. I’ll keep using it.'), correct: () => this.setState({ sheet: 'wakewin', wwDraft: s.wakeWin }),
         log: () => this.setState({ sheet: 'log', tab: 'today', logKid: k.id, logTime: NOW, logHeard: null }),
+        ...(() => { const mine = s.notes.map((n, i) => ({ ...n, i })).filter(n => n.kid === k.id); return {
+          canNotes: V === 'ana', hasNotes: mine.length > 0, noNotes: !mine.length,
+          notes: mine.map(n => ({ date: n.date, text: n.text, open: () => this.setState({ sheet: 'note', noteKid: k.id, noteIdx: n.i, noteText: n.text }) })),
+          addNote: () => this.setState({ sheet: 'note', noteKid: k.id, noteIdx: -1, noteText: '' }),
+          exportNotes: () => this.toastMsg('Your share sheet opens with ' + k.name + '’s notes as a text file. BestMom keeps no copy.'),
+        }; })(),
       })),
       // chat
       chatTabs: Object.entries(TOPICS).map(([k, t]) => ({ label: t.label, dot: DIMS[t.dim].solid, bg: s.chatTopic === k ? 'var(--card)' : 'transparent', sh: s.chatTopic === k ? '0 1px 4px rgba(42,33,28,.14)' : 'none', go: () => this.setState({ chatTopic: k }) })),
